@@ -40331,11 +40331,12 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .firefox .chat-sidebar .na
 
 /*# sourceMappingURL=theme.min.css.map */
 
-.report-table .table tr th{
-  border: 0 !important;
-  padding: 15px !important;
-  margin-top: 10px;
+.report-table .table tr th {
+    border: 0 !important;
+    padding: 15px !important;
+    margin-top: 10px;
 }
+
 /* .bg-info {
 
 } */
