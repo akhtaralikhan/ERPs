@@ -1,6 +1,32 @@
 import React from "react";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { useForm } from "react-hook-form";
+import FormInput from "../../Components/FormInput";
+
 
 const ForgetPassword = () => {
+  const resolver = yupResolver(
+    yup.object().shape({
+      email: yup.string().required("Please Enter E-mail."),
+    })
+  );
+
+  const defaultValues = {
+    // email: "company.mohseenpasha111@gmail.com"
+    email: "owner.mohseenpasha111@gmail.com",
+  };
+
+  const methods = useForm({ defaultValues, resolver });
+
+  const {
+    handleSubmit, // add this on form submission  <Form onSubmit={handleSubmit(onSubmitForm)} />
+    register, // on each input field use register to register the input and change input into formInput
+    // register={register}
+    control, // use control={control} on each form input field
+    formState: { errors }, // on each form input errors={errors}
+  } = methods;
+
   return (
     <main className="main" id="top">
       <div className="container-fluid bg-300 dark__bg-1200">

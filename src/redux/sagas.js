@@ -1,0 +1,48 @@
+import { all } from "redux-saga/effects";
+
+//auth
+import registerSaga from "./auth/register/saga";
+import loginSaga from "./auth/login/saga";
+import forgetPasswordSaga from "./auth/forgetpwd/saga";
+import profileSaga from "./profile/saga";
+import LayoutSaga from "./layout/saga";
+import contactsSaga from "./contacts/saga";
+import callsSaga from "./calls/saga";
+import bookmarksSaga from "./bookmarks/saga";
+import settingsSaga from "./settings/saga";
+import chatsSaga from "./chats/saga";
+import authSaga from "./auth/login/LoginSaga";
+import favouriteSaga, { archiveChatSaga, deleteMessageSaga, deleteUserMessagesSaga, getArchiveChatUsersSaga, GetStarredMessageSaga, getUserChatSaga, initiateMsgSaga, PinChatSaga, readMessageSaga, replyMsgSaga, RradAllMessageSaga, starMessageSaga, unArchiveChatSaga, unPinChatSaga, unReadSaga, UnStarMessageSaga, } from "./chats/CustomeSaga";
+
+export default function* rootSaga() {
+    yield all([
+        RradAllMessageSaga(),
+        readMessageSaga(),
+        starMessageSaga(),
+        UnStarMessageSaga(),
+        GetStarredMessageSaga(),
+        PinChatSaga(),
+        unPinChatSaga(),
+        getArchiveChatUsersSaga(),
+        unReadSaga(),
+        unArchiveChatSaga(),
+        archiveChatSaga(),
+        replyMsgSaga(),
+        initiateMsgSaga(),
+        deleteUserMessagesSaga(),
+        deleteMessageSaga(),
+        getUserChatSaga(),
+        favouriteSaga(),
+        authSaga(),
+        registerSaga(),
+        loginSaga(),
+        forgetPasswordSaga(),
+        profileSaga(),
+        LayoutSaga(),
+        contactsSaga(),
+        callsSaga(),
+        bookmarksSaga(),
+        settingsSaga(),
+        chatsSaga(),
+    ]);
+}

@@ -87,7 +87,7 @@ const Sidebar = () => {
                     <li className="nav-item">
                       <NavLink
                         className="nav-link"
-                        to="product.html"
+                        to="/Product"
                         data-bs-toggle=""
                         aria-expanded="false"
                       >
@@ -100,7 +100,7 @@ const Sidebar = () => {
                     <li className="nav-item">
                       <NavLink
                         className="nav-link"
-                        to="services.html"
+                        to="/Services"
                         data-bs-toggle=""
                         aria-expanded="false"
                       >
@@ -149,7 +149,7 @@ const Sidebar = () => {
                     <li className="nav-item">
                       <NavLink
                         className="nav-link"
-                        to="estimates.html"
+                        to="/Estimates"
                         data-bs-toggle=""
                         aria-expanded="false"
                       >
@@ -162,7 +162,7 @@ const Sidebar = () => {
                     <li className="nav-item">
                       <NavLink
                         className="nav-link"
-                        to="invoice.html"
+                        to="/Invoice"
                         data-bs-toggle=""
                         aria-expanded="false"
                       >
@@ -175,7 +175,7 @@ const Sidebar = () => {
                     <li className="nav-item">
                       <NavLink
                         className="nav-link"
-                        to="recurring-invoice.html"
+                        to="/RecurringInvoice"
                         data-bs-toggle=""
                         aria-expanded="false"
                       >
@@ -190,7 +190,7 @@ const Sidebar = () => {
                     <li className="nav-item">
                       <NavLink
                         className="nav-link"
-                        to="income.html"
+                        to="/Incomes"
                         data-bs-toggle=""
                         aria-expanded="false"
                       >
@@ -203,7 +203,7 @@ const Sidebar = () => {
                     <li className="nav-item">
                       <NavLink
                         className="nav-link"
-                        to="creadit-notes.html"
+                        to="/CreditNotes"
                         data-bs-toggle=""
                         aria-expanded="false"
                       >
@@ -216,7 +216,7 @@ const Sidebar = () => {
                     <li className="nav-item">
                       <NavLink
                         className="nav-link"
-                        to="customer.html"
+                        to="/Customer"
                         data-bs-toggle=""
                         aria-expanded="false"
                       >
@@ -261,7 +261,7 @@ const Sidebar = () => {
                     <li className="nav-item">
                       <NavLink
                         className="nav-link"
-                        to="bills.html"
+                        to="/Bills"
                         data-bs-toggle=""
                         aria-expanded="false"
                       >
@@ -274,7 +274,7 @@ const Sidebar = () => {
                     <li className="nav-item">
                       <NavLink
                         className="nav-link"
-                        to="expenses.html"
+                        to="/Expenses"
                         data-bs-toggle=""
                         aria-expanded="false"
                       >
@@ -287,7 +287,7 @@ const Sidebar = () => {
                     <li className="nav-item">
                       <NavLink
                         className="nav-link"
-                        to="debit-notes.html"
+                        to="/DebitNotes"
                         data-bs-toggle=""
                         aria-expanded="false"
                       >
@@ -300,7 +300,7 @@ const Sidebar = () => {
                     <li className="nav-item">
                       <NavLink
                         className="nav-link"
-                        to="vendors.html"
+                        to="/Vendors"
                         data-bs-toggle=""
                         aria-expanded="false"
                       >
@@ -324,7 +324,7 @@ const Sidebar = () => {
               <div className="nav-item-wrapper">
                 <NavLink
                   className="nav-link label-1"
-                  to="manual-journal.html"
+                  to="/ManualJournals"
                   role="button"
                   data-bs-toggle=""
                   aria-expanded="false"
@@ -342,7 +342,7 @@ const Sidebar = () => {
               <div className="nav-item-wrapper">
                 <NavLink
                   className="nav-link label-1"
-                  to="transactions.html"
+                  to="/Transations"
                   role="button"
                   data-bs-toggle=""
                   aria-expanded="false"
@@ -360,7 +360,7 @@ const Sidebar = () => {
               <div className="nav-item-wrapper">
                 <NavLink
                   className="nav-link label-1"
-                  to="chart-of-account.html"
+                  to="/ChartsOfAccount"
                   role="button"
                   data-bs-toggle=""
                   aria-expanded="false"
@@ -378,7 +378,7 @@ const Sidebar = () => {
               <div className="nav-item-wrapper">
                 <NavLink
                   className="nav-link label-1"
-                  to="assets.html"
+                  to="/Assets"
                   role="button"
                   data-bs-toggle=""
                   aria-expanded="false"
@@ -403,7 +403,7 @@ const Sidebar = () => {
               <div className="nav-item-wrapper">
                 <NavLink
                   className="nav-link label-1"
-                  to="report.html"
+                  to="/Report"
                   role="button"
                   data-bs-toggle=""
                   aria-expanded="false"
@@ -427,7 +427,7 @@ const Sidebar = () => {
               <div className="nav-item-wrapper">
                 <NavLink
                   className="nav-link label-1"
-                  to="settings.html"
+                  to="/Settings"
                   role="button"
                   data-bs-toggle=""
                   aria-expanded="false"
@@ -451,7 +451,7 @@ const Sidebar = () => {
               <div className="nav-item-wrapper">
                 <NavLink
                   className="nav-link label-1"
-                  to="console.html"
+                  to="/Console"
                   role="button"
                   data-bs-toggle=""
                   aria-expanded="false"

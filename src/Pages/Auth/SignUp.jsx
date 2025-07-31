@@ -1,12 +1,49 @@
 // src/pages/Auth/SignUp.jsx
 import React from "react";
 import { Link } from "react-router-dom";
-import Sidebar from "../../Components/SideBar";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { useForm } from "react-hook-form";
+import FormInput from "../../Components/FormInput";
 
 const SignUp = () => {
+  const resolver = yupResolver(
+    yup.object().shape({
+      name: yup.string().required("Please Enter Old Password."),
+      email: yup.string().required("Please Enter New Password."),
+      password: yup.string().required("Please Enter New Password."),
+      confirmPassword: yup
+        .string()
+        .oneOf([yup.ref("newPassword")], "Passwords don't match")
+        .required("This value is required."),
+    })
+  );
+
+  const defaultValues = {
+    // email: "company.mohseenpasha111@gmail.com"
+    // Password: "company123"
+    name: "Mohseen Pasha",
+    email: "owner.mohseenpasha111@gmail.com",
+    password: "admin123",
+    confirmPassword: "admin123",
+  };
+
+  const methods = useForm({ defaultValues, resolver });
+
+  const {
+    handleSubmit, // add this on form submission  <Form onSubmit={handleSubmit(onSubmitForm)} />
+    register, // on each input field use register to register the input and change input into formInput
+    // register={register}
+    control, // use control={control} on each form input field
+    formState: { errors }, // on each fotm input errors={errors}
+  } = methods;
+
+  const onSubmitForm = (data) => {
+    console.log("Form submitted with data:", data);
+  };
+
   return (
     <>
-      <Sidebar />
       <main className="main" id="top">
         <div className="container-fluid bg-300 dark__bg-1200">
           <div
@@ -97,27 +134,33 @@ const SignUp = () => {
                             or use email
                           </div>
                         </div>
-                        <form>
-                          <div className="mb-3 text-start">
-                            <label className="form-label" htmlFor="name">
-                              Name
-                            </label>
-                            <input
-                              className="form-control"
+                        <form onSubmit={handleSubmit(onSubmitForm)}>
+                          <div className="mb-3 text-start">                         
+                            <FormInput
+                              label="Name"
                               id="name"
                               type="text"
+                              name="Name"
+                              register={register}
+                              errors={errors}
+                              control={control}
+                              labelClassName="form-label"
                               placeholder="Name"
+                              className="form-control"
                             />
                           </div>
-                          <div className="mb-3 text-start">
-                            <label className="form-label" htmlFor="email">
-                              Email address
-                            </label>
-                            <input
-                              className="form-control"
+                          <div className="mb-3 text-start">                        
+                            <FormInput
                               id="email"
-                              type="email"
+                              label="Email"
+                              type="Email"
+                              name="email"
+                              register={register}
+                              errors={errors}
+                              control={control}
+                              labelClassName="form-label"
                               placeholder="name@example.com"
+                              className="form-control"
                             />
                           </div>
                           <div className="row g-3 mb-3">
@@ -125,11 +168,18 @@ const SignUp = () => {
                               <label className="form-label" htmlFor="password">
                                 Password
                               </label>
-                              <input
+                              <FormInput
                                 className="form-control form-icon-input"
-                                id="password"
                                 type="password"
-                                placeholder="Password"
+                                name="oldPassword"
+                                register={register}
+                                errors={errors}
+                                control={control}
+                                labelClassName="form-label"
+                                placeholder="Enter Old Password"
+                                withoutLabel={true}
+                                hidePasswordButton={true}
+                                id="password"
                               />
                             </div>
                             <div className="col-xl-6">
@@ -139,10 +189,17 @@ const SignUp = () => {
                               >
                                 Confirm Password
                               </label>
-                              <input
+                              <FormInput
+                                type="password"
+                                name="newPassword"
+                                register={register}
+                                errors={errors}
+                                control={control}
+                                labelClassName="form-label"
+                                withoutLabel={true}
+                                hidePasswordButton={false}
                                 className="form-control form-icon-input"
                                 id="confirmPassword"
-                                type="password"
                                 placeholder="Confirm Password"
                               />
                             </div>
@@ -157,15 +214,15 @@ const SignUp = () => {
                               className="form-label fs--1 text-none"
                               htmlFor="termsService"
                             >
-                              I accept the <Link to="#">terms </Link>and
-                              <Link to="#">privacy policy</Link>
+                              I accept the <a href="#!">terms</a> and{" "}
+                              <a href="#!">privacy policy</a>
                             </label>
                           </div>
                           <button className="btn btn-primary w-100 mb-3">
                             Sign up
                           </button>
                           <div className="text-center">
-                            <Link className="fs--1 fw-bold" to="/Login">
+                            <Link className="fs--1 fw-bold" to="/login">
                               Sign in to an existing account
                             </Link>
                           </div>
