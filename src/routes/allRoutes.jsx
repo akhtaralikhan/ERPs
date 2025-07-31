@@ -1,7 +1,6 @@
 // Auth Pages
-import SignUp from "../pages/Auth/SignUp";
-import ForgetPassword from "../pages/Auth/ForgetPassword";
-
+import SignUp from "../Pages/Auth/SignUp";
+import ForgetPassword from "../Pages/Auth/ForgetPassword";
 // Dashboard Pages
 import DashboardHome from "../pages/Dashboard/DashboardHome";
 import Product from "../pages/Dashboard/Product";
