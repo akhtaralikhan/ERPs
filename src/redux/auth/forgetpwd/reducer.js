@@ -1,3 +1,5 @@
+import { AuthForgetPassActionTypes } from './types';
+
 export const INIT_STATE = {
   forgetSuccessMsg: null,
   forgetError: null,

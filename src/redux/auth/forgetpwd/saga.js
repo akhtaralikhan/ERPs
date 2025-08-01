@@ -1,5 +1,5 @@
 import { takeEvery, fork, put, all, call } from "redux-saga/effects";
-
+import { AuthForgetPassActionTypes } from "./types";
 // Login Redux States
 import {
   authForgetPassApiResponseSuccess,
@@ -7,15 +7,8 @@ import {
 } from "./actions";
 
 //Include Both Helper File with needed methods
-import { getFirebaseBackend } from "../../../helpers/firebase_helper";
 
-import {
-  postFakeForgetPwd,
-  postJwtForgetPwd,
-  changePassword as changePasswordApi,
-} from "../../../api/index";
 
-const fireBaseBackend = getFirebaseBackend();
 
 //If user is send successfully send mail link then dispatch redux action's are directly from here.
 function* forgetUser({ payload: user }) {

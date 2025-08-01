@@ -1,9 +1,12 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import FormInput from "../../Components/FormInput";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
+import { useRedux } from "../../hooks/useRedux";
+import { loginUser } from "../../redux/auth/login/actions";
+import { createSelector } from "reselect";
 
 const Signin = () => {
   const [isChecked, setIsChecked] = useState(true);
@@ -32,9 +35,50 @@ const Signin = () => {
     formState: { errors }, // on each fotm input errors={errors}
   } = methods;
 
+  const { dispatch, useAppSelector } = useRedux();
+
+  
+  const userData = createSelector(
+    (state) => state.Login,
+    (state) => ({
+      isUserLogin: state.isUserLogin,
+      error: state.error,
+      loginLoading: state.loading,
+      isUserLogout: state.isUserLogout,
+      user: state.user,
+
+    })
+  );
+  // Inside your component
+  const { isUserLogin, error, loginLoading, isUserLogout, user } = useAppSelector(userData);
+  
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [redirectUrl, setRedirectUrl] = useState("/");
+  useEffect(() => {
+    console.log("isUserLogin:", isUserLogin);
+    
+    const url =
+      location.state && location.state.from
+        ? location.state.from.pathname
+        : "/";
+
+    setRedirectUrl(url);
+  }, [location]);
+
+  useEffect(() => {
+    if (isUserLogin) {
+      navigate("/");
+    }
+  }, [isUserLogin, user, navigate]);
+
+
+
   const onSubmitForm = (data) => {
+    dispatch(loginUser(data));
     console.log("Form submitted with data:", data);
   };
+
 
   return (
     <main className="main" id="top">
@@ -175,6 +219,7 @@ const Signin = () => {
                                 id="basic-checkbox"
                                 type="checkbox"
                                 checked="checked"
+                                onChange={(e) => setIsChecked(e.target.checked)}
                               />
                               <label
                                 className="form-check-label mb-0"

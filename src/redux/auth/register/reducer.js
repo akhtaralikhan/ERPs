@@ -1,5 +1,4 @@
-import { AuthRegisterActionTypes, AuthRegisterState } from "./types";
-
+import { AuthRegisterActionTypes } from "./types";
 export const INIT_STATE = {
   registrationError: null,
   message: "",

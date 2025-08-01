@@ -1,29 +1,18 @@
 import { call, put, takeEvery } from "redux-saga/effects";
-import { SagaIterator } from "redux-saga";
+import { authLoginApiResponseSuccess, authLoginApiResponseError } from "./actions";
 import { AuthLoginActionTypes } from "./types";
-import { authLoginApiResponseSuccess, authLoginApiResponseError } from "./actions";
-import { postRealLogin } from "../../../constants/RealApi";
-import { call, put, takeEvery } from "redux-saga/effects";
-import { AuthLoginActionTypes } from "./actionTypes";
-import { authLoginApiResponseSuccess, authLoginApiResponseError } from "./actions";
-import { postRealLogin } from "../../helpers/api";
-
+import { loginUserApi } from "../../../api/auth.JS";
 function* loginUser(action) {
     try {
         const { user } = action.payload;
 
-        const response = yield call(postRealLogin, {
-            email: user.email,
-            password: user.password,
-        });
+        // ✅ Pass credentials as a single object
+        const response = yield call(loginUserApi, user);
 
-        const profile = response?.responseData?.profile;
-        if (profile) {
+
+        if (response) {
             localStorage.setItem("userData", JSON.stringify(response));
-            localStorage.setItem("userUid", JSON.stringify(profile.userUid));
-            localStorage.setItem("CheckNotifyId", JSON.stringify(profile.id));
-            localStorage.setItem("token", profile.token || "");
-            localStorage.setItem("sessionId", profile.sessionId || "");
+            localStorage.setItem("token", response.data.token || "");
         }
 
         yield put(authLoginApiResponseSuccess(AuthLoginActionTypes.LOGIN_USER, response));

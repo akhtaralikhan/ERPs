@@ -14,7 +14,7 @@ const initialState = {
     PaymentSettings: {},
     EmailSettings: {},
     ApplicationPreferences: {},
-    CloseAccount: boolean = false,
+    CloseAccount: false,
 }
 
 const SettingsReducer = (state = initialState, action) => {

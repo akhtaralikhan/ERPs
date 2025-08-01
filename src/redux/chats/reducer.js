@@ -1,4 +1,4 @@
-// types
+import { ChatsActionTypes } from './types';
 
 export const INIT_STATE = {
     favourites: [],

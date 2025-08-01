@@ -47,4 +47,3 @@ export const ChatsActionTypes = {
   NEW_MESSAGE_RECEIVED: "@@chats/NEW_MESSAGE_RECEIVED",
   INCREMENT_UNREAD: "@@chats/INCREMENT_UNREAD",
 };
-  

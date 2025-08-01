@@ -1,11 +1,11 @@
-import { AuthLoginActionTypes, AuthLoginState } from "./types";
-
+import { AuthLoginActionTypes } from "./types";
 
 const storedUser = localStorage.getItem("userData");
 export const INIT_STATE = {
   user: storedUser ? JSON.parse(storedUser) : null,
   error: "",
   loading: false,
+  isUserLogin: false,
 };
 
 const Login = (state = INIT_STATE, action) => {

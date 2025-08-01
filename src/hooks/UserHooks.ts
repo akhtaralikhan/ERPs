@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 import { useRedux } from "../hooks/index";
 
 // api
-import { getLoggedinUser } from "../api/ApiCore";
 import { createSelector } from "reselect";
+import { getLoggedinUser } from "../api/apiCore";
 
 const useProfile = () => {
   // global store
