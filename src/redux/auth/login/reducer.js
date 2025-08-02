@@ -5,7 +5,7 @@ export const INIT_STATE = {
   user: storedUser ? JSON.parse(storedUser) : null,
   error: "",
   loading: false,
-  isUserLogin: false,
+  isUserLogin:  false,
 };
 
 const Login = (state = INIT_STATE, action) => {
@@ -20,10 +20,11 @@ const Login = (state = INIT_STATE, action) => {
             isUserLogin: true,
             isUserLogout: false,
           };
-        case AuthLoginActionTypes.LOGOUT_USER:
-          return {
-            ...state,
-            loading: false,
+          case AuthLoginActionTypes.LOGOUT_USER:
+            return {
+              ...state,
+              loading: false,
+              isUserLogin: false,
             isUserLogout: true,
           };
         default:

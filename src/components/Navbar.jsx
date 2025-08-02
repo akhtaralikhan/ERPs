@@ -1,8 +1,38 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useReducer } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import feather from "feather-icons";
+import { useRedux } from "../hooks/useRedux";
+import { createSelector } from "reselect";
+import { logoutUser } from "../redux/auth/login/actions";
 
 const Navbar = () => {
+  const { dispatch, useAppSelector } = useRedux();
+
+  const userData = createSelector(
+    (state) => state.Login,
+    (state) => ({
+      isUserLogin: state.isUserLogin,
+      error: state.error,
+      loginLoading: state.loading,
+      isUserLogout: state.isUserLogout,
+      user: state.user,
+    })
+  );
+
+  const { isUserLogin, error, loginLoading, isUserLogout, user } = useAppSelector(userData);
+
+  const profilePic = `${(user.data?.fullname || '').split(' ').map((n) => n[0]).join('').toUpperCase()}`;
+
+  // handleSignout
+
+  const navigate = useNavigate();
+
+  const handleSignout = () => {
+    localStorage.removeItem("userData");
+    localStorage.removeItem("token");
+    window.location.href = "/Signin";
+    dispatch(logoutUser());
+  };
 
   useEffect(() => {
     feather.replace();
@@ -254,11 +284,7 @@ const Navbar = () => {
                     to="pages/members.html"
                   >
                     <div className="avatar avatar-l status-online  me-2 text-900">
-                      <img
-                        className="rounded-circle "
-                        src="src/assets/img/team/40x40/10.webp"
-                        alt=""
-                      />
+                      <span className="username">{profilePic}</span>
                     </div>
                     <div className="flex-1">
                       <h6 className="mb-0 text-1000 title">Carry Anna</h6>
@@ -957,12 +983,12 @@ const Navbar = () => {
               aria-haspopup="true"
               aria-expanded="false"
             >
-              <div className="avatar avatar-l ">
-                <img
-                  className="rounded-circle "
-                  src="src/assets/img/team/40x40/57.webp"
-                  alt=""
-                />
+              <div className="avatar-xs">
+                <span
+                  className="avatar-title d-flex rounded-circle text-uppercase bold fs-1 border p-1">
+                  <span className="username m-1">{profilePic}</span>
+                  <span className="user-status"></span>
+                </span>
               </div>
             </Link>
             <div
@@ -973,13 +999,15 @@ const Navbar = () => {
                 <div className="card-body p-0">
                   <div className="text-center pt-4 pb-3">
                     <div className="avatar avatar-xl ">
-                      <img
-                        className="rounded-circle "
-                        src="src/assets/img/team/72x72/57.webp"
-                        alt=""
-                      />
+                      <div className="avatar-xs">
+                        <span
+                          className="avatar-title d-flex rounded-circle text-uppercase bold fs-1 border p-1">
+                          <span className="username m-1">{profilePic}</span>
+                          <span className="user-status"></span>
+                        </span>
+                      </div>
                     </div>
-                    <h6 className="mt-2 text-black">Jerry Seinfield</h6>
+                    <h6 className="mt-2 text-black">{user.data.fullname}</h6>
                   </div>
                   <div className="mb-3 mx-3">
                     <input
@@ -1071,17 +1099,15 @@ const Navbar = () => {
                   </ul>
                   <hr />
                   <div className="px-3">
-                    {" "}
-                    <Link
+                    <button
+                      onClick={handleSignout}
                       className="btn btn-phoenix-secondary d-flex flex-center w-100"
-                      to="#!"
+                      to="Signin"
                     >
-                      {" "}
                       <span className="me-2" data-feather="log-out">
-                        {" "}
                       </span>
                       Sign out
-                    </Link>
+                    </button>
                   </div>
                   <div className="my-2 text-center fw-bold fs--2 text-600">
                     <Link className="text-600 me-1" to="#!">
@@ -1102,7 +1128,7 @@ const Navbar = () => {
           </li>
         </ul>
       </div>
-    </nav>
+    </nav >
   );
 };
 

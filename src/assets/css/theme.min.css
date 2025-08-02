@@ -25969,10 +25969,19 @@ html {
     min-height: 100vh;
     padding: calc(var(--phoenix-navbar-top-height) + 2rem) 1.5rem 6.375rem 1.5rem;
     padding-bottom: 6rem !important;
-    padding-left: 2.5rem !important;
+    /* padding-left: 2.5rem !important;
     padding-right: 2.5rem !important;
-    margin-left: 15.875rem !important;
+    margin-left: 15.875rem !important; */
 }
+
+@media (min-width: 992px) and (max-width: 1919px) {
+    .content {
+        padding-left: 2.5rem !important;
+        padding-right: 2.5rem !important;
+        margin-left: 15.875rem !important;
+    }
+}
+
 
 @media(min-width: 576px) {
     .content {

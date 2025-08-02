@@ -8,9 +8,7 @@ function* loginUser(action) {
     try {
         const { user } = action.payload;
 
-        // ✅ Pass credentials as a single object
         const response = yield call(loginUserApi, user);
-
 
         if (response) {
             localStorage.setItem("userData", JSON.stringify(response));

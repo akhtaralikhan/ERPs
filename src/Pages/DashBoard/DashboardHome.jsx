@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { userData } from "../../constant/Config";
+import SalesChart from "../../Components/SalesChart";
 
 const DashboardHome = () => {
 
@@ -186,7 +187,9 @@ const DashboardHome = () => {
               <div
                 className="echart-total-sales-chart"
                 style={{ minHeight: "320px", width: "100%" }}
-              ></div>
+              >
+                <SalesChart />
+              </div>
               <div className="row mt-5">
                 <div className="col-lg-4 col-sm-12">
                   <p className="text-primary m-0">Total income </p>
@@ -1241,7 +1244,7 @@ const DashboardHome = () => {
                 <span className="d-none d-sm-inline-block mx-1">|</span>
                 <br className="d-sm-none" />
                 2023 &copy;
-                <a className="mx-1" href="#">
+                <a className="ms-3" href="#">
                   microhind
                 </a>
               </p>
