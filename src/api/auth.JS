@@ -5,19 +5,14 @@ import { endPoints } from './Urls';
 
 
 
-export const fetchUserProfile = () =>
-    apiClient({
-        endpoint: BASE_URL + `${endPoints.auth.sigIn}`,
-        method: 'POST',
-    });
-
 
 export const loginUserApi = async (credentials) => {
     const payload = {
         email: credentials.email,
         password: credentials.password,
-        rememberMe: false,
+        rememberMe: credentials.rememberMe,
     };
+
     const body = JSON.stringify(payload);
 
     const response = await axios.post(

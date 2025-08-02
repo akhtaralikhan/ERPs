@@ -2,6 +2,8 @@ import { call, put, takeEvery } from "redux-saga/effects";
 import { authLoginApiResponseSuccess, authLoginApiResponseError } from "./actions";
 import { AuthLoginActionTypes } from "./types";
 import { loginUserApi } from "../../../api/auth.JS";
+
+
 function* loginUser(action) {
     try {
         const { user } = action.payload;

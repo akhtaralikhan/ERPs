@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { userData } from "../../constant/Config";
 
 const DashboardHome = () => {
+
+
   return (
     <>
       <div className="content">
@@ -1336,7 +1339,7 @@ const DashboardHome = () => {
                   <div className="avatar avatar-3xl status-online">
                     <img
                       className="rounded-circle border border-3 border-white"
-                      src="assets/img/team/30.webp"
+                      src="src/assets/img/team/30.webp"
                       alt=""
                     />
                   </div>

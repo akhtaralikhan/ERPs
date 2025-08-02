@@ -940,7 +940,7 @@ const Services = () => {
                         <div className="avatar avatar-3xl status-online">
                           <img
                             className="rounded-circle border border-3 border-white"
-                            src="assets/img/team/30.webp"
+                            src="src/assets/img/team/30.webp"
                             alt=""
                           />
                         </div>

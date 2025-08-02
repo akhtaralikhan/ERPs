@@ -24,14 +24,16 @@ import Report from "../pages/Dashboard/Report";
 import Settings from "../pages/Dashboard/Settings";
 import Console from "../pages/Dashboard/Console";
 import ConnectBank from "../pages/Dashboard/ConnectBank";
-import Signin from "../pages/Auth/Signin";
+import Signin from "../Pages/Auth/Signin";
+import { superAdmin } from "../constant/Config";
 
 export const publicRoutes = [
   { path: "/Signin", component: <Signin /> },
   { path: "/SignUp", component: <SignUp /> },
   { path: "/ForgetPassword", component: <ForgetPassword /> },
 ];
-export const privateRoutes = [
+
+const basePrivateRoutes = [
   { path: "/", component: <DashboardHome /> },
   { path: "/Product", component: <Product /> },
   { path: "/Services", component: <Services /> },
@@ -52,6 +54,12 @@ export const privateRoutes = [
   { path: "/Assets", component: <Assets /> },
   { path: "/Report", component: <Report /> },
   { path: "/Settings", component: <Settings /> },
-  { path: "/Console", component: <Console /> },
   { path: "/ConnectBank", component: <ConnectBank /> },
 ];
+
+// Conditionally add Console route
+if (superAdmin) {
+  basePrivateRoutes.push({ path: "/Console", component: <Console /> });
+}
+
+export const privateRoutes = basePrivateRoutes;

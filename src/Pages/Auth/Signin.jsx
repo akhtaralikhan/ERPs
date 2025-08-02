@@ -9,7 +9,6 @@ import { loginUser } from "../../redux/auth/login/actions";
 import { createSelector } from "reselect";
 
 const Signin = () => {
-  const [isChecked, setIsChecked] = useState(true);
 
   const resolver = yupResolver(
     yup.object().shape({
@@ -37,7 +36,7 @@ const Signin = () => {
 
   const { dispatch, useAppSelector } = useRedux();
 
-  
+
   const userData = createSelector(
     (state) => state.Login,
     (state) => ({
@@ -46,18 +45,15 @@ const Signin = () => {
       loginLoading: state.loading,
       isUserLogout: state.isUserLogout,
       user: state.user,
-
     })
   );
-  // Inside your component
+
   const { isUserLogin, error, loginLoading, isUserLogout, user } = useAppSelector(userData);
-  
+
   const navigate = useNavigate();
   const location = useLocation();
   const [redirectUrl, setRedirectUrl] = useState("/");
   useEffect(() => {
-    console.log("isUserLogin:", isUserLogin);
-    
     const url =
       location.state && location.state.from
         ? location.state.from.pathname
@@ -72,12 +68,20 @@ const Signin = () => {
     }
   }, [isUserLogin, user, navigate]);
 
-
+  // login user action
+  const [isChecked, setIsChecked] = useState(true);
 
   const onSubmitForm = (data) => {
-    dispatch(loginUser(data));
-    console.log("Form submitted with data:", data);
+    const payload = {
+      email: data.email,
+      password: data.password,
+      rememberMe: isChecked, 
+    };
+
+    dispatch(loginUser(payload));
+    console.log("Form submitted with data:", payload);
   };
+
 
 
   return (
@@ -215,10 +219,9 @@ const Signin = () => {
                           <div className="col-auto">
                             <div className="form-check mb-0">
                               <input
-                                className="form-check-input"
-                                id="basic-checkbox"
                                 type="checkbox"
-                                checked="checked"
+                                className="form-check-input"
+                                checked={isChecked}
                                 onChange={(e) => setIsChecked(e.target.checked)}
                               />
                               <label

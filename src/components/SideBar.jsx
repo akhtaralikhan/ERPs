@@ -1,8 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import feather from "feather-icons";
 
 const Sidebar = () => {
+  const [isSuperAdmin, setIsSuperAdmin] = useState(false);
+
+  useEffect(() => {
+    const userData = localStorage.getItem("userData");
+    const user = userData ? JSON.parse(userData) : null;
+    if (user?.data?.role?.name === "SuperAdmin") {
+      setIsSuperAdmin(true);
+    }
+  }, [isSuperAdmin]);
+
+
   useEffect(() => {
     feather.replace();
 
@@ -443,30 +454,31 @@ const Sidebar = () => {
                 </NavLink>
               </div>
             </li>
-            <li className="nav-item">
-              {/* <!-- label--> */}
-              <p className="navbar-vertical-label">Super Admin</p>
-              <hr className="navbar-vertical-line" />
-              {/* <!-- parent pages--> */}
-              <div className="nav-item-wrapper">
-                <NavLink
-                  className="nav-link label-1"
-                  to="/Console"
-                  role="button"
-                  data-bs-toggle=""
-                  aria-expanded="false"
-                >
-                  <div className="d-flex align-items-center">
-                    <span className="nav-link-icon">
-                      <span data-feather="codepen"></span>
-                    </span>
-                    <span className="nav-link-text-wrapper">
-                      <span className="nav-link-text">Console</span>
-                    </span>
-                  </div>
-                </NavLink>
-              </div>
-            </li>
+            {isSuperAdmin &&
+              <li className="nav-item">
+                {/* <!-- label--> */}
+                <p className="navbar-vertical-label">Super Admin</p>
+                <hr className="navbar-vertical-line" />
+                {/* <!-- parent pages--> */}
+                <div className="nav-item-wrapper">
+                  <NavLink
+                    className="nav-link label-1"
+                    to="/Console"
+                    role="button"
+                    data-bs-toggle=""
+                    aria-expanded="false"
+                  >
+                    <div className="d-flex align-items-center">
+                      <span className="nav-link-icon">
+                        <span data-feather="codepen"></span>
+                      </span>
+                      <span className="nav-link-text-wrapper">
+                        <span className="nav-link-text">Console</span>
+                      </span>
+                    </div>
+                  </NavLink>
+                </div>
+              </li>}
           </ul>
         </div>
       </div>

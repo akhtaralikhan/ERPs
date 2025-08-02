@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 // hooks
-import { useRedux } from "../hooks/index";
+import { useRedux } from "./index";
 
 // api
 import { createSelector } from "reselect";
@@ -16,7 +16,7 @@ const useProfile = () => {
   // }));
 
   const errorData = createSelector(
-    (state: any) => state.Settings,
+    (state) => state.Settings,
     (state) => ({
       settings: state.settings,
     })

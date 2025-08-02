@@ -121,7 +121,7 @@ const Navbar = () => {
                     <div className="file-thumbnail me-2">
                       <img
                         className="h-100 w-100 fit-cover rounded-3"
-                        src="assets/img/products/60x60/3.png"
+                        src="src/assets/img/products/60x60/3.png"
                         alt=""
                       />
                     </div>
@@ -143,7 +143,7 @@ const Navbar = () => {
                     <div className="file-thumbnail me-2">
                       <img
                         className="img-fluid"
-                        src="assets/img/products/60x60/3.png"
+                        src="src/assets/img/products/60x60/3.png"
                         alt=""
                       />
                     </div>
@@ -256,7 +256,7 @@ const Navbar = () => {
                     <div className="avatar avatar-l status-online  me-2 text-900">
                       <img
                         className="rounded-circle "
-                        src="assets/img/team/40x40/10.webp"
+                        src="src/assets/img/team/40x40/10.webp"
                         alt=""
                       />
                     </div>
@@ -274,7 +274,7 @@ const Navbar = () => {
                     <div className="avatar avatar-l  me-2 text-900">
                       <img
                         className="rounded-circle "
-                        src="assets/img/team/40x40/12.webp"
+                        src="src/assets/img/team/40x40/12.webp"
                         alt=""
                       />
                     </div>
@@ -404,7 +404,7 @@ const Navbar = () => {
                             <div className="avatar avatar-m status-online me-3">
                               <img
                                 className="rounded-circle"
-                                src="assets/img/team/40x40/30.webp"
+                                src="src/assets/img/team/40x40/30.webp"
                                 alt=""
                               />
                             </div>
@@ -496,7 +496,7 @@ const Navbar = () => {
                             <div className="avatar avatar-m status-online me-3">
                               <img
                                 className="rounded-circle avatar-placeholder"
-                                src="assets/img/team/40x40/avatar.webp"
+                                src="src/assets/img/team/40x40/avatar.webp"
                                 alt=""
                               />
                             </div>
@@ -592,7 +592,7 @@ const Navbar = () => {
                             <div className="avatar avatar-m status-online me-3">
                               <img
                                 className="rounded-circle"
-                                src="assets/img/team/40x40/59.webp"
+                                src="src/assets/img/team/40x40/59.webp"
                                 alt=""
                               />
                             </div>
@@ -638,7 +638,7 @@ const Navbar = () => {
                             <div className="avatar avatar-m status-online me-3">
                               <img
                                 className="rounded-circle"
-                                src="assets/img/team/40x40/58.webp"
+                                src="src/assets/img/team/40x40/58.webp"
                                 alt=""
                               />
                             </div>
@@ -737,7 +737,7 @@ const Navbar = () => {
                         to="#!"
                       >
                         <img
-                          src="assets/img/nav-icons/behance.webp"
+                          src="src/assets/img/nav-icons/behance.webp"
                           alt=""
                           width="30"
                         />
@@ -752,7 +752,7 @@ const Navbar = () => {
                         to="#!"
                       >
                         <img
-                          src="assets/img/nav-icons/google-cloud.webp"
+                          src="src/assets/img/nav-icons/google-cloud.webp"
                           alt=""
                           width="30"
                         />
@@ -767,7 +767,7 @@ const Navbar = () => {
                         to="#!"
                       >
                         <img
-                          src="assets/img/nav-icons/slack.webp"
+                          src="src/assets/img/nav-icons/slack.webp"
                           alt=""
                           width="30"
                         />
@@ -782,7 +782,7 @@ const Navbar = () => {
                         to="#!"
                       >
                         <img
-                          src="assets/img/nav-icons/gitlab.webp"
+                          src="src/assets/img/nav-icons/gitlab.webp"
                           alt=""
                           width="30"
                         />
@@ -797,7 +797,7 @@ const Navbar = () => {
                         to="#!"
                       >
                         <img
-                          src="assets/img/nav-icons/bitbucket.webp"
+                          src="src/assets/img/nav-icons/bitbucket.webp"
                           alt=""
                           width="30"
                         />
@@ -812,7 +812,7 @@ const Navbar = () => {
                         to="#!"
                       >
                         <img
-                          src="assets/img/nav-icons/google-drive.webp"
+                          src="src/assets/img/nav-icons/google-drive.webp"
                           alt=""
                           width="30"
                         />
@@ -827,7 +827,7 @@ const Navbar = () => {
                         to="#!"
                       >
                         <img
-                          src="assets/img/nav-icons/trello.webp"
+                          src="src/assets/img/nav-icons/trello.webp"
                           alt=""
                           width="30"
                         />
@@ -842,7 +842,7 @@ const Navbar = () => {
                         to="#!"
                       >
                         <img
-                          src="assets/img/nav-icons/figma.webp"
+                          src="src/assets/img/nav-icons/figma.webp"
                           alt=""
                           width="20"
                         />
@@ -857,7 +857,7 @@ const Navbar = () => {
                         to="#!"
                       >
                         <img
-                          src="assets/img/nav-icons/twitter.webp"
+                          src="src/assets/img/nav-icons/twitter.webp"
                           alt=""
                           width="30"
                         />
@@ -872,7 +872,7 @@ const Navbar = () => {
                         to="#!"
                       >
                         <img
-                          src="assets/img/nav-icons/pinterest.webp"
+                          src="src/assets/img/nav-icons/pinterest.webp"
                           alt=""
                           width="30"
                         />
@@ -887,7 +887,7 @@ const Navbar = () => {
                         to="#!"
                       >
                         <img
-                          src="assets/img/nav-icons/ln.webp"
+                          src="src/assets/img/nav-icons/ln.webp"
                           alt=""
                           width="30"
                         />
@@ -902,7 +902,7 @@ const Navbar = () => {
                         to="#!"
                       >
                         <img
-                          src="assets/img/nav-icons/google-maps.webp"
+                          src="src/assets/img/nav-icons/google-maps.webp"
                           alt=""
                           width="30"
                         />
@@ -917,7 +917,7 @@ const Navbar = () => {
                         to="#!"
                       >
                         <img
-                          src="assets/img/nav-icons/google-photos.webp"
+                          src="src/assets/img/nav-icons/google-photos.webp"
                           alt=""
                           width="30"
                         />
@@ -932,7 +932,7 @@ const Navbar = () => {
                         to="#!"
                       >
                         <img
-                          src="assets/img/nav-icons/spotify.webp"
+                          src="src/assets/img/nav-icons/spotify.webp"
                           alt=""
                           width="30"
                         />
@@ -975,7 +975,7 @@ const Navbar = () => {
                     <div className="avatar avatar-xl ">
                       <img
                         className="rounded-circle "
-                        src="assets/img/team/72x72/57.webp"
+                        src="src/assets/img/team/72x72/57.webp"
                         alt=""
                       />
                     </div>
