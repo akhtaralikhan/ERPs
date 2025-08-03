@@ -22,3 +22,18 @@ export const dashboardTypes = {
     INVOICE_REPORT: "@@DASHBOARD/INVOICE_REPORT",
     GOALS_LAST: "@@DASHBOARD/GOALS_LAST",
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

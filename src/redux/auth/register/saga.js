@@ -7,55 +7,26 @@ import {
   authRegisterApiResponseError,
 } from "./actions";
 
-//Include Both Helper File with needed methods
 
-// initialize relavant method of both Auth
-
-// Is user register successfull then direct plot user in redux.
-function* registerUser({ payload: { user } }) {
+function* registerUserApi(action) {
   try {
-    if (process.env.REACT_APP_DEFAULTAUTH === "firebase") {
-      const response = yield call(
-        fireBaseBackend.registerUser,
-        user.email,
-        user.password
-      );
-      yield put(
-        authRegisterApiResponseSuccess(
-          AuthRegisterActionTypes.REGISTER_USER,
-          response
-        )
-      );
-    } else if (process.env.REACT_APP_DEFAULTAUTH === "jwt") {
-      const response = yield call(postJwtRegister, user);
-      yield put(
-        authRegisterApiResponseSuccess(
-          AuthRegisterActionTypes.REGISTER_USER,
-          response
-        )
-      );
-    } else if (process.env.REACT_APP_DEFAULTAUTH === "fake") {
-      const response = yield call(postFakeRegister, user);
-      yield put(
-        authRegisterApiResponseSuccess(
-          AuthRegisterActionTypes.REGISTER_USER,
-          response
-        )
-      );
+    const { user } = action.payload;
+
+    const response = yield call(loginUserApi, user);
+
+    if (response) {
+      localStorage.setItem("userData", JSON.stringify(response));
+      localStorage.setItem("token", response.data.token || "");
     }
+
+    yield put(authLoginApiResponseSuccess(AuthLoginActionTypes.LOGIN_USER, response));
   } catch (error) {
     yield put(
-      authRegisterApiResponseError(AuthRegisterActionTypes.REGISTER_USER, error)
+      authLoginApiResponseError(AuthLoginActionTypes.LOGIN_USER, error.response?.data || "Login failed")
     );
   }
 }
 
-export function* watchUserRegister() {
-  yield takeEvery(AuthRegisterActionTypes.REGISTER_USER, registerUser);
+export default function* loginSaga() {
+  yield takeEvery(AuthLoginActionTypes.LOGIN_USER, loginUser);
 }
-
-function* registerSaga() {
-  yield all([fork(watchUserRegister)]);
-}
-
-export default registerSaga;
