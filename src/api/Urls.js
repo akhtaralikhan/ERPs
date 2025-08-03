@@ -61,6 +61,9 @@ export const endPoints = {
         currencyDefault: "currency/default",
         chartaccounts: "chartaccounts",
         assets: "assets",
+        vendor: "vendor",
+        taxe: "taxe",
+        customer: "customer"
     },
     reports: {
         currencyDefault: "currency/default",
@@ -80,7 +83,7 @@ export const endPoints = {
     console: {
         users_UserId: `users/${userData.id}`,
         allUsers: "users/all",
-        stripeAccountAl: "stripe/account/all",
+        stripeAccountAll: "stripe/account/all",
         subscriptionTenantAllUser: `Subscriptions/all/user/${userData.id}`,
         settingTypesLicence: "setting/type/LICENSE",
         plan: "plan",

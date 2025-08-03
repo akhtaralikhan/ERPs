@@ -4,10 +4,10 @@ import { BASE_URL } from './apiCore';
 import { endPoints } from './Urls';
 
 
-export const comapnyTenantApi = async () => {
+export const manualJournalApi = async () => {
 
     const response = await axios.get(
-        BASE_URL + endPoints.settings.comapnyTenant,
+        BASE_URL + endPoints.accounting.manualjournal,
         body,
         {
             headers: {
@@ -21,11 +21,10 @@ export const comapnyTenantApi = async () => {
 };
 
 
-
-export const usersApi = async () => {
+export const transactionApi = async () => {
 
     const response = await axios.get(
-        BASE_URL + endPoints.settings.users,
+        BASE_URL + endPoints.accounting.transaction,
         body,
         {
             headers: {
@@ -39,11 +38,10 @@ export const usersApi = async () => {
 };
 
 
-
-export const subscriptionTenantApi = async () => {
+export const currencyDefaultApi = async () => {
 
     const response = await axios.get(
-        BASE_URL + endPoints.settings.subscriptionTenant,
+        BASE_URL + endPoints.accounting.currencyDefault,
         body,
         {
             headers: {
@@ -57,11 +55,10 @@ export const subscriptionTenantApi = async () => {
 };
 
 
-
-export const subscriptionTenantAllUserApi = async () => {
+export const chartAccountsApi = async () => {
 
     const response = await axios.get(
-        BASE_URL + endPoints.settings.subscriptionTenantAllUser,
+        BASE_URL + endPoints.accounting.chartaccounts,
         body,
         {
             headers: {
@@ -75,11 +72,10 @@ export const subscriptionTenantAllUserApi = async () => {
 };
 
 
-
-export const settingTypeLicenseApi = async () => {
+export const vendorApi = async () => {
 
     const response = await axios.get(
-        BASE_URL + endPoints.settings.settingTypeLicenseApi,
+        BASE_URL + endPoints.accounting.vendor, //check 
         body,
         {
             headers: {
@@ -91,49 +87,12 @@ export const settingTypeLicenseApi = async () => {
 
     return response;
 };
-
-
-
-export const planApi = async () => {
-
-    const response = await axios.get(
-        BASE_URL + endPoints.settings.plan,
-        body,
-        {
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-            },
-        }
-    );
-
-    return response;
-};
-
-
-
-export const categoryApi = async () => {
-
-    const response = await axios.get(
-        BASE_URL + endPoints.settings.category,
-        body,
-        {
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-            },
-        }
-    );
-
-    return response;
-};
-
 
 
 export const taxeApi = async () => {
 
     const response = await axios.get(
-        BASE_URL + endPoints.settings.taxe,
+        BASE_URL + endPoints.accounting.taxe, //reamaining
         body,
         {
             headers: {
@@ -146,3 +105,36 @@ export const taxeApi = async () => {
     return response;
 };
 
+
+export const asssetApi = async () => {
+
+    const response = await axios.get(
+        BASE_URL + endPoints.accounting.assets,
+        body,
+        {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+        }
+    );
+
+    return response;
+};
+
+
+export const customerApi = async () => {
+
+    const response = await axios.get(
+        BASE_URL + endPoints.accounting.customer,
+        body,
+        {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+        }
+    );
+
+    return response;
+};
