@@ -1,3 +1,5 @@
+import { dashboardTypes } from "./types";
+
 export const getDashboardData = () => ({
     type: dashboardTypes.FETCH_DASHBOARD_DATA,
 });

@@ -8,7 +8,7 @@ export const usersUserIdApi = async () => {
 
     const response = await axios.get(
         BASE_URL + endPoints.console.users_UserId,
-        body,
+
         {
             headers: {
                 "Content-Type": "application/json",
@@ -26,7 +26,7 @@ export const allUsersApi = async () => {
 
     const response = await axios.get(
         BASE_URL + endPoints.console.allUsers,
-        body,
+
         {
             headers: {
                 "Content-Type": "application/json",
@@ -44,7 +44,7 @@ export const stripeAccountAllApi = async () => {
 
     const response = await axios.get(
         BASE_URL + endPoints.console.stripeAccountAll,
-        body,
+
         {
             headers: {
                 "Content-Type": "application/json",
@@ -60,7 +60,7 @@ export const subscriptionTenantAllUserApi = async () => {
 
     const response = await axios.get(
         BASE_URL + endPoints.console.subscriptionTenantAllUser,
-        body,
+
         {
             headers: {
                 "Content-Type": "application/json",
@@ -73,10 +73,8 @@ export const subscriptionTenantAllUserApi = async () => {
 };
 
 export const getSubscriptionsTenant = async () => {
-
     const response = await axios.get(
         BASE_URL + endPoints.console.subscriptionTenantUser,
-        body,
         {
             headers: {
                 "Content-Type": "application/json",
@@ -85,14 +83,14 @@ export const getSubscriptionsTenant = async () => {
         }
     );
 
-    return response;
+    return response.data;
 };
 
 export const settingTypesLicenceApi = async () => {
 
     const response = await axios.get(
         BASE_URL + endPoints.console.settingTypesLicence,
-        body,
+
         {
             headers: {
                 "Content-Type": "application/json",
@@ -108,7 +106,7 @@ export const planApi = async () => {
 
     const response = await axios.get(
         BASE_URL + endPoints.console.plan,
-        body,
+
         {
             headers: {
                 "Content-Type": "application/json",
@@ -124,7 +122,7 @@ export const allSubscriptionApi = async () => {
 
     const response = await axios.get(
         BASE_URL + endPoints.console.allSubscription,
-        body,
+
         {
             headers: {
                 "Content-Type": "application/json",
@@ -140,7 +138,7 @@ export const currencyApi = async () => {
 
     const response = await axios.get(
         BASE_URL + endPoints.console.currency,
-        body,
+
         {
             headers: {
                 "Content-Type": "application/json",
@@ -156,7 +154,7 @@ export const settingTypesGeneralApi = async () => {
 
     const response = await axios.get(
         BASE_URL + endPoints.console.settingTypesGeneral,
-        body,
+
         {
             headers: {
                 "Content-Type": "application/json",
@@ -173,7 +171,7 @@ export const settingTypeEmailApi = async () => {
 
     const response = await axios.get(
         BASE_URL + endPoints.console.settingTypeEmail,
-        body,
+
         {
             headers: {
                 "Content-Type": "application/json",
@@ -190,7 +188,7 @@ export const settingTypeSocialLoginApi = async () => {
 
     const response = await axios.get(
         BASE_URL + endPoints.console.settingTypeSocialLogin,
-        body,
+
         {
             headers: {
                 "Content-Type": "application/json",
@@ -207,7 +205,7 @@ export const settingTyopePaymentApi = async () => {
 
     const response = await axios.get(
         BASE_URL + endPoints.console.settingTyopePayment,
-        body,
+
         {
             headers: {
                 "Content-Type": "application/json",

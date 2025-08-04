@@ -12,8 +12,8 @@ export const apiResponseErrorAction = (actionType, error) => ({
 
 export const getSubscriptionsTenant3Action = () => ({
     type: ConsoleActionTypes.SUBSCRIPTIONS_TENANT_3,
-});
-
+  });
+  
 export const getUsersAllAction = () => ({
     type: ConsoleActionTypes.USERS_ALL,
 });

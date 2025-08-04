@@ -1,10 +1,11 @@
 import { call, put, takeEvery } from "redux-saga/effects";
 import { authLoginApiResponseSuccess, authLoginApiResponseError } from "./actions";
 import { AuthLoginActionTypes } from "./types";
-import { loginUserApi } from "../../../api/auth.JS";
+import { loginUserApi } from "../../../api/auth";
 
 
 function* loginUser(action) {
+    console.log("🟢 loginUser saga triggered with:", action.payload.user);
     try {
         const { user } = action.payload;
 

@@ -1,9 +1,19 @@
 import React, { useEffect } from "react";
 import { userData } from "../../constant/Config";
 import SalesChart from "../../Components/SalesChart";
+import { getSubscriptionsTenant3Action } from "../../redux/console/actions";
+import { useRedux } from "../../hooks/useRedux";
+import { getBankAccount, getSummary } from "../../redux/dashboard/actions";
 
 const DashboardHome = () => {
 
+  const { dispatch, useAppSelector } = useRedux();
+
+  useEffect(() => {
+    dispatch(getSubscriptionsTenant3Action());
+    dispatch(getSummary())
+    dispatch(getBankAccount())
+  }, []);
 
   return (
     <>

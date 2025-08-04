@@ -4,6 +4,7 @@ export const INIT_STATE = {
     summary: [],
     monthlyTransactions: {},
     monthlyActivity: {},
+    bankAccount: [],
     cardReports: [],
     lastInvoice: [],
     lastEstimaytes: [],
@@ -25,6 +26,12 @@ const dashboardReducer = (state = INIT_STATE, action) => {
                     return {
                         ...state,
                         summary: action.payload.data,
+                        loading: false,
+                    };
+                case dashboardTypes.BANKACCOUNT:
+                    return {
+                        ...state,
+                        bankAccount: action.payload.data,
                         loading: false,
                     };
                 case dashboardTypes.MONTH_TRANSACTIONS:

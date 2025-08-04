@@ -1,6 +1,6 @@
 import { call, put, takeEvery } from "redux-saga/effects";
 import { ConsoleActionTypes } from "./types";
-import { apiResponseError, apiResponseSuccess } from "./actions";
+import { apiResponseSuccessAction, apiResponseErrorAction } from "./actions";
 import { createBankAccountApi, getSubscriptionsTenant, subscriptionTenantAllUserApi } from "../../api/Console";
 
 
@@ -25,30 +25,27 @@ function* createBankAccount(user) {
             },
         });
 
-        yield put(apiResponseSuccess(ConsoleActionTypes.CREATEBANKACCOUNT, response));
+        yield put(apiResponseSuccessAction(ConsoleActionTypes.CREATEBANKACCOUNT, response));
     } catch (error) {
         yield put(
-            apiResponseError(ConsoleActionTypes.CREATEBANKACCOUNT, error.response?.data || "Faild creating bank account")
+            apiResponseErrorAction(ConsoleActionTypes.CREATEBANKACCOUNT, error.response?.data || "Faild creating bank account")
         );
     }
 }
-export  function* createBankAccountSaga() {
+export function* createBankAccountSaga() {
     yield takeEvery(ConsoleActionTypes.CREATEBANKACCOUNT, createBankAccount);
 }
 
-
 function* getSubscriptionsTenant3() {
-    try {
-        const response = yield call(getSubscriptionsTenant, {
-        });
 
-        yield put(apiResponseSuccess(ConsoleActionTypes.SUBSCRIPTIONS_TENANT_3, response));
+    try {
+        const response = yield call(getSubscriptionsTenant);
+        yield put(apiResponseSuccessAction(ConsoleActionTypes.SUBSCRIPTIONS_TENANT_3, response));
     } catch (error) {
-        yield put(
-            apiResponseError(ConsoleActionTypes.SUBSCRIPTIONS_TENANT_3, error.response?.data || "Faild getSubscriptionsTenant3 account")
-        );
+        yield put(apiResponseErrorAction(ConsoleActionTypes.SUBSCRIPTIONS_TENANT_3, error?.response?.data || "Failed"));
     }
 }
-export  function* getSubscriptionsTenant3Saga() {
+
+export function* getSubscriptionsTenant3Saga() {
     yield takeEvery(ConsoleActionTypes.SUBSCRIPTIONS_TENANT_3, getSubscriptionsTenant3);
 }

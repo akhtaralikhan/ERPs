@@ -8,7 +8,7 @@ import {
 } from "./actions";
 
 
-function* registerUserApi(action) {
+function* registerUser(action) {
   try {
     const { user } = action.payload;
 
@@ -19,14 +19,14 @@ function* registerUserApi(action) {
       localStorage.setItem("token", response.data.token || "");
     }
 
-    yield put(authLoginApiResponseSuccess(AuthLoginActionTypes.LOGIN_USER, response));
+    yield put(authRegisterApiResponseSuccess(AuthRegisterActionTypes.REGISTER_USER, response));
   } catch (error) {
     yield put(
-      authLoginApiResponseError(AuthLoginActionTypes.LOGIN_USER, error.response?.data || "Login failed")
+      authRegisterApiResponseError(AuthRegisterActionTypes.REGISTER_USER, error.response?.data || "Login failed")
     );
   }
 }
 
-export default function* loginSaga() {
-  yield takeEvery(AuthLoginActionTypes.LOGIN_USER, loginUser);
+export default function* registerUserSaga() {
+  yield takeEvery(AuthRegisterActionTypes.REGISTER_USER, registerUser);
 }

@@ -1,8 +1,8 @@
 // src/App.jsx
 import React, { useEffect } from "react";
 import feather from "feather-icons";
-import "./assets/css/theme.min.css";
-import "./vendors/simplebar/simplebar.min.css";
+import "../src/assets/css/theme.min.css";
+import "../src/vendors/simplebar/simplebar.min.css";
 
 // Route Entry Point
 import AppRoutes from "./routes/IndexRouter";

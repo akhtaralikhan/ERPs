@@ -1,4 +1,4 @@
-export const reportsActionTypes = {
+export const ReportsActionTypes = {
     API_RESPONSE_SUCCESS: "@@REPORTS/API_RESPONSE_SUCCESS",
     API_RESPONSE_ERROR: "@@REPORTS/API_RESPONSE_ERROR",
    CURRENCY_DEFAULT: "@@REPORTS/CURRENCY_DEFAULT",
