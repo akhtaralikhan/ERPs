@@ -1,20 +1,17 @@
 import { boolean } from "yup";
 
 const initialState = {
-    CompanyProfile: {},
-    UsersRoles: [],
-    Currencies: [],
-    InvoiceCustomization: {},
-    Subscriptions: [],
-    Pricings: [],
-    Categories: [],
-    taxes: [],
-    UserProfile: {},
-    SocialLogin: {},
-    PaymentSettings: {},
-    EmailSettings: {},
-    ApplicationPreferences: {},
-    CloseAccount: false,
+    companyTenant: {},
+    users: [],
+    SubscriptionsTenant: {},
+    currencyDefault: [],
+    SubscriptionallUsers: [],
+    settingTypeLicense: {},
+    plan: [],
+    category: [],
+    taxe: [],
+    users_3: {},
+
 }
 
 const SettingsReducer = (state = initialState, action) => {

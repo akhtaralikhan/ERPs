@@ -85,6 +85,7 @@ export const endPoints = {
         allUsers: "users/all",
         stripeAccountAll: "stripe/account/all",
         subscriptionTenantAllUser: `Subscriptions/all/user/${userData.id}`,
+        subscriptionTenantUser: `Subscriptions/tenant/${userData.id}`,
         settingTypesLicence: "setting/type/LICENSE",
         plan: "plan",
         allSubscription: "Subscriptions/all",
@@ -93,6 +94,7 @@ export const endPoints = {
         settingTypeEmail: "setting/type/EMAIL",
         settingTypeSocialLogin: "setting/type/SOCIAL_LOGIN",
         settingTyopePayment: "setting/type/PAYMENT",
+        createBankAccount: "bankaccount"
     },
     chats: {
         getChatMessages: "/chats/messages",

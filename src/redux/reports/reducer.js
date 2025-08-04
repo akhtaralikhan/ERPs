@@ -1,28 +1,55 @@
+import { ReportsActionTypes } from "./types";
+
 const initialState = {
-    ProfitAndLoss: {},
-    BalanceSheet: {},
-    TaxesReport: {},
-    SalesByCustomer: {},
-    PurchaseByVendor: {},
-    AccountBalances: {},
-    TrialBalances: {},
-    AccountTransactions: {},
-}
+    currencyDefault: {},
+    customeDateReport: [],
+    loading: false,
+    isDataFetched: false,
+    error: "",
+};
 
 const reportsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'SET_REPORT_DATA':
+        case ReportsActionTypes.API_RESPONSE_SUCCESS:
+            switch (action.payload.actionType) {
+                case ReportsActionTypes.FETCH_CURRENCY_DEFAULT:
+                    return {
+                        ...state,
+                        currencyDefault: action.payload.data,
+                        loading: false,
+                        isDataFetched: true,
+                    };
+                case ReportsActionTypes.FETCH_CUSTOM_DATE_REPORT:
+                    return {
+                        ...state,
+                        customeDateReport: action.payload.data,
+                        loading: false,
+                        isDataFetched: true,
+                    };
+                default:
+                    return { ...state };
+            }
+
+        case ReportsActionTypes.API_RESPONSE_ERROR:
             return {
                 ...state,
-                [action.payload.reportType]: action.payload.data,
+                loading: false,
+                isDataFetched: false,
+                error: action.payload.error,
             };
-        case 'CLEAR_REPORT_DATA':
+
+        case ReportsActionTypes.FETCH_CURRENCY_DEFAULT:
+        case ReportsActionTypes.FETCH_CUSTOM_DATE_REPORT:
             return {
                 ...state,
-                [action.payload.reportType]: {},
+                loading: true,
+                isDataFetched: false,
+                error: "",
             };
+
         default:
             return state;
     }
-}
+};
+
 export default reportsReducer;

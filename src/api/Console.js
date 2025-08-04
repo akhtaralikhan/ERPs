@@ -72,6 +72,22 @@ export const subscriptionTenantAllUserApi = async () => {
     return response;
 };
 
+export const getSubscriptionsTenant = async () => {
+
+    const response = await axios.get(
+        BASE_URL + endPoints.console.subscriptionTenantUser,
+        body,
+        {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+        }
+    );
+
+    return response;
+};
+
 export const settingTypesLicenceApi = async () => {
 
     const response = await axios.get(
@@ -201,4 +217,41 @@ export const settingTyopePaymentApi = async () => {
     );
 
     return response;
+};
+
+
+export const createBankAccountApi = async (credentials) => {
+    const payload = {
+        bankName: credentials.bankName,
+        bankHolderName: credentials.bankHolderName,
+        accountNumber: credentials.accountNumber,
+        balance: credentials.balance,
+        pendingBalance: credentials.pendingBalance,
+        phone: credentials.phone,
+        currencyId: credentials.currencyId,
+        createdById: credentials.createdById,
+        type: credentials.type,
+        address: {
+            addressLine1: credentials.address.addressLine1,
+            addressLine2: credentials.address.addressLine2,
+            zipCode: credentials.address.zipCode,
+            city: credentials.address.city,
+            country: credentials.address.country,
+        },
+    };
+
+    const body = JSON.stringify(payload);
+
+    const response = await axios.post(
+        commonApiUrl + endPoints.console.createBankAccount,
+        body,
+        {
+            headers: {
+                "Content-Type": "application/json",
+                publicKey: PublicKey,
+            },
+        }
+    );
+
+    return response.data;
 };

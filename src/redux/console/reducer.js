@@ -1,63 +1,136 @@
-const initialState = {
-    UsersAndRoles: [],
-    Stripeaccounts: [],
-    Pricing: [],
-    Subscriptions: [],
-    Currencies: [],
-    ApplicationPreferences: {},
-    UpdateEmailSettings: {},
-    SocialLogin: {},
-    UpdatePaymentSettings: {},
-}
+import { ConsoleActionTypes } from "./types";
+
+export const initialState = {
+    SubscriptionsTenant: {},
+    allUsers: [],
+    subscriptionAllUser_3: [],
+    settingTypeLicense: {},
+    plan: [],
+    allSubscription: [],
+    currency: [],
+    settingTypeGeneral: {},
+    settingTypeEmail: {},
+    settingTypeSocialLogin: {},
+    settingTypePayment: {},
+    loading: false,
+    isDataFetched: false,
+    error: "",
+};
 
 export const consoleReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'SET_USERS_AND_ROLES':
+        case ConsoleActionTypes.API_RESPONSE_SUCCESS:
+            switch (action.payload.actionType) {
+                case ConsoleActionTypes.FETCH_SUBSCRIPTIONS_TENANT:
+                    return {
+                        ...state,
+                        SubscriptionsTenant: action.payload.data,
+                        loading: false,
+                        isDataFetched: true,
+                    };
+                case ConsoleActionTypes.FETCH_ALL_USERS:
+                    return {
+                        ...state,
+                        allUsers: action.payload.data,
+                        loading: false,
+                        isDataFetched: true,
+                    };
+                case ConsoleActionTypes.FETCH_SUBSCRIPTION_ALL_USER_3:
+                    return {
+                        ...state,
+                        subscriptionAllUser_3: action.payload.data,
+                        loading: false,
+                        isDataFetched: true,
+                    };
+                case ConsoleActionTypes.FETCH_SETTING_LICENSE:
+                    return {
+                        ...state,
+                        settingTypeLicense: action.payload.data,
+                        loading: false,
+                        isDataFetched: true,
+                    };
+                case ConsoleActionTypes.FETCH_PLAN:
+                    return {
+                        ...state,
+                        plan: action.payload.data,
+                        loading: false,
+                        isDataFetched: true,
+                    };
+                case ConsoleActionTypes.FETCH_ALL_SUBSCRIPTION:
+                    return {
+                        ...state,
+                        allSubscription: action.payload.data,
+                        loading: false,
+                        isDataFetched: true,
+                    };
+                case ConsoleActionTypes.FETCH_CURRENCY:
+                    return {
+                        ...state,
+                        currency: action.payload.data,
+                        loading: false,
+                        isDataFetched: true,
+                    };
+                case ConsoleActionTypes.FETCH_SETTING_GENERAL:
+                    return {
+                        ...state,
+                        settingTypeGeneral: action.payload.data,
+                        loading: false,
+                        isDataFetched: true,
+                    };
+                case ConsoleActionTypes.FETCH_SETTING_EMAIL:
+                    return {
+                        ...state,
+                        settingTypeEmail: action.payload.data,
+                        loading: false,
+                        isDataFetched: true,
+                    };
+                case ConsoleActionTypes.FETCH_SETTING_SOCIAL_LOGIN:
+                    return {
+                        ...state,
+                        settingTypeSocialLogin: action.payload.data,
+                        loading: false,
+                        isDataFetched: true,
+                    };
+                case ConsoleActionTypes.FETCH_SETTING_PAYMENT:
+                    return {
+                        ...state,
+                        settingTypePayment: action.payload.data,
+                        loading: false,
+                        isDataFetched: true,
+                    };
+                default:
+                    return { ...state };
+            }
+
+        case ConsoleActionTypes.API_RESPONSE_ERROR:
             return {
                 ...state,
-                UsersAndRoles: action.payload,
+                loading: false,
+                isDataFetched: false,
+                error: action.payload.error,
             };
-        case 'SET_STRIPE_ACCOUNTS':
+
+        case ConsoleActionTypes.FETCH_SUBSCRIPTIONS_TENANT:
+        case ConsoleActionTypes.FETCH_ALL_USERS:
+        case ConsoleActionTypes.FETCH_SUBSCRIPTION_ALL_USER_3:
+        case ConsoleActionTypes.FETCH_SETTING_LICENSE:
+        case ConsoleActionTypes.FETCH_PLAN:
+        case ConsoleActionTypes.FETCH_ALL_SUBSCRIPTION:
+        case ConsoleActionTypes.FETCH_CURRENCY:
+        case ConsoleActionTypes.FETCH_SETTING_GENERAL:
+        case ConsoleActionTypes.FETCH_SETTING_EMAIL:
+        case ConsoleActionTypes.FETCH_SETTING_SOCIAL_LOGIN:
+        case ConsoleActionTypes.FETCH_SETTING_PAYMENT:
             return {
                 ...state,
-                Stripeaccounts: action.payload,
+                loading: true,
+                isDataFetched: false,
+                error: "",
             };
-        case 'SET_PRICING':
-            return {
-                ...state,
-                Pricing: action.payload,
-            };
-        case 'SET_SUBSCRIPTIONS':
-            return {
-                ...state,
-                Subscriptions: action.payload,
-            };
-        case 'SET_CURRENCIES':
-            return {
-                ...state,
-                Currencies: action.payload,
-            };
-        case 'SET_APPLICATION_PREFERENCES':
-            return {
-                ...state,
-                ApplicationPreferences: action.payload,
-            };
-        case 'SET_UPDATE_EMAIL_SETTINGS':
-            return {
-                ...state,
-                UpdateEmailSettings: action.payload,
-            };
-        case 'SET_SOCIAL_LOGIN':
-            return {
-                ...state,
-                SocialLogin: action.payload,
-            };
-        case 'SET_UPDATE_PAYMENT_SETTINGS':
-            return {
-                ...state,
-                UpdatePaymentSettings: action.payload,
-            };
+
         default:
             return state;
     }
 };
+
+export default consoleReducer;

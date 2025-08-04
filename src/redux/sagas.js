@@ -5,9 +5,12 @@ import chatsSaga from "./chats/saga";
 import authSaga from "./auth/login/LoginSaga";
 import favouriteSaga, { archiveChatSaga, deleteMessageSaga, deleteUserMessagesSaga, getArchiveChatUsersSaga, GetStarredMessageSaga, getUserChatSaga, initiateMsgSaga, PinChatSaga, readMessageSaga, replyMsgSaga, RradAllMessageSaga, starMessageSaga, unArchiveChatSaga, unPinChatSaga, unReadSaga, UnStarMessageSaga, } from "./chats/saga";
 import loginSaga from "./auth/login/LoginSaga";
+import {createBankAccountSaga, getSubscriptionsTenant3Saga} from "./console/saga";
 
 export default function* rootSaga() {
     yield all([
+        getSubscriptionsTenant3Saga(),
+        createBankAccountSaga(),
         loginSaga(),
         RradAllMessageSaga(),
         readMessageSaga(),
