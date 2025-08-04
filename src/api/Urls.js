@@ -67,7 +67,7 @@ export const endPoints = {
     },
     reports: {
         currencyDefault: "currency/default",
-        getReportsDataOfCustomeDate: `report/profit-and-loss/start-at/${startDate}/end-at/${endDate}`, //gotta make this dynamic
+        // getReportsDataOfCustomeDate: `report/profit-and-loss/start-at/${startDate}/end-at/${endDate}`, //gotta make this dynamic
     },
     settings: {
         comapnyTenant: `company/tenant/${userData.id}`,
