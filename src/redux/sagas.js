@@ -8,13 +8,24 @@ import loginSaga from "./auth/login/LoginSaga";
 import { AuthLoginActionTypes } from "./auth/login/types";
 import { createBankAccountSaga, getSubscriptionsTenant3Saga } from "./console/saga";
 import registerUserSaga from "./auth/register/saga";
-import { bankaccountSaga, summarySaga } from "./dashboard/saga";
+import { bankaccountSaga, monthlyActivitySaga, monthlyTransactionSaga, revenueTotalSaga, settingTypeGeneralSaga, settingTypeLicenseSaga, settingTypePaymentSaga, SocialLoginSaga, summarySaga, weekActivitySaga, weekTransactionSaga, yearlyActivitySaga, yearlyTransactionSaga } from "./dashboard/saga";
 
 export default function* rootSaga() {
     yield all([
         getSubscriptionsTenant3Saga(),
         bankaccountSaga(),
         summarySaga(),
+        SocialLoginSaga(),
+        settingTypeGeneralSaga(),
+        settingTypePaymentSaga(),
+        revenueTotalSaga(),
+        monthlyTransactionSaga(),
+        yearlyTransactionSaga(),
+        weekTransactionSaga(),
+        monthlyActivitySaga(),
+        yearlyActivitySaga(),
+        weekActivitySaga(),
+        settingTypeLicenseSaga(),
         createBankAccountSaga(),
         registerUserSaga(),
         loginSaga(),

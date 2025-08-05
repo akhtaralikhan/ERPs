@@ -1,18 +1,30 @@
 import React, { useEffect } from "react";
 import { userData } from "../../constant/Config";
 import SalesChart from "../../Components/SalesChart";
-import { getSubscriptionsTenant3Action } from "../../redux/console/actions";
+import { getSettingTypeLicenseAction, getSubscriptionsTenant3Action } from "../../redux/console/actions";
 import { useRedux } from "../../hooks/useRedux";
-import { getBankAccount, getSummary } from "../../redux/dashboard/actions";
+import { getBankAccount, getMonthActivity, getMonthTransactions, getRevenueTotal, getSettingTypesGeneral, getSettingTypesLicense, getSettingTypesPayment, getSummary, getWeekActivity, getWeekTransactions, getYearActivity, getYearTransactions, socialLoginAction } from "../../redux/dashboard/actions";
 
 const DashboardHome = () => {
 
   const { dispatch, useAppSelector } = useRedux();
 
   useEffect(() => {
-    dispatch(getSubscriptionsTenant3Action());
-    dispatch(getSummary())
-    dispatch(getBankAccount())
+    // dispatch(getSubscriptionsTenant3Action());
+    // dispatch(getSummary())
+    // dispatch(getBankAccount())
+    // dispatch(socialLoginAction())
+    // dispatch(getSettingTypesGeneral())
+    // dispatch(getSettingTypesPayment())
+    // dispatch(getRevenueTotal())
+    // dispatch(getMonthTransactions())
+    // dispatch(getYearTransactions())
+    // dispatch(getWeekTransactions())
+    // dispatch(getMonthActivity())
+    // dispatch(getYearActivity())
+    // dispatch(getWeekActivity())
+    // dispatch(getSettingTypesLicense())
+
   }, []);
 
   return (

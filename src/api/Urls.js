@@ -10,11 +10,16 @@ export const endPoints = {
     dashboard: {
         transactionSummary: "dashboard/transactions/summary",
         MonthlyTransaction: `dashboard/transactions/period/month`,
-        mothlyActivity: "dashboard/activity/period/month",
+        yearlyTransaction: `dashboard/transactions/period/year`,
+        weeklyTransaction: `dashboard/transactions/period/week`,
+        mothlyActivity: `dashboard/activity/period/month`,
+        yearlyActivity: `dashboard/activity/period/year`,
+        weeklyActivity: `dashboard/activity/period/week`,
         settingTypesLicence: "setting/type/LICENSE",
         subscriptionTenant: `Subscriptions/tenant/${userData?.data?.id}`,
         bankaccount: "bankaccount",
         settingTypesGeneral: "setting/type/GENERAL",
+        settingTypesPayment: "setting/type/PAYMENT",
         cardReport: "dashboard/card-reports",
         lastEstimates: "dashboard/estimates/last",
         lastTransaction: "dashboard/transactions/last",
@@ -22,8 +27,9 @@ export const endPoints = {
         lastBills: "dashboard/bills/last",
         currencyDefault: "currency/default",
         invoiceReport: "dashboard/invoice/report",
-        totalRevenue: "api/revenue/total",
+        totalRevenue: "revenue/total",
         lastGoals: "dashboard/goals/last",
+        socialLogin: "setting/type/SOCIAL_LOGIN"
 
     },
     bankaccount: {

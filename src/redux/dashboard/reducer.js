@@ -4,10 +4,12 @@ export const INIT_STATE = {
     summary: [],
     monthlyTransactions: {},
     monthlyActivity: {},
+    socialLogin: {},
     bankAccount: [],
     cardReports: [],
     lastInvoice: [],
     lastEstimaytes: [],
+    settingTypeGeneral: {},
     lastBills: [],
     lastTransactions: [],
     defaultCurrency: {},
@@ -26,6 +28,18 @@ const dashboardReducer = (state = INIT_STATE, action) => {
                     return {
                         ...state,
                         summary: action.payload.data,
+                        loading: false,
+                    };
+                case dashboardTypes.SOCIAL_LOGIN:
+                    return {
+                        ...state,
+                        socialLogin: action.payload.data,
+                        loading: false,
+                    };
+                case dashboardTypes.SETTING_TYPES_GENERAL:
+                    return {
+                        ...state,
+                        socialLogin: action.payload.data,
                         loading: false,
                     };
                 case dashboardTypes.BANKACCOUNT:
@@ -107,6 +121,8 @@ const dashboardReducer = (state = INIT_STATE, action) => {
         case dashboardTypes.API_RESPONSE_ERROR:
             switch (action.payload.actionType) {
                 case dashboardTypes.SUMMARY:
+                case dashboardTypes.SOCIAL_LOGIN:
+                case dashboardTypes.SETTING_TYPES_GENERAL:
                 case dashboardTypes.MONTH_TRANSACTIONS:
                 case dashboardTypes.MONTH_ACTIVITY:
                 case dashboardTypes.CARDREPORTS:
@@ -129,6 +145,8 @@ const dashboardReducer = (state = INIT_STATE, action) => {
 
         case dashboardTypes.SUMMARY:
         case dashboardTypes.MONTH_TRANSACTIONS:
+        case dashboardTypes.SOCIAL_LOGIN:
+        case dashboardTypes.SETTING_TYPES_GENERAL:
         case dashboardTypes.MONTH_ACTIVITY:
         case dashboardTypes.CARDREPORTS:
         case dashboardTypes.INNOVOICE_LAST:

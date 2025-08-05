@@ -35,8 +35,28 @@ export const getMonthActivity = () => ({
     type: dashboardTypes.MONTH_ACTIVITY,
 });
 
+export const getYearActivity = () => ({
+    type: dashboardTypes.YEAR_ACTIVITY,
+});
+
+export const getWeekActivity = () => ({
+    type: dashboardTypes.WEEK_ACTIVITY,
+});
+
+export const socialLoginAction = () => ({
+    type: dashboardTypes.SOCIAL_LOGIN,
+});
+
 export const getMonthTransactions = () => ({
     type: dashboardTypes.MONTH_TRANSACTIONS,
+});
+
+export const getYearTransactions = () => ({
+    type: dashboardTypes.YEAR_TRANSACTIONS,
+});
+
+export const getWeekTransactions = () => ({
+    type: dashboardTypes.WEEK_TRANSACTIONS,
 });
 
 export const getBankAccount = () => ({
@@ -53,6 +73,10 @@ export const getSettingTypesLicense = () => ({
 
 export const getSettingTypesGeneral = () => ({
     type: dashboardTypes.SETTING_TYPES_GENERAL,
+});
+
+export const getSettingTypesPayment = () => ({
+    type: dashboardTypes.SETTING_TYPES_PAYMENT,
 });
 
 export const getCardReports = () => ({

@@ -34,20 +34,6 @@ export const summaryApi = async () => {
     return response;
 }
 
-export const monthActivityApi = async () => {
-    const response = await axios.get(
-        BASE_URL + endPoints.dashboard.monthActivityApi,
-        {
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-            },
-        }
-    );
-
-    return response;
-};
-
 export const monthTransactionsApi = async () => {
     const response = await axios.get(
         BASE_URL + endPoints.dashboard.MonthlyTransaction,
@@ -62,9 +48,93 @@ export const monthTransactionsApi = async () => {
     return response;
 };
 
+export const yearTransactionsApi = async () => {
+    const response = await axios.get(
+        BASE_URL + endPoints.dashboard.yearlyTransaction,
+        {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+        }
+    );
+
+    return response;
+};
+
+export const weekTransactionsApi = async () => {
+    const response = await axios.get(
+        BASE_URL + endPoints.dashboard.weeklyTransaction,
+        {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+        }
+    );
+
+    return response;
+};
+
+export const monthActivityApi = async () => {
+    const response = await axios.get(
+        BASE_URL + endPoints.dashboard.mothlyActivity,
+        {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+        }
+    );
+
+    return response;
+};
+
+export const yearActivityApi = async () => {
+    const response = await axios.get(
+        BASE_URL + endPoints.dashboard.yearlyActivity,
+        {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+        }
+    );
+
+    return response;
+};
+
+export const weekActivityApi = async () => {
+    const response = await axios.get(
+        BASE_URL + endPoints.dashboard.weeklyActivity,
+        {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+        }
+    );
+
+    return response;
+};
+
 export const bankaccountApi = async () => {
     const response = await axios.get(
         BASE_URL + endPoints.dashboard.bankaccount,
+        {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+        }
+    );
+
+    return response;
+};
+
+export const socialLoginApi = async () => {
+    const response = await axios.get(
+        BASE_URL + endPoints.dashboard.socialLogin,
         {
             headers: {
                 "Content-Type": "application/json",
@@ -118,7 +188,21 @@ export const settingTypesGeneralApi = async () => {
     return response;
 };
 
-export const cardreportsApi = async () => {
+export const paymentApi = async () => {
+    const response = await axios.get(
+        BASE_URL + endPoints.dashboard.settingTypesPayment,
+        {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+        }
+    );
+
+    return response;
+};
+
+export const cardReportsApi = async () => {
     const response = await axios.get(
         BASE_URL + endPoints.dashboard.cardReport,
         {
