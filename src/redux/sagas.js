@@ -12,6 +12,7 @@ import { bankaccountSaga, cardReportSaga, currencyDefaultSaga, invoiceReportSaga
 import { bankAccountSaga } from "./bankAccounts/saga";
 import { productSaga, servicesSaga } from "./productAndServices/saga";
 import { creditNoteSaga, currencySaga, customerSaga, goalsSaga, invoiceSaga, proposalSaga, revenueSaga } from "./sales/saga";
+import { billSaga, debitNotesSaga, paymentSaga, vendorSaga } from "./expenses/saga";
 
 export default function* rootSaga() {
     yield all([
@@ -49,6 +50,10 @@ export default function* rootSaga() {
         revenueSaga(),
         creditNoteSaga(),
         customerSaga(),
+        billSaga(),
+        paymentSaga(),
+        debitNotesSaga(),
+        vendorSaga(),
         createBankAccountSaga(),
         registerUserSaga(),
         loginSaga(),

@@ -1,6 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useRedux } from "../../hooks/useRedux";
+import { getVendors } from "../../redux/expenses/actions";
 
 const Vendors = () => {
+  const { dispatch, useAppSelector } = useRedux();
+
+  useEffect(() => {
+    dispatch(getVendors());
+
+  }, []);
+
+
   return (
     <>
       <div className="content">

@@ -1,6 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useRedux } from "../../hooks/useRedux";
+import { getBills } from "../../redux/expenses/actions";
 
 const Bills = () => {
+  const { dispatch, useAppSelector } = useRedux();
+
+  useEffect(() => {
+ 
+    dispatch(getBills());
+
+  }, []);
+
   return (
     <>
       <div className="content">
