@@ -1,6 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { getCreditNotes } from "../../redux/sales/actions";
+import { getCurrencyDefault } from "../../redux/dashboard/actions";
+import { useRedux } from "../../hooks/useRedux";
 
 const CreditNotes = () => {
+
+  const { dispatch, useAppSelector } = useRedux();
+
+  useEffect(() => {
+    dispatch(getCurrencyDefault())
+    dispatch(getCreditNotes())
+
+  }, []);
+
   return (
     <>
       <div className="content">

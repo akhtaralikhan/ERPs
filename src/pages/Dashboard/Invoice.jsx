@@ -1,8 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useRedux } from "../../hooks/useRedux";
+import { getInvoices } from "../../redux/sales/actions";
+import { getSubscriptionsTenant3Action } from "../../redux/console/actions";
 
 const Invoice = () => {
   const [selectedCustomer, setSelectedCustomer] = useState("Customer");
   const [selectedDoller, setSelectedDoller] = useState("Doller");
+
+  const { dispatch, useAppSelector } = useRedux();
+
+  useEffect(() => {
+    dispatch(getSubscriptionsTenant3Action());
+    dispatch(getInvoices());
+
+  }, []);
+
 
   return (
     <>

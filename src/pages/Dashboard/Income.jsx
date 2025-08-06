@@ -1,6 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { getCurrencyDefault, getRevenueTotal } from "../../redux/dashboard/actions";
+import { getGoals, getRevenue } from "../../redux/sales/actions";
+import { useRedux } from "../../hooks/useRedux";
 
 const Income = () => {
+
+  const { dispatch, useAppSelector } = useRedux();
+
+  useEffect(() => {
+    dispatch(getCurrencyDefault())
+    dispatch(getRevenueTotal())
+    dispatch(getRevenue())
+    dispatch(getGoals())
+  }, []);
+
   return (
     <>
       <div className="content">

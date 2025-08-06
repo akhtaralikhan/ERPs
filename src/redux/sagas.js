@@ -8,7 +8,10 @@ import loginSaga from "./auth/login/LoginSaga";
 import { AuthLoginActionTypes } from "./auth/login/types";
 import { createBankAccountSaga, getSubscriptionsTenant3Saga } from "./console/saga";
 import registerUserSaga from "./auth/register/saga";
-import { bankaccountSaga, monthlyActivitySaga, monthlyTransactionSaga, revenueTotalSaga, settingTypeGeneralSaga, settingTypeLicenseSaga, settingTypePaymentSaga, SocialLoginSaga, summarySaga, weekActivitySaga, weekTransactionSaga, yearlyActivitySaga, yearlyTransactionSaga } from "./dashboard/saga";
+import { bankaccountSaga, cardReportSaga, currencyDefaultSaga, invoiceReportSaga, lastBillsSaga, lastEstimatesSaga, lastGoalsSaga, lastInvoiceSaga, lastTransactionsSaga, monthlyActivitySaga, monthlyTransactionSaga, revenueTotalSaga, settingTypeGeneralSaga, settingTypeLicenseSaga, settingTypePaymentSaga, SocialLoginSaga, summarySaga, weekActivitySaga, weekTransactionSaga, yearlyActivitySaga, yearlyTransactionSaga } from "./dashboard/saga";
+import { bankAccountSaga } from "./bankAccounts/saga";
+import { productSaga, servicesSaga } from "./productAndServices/saga";
+import { creditNoteSaga, currencySaga, customerSaga, goalsSaga, invoiceSaga, proposalSaga, revenueSaga } from "./sales/saga";
 
 export default function* rootSaga() {
     yield all([
@@ -25,7 +28,27 @@ export default function* rootSaga() {
         monthlyActivitySaga(),
         yearlyActivitySaga(),
         weekActivitySaga(),
+        cardReportSaga(),
+        lastInvoiceSaga(),
+        lastEstimatesSaga(),
+        lastBillsSaga(),
+        lastTransactionsSaga(),
         settingTypeLicenseSaga(),
+        currencyDefaultSaga(),
+        invoiceReportSaga(),
+        lastGoalsSaga(),
+        bankAccountSaga(),
+        currencyDefaultSaga(),
+        productSaga(),
+        servicesSaga(),
+        proposalSaga(),
+        invoiceSaga(),
+        currencySaga(),
+        customerSaga(),
+        goalsSaga(),
+        revenueSaga(),
+        creditNoteSaga(),
+        customerSaga(),
         createBankAccountSaga(),
         registerUserSaga(),
         loginSaga(),

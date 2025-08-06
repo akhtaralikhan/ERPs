@@ -1,8 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { getBankAccount } from "../../redux/bankAccounts/actions";
+import { useRedux } from "../../hooks/useRedux";
+import { getCurrencyDefault } from "../../redux/dashboard/actions";
 
 const BankAccounts = () => {
   const [selectedOption, setSelectedOption] = useState("paypal");
+
+
+  const { dispatch, useAppSelector } = useRedux();
+
+  useEffect(() => {
+    dispatch(getBankAccount())
+    dispatch(getCurrencyDefault())
+  }, []);
+
 
   return (
     <>

@@ -3,27 +3,35 @@ import { userData } from "../../constant/Config";
 import SalesChart from "../../Components/SalesChart";
 import { getSettingTypeLicenseAction, getSubscriptionsTenant3Action } from "../../redux/console/actions";
 import { useRedux } from "../../hooks/useRedux";
-import { getBankAccount, getMonthActivity, getMonthTransactions, getRevenueTotal, getSettingTypesGeneral, getSettingTypesLicense, getSettingTypesPayment, getSummary, getWeekActivity, getWeekTransactions, getYearActivity, getYearTransactions, socialLoginAction } from "../../redux/dashboard/actions";
+import { getBankAccount, getBillsLast, getCardReports, getCurrencyDefault, getEstimatesLast, getGoalsLast, getInnovoiceLast, getInvoiceReport, getMonthActivity, getMonthTransactions, getRevenueTotal, getSettingTypesGeneral, getSettingTypesLicense, getSettingTypesPayment, getSummary, getTransactionsLast, getWeekActivity, getWeekTransactions, getYearActivity, getYearTransactions, socialLoginAction } from "../../redux/dashboard/actions";
 
 const DashboardHome = () => {
 
   const { dispatch, useAppSelector } = useRedux();
 
   useEffect(() => {
-    // dispatch(getSubscriptionsTenant3Action());
-    // dispatch(getSummary())
-    // dispatch(getBankAccount())
-    // dispatch(socialLoginAction())
-    // dispatch(getSettingTypesGeneral())
-    // dispatch(getSettingTypesPayment())
-    // dispatch(getRevenueTotal())
-    // dispatch(getMonthTransactions())
-    // dispatch(getYearTransactions())
-    // dispatch(getWeekTransactions())
-    // dispatch(getMonthActivity())
-    // dispatch(getYearActivity())
-    // dispatch(getWeekActivity())
-    // dispatch(getSettingTypesLicense())
+    dispatch(getSubscriptionsTenant3Action());
+    dispatch(getSummary())
+    dispatch(getBankAccount())
+    dispatch(socialLoginAction())
+    dispatch(getSettingTypesGeneral())
+    dispatch(getSettingTypesPayment())
+    dispatch(getMonthTransactions())
+    dispatch(getYearTransactions())
+    dispatch(getWeekTransactions())
+    dispatch(getMonthActivity())
+    dispatch(getYearActivity())
+    dispatch(getWeekActivity())
+    dispatch(getSettingTypesLicense())
+    dispatch(getCardReports())
+    dispatch(getInnovoiceLast())
+    dispatch(getEstimatesLast())
+    dispatch(getBillsLast())
+    dispatch(getTransactionsLast())
+    dispatch(getCurrencyDefault())
+    dispatch(getRevenueTotal())
+    dispatch(getInvoiceReport())
+    dispatch(getGoalsLast())
 
   }, []);
 

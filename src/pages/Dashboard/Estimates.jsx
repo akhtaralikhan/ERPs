@@ -1,6 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useRedux } from "../../hooks/useRedux";
+import { getSubscriptionsTenant3Action } from "../../redux/console/actions";
+import { getProposals } from "../../redux/sales/actions";
 
 const Estimates = () => {
+
+  const { dispatch, useAppSelector } = useRedux();
+
+  useEffect(() => {
+    dispatch(getSubscriptionsTenant3Action());
+    dispatch(getProposals());
+
+  }, []);
+
+
   return (
     <>
       <div className="content">

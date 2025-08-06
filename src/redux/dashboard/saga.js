@@ -1,6 +1,6 @@
 import { getSubscriptionsTenant, settingTypesLicenceApi } from "../../api/Console";
 import { call, put, takeEvery } from "redux-saga/effects";
-import { bankaccountApi, monthActivityApi, monthTransactionsApi, paymentApi, revenueTotalApi, settingTypesGeneralApi, socialLoginApi, summaryApi, weekActivityApi, weekTransactionsApi, yearActivityApi, yearTransactionsApi } from "../../api/Dashboard";
+import { bankaccountApi, billsLastApi, cardReportsApi, currencyDefaultApi, estimatesLastApi, goalsLastApi, innovoiceLastApi, invoiceReportApi, monthActivityApi, monthTransactionsApi, paymentApi, revenueTotalApi, settingTypesGeneralApi, socialLoginApi, summaryApi, transactionsLastApi, weekActivityApi, weekTransactionsApi, yearActivityApi, yearTransactionsApi } from "../../api/Dashboard";
 import { dashboardTypes } from "./types";
 
 export const ApiResponseSuccess = (actionType, data) => ({
@@ -186,4 +186,108 @@ function* settingTypeLicense() {
 }
 export function* settingTypeLicenseSaga() {
     yield takeEvery(dashboardTypes.SETTING_TYPES_LICENSE, settingTypeLicense);
+};
+
+
+function* cardReport() {
+    try {
+        const response = yield call(cardReportsApi);
+        yield put(ApiResponseSuccess(dashboardTypes.CARDREPORTS, response));
+    } catch (error) {
+        yield put(ApiResponseError(dashboardTypes.CARDREPORTS, error?.response?.data || "Failed"));
+    }
+}
+export function* cardReportSaga() {
+    yield takeEvery(dashboardTypes.CARDREPORTS, cardReport);
+};
+
+
+function* lastInvoice() {
+    try {
+        const response = yield call(innovoiceLastApi);
+        yield put(ApiResponseSuccess(dashboardTypes.INNOVOICE_LAST, response));
+    } catch (error) {
+        yield put(ApiResponseError(dashboardTypes.INNOVOICE_LAST, error?.response?.data || "Failed"));
+    }
+}
+export function* lastInvoiceSaga() {
+    yield takeEvery(dashboardTypes.INNOVOICE_LAST, lastInvoice);
+};
+
+
+function* lastEstimates() {
+    try {
+        const response = yield call(estimatesLastApi);
+        yield put(ApiResponseSuccess(dashboardTypes.ESTIMATES_LAST, response));
+    } catch (error) {
+        yield put(ApiResponseError(dashboardTypes.ESTIMATES_LAST, error?.response?.data || "Failed"));
+    }
+}
+export function* lastEstimatesSaga() {
+    yield takeEvery(dashboardTypes.ESTIMATES_LAST, lastEstimates);
+};
+
+
+function* lastBills() {
+    try {
+        const response = yield call(billsLastApi);
+        yield put(ApiResponseSuccess(dashboardTypes.BILLS_LAST, response));
+    } catch (error) {
+        yield put(ApiResponseError(dashboardTypes.BILLS_LAST, error?.response?.data || "Failed"));
+    }
+}
+export function* lastBillsSaga() {
+    yield takeEvery(dashboardTypes.BILLS_LAST, lastBills);
+};
+
+
+function* lastTransactions() {
+    try {
+        const response = yield call(transactionsLastApi);
+        yield put(ApiResponseSuccess(dashboardTypes.TRANSACTIONS_LAST, response));
+    } catch (error) {
+        yield put(ApiResponseError(dashboardTypes.TRANSACTIONS_LAST, error?.response?.data || "Failed"));
+    }
+}
+export function* lastTransactionsSaga() {
+    yield takeEvery(dashboardTypes.TRANSACTIONS_LAST, lastTransactions);
+};
+
+
+function* currencyDefault() {
+    try {
+        const response = yield call(currencyDefaultApi);
+        yield put(ApiResponseSuccess(dashboardTypes.CURRENCY_DEFAULT, response));
+    } catch (error) {
+        yield put(ApiResponseError(dashboardTypes.CURRENCY_DEFAULT, error?.response?.data || "Failed"));
+    }
+}
+export function* currencyDefaultSaga() {
+    yield takeEvery(dashboardTypes.CURRENCY_DEFAULT, currencyDefault);
+};
+
+
+function* invoiceReport() {
+    try {
+        const response = yield call(invoiceReportApi);
+        yield put(ApiResponseSuccess(dashboardTypes.INVOICE_REPORT, response));
+    } catch (error) {
+        yield put(ApiResponseError(dashboardTypes.INVOICE_REPORT, error?.response?.data || "Failed"));
+    }
+}
+export function* invoiceReportSaga() {
+    yield takeEvery(dashboardTypes.INVOICE_REPORT, invoiceReport);
+};
+
+
+function* lastGoals() {
+    try {
+        const response = yield call(goalsLastApi);
+        yield put(ApiResponseSuccess(dashboardTypes.GOALS_LAST, response));
+    } catch (error) {
+        yield put(ApiResponseError(dashboardTypes.GOALS_LAST, error?.response?.data || "Failed"));
+    }
+}
+export function* lastGoalsSaga() {
+    yield takeEvery(dashboardTypes.GOALS_LAST, lastGoals);
 };

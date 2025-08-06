@@ -1,6 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useRedux } from "../../hooks/useRedux";
+import { getCurrency, getCustomers } from "../../redux/sales/actions";
 
 const RecurringInvoice = () => {
+
+
+  const { dispatch, useAppSelector } = useRedux();
+
+  useEffect(() => {
+    dispatch(getCurrency());
+    dispatch(getCustomers())
+  }, []);
+
+
+
+
   return (
     <>
       <div className="content">

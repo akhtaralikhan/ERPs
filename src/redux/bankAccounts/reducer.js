@@ -1,21 +1,57 @@
-const initialState = {
-    bankDetails: {},
+import { bankAccountActionTypes } from "./types";
+
+export const INIT_STATE = {
+    bankAccount: [],
+    currencyDefault: {},
+    loading: false,
+    isDataFetched: false,
+    error: "",
 };
 
-const bankAccountsReducer = (state = initialState, action) => {
+const bankAccountsReducer = (state = INIT_STATE, action) => {
     switch (action.type) {
-        case 'SET_BANK_DETAILS':
+        case bankAccountActionTypes.API_RESPONSE_SUCCESS:
+            switch (action.payload.actionType) {
+                case bankAccountActionTypes.BANK_ACCOUNT:
+                    return {
+                        ...state,
+                        bankAccount: action.payload.data,
+                        loading: false,
+                        isDataFetched: true,
+                    };
+
+                case bankAccountActionTypes.CURRENCY_DEFAULT:
+                    return {
+                        ...state,
+                        currencyDefault: action.payload.data,
+                        loading: false,
+                        isDataFetched: true,
+                    };
+
+                default:
+                    return { ...state };
+            }
+
+        case bankAccountActionTypes.API_RESPONSE_ERROR:
             return {
                 ...state,
-                bankDetails: action.payload,
+                loading: false,
+                isDataFetched: false,
+                error: action.payload.error,
             };
-        case 'CLEAR_BANK_DETAILS':
+
+        case bankAccountActionTypes.BANK_ACCOUNT:
+        case bankAccountActionTypes.CURRENCY_DEFAULT:
             return {
                 ...state,
-                bankDetails: {},
+                loading: true,
+                error: "",
+                isDataFetched: false,
             };
+
         default:
-            return state;
+            return { ...state };
     }
-}
+};
+
 export default bankAccountsReducer;

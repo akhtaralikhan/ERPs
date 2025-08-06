@@ -4,11 +4,10 @@ import { BASE_URL } from './apiCore';
 import { endPoints } from './Urls';
 
 
-export const bankaccountApi = async () => {
+export const bankAccountApi = async () => {
 
     const response = await axios.get(
         BASE_URL + endPoints.bankaccount.bankaccount,
-        body,
         {
             headers: {
                 "Content-Type": "application/json",
@@ -24,7 +23,6 @@ export const currencyDefaultApi = async () => {
 
     const response = await axios.get(
         BASE_URL + endPoints.bankaccount.currencyDefault,
-        body,
         {
             headers: {
                 "Content-Type": "application/json",
