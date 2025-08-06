@@ -1,6 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { getSubscriptionsTenant3Action } from "../../redux/console/actions";
+import { getCustomers } from "../../redux/sales/actions";
+import { useRedux } from "../../hooks/useRedux";
 
 const Customer = () => {
+  const { dispatch, useAppSelector } = useRedux();
+
+  useEffect(() => {
+    dispatch(getSubscriptionsTenant3Action());
+    dispatch(getCustomers());
+
+  }, []);
   return (
     <>
       <div className="content">

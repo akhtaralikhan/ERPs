@@ -1,6 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { getDebitNotes } from "../../redux/expenses/actions";
+import { useRedux } from "../../hooks/useRedux";
 
 const DebitNotes = () => {
+  const { dispatch, useAppSelector } = useRedux();
+
+  useEffect(() => {
+    dispatch(getDebitNotes());
+
+  }, []);
+
+
   return (
     <>
       <div className="content">

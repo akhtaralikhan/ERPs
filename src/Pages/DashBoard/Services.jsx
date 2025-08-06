@@ -1,9 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useRedux } from "../../hooks/useRedux";
+import { getServices } from "../../redux/productAndServices/actions";
+import { getSubscriptionsTenant3Action } from "../../redux/console/actions";
+import { getCurrencyDefault } from "../../redux/dashboard/actions";
 
 const Services = () => {
   const [selectedCategory, setSelectedCategory] = useState("Food");
   const [selectedTax, setSelectedTax] = useState("IVA1 (12%)");
+
+
+  const { dispatch, useAppSelector } = useRedux();
+
+  useEffect(() => {
+    dispatch(getSubscriptionsTenant3Action());
+    dispatch(getCurrencyDefault())
+    dispatch(getServices())
+  }, []);
+
+
 
   return (
     <>

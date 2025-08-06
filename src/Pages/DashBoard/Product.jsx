@@ -1,9 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useRedux } from "../../hooks/useRedux";
+import { getSubscriptionsTenant3Action } from "../../redux/console/actions";
+import { getCurrencyDefault } from "../../redux/dashboard/actions";
+import { getProducts } from "../../redux/productAndServices/actions";
 
 const Product = () => {
   const [selectedCategory, setSelectedCategory] = useState("Food");
   const [selectedTax, setSelectedTax] = useState("IVA1 (12%)");
+
+  const { dispatch, useAppSelector } = useRedux();
+
+  useEffect(() => {
+    dispatch(getSubscriptionsTenant3Action());
+    dispatch(getCurrencyDefault())
+    dispatch(getProducts())
+  }, []);
+
+
 
   return (
     <>
@@ -139,13 +153,13 @@ const Product = () => {
                                     <td className="align-middle age">Food</td>
                                     <td className="align-middle age">G500</td>
                                     <td className="align-middle age">
-                                                    IVA1 (12%)
+                                      IVA1 (12%)
                                     </td>
                                     <td className="align-middle age">
-                                                    $12500
+                                      $12500
                                     </td>
                                     <td className="align-middle age">
-                                                    $15500
+                                      $15500
                                     </td>
                                     <td className="align-middle white-space-nowrap text-end pe-0">
                                       <div className="font-sans-serif btn-reveal-trigger position-static">
@@ -210,13 +224,13 @@ const Product = () => {
                                     <td className="align-middle age">Food</td>
                                     <td className="align-middle age">G500</td>
                                     <td className="align-middle age">
-                                                    IVA1 (12%)
+                                      IVA1 (12%)
                                     </td>
                                     <td className="align-middle age">
-                                                    $12500
+                                      $12500
                                     </td>
                                     <td className="align-middle age">
-                                                    $15500
+                                      $15500
                                     </td>
                                     <td className="align-middle white-space-nowrap text-end pe-0">
                                       <div className="font-sans-serif btn-reveal-trigger position-static">
@@ -281,13 +295,13 @@ const Product = () => {
                                     <td className="align-middle age">Food</td>
                                     <td className="align-middle age">G500</td>
                                     <td className="align-middle age">
-                                                    IVA1 (12%)
+                                      IVA1 (12%)
                                     </td>
                                     <td className="align-middle age">
-                                                    $12500
+                                      $12500
                                     </td>
                                     <td className="align-middle age">
-                                                    $15500
+                                      $15500
                                     </td>
                                     <td className="align-middle white-space-nowrap text-end pe-0">
                                       <div className="font-sans-serif btn-reveal-trigger position-static">
@@ -352,13 +366,13 @@ const Product = () => {
                                     <td className="align-middle age">Food</td>
                                     <td className="align-middle age">G500</td>
                                     <td className="align-middle age">
-                                                    IVA1 (12%)
+                                      IVA1 (12%)
                                     </td>
                                     <td className="align-middle age">
-                                                    $12500
+                                      $12500
                                     </td>
                                     <td className="align-middle age">
-                                                    $15500
+                                      $15500
                                     </td>
                                     <td className="align-middle white-space-nowrap text-end pe-0">
                                       <div className="font-sans-serif btn-reveal-trigger position-static">
@@ -423,13 +437,13 @@ const Product = () => {
                                     <td className="align-middle age">Food</td>
                                     <td className="align-middle age">G500</td>
                                     <td className="align-middle age">
-                                                    IVA1 (12%)
+                                      IVA1 (12%)
                                     </td>
                                     <td className="align-middle age">
-                                                    $12500
+                                      $12500
                                     </td>
                                     <td className="align-middle age">
-                                                    $15500
+                                      $15500
                                     </td>
                                     <td className="align-middle white-space-nowrap text-end pe-0">
                                       <div className="font-sans-serif btn-reveal-trigger position-static">
