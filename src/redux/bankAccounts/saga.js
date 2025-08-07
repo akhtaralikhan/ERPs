@@ -21,7 +21,7 @@ function* bankAccount() {
 
     try {
         const response = yield call(bankAccountApi);
-        yield put(ApiResponseSuccess(bankAccountActionTypes.BANK_ACCOUNT, response));
+        yield put(ApiResponseSuccess(bankAccountActionTypes.BANK_ACCOUNT, response.data));
     } catch (error) {
         yield put(ApiResponseError(bankAccountActionTypes.BANK_ACCOUNT, error?.response?.data || "Failed"));
     }
@@ -37,7 +37,7 @@ function* currencyDefault() {
 
     try {
         const response = yield call(currencyDefaultApi);
-        yield put(ApiResponseSuccess(bankAccountActionTypes.CURRENCY_DEFAULT, response));
+        yield put(ApiResponseSuccess(bankAccountActionTypes.CURRENCY_DEFAULT, response.data));
     } catch (error) {
         yield put(ApiResponseError(bankAccountActionTypes.CURRENCY_DEFAULT, error?.response?.data || "Failed"));
     }

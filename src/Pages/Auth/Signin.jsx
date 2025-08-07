@@ -235,7 +235,7 @@ const Signin = () => {
                           <div className="col-auto">
                             <a
                               className="fs--1 fw-semi-bold"
-                              href="forgotPassword.html"
+                              href="/ForgetPassword"
                             >
                               Forgot Password?
                             </a>
@@ -245,7 +245,7 @@ const Signin = () => {
                           Sign In
                         </button>
                         <div className="text-center">
-                          <a className="fs--1 fw-bold" href="signUp.html">
+                          <a className="fs--1 fw-bold" href="/SignUp">
                             Create an account
                           </a>
                         </div>

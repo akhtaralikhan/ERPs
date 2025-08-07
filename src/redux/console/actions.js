@@ -12,8 +12,8 @@ export const apiResponseErrorAction = (actionType, error) => ({
 
 export const getSubscriptionsTenant3Action = () => ({
     type: ConsoleActionTypes.SUBSCRIPTIONS_TENANT_3,
-  });
-  
+});
+
 export const getUsersAllAction = () => ({
     type: ConsoleActionTypes.USERS_ALL,
 });
@@ -31,7 +31,7 @@ export const getUsersAction = () => ({
 });
 
 export const getUsers6Action = () => ({
-    type: ConsoleActionTypes.USERS_6,
+    type: ConsoleActionTypes.USERS_6_id,
 });
 
 export const getPlanAction = () => ({
@@ -77,4 +77,8 @@ export const getSettingTypeEmailAction = () => ({
 export const createBankAccountActionAction = (user) => ({
     type: ConsoleActionTypes.CREATEBANKACCOUNT,
     payload: { user },
+});
+
+export const getPlanIdAction = () => ({
+    type: ConsoleActionTypes.PLAN_ID,
 });

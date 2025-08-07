@@ -1,86 +1,23 @@
-import { takeEvery, fork, put, all, call } from "redux-saga/effects";
+import { call, put, takeEvery } from "redux-saga/effects";
+import { authLoginApiResponseSuccess, authLoginApiResponseError } from "./actions";
 import { AuthForgetPassActionTypes } from "./types";
-// Login Redux States
-import {
-  authForgetPassApiResponseSuccess,
-  authForgetPassApiResponseError,
-} from "./actions";
-
-//Include Both Helper File with needed methods
+import { forgetPswdUserApi } from "../../../api/auth";
 
 
-
-//If user is send successfully send mail link then dispatch redux action's are directly from here.
-function* forgetUser({ payload: user }) {
+function* forgetPassword(action) {
   try {
-    if (process.env.REACT_APP_DEFAULTAUTH === "firebase") {
-      yield call(fireBaseBackend.forgetPassword, user.email);
-      yield put(
-        authForgetPassApiResponseSuccess(
-          AuthForgetPassActionTypes.FORGET_PASSWORD,
-          "Reset link are sended to your mailbox, check there first"
-        )
-      );
-    } else if (process.env.REACT_APP_DEFAULTAUTH === "jwt") {
-      yield call(postJwtForgetPwd, {
-        email: user.email,
-      });
-      yield put(
-        authForgetPassApiResponseSuccess(
-          AuthForgetPassActionTypes.FORGET_PASSWORD,
-          "Reset link are sended to your mailbox, check there first"
-        )
-      );
-    } else {
-      yield call(postFakeForgetPwd, {
-        email: user.email,
-      });
-      yield put(
-        authForgetPassApiResponseSuccess(
-          AuthForgetPassActionTypes.FORGET_PASSWORD,
-          "Reset link are sended to your mailbox, check there first"
-        )
-      );
-    }
+    const { user } = action.payload;
+
+    const response = yield call(forgetPswdUserApi, user);
+
+    yield put(authLoginApiResponseSuccess(AuthForgetPassActionTypes.FORGET_PASSWORD, response.data));
   } catch (error) {
     yield put(
-      authForgetPassApiResponseError(
-        AuthForgetPassActionTypes.FORGET_PASSWORD,
-        error
-      )
+      authLoginApiResponseError(AuthForgetPassActionTypes.FORGET_PASSWORD, error.response?.data || "Forget pasasword failed")
     );
   }
 }
 
-function* changePassword({ payload: newPassword }) {
-  try {
-    yield call(changePasswordApi, newPassword);
-    yield put(
-      authForgetPassApiResponseSuccess(
-        AuthForgetPassActionTypes.CHANGE_PASSWORD,
-        "Your Password is Changed"
-      )
-    );
-  } catch (error) {
-    yield put(
-      authForgetPassApiResponseError(
-        AuthForgetPassActionTypes.CHANGE_PASSWORD,
-        error
-      )
-    );
-  }
+export default function* forgetPasswordSaga() {
+  yield takeEvery(AuthForgetPassActionTypes.FORGET_PASSWORD, forgetPassword);
 }
-
-export function* watchUserPasswordForget() {
-  yield takeEvery(AuthForgetPassActionTypes.FORGET_PASSWORD, forgetUser);
-}
-
-export function* watchUserChangePassword() {
-  yield takeEvery(AuthForgetPassActionTypes.CHANGE_PASSWORD, changePassword);
-}
-
-function* forgetPasswordSaga() {
-  yield all([fork(watchUserPasswordForget), fork(watchUserChangePassword)]);
-}
-
-export default forgetPasswordSaga;

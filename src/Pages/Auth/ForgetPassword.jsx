@@ -3,6 +3,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import FormInput from "../../Components/FormInput";
+import { useRedux } from "../../hooks/useRedux";
+import { recoverPassword } from "../../redux/auth/forgetpwd/actions";
 
 
 const ForgetPassword = () => {
@@ -26,6 +28,19 @@ const ForgetPassword = () => {
     control, // use control={control} on each form input field
     formState: { errors }, // on each form input errors={errors}
   } = methods;
+
+  const { dispatch, useAppSelector } = useRedux();
+
+  const onSubmitForm = (data) => {
+    const payload = {
+      email: data.email,
+    };
+
+    dispatch(recoverPassword(payload));
+    console.log("Form submitted with data:", payload);
+  };
+
+
 
   return (
     <main className="main" id="top">
@@ -106,12 +121,18 @@ const ForgetPassword = () => {
                           send you <br className="d-none d-xxl-block" />a reset
                           link
                         </p>
-                        <form className="d-flex align-items-center mb-5">
-                          <input
-                            className="form-control flex-1"
+                        <form
+                          onSubmit={handleSubmit(onSubmitForm)}
+                          className="d-flex align-items-center mb-5">
+                          <FormInput
                             id="email"
                             type="email"
-                            placeholder="Email"
+                            name="email"
+                            register={register}
+                            errors={errors}
+                            control={control}
+                            placeholder="name@example.com"
+                            className="form-control flex-1"
                           />
                           <button className="btn btn-primary ms-2">
                             Send

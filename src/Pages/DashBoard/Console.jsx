@@ -1,8 +1,43 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useRedux } from "../../hooks/useRedux";
+import {
+  getCurrencyAction,
+  getPlanAction,
+  getPlanIdAction,
+  getRolesAction,
+  getSettingTypeEmailAction,
+  getSettingTypeGeneralAction,
+  getSettingTypeLicenseAction,
+  getSettingTypePaymentAction,
+  getSettingTypeSocialLoginAction,
+  getStripeAccountAllAction,
+  getSubscriptionsAllAction,
+  getSubscriptionsTenant3Action,
+  getUsers6Action,
+  getUsersAllAction,
+} from "../../redux/console/actions";
 
 const Console = () => {
   const [language, setLanguage] = useState("1");
   const [isChecked, setIsChecked] = useState(false);
+  const { dispatch, useAppSelector } = useRedux();
+
+  useEffect(() => {
+    dispatch(getSubscriptionsTenant3Action());
+    dispatch(getUsersAllAction());
+    dispatch(getStripeAccountAllAction());
+    dispatch(getSubscriptionsAllAction());
+    dispatch(getPlanAction());
+    dispatch(getSettingTypeLicenseAction());
+    dispatch(getCurrencyAction());
+    dispatch(getSettingTypeGeneralAction());
+    dispatch(getSettingTypeEmailAction());
+    dispatch(getSettingTypeSocialLoginAction());
+    dispatch(getSettingTypePaymentAction());
+    dispatch(getRolesAction());
+    dispatch(getUsers6Action());
+    dispatch(getPlanIdAction());
+  }, []);
 
   return (
     <>

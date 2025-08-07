@@ -1,6 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useRedux } from "../../hooks/useRedux";
+import { getCurrencyDefault, getTransactions } from "../../redux/accounting/actions";
 
 const Transations = () => {
+  const { dispatch, useAppSelector } = useRedux();
+
+  useEffect(() => {
+    dispatch(getTransactions());
+    dispatch(getCurrencyDefault());
+
+  }, [])
+
+
   return (
     <>
       <div className="content">

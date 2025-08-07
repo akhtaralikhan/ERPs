@@ -1,6 +1,37 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useRedux } from "../../hooks/useRedux";
+import {
+  getAccountBalanceReport,
+  getAccountTransactionReport,
+  getBalanceSheetReport,
+  getCustomerReport,
+  getProfitAndLossReport,
+  getTaxReport,
+  getTrialBalanceReport,
+  getVendorReport,
+} from "../../redux/reports/actions";
+import { getCurrencyDefault } from "../../redux/bankAccounts/actions";
 
 const Report = () => {
+  const { dispatch, useAppSelector } = useRedux();
+
+  const startDate = "2025-06-01";
+  const endDate = "2025-08-31";
+  const trailbalanceDate = "2025-08-06";
+
+  useEffect(() => {
+    dispatch(getProfitAndLossReport(startDate, endDate));
+    dispatch(getCurrencyDefault());
+    dispatch(getBalanceSheetReport(startDate, endDate));
+    dispatch(getTaxReport(startDate, endDate));
+    dispatch(getCustomerReport(startDate, endDate));
+    dispatch(getVendorReport(startDate, endDate));
+    dispatch(getAccountBalanceReport(startDate, endDate));
+    dispatch(getTrialBalanceReport(trailbalanceDate));
+    dispatch(getAccountTransactionReport(startDate, endDate));
+  }, [startDate, endDate]);
+
+
   return (
     <>
       <div className="content">

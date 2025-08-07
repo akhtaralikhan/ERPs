@@ -3,6 +3,5 @@ export const AuthForgetPassActionTypes = {
   API_RESPONSE_ERROR: "@@auth/forgetPass/API_RESPONSE_ERROR",
 
   FORGET_PASSWORD: "@@auth/forgetPass/FORGET_PASSWORD",
-  CHANGE_PASSWORD: "@@auth/forgetPass/CHANGE_PASSWORD",
 }
 

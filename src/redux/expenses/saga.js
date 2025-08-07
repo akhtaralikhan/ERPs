@@ -21,7 +21,7 @@ function* bill() {
 
     try {
         const response = yield call(billApi);
-        yield put(ApiResponseSuccess(expensesActionTypes.BILL, response));
+        yield put(ApiResponseSuccess(expensesActionTypes.BILL, response.data));
     } catch (error) {
         yield put(ApiResponseError(expensesActionTypes.BILL, error?.response?.data || "Failed"));
     }
@@ -35,7 +35,7 @@ function* payment() {
 
     try {
         const response = yield call(paymentApi);
-        yield put(ApiResponseSuccess(expensesActionTypes.PAYMENT, response));
+        yield put(ApiResponseSuccess(expensesActionTypes.PAYMENT, response.data));
     } catch (error) {
         yield put(ApiResponseError(expensesActionTypes.PAYMENT, error?.response?.data || "Failed"));
     }
@@ -50,7 +50,7 @@ function* debitNotes() {
 
     try {
         const response = yield call(debitnotesApi);
-        yield put(ApiResponseSuccess(expensesActionTypes.DEBITNOTES, response));
+        yield put(ApiResponseSuccess(expensesActionTypes.DEBITNOTES, response.data));
     } catch (error) {
         yield put(ApiResponseError(expensesActionTypes.DEBITNOTES, error?.response?.data || "Failed"));
     }
@@ -66,7 +66,7 @@ function* vendor() {
 
     try {
         const response = yield call(vendorApi);
-        yield put(ApiResponseSuccess(expensesActionTypes.VENDOR, response));
+        yield put(ApiResponseSuccess(expensesActionTypes.VENDOR, response.data));
     } catch (error) {
         yield put(ApiResponseError(expensesActionTypes.VENDOR, error?.response?.data || "Failed"));
     }

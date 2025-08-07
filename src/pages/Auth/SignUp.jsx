@@ -1,21 +1,25 @@
 // src/pages/Auth/SignUp.jsx
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import FormInput from "../../Components/FormInput";
+import { useRedux } from "../../hooks/useRedux";
+import { registerUser } from "../../redux/auth/register/actions";
 
 const SignUp = () => {
+
+  // yup form validation 
   const resolver = yupResolver(
     yup.object().shape({
-      name: yup.string().required("Please Enter Old Password."),
-      email: yup.string().required("Please Enter New Password."),
-      password: yup.string().required("Please Enter New Password."),
+      fullname: yup.string().required("Please enter your full name."),
+      email: yup.string().email().required("Please enter your email."),
+      password: yup.string().required("Please enter a password."),
       confirmPassword: yup
         .string()
-        .oneOf([yup.ref("newPassword")], "Passwords don't match")
-        .required("This value is required."),
+        .oneOf([yup.ref("password")], "Passwords don't match")
+        .required("This field is required."),
     })
   );
 
@@ -31,16 +35,44 @@ const SignUp = () => {
   const methods = useForm({ defaultValues, resolver });
 
   const {
-    handleSubmit, // add this on form submission  <Form onSubmit={handleSubmit(onSubmitForm)} />
-    register, // on each input field use register to register the input and change input into formInput
-    // register={register}
-    control, // use control={control} on each form input field
-    formState: { errors }, // on each fotm input errors={errors}
+    handleSubmit,
+    register,
+    control,
+    formState: { errors },
   } = methods;
+ // form submission api 
+  const { dispatch, useAppSelector } = useRedux();
+  const navigate = useNavigate();
+  const [isChecked, setIsChecked] = useState(true);
+  function getLocalISOTime() {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    const hour = String(now.getHours()).padStart(2, '0');
+    const minute = String(now.getMinutes()).padStart(2, '0');
+    const second = String(now.getSeconds()).padStart(2, '0');
+    return `${year}-${month}-${day}T${hour}:${minute}:${second}`;
+  }
 
   const onSubmitForm = (data) => {
-    console.log("Form submitted with data:", data);
+    const payload = {
+      fullname: data.fullname,
+      email: data.email,
+      password: data.password,
+      agreeTerm: isChecked,
+      roleId: 2,
+      planId: 1,
+      updatedAt: getLocalISOTime(),
+      createdAt: getLocalISOTime(),
+      isActive: true,
+    };
+
+    dispatch(registerUser(payload));
+    navigate('/')
+    
   };
+
 
   return (
     <>
@@ -134,13 +166,14 @@ const SignUp = () => {
                             or use email
                           </div>
                         </div>
-                        <form onSubmit={handleSubmit(onSubmitForm)}>
-                          <div className="mb-3 text-start">                         
+                        <form
+                          onSubmit={handleSubmit(onSubmitForm)}>
+                          <div className="mb-3 text-start">
                             <FormInput
                               label="Name"
                               id="name"
                               type="text"
-                              name="Name"
+                              name="fullname"
                               register={register}
                               errors={errors}
                               control={control}
@@ -149,7 +182,7 @@ const SignUp = () => {
                               className="form-control"
                             />
                           </div>
-                          <div className="mb-3 text-start">                        
+                          <div className="mb-3 text-start">
                             <FormInput
                               id="email"
                               label="Email"
@@ -171,12 +204,12 @@ const SignUp = () => {
                               <FormInput
                                 className="form-control form-icon-input"
                                 type="password"
-                                name="oldPassword"
+                                name="password"
                                 register={register}
                                 errors={errors}
                                 control={control}
                                 labelClassName="form-label"
-                                placeholder="Enter Old Password"
+                                placeholder=""
                                 withoutLabel={true}
                                 hidePasswordButton={true}
                                 id="password"
@@ -191,7 +224,7 @@ const SignUp = () => {
                               </label>
                               <FormInput
                                 type="password"
-                                name="newPassword"
+                                name="confirmPassword"
                                 register={register}
                                 errors={errors}
                                 control={control}
@@ -200,15 +233,16 @@ const SignUp = () => {
                                 hidePasswordButton={false}
                                 className="form-control form-icon-input"
                                 id="confirmPassword"
-                                placeholder="Confirm Password"
+                                placeholder=""
                               />
                             </div>
                           </div>
                           <div className="form-check mb-3">
                             <input
-                              className="form-check-input"
-                              id="termsService"
                               type="checkbox"
+                              className="form-check-input"
+                              checked={isChecked}
+                              onChange={(e) => setIsChecked(e.target.checked)}
                             />
                             <label
                               className="form-label fs--1 text-none"

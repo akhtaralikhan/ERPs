@@ -20,7 +20,7 @@ function* product() {
 
     try {
         const response = yield call(getProductsApi);
-        yield put(ApiResponseSuccess(productAndServicesTypes.GET_PRODUCTS, response));
+        yield put(ApiResponseSuccess(productAndServicesTypes.GET_PRODUCTS, response.data));
     } catch (error) {
         yield put(ApiResponseError(productAndServicesTypes.GET_PRODUCTS, error?.response?.data || "Failed"));
     }
@@ -35,7 +35,7 @@ function* services() {
 
     try {
         const response = yield call(getServicesApi);
-        yield put(ApiResponseSuccess(productAndServicesTypes.GET_SERVICES, response));
+        yield put(ApiResponseSuccess(productAndServicesTypes.GET_SERVICES, response.data));
     } catch (error) {
         yield put(ApiResponseError(productAndServicesTypes.GET_SERVICES, error?.response?.data || "Failed"));
     }

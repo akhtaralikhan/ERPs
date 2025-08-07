@@ -1,4 +1,4 @@
-
+import { AuthRegisterActionTypes } from "./types";
 // common success
 export const authRegisterApiResponseSuccess = (
   actionType,

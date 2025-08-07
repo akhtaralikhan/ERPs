@@ -1,6 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useRedux } from "../../hooks/useRedux";
+import { getChartAccounts } from "../../redux/accounting/actions";
 
 const ChartsOfAccount = () => {
+
+  const { dispatch, useAppSelector } = useRedux();
+  useEffect(() => {
+    dispatch(getChartAccounts());//3
+
+  }, [])
+
+
   return (
     <>
       <div className="content">

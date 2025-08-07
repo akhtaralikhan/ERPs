@@ -1,352 +1,309 @@
+import {
+    categoryApi,
+    comapnyTenantApi,
+    currency10Api,
+    currencyApi,
+    planApi,
+    rolesApi,
+    settingTypeGeneralApi,
+    settingTypeLicenseApi,
+    subscriptionTenantAllUserApi,
+    subscriptionTenantApi,
+    taxeApi,
+    users3Api,
+    usersApi,
+} from "../../api/Settings";
+import { SettingsActionTypes } from "./types";
 import { call, put, takeEvery } from "redux-saga/effects";
-import { archiveUser, deleteMsg, deleteUserChat, getArchiveList, getFavouritesApi, getMessageList, GetStarredUserMsg, getUserConversation, initiateChat, PinUserChat, readAllMsg, readUserMsg, replyChat, starUserMsg, unArchiveUser, unPinUserChat, unReadUserMsg, UnStarUserMsg } from "../../constants/RealApi";
-import { chatsApiResponseError, chatsApiResponseSuccess, } from "./actions";
-import { ChatsActionTypes } from "./types";
 
+export const ApiResponseSuccess = (actionType, data) => ({
+    type: SettingsActionTypes.API_RESPONSE_SUCCESS,
+    payload: { actionType, data },
+});
 
-function* getFavourites() {
+export const ApiResponseError = (actionType, error) => ({
+    type: SettingsActionTypes.API_RESPONSE_ERROR,
+    payload: { actionType, error },
+});
+
+function* comapnyTenant() {
     try {
-        const response = yield call(getMessageList);
-
-        const favouriteList = response?.responseData || [];
-
+        const response = yield call(comapnyTenantApi);
         yield put(
-            chatsApiResponseSuccess(ChatsActionTypes.GET_FAVOURITES, favouriteList)
-        );
-
-    } catch (error) {
-        yield put(
-            chatsApiResponseError(ChatsActionTypes.GET_FAVOURITES, error.response?.data || "Failed to fetch favourites")
-        );
-    }
-}
-export default function* favouriteSaga() {
-    yield takeEvery(ChatsActionTypes.GET_FAVOURITES, getFavourites);
-}
-
-
-
-function* getChatUserConversations({ payload }) {
-    if (!payload || typeof payload !== "string") return;
-
-    try {
-        const response = yield call(getUserConversation, { userUid: payload });
-        yield put(
-            chatsApiResponseSuccess(ChatsActionTypes.GET_CHAT_USER_CONVERSATIONS, response)
+            ApiResponseSuccess(SettingsActionTypes.COMPANY_TENANT_3, response?.data)
         );
     } catch (error) {
         yield put(
-            chatsApiResponseError(
-                ChatsActionTypes.GET_CHAT_USER_CONVERSATIONS,
-                error.response?.data || "Failed to fetch user chat conversations"
+            ApiResponseError(
+                SettingsActionTypes.COMPANY_TENANT_3,
+                error?.response?.data || "Failed"
             )
         );
     }
 }
 
+export function* comapnyTenantSaga() {
+    yield takeEvery(SettingsActionTypes.COMPANY_TENANT_3, comapnyTenant);
+}
 
-export function* getUserChatSaga() {
-    yield takeEvery(ChatsActionTypes.GET_CHAT_USER_CONVERSATIONS, getChatUserConversations);
-};
+// function* Company() {
+//     try {
+//         const response = yield call(CompanyApi);
+//         yield put(
+//             ApiResponseSuccess(SettingsActionTypes.COMPANY, response?.data)
+//         );
+//     } catch (error) {
+//         yield put(
+//             ApiResponseError(
+//                 SettingsActionTypes.COMPANY,
+//                 error?.response?.data || "Failed"
+//             )
+//         );
+//     }
+// }
 
-function* deleteMessage({ payload }) {
+// export function* CompanySaga() {
+//     yield takeEvery(SettingsActionTypes.COMPANY, Company);
+// }
+
+function* users() {
     try {
-        const response = yield call(deleteMsg, { messageId: payload });
-
+        const response = yield call(usersApi);
         yield put(
-            chatsApiResponseSuccess(ChatsActionTypes.DELETE_MESSAGE, response)
+            ApiResponseSuccess(SettingsActionTypes.USERS, response?.data)
         );
     } catch (error) {
-        console.error("Error in deleteMessage saga:", error);
         yield put(
-            chatsApiResponseError(
-                ChatsActionTypes.DELETE_MESSAGE,
-                error || "Error in deleteMessage saga:"
+            ApiResponseError(
+                SettingsActionTypes.USERS,
+                error?.response?.data || "Failed"
             )
         );
     }
 }
 
-export function* deleteMessageSaga() {
-    yield takeEvery(ChatsActionTypes.DELETE_MESSAGE, deleteMessage);
-};
+export function* usersSaga() {
+    yield takeEvery(SettingsActionTypes.USERS, users);
+}
 
-
-function* deleteUserMessages({ payload }) {
+function* subscriptionTenant() {
     try {
-        const { userUid, msgID } = payload;
-
-        const response = yield call(deleteUserChat, {
-            userUid,
-            msgID,
-        });
-
+        const response = yield call(subscriptionTenantApi);
         yield put(
-            chatsApiResponseSuccess(ChatsActionTypes.DELETE_USER_MESSAGES, response)
+            ApiResponseSuccess(SettingsActionTypes.SUBSCRIPTIONS_TENANT_3, response?.data)
         );
     } catch (error) {
         yield put(
-            chatsApiResponseError(
-                ChatsActionTypes.DELETE_USER_MESSAGES,
-                error || "Error in deleteUserMessages saga"
+            ApiResponseError(
+                SettingsActionTypes.SUBSCRIPTIONS_TENANT_3,
+                error?.response?.data || "Failed"
             )
         );
     }
 }
 
-export function* deleteUserMessagesSaga() {
-    yield takeEvery(ChatsActionTypes.DELETE_USER_MESSAGES, deleteUserMessages);
+export function* subscriptionTenantSaga() {
+    yield takeEvery(SettingsActionTypes.SUBSCRIPTIONS_TENANT_3, subscriptionTenant);
 }
 
-
-function* initiateMsg({ payload }) {
+function* subscriptionTenantAllUser() {
     try {
-        const { msg, userUid } = payload;
-        const response = yield call(initiateChat, { msg, userUid });
-
-        yield put(chatsApiResponseSuccess(ChatsActionTypes.ON_SEND_MESSAGE, response));
-    } catch (error) {
-        yield put(chatsApiResponseError(ChatsActionTypes.ON_SEND_MESSAGE, error));
-    }
-}
-
-export function* initiateMsgSaga() {
-    yield takeEvery(ChatsActionTypes.ON_SEND_MESSAGE, initiateMsg);
-}
-
-function* replyMsg({ payload }) {
-    try {
-        const { msg, msgID } = payload;
-
-        const response = yield call(replyChat, { msg, msgID });
-
-        yield put(chatsApiResponseSuccess(ChatsActionTypes.ON_REPLY_MESSAGE, response));
-    } catch (error) {
-        yield put(chatsApiResponseError(ChatsActionTypes.ON_REPLY_MESSAGE, error));
-    }
-}
-
-export function* replyMsgSaga() {
-    yield takeEvery(ChatsActionTypes.ON_REPLY_MESSAGE, replyMsg);
-}
-
-
-function* archiveChat({ payload }) {
-    try {
-        const { msgID } = payload;
-
-        const response = yield call(archiveUser, { msgID });
-
-        yield put(chatsApiResponseSuccess(ChatsActionTypes.ARCHIVE_CONTACT, response));
-    } catch (error) {
-        yield put(chatsApiResponseError(ChatsActionTypes.ARCHIVE_CONTACT, error));
-    }
-}
-
-export function* archiveChatSaga() {
-    yield takeEvery(ChatsActionTypes.ARCHIVE_CONTACT, archiveChat);
-}
-
-
-function* unArchiveChat({ payload }) {
-    try {
-        const { msgID } = payload;
-
-        const response = yield call(unArchiveUser, { msgID });
-
-        yield put(chatsApiResponseSuccess(ChatsActionTypes.UNARCHIVE_CONTACT, response));
-    } catch (error) {
-        yield put(chatsApiResponseError(ChatsActionTypes.UNARCHIVE_CONTACT, error));
-    }
-}
-
-export function* unArchiveChatSaga() {
-    yield takeEvery(ChatsActionTypes.UNARCHIVE_CONTACT, unArchiveChat);
-}
-
-
-function* PinChat({ payload }) {
-    try {
-        const { msgID } = payload;
-
-        const response = yield call(PinUserChat, { msgID });
-
-        yield put(chatsApiResponseSuccess(ChatsActionTypes.PIN_CONTACT, response));
-    } catch (error) {
-        yield put(chatsApiResponseError(ChatsActionTypes.PIN_CONTACT, error));
-    }
-}
-
-export function* PinChatSaga() {
-    yield takeEvery(ChatsActionTypes.PIN_CONTACT, PinChat);
-}
-
-
-function* unPinChat({ payload }) {
-    try {
-        const { msgID } = payload;
-
-        const response = yield call(unPinUserChat, { msgID });
-
-        yield put(chatsApiResponseSuccess(ChatsActionTypes.UNPIN_CONTACT, response));
-    } catch (error) {
-        yield put(chatsApiResponseError(ChatsActionTypes.UNPIN_CONTACT, error));
-    }
-}
-
-export function* unPinChatSaga() {
-    yield takeEvery(ChatsActionTypes.UNPIN_CONTACT, unPinChat);
-}
-
-function* RradAllMessage({ payload }) {
-    try {
-        const response = "";
-        // yield call(readUserMsg, { messageId: payload });
-
-        // yield put(
-        //     chatsApiResponseSuccess(ChatsActionTypes.READ_MESSAGE, response)
-        // );
-    } catch (error) {
-        console.error("Error in read all saga:", error);
+        const response = yield call(subscriptionTenantAllUserApi);
         yield put(
-            chatsApiResponseError(
-                ChatsActionTypes.READ_MESSAGE,
-                error || "Error in read all saga:"
+            ApiResponseSuccess(SettingsActionTypes.SUBSCRIPTIONS_ALL_USER_3, response?.data)
+        );
+    } catch (error) {
+        yield put(
+            ApiResponseError(
+                SettingsActionTypes.SUBSCRIPTIONS_ALL_USER_3,
+                error?.response?.data || "Failed"
             )
         );
     }
 }
 
-export function* RradAllMessageSaga() {
-    yield takeEvery(ChatsActionTypes.READ_MESSAGE, RradAllMessage);
-};
+export function* subscriptionTenantAllUserSaga() {
+    yield takeEvery(SettingsActionTypes.SUBSCRIPTIONS_ALL_USER_3, subscriptionTenantAllUser);
+}
 
-function* readMessage({ payload }) {
+function* plan() {
     try {
-        const response = yield call(readMessage, { messageId: payload });
-
+        const response = yield call(planApi);
         yield put(
-            chatsApiResponseSuccess(ChatsActionTypes.UNREAD_MESSAGE, response)
+            ApiResponseSuccess(SettingsActionTypes.PLAN, response?.data)
         );
     } catch (error) {
-        console.error("Error in deleteMessage saga:", error);
         yield put(
-            chatsApiResponseError(
-                ChatsActionTypes.UNREAD_MESSAGE,
-                error || "Error in deleteMessage saga:"
+            ApiResponseError(
+                SettingsActionTypes.PLAN,
+                error?.response?.data || "Failed"
             )
         );
     }
 }
 
-export function* readMessageSaga() {
-    yield takeEvery(ChatsActionTypes.UNREAD_MESSAGE, readMessage);
-};
+export function* planSaga() {
+    yield takeEvery(SettingsActionTypes.PLAN, plan);
+}
 
-function* unReadMessage({ payload }) {
+function* category() {
     try {
-        const response = yield call(unReadUserMsg, { messageId: payload });
-
+        const response = yield call(categoryApi);
         yield put(
-            chatsApiResponseSuccess(ChatsActionTypes.UNREAD_MESSAGE, response)
+            ApiResponseSuccess(SettingsActionTypes.CATEGORY, response?.data)
         );
     } catch (error) {
-        console.error("Error in deleteMessage saga:", error);
         yield put(
-            chatsApiResponseError(
-                ChatsActionTypes.UNREAD_MESSAGE,
-                error || "Error in deleteMessage saga:"
+            ApiResponseError(
+                SettingsActionTypes.CATEGORY,
+                error?.response?.data || "Failed"
             )
         );
     }
 }
 
-export function* unReadSaga() {
-    yield takeEvery(ChatsActionTypes.UNREAD_MESSAGE, unReadMessage);
-};
+export function* categorySaga() {
+    yield takeEvery(SettingsActionTypes.CATEGORY, category);
+}
 
-function* starMessage({ payload }) {
+function* taxe() {
     try {
-        const response = yield call(starUserMsg, { messageId: payload });
-
+        const response = yield call(taxeApi);
         yield put(
-            chatsApiResponseSuccess(ChatsActionTypes.STAR_CHAT, response)
+            ApiResponseSuccess(SettingsActionTypes.TAXE, response?.data)
         );
     } catch (error) {
-        console.error("Error in star saga:", error);
         yield put(
-            chatsApiResponseError(
-                ChatsActionTypes.STAR_CHAT,
-                error || "Error in star saga:"
+            ApiResponseError(
+                SettingsActionTypes.TAXE,
+                error?.response?.data || "Failed"
             )
         );
     }
 }
 
-export function* starMessageSaga() {
-    yield takeEvery(ChatsActionTypes.STAR_CHAT, starMessage);
-};
+export function* taxeSaga() {
+    yield takeEvery(SettingsActionTypes.TAXE, taxe);
+}
 
-function* UnStarMessage({ payload }) {
+function* users3() {
     try {
-        const response = yield call(UnStarUserMsg, { messageId: payload });
-
+        const response = yield call(users3Api);
         yield put(
-            chatsApiResponseSuccess(ChatsActionTypes.UNSTAR_CHAT, response)
+            ApiResponseSuccess(SettingsActionTypes.USERS_3, response?.data)
         );
     } catch (error) {
-        console.error("Error in UnStarMessage saga:", error);
         yield put(
-            chatsApiResponseError(
-                ChatsActionTypes.UNSTAR_CHAT,
-                error || "Error in UnStarMessage saga:"
+            ApiResponseError(
+                SettingsActionTypes.USERS_3,
+                error?.response?.data || "Failed"
             )
         );
     }
 }
 
-export function* UnStarMessageSaga() {
-    yield takeEvery(ChatsActionTypes.UNSTAR_CHAT, UnStarMessage);
-};
+export function* users3Saga() {
+    yield takeEvery(SettingsActionTypes.USERS_3, users3);
+}
 
-function* GetStarredMessage({ payload }) {
+function* currency() {
     try {
-        const response = yield call(GetStarredUserMsg, { toUserUid: payload });
-
+        const response = yield call(currencyApi);
         yield put(
-            chatsApiResponseSuccess(ChatsActionTypes.GET_STARRED_CHATS, response)
+            ApiResponseSuccess(SettingsActionTypes.CURRENCY, response?.data)
         );
     } catch (error) {
-        console.error("Error in get star mesage saga:", error);
         yield put(
-            chatsApiResponseError(
-                ChatsActionTypes.GET_STARRED_CHATS,
-                error || "Error in get star mesage saga:"
+            ApiResponseError(
+                SettingsActionTypes.CURRENCY,
+                error?.response?.data || "Failed"
             )
         );
     }
 }
 
-export function* GetStarredMessageSaga() {
-    yield takeEvery(ChatsActionTypes.GET_STARRED_CHATS, GetStarredMessage);
-};
+export function* currencySaga() {
+    yield takeEvery(SettingsActionTypes.CURRENCY, currency);
+}
 
-function* getArchiveChatUsers() {
+// function* currency10() {
+//     try {
+//         const response = yield call(currency10Api);
+//         yield put(
+//             ApiResponseSuccess(SettingsActionTypes.CURRENCY_10, response?.data)
+//         );
+//     } catch (error) {
+//         yield put(
+//             ApiResponseError(
+//                 SettingsActionTypes.CURRENCY_10,
+//                 error?.response?.data || "Failed"
+//             )
+//         );
+//     }
+// }
+
+// export function* currency10Saga() {
+//     yield takeEvery(SettingsActionTypes.CURRENCY_10, currency10);
+// }
+
+function* settingTypeLicense() {
     try {
-        const response = yield call(getArchiveList);
-
-        const archiveList = response?.responseData || [];
-
+        const response = yield call(settingTypeLicenseApi);
         yield put(
-            chatsApiResponseSuccess(ChatsActionTypes.GET_ARCHIVE_CONTACT, archiveList)
+            ApiResponseSuccess(SettingsActionTypes.SETTING_TYPES_LICENSE, response?.data)
         );
-
     } catch (error) {
         yield put(
-            chatsApiResponseError(ChatsActionTypes.GET_ARCHIVE_CONTACT, error.response?.status || "Failed to fetch favourites")
+            ApiResponseError(
+                SettingsActionTypes.SETTING_TYPES_LICENSE,
+                error?.response?.data || "Failed"
+            )
         );
     }
 }
-export function* getArchiveChatUsersSaga() {
-    yield takeEvery(ChatsActionTypes.GET_ARCHIVE_CONTACT, getArchiveChatUsers);
+
+export function* settingTypeLicenseSaga() {
+    yield takeEvery(SettingsActionTypes.SETTING_TYPES_LICENSE, settingTypeLicense);
+}
+
+
+function* settingTypeGeneral() {
+    try {
+        const response = yield call(settingTypeGeneralApi);
+        yield put(
+            ApiResponseSuccess(SettingsActionTypes.SETTING_TYPE_GENERAL, response?.data)
+        );
+    } catch (error) {
+        yield put(
+            ApiResponseError(
+                SettingsActionTypes.SETTING_TYPE_GENERAL,
+                error?.response?.data || "Failed"
+            )
+        );
+    }
+}
+
+export function* settingTypeGeneralSaga() {
+    yield takeEvery(SettingsActionTypes.SETTING_TYPE_GENERAL, settingTypeGeneral);
+}
+
+
+function* roles() {
+    try {
+        const response = yield call(rolesApi);
+        yield put(
+            ApiResponseSuccess(SettingsActionTypes.ROLES, response?.data)
+        );
+    } catch (error) {
+        yield put(
+            ApiResponseError(
+                SettingsActionTypes.ROLES,
+                error?.response?.data || "Failed"
+            )
+        );
+    }
+}
+
+export function* rolesSaga() {
+    yield takeEvery(SettingsActionTypes.ROLES, roles);
 }

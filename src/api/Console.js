@@ -20,6 +20,39 @@ export const usersUserIdApi = async () => {
     return response;
 };
 
+export const plan_idApi = async () => {
+
+    const response = await axios.get(
+        BASE_URL + endPoints.console.users_UserId,
+
+        {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+        }
+    );
+
+    return response;
+};
+
+
+export const rolesApi = async () => {
+
+    const response = await axios.get(
+        BASE_URL + endPoints.console.roles,
+
+        {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+        }
+    );
+
+    return response;
+};
+
 
 
 export const allUsersApi = async () => {
@@ -73,6 +106,20 @@ export const subscriptionTenantAllUserApi = async () => {
 };
 
 export const getSubscriptionsTenant = async () => {
+    const response = await axios.get(
+        BASE_URL + endPoints.console.subscriptionTenantUser,
+        {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+        }
+    );
+
+    return response.data;
+};
+
+export const subscriptionTenantApi = async () => {
     const response = await axios.get(
         BASE_URL + endPoints.console.subscriptionTenantUser,
         {

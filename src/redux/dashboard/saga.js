@@ -21,7 +21,7 @@ function* summary() {
 
     try {
         const response = yield call(summaryApi);
-        yield put(ApiResponseSuccess(dashboardTypes.SUMMARY, response));
+        yield put(ApiResponseSuccess(dashboardTypes.SUMMARY, response.data));
     } catch (error) {
         yield put(ApiResponseError(dashboardTypes.SUMMARY, error?.response?.data || "Failed"));
     }
@@ -36,7 +36,7 @@ function* bankaccount() {
 
     try {
         const response = yield call(bankaccountApi);
-        yield put(ApiResponseSuccess(dashboardTypes.BANKACCOUNT, response));
+        yield put(ApiResponseSuccess(dashboardTypes.BANKACCOUNT, response.data));
     } catch (error) {
         yield put(ApiResponseError(dashboardTypes.BANKACCOUNT, error?.response?.data || "Failed"));
     }
@@ -49,7 +49,7 @@ export function* bankaccountSaga() {
 function* SocialLogin() {
     try {
         const response = yield call(socialLoginApi);
-        yield put(ApiResponseSuccess(dashboardTypes.SOCIAL_LOGIN, response));
+        yield put(ApiResponseSuccess(dashboardTypes.SOCIAL_LOGIN, response.data));
     } catch (error) {
         yield put(ApiResponseError(dashboardTypes.SOCIAL_LOGIN, error?.response?.data || "Failed"));
     }
@@ -62,7 +62,7 @@ export function* SocialLoginSaga() {
 function* settingTypeGeneral() {
     try {
         const response = yield call(settingTypesGeneralApi);
-        yield put(ApiResponseSuccess(dashboardTypes.SETTING_TYPES_GENERAL, response));
+        yield put(ApiResponseSuccess(dashboardTypes.SETTING_TYPES_GENERAL, response.data));
     } catch (error) {
         yield put(ApiResponseError(dashboardTypes.SETTING_TYPES_GENERAL, error?.response?.data || "Failed"));
     }
@@ -75,7 +75,7 @@ export function* settingTypeGeneralSaga() {
 function* settingTypePayment() {
     try {
         const response = yield call(paymentApi);
-        yield put(ApiResponseSuccess(dashboardTypes.SETTING_TYPES_PAYMENT, response));
+        yield put(ApiResponseSuccess(dashboardTypes.SETTING_TYPES_PAYMENT, response.data));
     } catch (error) {
         yield put(ApiResponseError(dashboardTypes.SETTING_TYPES_PAYMENT, error?.response?.data || "Failed"));
     }
@@ -88,7 +88,7 @@ export function* settingTypePaymentSaga() {
 function* revenueTotal() {
     try {
         const response = yield call(revenueTotalApi);
-        yield put(ApiResponseSuccess(dashboardTypes.REVENUE_TOTAL, response));
+        yield put(ApiResponseSuccess(dashboardTypes.REVENUE_TOTAL, response.data));
     } catch (error) {
         yield put(ApiResponseError(dashboardTypes.REVENUE_TOTAL, error?.response?.data || "Failed"));
     }
@@ -101,7 +101,7 @@ export function* revenueTotalSaga() {
 function* monthlyTransaction() {
     try {
         const response = yield call(monthTransactionsApi);
-        yield put(ApiResponseSuccess(dashboardTypes.MONTH_TRANSACTIONS, response));
+        yield put(ApiResponseSuccess(dashboardTypes.MONTH_TRANSACTIONS, response.data));
     } catch (error) {
         yield put(ApiResponseError(dashboardTypes.MONTH_TRANSACTIONS, error?.response?.data || "Failed"));
     }
@@ -114,7 +114,7 @@ export function* monthlyTransactionSaga() {
 function* yearlyTransaction() {
     try {
         const response = yield call(yearTransactionsApi);
-        yield put(ApiResponseSuccess(dashboardTypes.YEAR_TRANSACTIONS, response));
+        yield put(ApiResponseSuccess(dashboardTypes.YEAR_TRANSACTIONS, response.data));
     } catch (error) {
         yield put(ApiResponseError(dashboardTypes.YEAR_TRANSACTIONS, error?.response?.data || "Failed"));
     }
@@ -127,7 +127,7 @@ export function* yearlyTransactionSaga() {
 function* weekTransaction() {
     try {
         const response = yield call(weekTransactionsApi);
-        yield put(ApiResponseSuccess(dashboardTypes.WEEK_TRANSACTIONS, response));
+        yield put(ApiResponseSuccess(dashboardTypes.WEEK_TRANSACTIONS, response.data));
     } catch (error) {
         yield put(ApiResponseError(dashboardTypes.WEEK_TRANSACTIONS, error?.response?.data || "Failed"));
     }
@@ -140,7 +140,7 @@ export function* weekTransactionSaga() {
 function* monthlyActivity() {
     try {
         const response = yield call(monthActivityApi);
-        yield put(ApiResponseSuccess(dashboardTypes.MONTH_ACTIVITY, response));
+        yield put(ApiResponseSuccess(dashboardTypes.MONTH_ACTIVITY, response.data));
     } catch (error) {
         yield put(ApiResponseError(dashboardTypes.MONTH_ACTIVITY, error?.response?.data || "Failed"));
     }
@@ -153,7 +153,7 @@ export function* monthlyActivitySaga() {
 function* yearlyActivity() {
     try {
         const response = yield call(yearActivityApi);
-        yield put(ApiResponseSuccess(dashboardTypes.YEAR_ACTIVITY, response));
+        yield put(ApiResponseSuccess(dashboardTypes.YEAR_ACTIVITY, response.data));
     } catch (error) {
         yield put(ApiResponseError(dashboardTypes.YEAR_ACTIVITY, error?.response?.data || "Failed"));
     }
@@ -166,7 +166,7 @@ export function* yearlyActivitySaga() {
 function* weekActivity() {
     try {
         const response = yield call(weekActivityApi);
-        yield put(ApiResponseSuccess(dashboardTypes.WEEK_ACTIVITY, response));
+        yield put(ApiResponseSuccess(dashboardTypes.WEEK_ACTIVITY, response.data));
     } catch (error) {
         yield put(ApiResponseError(dashboardTypes.WEEK_ACTIVITY, error?.response?.data || "Failed"));
     }
@@ -179,7 +179,7 @@ export function* weekActivitySaga() {
 function* settingTypeLicense() {
     try {
         const response = yield call(settingTypesLicenceApi);
-        yield put(ApiResponseSuccess(dashboardTypes.SETTING_TYPES_LICENSE, response));
+        yield put(ApiResponseSuccess(dashboardTypes.SETTING_TYPES_LICENSE, response.data));
     } catch (error) {
         yield put(ApiResponseError(dashboardTypes.SETTING_TYPES_LICENSE, error?.response?.data || "Failed"));
     }
@@ -192,7 +192,7 @@ export function* settingTypeLicenseSaga() {
 function* cardReport() {
     try {
         const response = yield call(cardReportsApi);
-        yield put(ApiResponseSuccess(dashboardTypes.CARDREPORTS, response));
+        yield put(ApiResponseSuccess(dashboardTypes.CARDREPORTS, response.data));
     } catch (error) {
         yield put(ApiResponseError(dashboardTypes.CARDREPORTS, error?.response?.data || "Failed"));
     }
@@ -205,7 +205,7 @@ export function* cardReportSaga() {
 function* lastInvoice() {
     try {
         const response = yield call(innovoiceLastApi);
-        yield put(ApiResponseSuccess(dashboardTypes.INNOVOICE_LAST, response));
+        yield put(ApiResponseSuccess(dashboardTypes.INNOVOICE_LAST, response.data));
     } catch (error) {
         yield put(ApiResponseError(dashboardTypes.INNOVOICE_LAST, error?.response?.data || "Failed"));
     }
@@ -218,7 +218,7 @@ export function* lastInvoiceSaga() {
 function* lastEstimates() {
     try {
         const response = yield call(estimatesLastApi);
-        yield put(ApiResponseSuccess(dashboardTypes.ESTIMATES_LAST, response));
+        yield put(ApiResponseSuccess(dashboardTypes.ESTIMATES_LAST, response.data));
     } catch (error) {
         yield put(ApiResponseError(dashboardTypes.ESTIMATES_LAST, error?.response?.data || "Failed"));
     }
@@ -231,7 +231,7 @@ export function* lastEstimatesSaga() {
 function* lastBills() {
     try {
         const response = yield call(billsLastApi);
-        yield put(ApiResponseSuccess(dashboardTypes.BILLS_LAST, response));
+        yield put(ApiResponseSuccess(dashboardTypes.BILLS_LAST, response.data));
     } catch (error) {
         yield put(ApiResponseError(dashboardTypes.BILLS_LAST, error?.response?.data || "Failed"));
     }
@@ -244,7 +244,7 @@ export function* lastBillsSaga() {
 function* lastTransactions() {
     try {
         const response = yield call(transactionsLastApi);
-        yield put(ApiResponseSuccess(dashboardTypes.TRANSACTIONS_LAST, response));
+        yield put(ApiResponseSuccess(dashboardTypes.TRANSACTIONS_LAST, response.data));
     } catch (error) {
         yield put(ApiResponseError(dashboardTypes.TRANSACTIONS_LAST, error?.response?.data || "Failed"));
     }
@@ -257,7 +257,7 @@ export function* lastTransactionsSaga() {
 function* currencyDefault() {
     try {
         const response = yield call(currencyDefaultApi);
-        yield put(ApiResponseSuccess(dashboardTypes.CURRENCY_DEFAULT, response));
+        yield put(ApiResponseSuccess(dashboardTypes.CURRENCY_DEFAULT, response.data));
     } catch (error) {
         yield put(ApiResponseError(dashboardTypes.CURRENCY_DEFAULT, error?.response?.data || "Failed"));
     }
@@ -270,7 +270,7 @@ export function* currencyDefaultSaga() {
 function* invoiceReport() {
     try {
         const response = yield call(invoiceReportApi);
-        yield put(ApiResponseSuccess(dashboardTypes.INVOICE_REPORT, response));
+        yield put(ApiResponseSuccess(dashboardTypes.INVOICE_REPORT, response.data));
     } catch (error) {
         yield put(ApiResponseError(dashboardTypes.INVOICE_REPORT, error?.response?.data || "Failed"));
     }
@@ -283,7 +283,7 @@ export function* invoiceReportSaga() {
 function* lastGoals() {
     try {
         const response = yield call(goalsLastApi);
-        yield put(ApiResponseSuccess(dashboardTypes.GOALS_LAST, response));
+        yield put(ApiResponseSuccess(dashboardTypes.GOALS_LAST, response.data));
     } catch (error) {
         yield put(ApiResponseError(dashboardTypes.GOALS_LAST, error?.response?.data || "Failed"));
     }

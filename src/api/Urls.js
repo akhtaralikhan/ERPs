@@ -100,7 +100,9 @@ export const endPoints = {
         settingTypeEmail: "setting/type/EMAIL",
         settingTypeSocialLogin: "setting/type/SOCIAL_LOGIN",
         settingTyopePayment: "setting/type/PAYMENT",
-        createBankAccount: "bankaccount"
+        createBankAccount: "bankaccount",
+        plan_idApi: `plan/${userData?.data?.id}`,
+        roles: "roles",
     },
     chats: {
         getChatMessages: "/chats/messages",

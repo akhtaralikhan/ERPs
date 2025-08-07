@@ -1,7 +1,42 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import {
+  getCategory,
+  getCompany,
+  getCompanyTenant3,
+  getCurrency,
+  getCurrency10,
+  getPlan,
+  getRoles,
+  getSettingTypeGeneral,
+  getSettingTypesLicense,
+  getSubscriptionsAllUser3,
+  getSubscriptionsTenant3,
+  getTaxe,
+  getUsers,
+  getUsers3,
+} from "../../redux/settings/actions";
+import { useRedux } from "../../hooks/useRedux";
 
 const Settings = () => {
   const [isChecked, setIsChecked] = useState(false);
+  const { dispatch, useAppSelector } = useRedux();
+
+  useEffect(() => {
+    dispatch(getCompanyTenant3());
+    // dispatch(getCompany());
+    dispatch(getUsers());
+    dispatch(getSubscriptionsTenant3());
+    dispatch(getSubscriptionsAllUser3());
+    dispatch(getPlan());
+    dispatch(getCategory());
+    dispatch(getTaxe());
+    dispatch(getUsers3());
+    dispatch(getCurrency());
+    dispatch(getSettingTypesLicense());
+    dispatch(getSettingTypeGeneral());
+    dispatch(getRoles());
+    // dispatch(getCurrency10());
+  }, []);
 
   return (
     <>

@@ -1,6 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useRedux } from "../../hooks/useRedux";
+import { getAccountType, getAssets, getBillNaN, getChartAccounts, getCurrency, getCurrencyDefault, getCustomer, getGoal, getInvoiceNaN, getManualJournal, getPayment, getRevenue, getRevenueTotal, getTaxe, getTransactions, getVendor } from "../../redux/accounting/actions";
+import { getBankAccount } from "../../redux/dashboard/actions";
+
 
 const ManualJournals = () => {
+
+  const { dispatch, useAppSelector } = useRedux();
+
+  //do check again
+  useEffect(() => {
+    dispatch(getManualJournal());//1
+    dispatch(getTransactions());
+    dispatch(getCurrencyDefault());//2
+    dispatch(getChartAccounts());//
+    dispatch(getVendor());
+    dispatch(getTaxe());//3
+    dispatch(getAssets());//4
+    dispatch(getCustomer());
+    dispatch(getInvoiceNaN());
+    dispatch(getBillNaN());
+    dispatch(getCurrency());
+    dispatch(getAccountType());
+    dispatch(getPayment());
+    dispatch(getBankAccount());
+    dispatch(getRevenue());
+    dispatch(getRevenueTotal());
+    dispatch((getGoal()));
+  }, []);
   return (
     <>
       <div className="content">

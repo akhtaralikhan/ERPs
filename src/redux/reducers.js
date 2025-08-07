@@ -3,7 +3,7 @@ import ForgetPassword from "./auth/forgetpwd/reducer";
 import Login from "./auth/login/reducer";
 import Register from "./auth/register/reducer";
 import SettingsReducer from "./settings/reducer";
-import { consoleReducer } from "./console/reducer";
+import consoleReducer from "./console/reducer";
 import Chats from "./chats/reducer";
 import reportsReducer from "./reports/reducer";
 import salesReducer from "./sales/reducer";

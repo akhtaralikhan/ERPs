@@ -1,13 +1,13 @@
 // common success
-export const authForgetPassApiResponseSuccess = (
-  actionType,
-  data
-) => ({
+import { AuthForgetPassActionTypes } from './types';
+// common success
+export const authLoginApiResponseSuccess = (actionType, data) => ({
   type: AuthForgetPassActionTypes.API_RESPONSE_SUCCESS,
   payload: { actionType, data },
 });
+
 // common error
-export const authForgetPassApiResponseError = (
+export const authLoginApiResponseError = (
   actionType,
   error
 ) => ({
@@ -15,16 +15,9 @@ export const authForgetPassApiResponseError = (
   payload: { actionType, error },
 });
 
-export const userForgetPassword = (user) => {
+export const recoverPassword = (user) => {
   return {
     type: AuthForgetPassActionTypes.FORGET_PASSWORD,
-    payload: user,
-  };
-};
-
-export const userChangePassword = (newPassword) => {
-  return {
-    type: AuthForgetPassActionTypes.CHANGE_PASSWORD,
-    payload: newPassword,
+    payload: { user },
   };
 };
