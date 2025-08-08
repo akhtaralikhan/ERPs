@@ -8,7 +8,7 @@ export const INIT_STATE = {
     bankAccount: [],
     cardReports: [],
     lastInvoice: [],
-    lastEstimaytes: [],
+    lastEstimates: [],
     settingTypeGeneral: {},
     lastBills: [],
     lastTransactions: [],
@@ -75,7 +75,7 @@ const dashboardReducer = (state = INIT_STATE, action) => {
                 case dashboardTypes.ESTIMATES_LAST:
                     return {
                         ...state,
-                        lastEstimaytes: action.payload.data,
+                        lastEstimates: action.payload.data,
                         loading: false,
                     };
                 case dashboardTypes.BILLS_LAST:

@@ -25,6 +25,4 @@ export default combineReducers({
     expensesReducer,
     dashboardReducer,
     bankAccountsReducer,
-
-
 });

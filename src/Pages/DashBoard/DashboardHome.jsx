@@ -1,13 +1,70 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { token, userData } from "../../constant/Config";
 import SalesChart from "../../Components/SalesChart";
 import { getSettingTypeLicenseAction, getSubscriptionsTenant3Action } from "../../redux/console/actions";
 import { useRedux } from "../../hooks/useRedux";
 import { getBankAccount, getBillsLast, getCardReports, getCurrencyDefault, getEstimatesLast, getGoalsLast, getInnovoiceLast, getInvoiceReport, getMonthActivity, getMonthTransactions, getRevenueTotal, getSettingTypesGeneral, getSettingTypesLicense, getSettingTypesPayment, getSummary, getTransactionsLast, getWeekActivity, getWeekTransactions, getYearActivity, getYearTransactions, socialLoginAction } from "../../redux/dashboard/actions";
+import { createSelector } from "reselect";
+import moment from "moment";
+
+
 
 const DashboardHome = () => {
-
   const { dispatch, useAppSelector } = useRedux();
+
+  const userData = createSelector(
+    (state) => state.dashboardReducer,
+    (state) => ({
+      summary: state.summary,
+      monthlyTransactions: state.monthlyTransactions,
+      monthlyActivity: state.monthlyActivity,
+      socialLogin: state.socialLogin,
+      bankAccount: state.bankAccount,
+      cardReports: state.cardReports,
+      lastInvoice: state.lastInvoice,
+      lastEstimates: state.lastEstimates,
+      settingTypeGeneral: state.settingTypeGeneral,
+      lastBills: state.lastBills,
+      lastTransactions: state.lastTransactions,
+      defaultCurrency: state.defaultCurrency,
+      totalRevenue: state.totalRevenue,
+      report: state.report,
+      lastGoals: state.lastGoals,
+    })
+  );
+
+  const { summary,
+    monthlyTransactions,
+    monthlyActivity,
+    socialLogin,
+    bankAccount,
+    cardReports,
+    lastInvoice,
+    lastEstimates,
+    settingTypeGeneral,
+    lastBills,
+    lastTransactions,
+    defaultCurrency,
+    totalRevenue,
+    report,
+    lastGoals } = useAppSelector(userData);
+
+  const [isSelected, setIsSelected] = useState("month");
+
+  useEffect(() => {
+    if (isSelected === "month") {
+      dispatch(getMonthTransactions());
+      dispatch(getMonthActivity());
+    } else if (isSelected === "year") {
+      dispatch(getYearTransactions());
+      dispatch(getYearActivity());
+    } else if (isSelected === "week") {
+      dispatch(getWeekTransactions());
+      dispatch(getWeekActivity());
+    }
+  }, [isSelected, dispatch]);
+
+  //api call
   if (token) {
     useEffect(() => {
       dispatch(getSubscriptionsTenant3Action());
@@ -16,12 +73,6 @@ const DashboardHome = () => {
       dispatch(socialLoginAction())
       dispatch(getSettingTypesGeneral())
       dispatch(getSettingTypesPayment())
-      dispatch(getMonthTransactions())
-      dispatch(getYearTransactions())
-      dispatch(getWeekTransactions())
-      dispatch(getMonthActivity())
-      dispatch(getYearActivity())
-      dispatch(getWeekActivity())
       dispatch(getSettingTypesLicense())
       dispatch(getCardReports())
       dispatch(getInnovoiceLast())
@@ -34,6 +85,17 @@ const DashboardHome = () => {
       dispatch(getGoalsLast())
     }, []);
   }
+
+  //time foramte 
+  const invoiceTime = (moment(lastInvoice[0]?.invoiceDate).format("MMM D, YYYY, HH:mm"));
+
+  //badge color
+  const badgeClass =
+      item.category === "Income"
+        ? "bg-primary"
+        : item.category === "Expense"
+        ? "bg-warning"
+        : "bg-info"; // default for ManualJournal
 
   return (
     <>
@@ -73,125 +135,43 @@ const DashboardHome = () => {
               <div className="row align-items-center g-4">
                 <div className="col-12 col-xxl-12">
                   <div className="row g-3">
-                    <div className="col-12 col-md-6">
-                      <div className="card">
+                    {cardReports?.map((report, index) => (
+                      <div className="card h-100" key={index}>
                         <div className="card-body">
                           <div className="d-flex justify-content-between">
                             <div>
                               <h5 className="mb-1">
-                                Total balance
+                                {report?.name}
                                 <span className="badge badge-phoenix badge-phoenix-warning rounded-pill fs--1 ms-2">
-                                  <span className="badge-label">-6.8%</span>
+                                  <span className="badge-label">
+                                    {report?.isIncreasing
+                                      ? `+ ${report?.percentage}`
+                                      : `- ${report?.percentage}`} %
+                                  </span>
                                 </span>
                               </h5>
-                              <h6 className="text-700">Last 7 days</h6>
+                              <h6 className="text-700">
+                                {report?.monthTotal} This month
+                              </h6>
                             </div>
-                            <h4>$4.00M</h4>
+                            <h4>{report?.total}</h4>
                           </div>
-                          {/* <!-- <div className="d-flex justify-content-center px-4 py-6">
-                          <div className="echart-total-orders" style="height:85px;width:115px"></div>
-                        </div> --> */}
+
                           <div className="mt-2">
                             <div className="d-flex align-items-center">
                               <h6 className="text-900 fw-semi-bold flex-1 mb-0">
-                                Pending payment
+                                since last month
                               </h6>
                               <h6 className="text-900 fw-semi-bold mb-0">
-                                $4.00M
+                                {report?.isIncreasing
+                                  ? `+ ${report?.perfomance}`
+                                  : `- ${report?.perfomance}`} %
                               </h6>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <div className="col-12 col-md-6">
-                      <div className="card h-100">
-                        <div className="card-body">
-                          <div className="d-flex justify-content-between">
-                            <div>
-                              <h5 className="mb-1">
-                                Total invoice
-                                <span className="badge badge-phoenix badge-phoenix-warning rounded-pill fs--1 ms-2">
-                                  <span className="badge-label">+26.5%</span>
-                                </span>
-                              </h5>
-                              <h6 className="text-700">1 This month</h6>
-                            </div>
-                            <h4>14</h4>
-                          </div>
-                          {/* <!-- <div className="pb-0 pt-4">
-                          <div className="echarts-new-customers" style="height:180px;width:100%;"></div>
-                        </div> --> */}
-                          <div className="mt-2">
-                            <div className="d-flex align-items-center">
-                              <h6 className="text-900 fw-semi-bold flex-1 mb-0">
-                                since last month
-                              </h6>
-                              <h6 className="text-900 fw-semi-bold mb-0">0%</h6>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-12 col-md-6">
-                      <div className="card h-100">
-                        <div className="card-body">
-                          <div className="d-flex justify-content-between">
-                            <div>
-                              <h5 className="mb-1">
-                                Total customer
-                                <span className="badge badge-phoenix badge-phoenix-warning rounded-pill fs--1 ms-2">
-                                  <span className="badge-label">+26.5%</span>
-                                </span>
-                              </h5>
-                              <h6 className="text-700">0 This month</h6>
-                            </div>
-                            <h4>2</h4>
-                          </div>
-                          {/* <!-- <div className="pb-0 pt-4">
-                          <div className="echarts-new-customers" style="height:180px;width:100%;"></div>
-                        </div> --> */}
-                          <div className="mt-2">
-                            <div className="d-flex align-items-center">
-                              <h6 className="text-900 fw-semi-bold flex-1 mb-0">
-                                since last month
-                              </h6>
-                              <h6 className="text-900 fw-semi-bold mb-0">0%</h6>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-12 col-md-6">
-                      <div className="card h-100">
-                        <div className="card-body">
-                          <div className="d-flex justify-content-between">
-                            <div>
-                              <h5 className="mb-1">
-                                Total estimate
-                                <span className="badge badge-phoenix badge-phoenix-warning rounded-pill fs--1 ms-2">
-                                  <span className="badge-label">+26.5%</span>
-                                </span>
-                              </h5>
-                              <h6 className="text-700">0 This month</h6>
-                            </div>
-                            <h4>7</h4>
-                          </div>
-                          {/* <!-- <div className="pb-0 pt-4">
-                          <div className="echarts-new-customers" style="height:180px;width:100%;"></div>
-                        </div> --> */}
-                          <div className="mt-2">
-                            <div className="d-flex align-items-center">
-                              {/* <!-- <div className="bullet-item bg-primary-100 me-2"></div> --> */}
-                              <h6 className="text-900 fw-semi-bold flex-1 mb-0">
-                                since last month
-                              </h6>
-                              <h6 className="text-900 fw-semi-bold mb-0">0%</h6>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -207,10 +187,12 @@ const DashboardHome = () => {
                   <select
                     className="form-select form-select-sm mt-2"
                     id="select-gross-revenue-month"
+                    value={isSelected}
+                    onChange={(e) => setIsSelected(e.target.value)}
                   >
-                    <option>Mar 1 - 31, 2022</option>
-                    <option>April 1 - 30, 2022</option>
-                    <option>May 1 - 31, 2022</option>
+                    <option value="week">Week</option>
+                    <option value="month">Month</option>
+                    <option value="year">Year</option>
                   </select>
                 </div>
               </div>
@@ -221,18 +203,12 @@ const DashboardHome = () => {
                 <SalesChart />
               </div>
               <div className="row mt-5">
-                <div className="col-lg-4 col-sm-12">
-                  <p className="text-primary m-0">Total income </p>
-                  <span className="text-primary">$2911.47</span>
-                </div>
-                <div className="col-lg-4 col-sm-12">
-                  <p className="text-primary m-0">Total expense</p>
-                  <span className="text-primary">$719.74</span>
-                </div>
-                <div className="col-lg-4 col-sm-12">
-                  <p className="text-primary m-0">Total profit </p>
-                  <span className="text-primary">$2191.73</span>
-                </div>
+                {summary?.map((item, index) => (
+                  <div className="col-lg-4 col-sm-12" key={index}>
+                    <p className="text-primary m-0">{item?.title}</p>
+                    <span className="text-primary">${item?.value}</span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -284,28 +260,26 @@ const DashboardHome = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Aug 6, 2023, 22:55</td>
-                    <td className="align-middle text-start status">
-                      <span className="badge bg-primary">Income</span>
-                    </td>
-                    <td className="text-primary">$0</td>
-                  </tr>
-                  <tr>
-                    <td>Aug 6, 2023, 22:55</td>
-                    <td className="align-middle text-start status">
-                      <span className="badge bg-warning">Expense</span>
-                    </td>
-                    <td className="text-primary">$0</td>
-                  </tr>
-                  <tr>
-                    <td>Aug 6, 2023, 22:55</td>
-                    <td className="align-middle text-start status">
-                      <span className="badge bg-info">ManualJournal</span>
-                    </td>
-                    <td className="text-primary">$0</td>
-                  </tr>
+                  {lastTransactions.map((item, index) => (
+                    <tr key={index}>
+                      <td>
+                        {new Date(item.date).toLocaleString("en-US", {
+                          month: "short",
+                          day: "numeric",
+                          year: "numeric",
+                          hour: "numeric",
+                          minute: "2-digit",
+                          hour12: true,
+                        })}
+                      </td>
+                      <td className="align-middle text-start status">
+                        <span className={`badge ${badgeClass}`}>{item.category}</span>
+                      </td>
+                      <td className="text-primary">${item.amount}</td>
+                    </tr>
+                  ))}
                 </tbody>
+
               </table>
             </div>
 
@@ -402,115 +376,64 @@ const DashboardHome = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td className="align-middle customer white-space-nowrap">
-                      <a
-                        className="d-flex align-items-center text-900"
-                        href="#"
-                      >
-                        <div className="avatar avatar-l">
-                          <div className="avatar-name rounded-circle">
-                            <span>R</span>
+                  {lastInvoice?.map((invoice, index) => (
+                    <tr key={index}>
+                      <td className="align-middle customer white-space-nowrap">
+                        <a className="d-flex align-items-center text-900" href="#">
+                          <div className="avatar avatar-l">
+                            <div className="avatar-name rounded-circle">
+                              <span>{invoice?.customer?.name?.[0] || "?"}</span>
+                            </div>
                           </div>
-                        </div>
-                        <div className="">
-                          <h6 className="mb-0 ms-3 text-900">
-                            Richard Dawkins
-                          </h6>
-                          <small className="mb-0 ms-3 text-900">
-                            Johson@gmail.com
-                          </small>
-                        </div>
-                      </a>
-                    </td>
-                    <td className="text-primary">$920</td>
-                    <td>Sep 15, 2023, 15:31</td>
-                    <td className="align-middle text-start status">
-                      <span className="badge bg-secondary">Draft</span>
-                    </td>
-                    <td>
-                      <a href="#?" className="btn btn-md" type="button">
-                        <i
-                          className="fa-solid fa-eye"
-                          data-bs-toggle="modal"
-                          data-bs-target="#scrollingLong2"
-                        ></i>
-                      </a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="align-middle customer white-space-nowrap">
-                      <a
-                        className="d-flex align-items-center text-900"
-                        href="#"
-                      >
-                        <div className="avatar avatar-l">
-                          <div className="avatar-name rounded-circle">
-                            <span>R</span>
+                          <div>
+                            <h6 className="mb-0 ms-3 text-900">
+                              {invoice?.customer?.name}
+                            </h6>
+                            <small className="mb-0 ms-3 text-900">
+                              {invoice?.customer?.email}
+                            </small>
                           </div>
-                        </div>
-                        <div className="">
-                          <h6 className="mb-0 ms-3 text-900">
-                            Richard Dawkins
-                          </h6>
-                          <small className="mb-0 ms-3 text-900">
-                            Johson@gmail.com
-                          </small>
-                        </div>
-                      </a>
-                    </td>
-                    <td className="text-primary">$920</td>
-                    <td>Sep 15, 2023, 15:31</td>
-                    <td className="align-middle text-start status">
-                      <span className="badge bg-success">Paid</span>
-                    </td>
-                    <td>
-                      <a href="#?" className="btn btn-md" type="button">
-                        <i
-                          className="fa-solid fa-eye"
-                          data-bs-toggle="modal"
-                          data-bs-target="#scrollingLong2"
-                        ></i>
-                      </a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="align-middle customer white-space-nowrap">
-                      <a
-                        className="d-flex align-items-center text-900"
-                        href="#"
-                      >
-                        <div className="avatar avatar-l">
-                          <div className="avatar-name rounded-circle">
-                            <span>R</span>
-                          </div>
-                        </div>
-                        <div className="">
-                          <h6 className="mb-0 ms-3 text-900">
-                            Richard Dawkins
-                          </h6>
-                          <small className="mb-0 ms-3 text-900">
-                            Johson@gmail.com
-                          </small>
-                        </div>
-                      </a>
-                    </td>
-                    <td className="text-primary">$920 </td>
-                    <td>Sep 15, 2023, 15:31 </td>
-                    <td className="align-middle text-start status">
-                      <span className="badge bg-secondary">Approved</span>
-                    </td>
-                    <td>
-                      <a href="#?" className="btn btn-md" type="button">
-                        <i
-                          className="fa-solid fa-eye"
-                          data-bs-toggle="modal"
-                          data-bs-target="#scrollingLong2"
-                        ></i>
-                      </a>
-                    </td>
-                  </tr>
+                        </a>
+                      </td>
+
+                      <td className="text-primary">
+                        ${invoice?.totalAmount}
+                      </td>
+
+                      <td>
+                        {new Date(invoice?.invoiceDate).toLocaleString("en-US", {
+                          month: "short",
+                          day: "numeric",
+                          year: "numeric",
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })}
+                      </td>
+
+                      <td className="align-middle text-start status">
+                        <span
+                          className={`badge ${invoice?.status?.toLowerCase() === "paid"
+                            ? "bg-success"
+                            : "bg-secondary"
+                            }`}
+                        >
+                          {invoice?.status}
+                        </span>
+                      </td>
+
+                      <td>
+                        <a href="#?" className="btn btn-md" type="button">
+                          <i
+                            className="fa-solid fa-eye"
+                            data-bs-toggle="modal"
+                            data-bs-target="#scrollingLong2"
+                          ></i>
+                        </a>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
+
               </table>
             </div>
 
@@ -599,6 +522,7 @@ const DashboardHome = () => {
             </div>
           </div>
         </div>
+
         <div className="mx-n4 my-5 px-4 mx-lg-n6 px-lg-6 bg-white pt-7 border-y border-300">
           <div data-list='{"valueNames":["product","customer","rating","review","time"],"page":6}'>
             <div className="row align-items-end justify-content-between pb-5 g-3">
@@ -648,115 +572,59 @@ const DashboardHome = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td className="align-middle customer white-space-nowrap">
-                      <a
-                        className="d-flex align-items-center text-900"
-                        href="#"
-                      >
-                        <div className="avatar avatar-l">
-                          <div className="avatar-name rounded-circle">
-                            <span>R</span>
+                  {lastEstimates?.map((estimate, index) => (
+                    <tr key={index}>
+                      <td className="align-middle customer white-space-nowrap">
+                        <a className="d-flex align-items-center text-900" href="#">
+                          <div className="avatar avatar-l">
+                            <div className="avatar-name rounded-circle">
+                              <span>{estimate?.customer?.name?.[0] || "?"}</span>
+                            </div>
                           </div>
-                        </div>
-                        <div className="">
-                          <h6 className="mb-0 ms-3 text-900">
-                            Richard Dawkins
-                          </h6>
-                          <small className="mb-0 ms-3 text-900">
-                            Johson@gmail.com
-                          </small>
-                        </div>
-                      </a>
-                    </td>
-                    <td className="text-primary">$920</td>
-                    <td>Sep 15, 2023, 15:31</td>
-                    <td className="align-middle text-start status">
-                      <span className="badge bg-secondary">Draft</span>
-                    </td>
-                    <td>
-                      <a href="#" className="btn btn-md" type="button">
-                        <i
-                          className="fa-solid fa-eye"
-                          data-bs-toggle="modal"
-                          data-bs-target="#scrollingLong2"
-                        ></i>
-                      </a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="align-middle customer white-space-nowrap">
-                      <a
-                        className="d-flex align-items-center text-900"
-                        href="#"
-                      >
-                        <div className="avatar avatar-l">
-                          <div className="avatar-name rounded-circle">
-                            <span>R</span>
+                          <div>
+                            <h6 className="mb-0 ms-3 text-900">
+                              {estimate?.customer?.name}
+                            </h6>
+                            <small className="mb-0 ms-3 text-900">
+                              {estimate?.customer?.email}
+                            </small>
                           </div>
-                        </div>
-                        <div className="">
-                          <h6 className="mb-0 ms-3 text-900">
-                            Richard Dawkins
-                          </h6>
-                          <small className="mb-0 ms-3 text-900">
-                            Johson@gmail.com
-                          </small>
-                        </div>
-                      </a>
-                    </td>
-                    <td className="text-primary">$920</td>
-                    <td>Sep 15, 2023, 15:31</td>
-                    <td className="align-middle text-start status">
-                      <span className="badge bg-success">Paid</span>
-                    </td>
-                    <td>
-                      <a href="#" className="btn btn-md" type="button">
-                        <i
-                          className="fa-solid fa-eye"
-                          data-bs-toggle="modal"
-                          data-bs-target="#scrollingLong2"
-                        ></i>
-                      </a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="align-middle customer white-space-nowrap">
-                      <a
-                        className="d-flex align-items-center text-900"
-                        href="#"
-                      >
-                        <div className="avatar avatar-l">
-                          <div className="avatar-name rounded-circle">
-                            <span>R</span>
-                          </div>
-                        </div>
-                        <div className="">
-                          <h6 className="mb-0 ms-3 text-900">
-                            Richard Dawkins
-                          </h6>
-                          <small className="mb-0 ms-3 text-900">
-                            Johson@gmail.com
-                          </small>
-                        </div>
-                      </a>
-                    </td>
-                    <td className="text-primary">$920 </td>
-                    <td>Sep 15, 2023, 15:31 </td>
-                    <td className="align-middle text-start status">
-                      <span className="badge bg-secondary">Approved</span>
-                    </td>
-                    <td>
-                      <a href="#" className="btn btn-md" type="button">
-                        <i
-                          className="fa-solid fa-eye"
-                          data-bs-toggle="modal"
-                          data-bs-target="#scrollingLong2"
-                        ></i>
-                      </a>
-                    </td>
-                  </tr>
+                        </a>
+                      </td>
+
+                      <td className="text-primary">
+                        ${estimate?.totalAmount || 0}
+                      </td>
+
+                      <td>
+                        {new Date(estimate?.issueDate).toLocaleString("en-US", {
+                          month: "short",
+                          day: "numeric",
+                          year: "numeric",
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })}
+                      </td>
+
+                      <td className="align-middle text-start status">
+                        <span className="badge bg-secondary">
+                          {estimate?.status || "Draft"}
+                        </span>
+                      </td>
+
+                      <td>
+                        <a href="#" className="btn btn-md" type="button">
+                          <i
+                            className="fa-solid fa-eye"
+                            data-bs-toggle="modal"
+                            data-bs-target="#scrollingLong2"
+                          ></i>
+                        </a>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
+
               </table>
             </div>
 
@@ -803,6 +671,7 @@ const DashboardHome = () => {
             </div>
           </div>
         </div>
+
         <div className="mx-n4 my-5 px-4 mx-lg-n6 px-lg-6 bg-white pt-7 border-y border-300">
           <div data-list='{"valueNames":["product","customer","rating","review","time"],"page":6}'>
             <div className="row align-items-end justify-content-between pb-5 g-3">
@@ -851,115 +720,59 @@ const DashboardHome = () => {
                     <th scope="col">Actions</th>
                   </tr>
                 </thead>
+
                 <tbody>
-                  <tr>
-                    <td className="align-middle customer white-space-nowrap">
-                      <a
-                        className="d-flex align-items-center text-900"
-                        href="#"
-                      >
-                        <div className="avatar avatar-l">
-                          <div className="avatar-name rounded-circle">
-                            <span>R</span>
+                  {lastBills?.map((lastBill, index) => (
+                    <tr key={index}>
+                      <td className="align-middle customer white-space-nowrap">
+                        <a className="d-flex align-items-center text-900" href="#">
+                          <div className="avatar avatar-l">
+                            <div className="avatar-name rounded-circle">
+                              <span>{lastBill?.vendor?.name?.[0] || "?"}</span>
+                            </div>
                           </div>
-                        </div>
-                        <div className="">
-                          <h6 className="mb-0 ms-3 text-900">
-                            Richard Dawkins
-                          </h6>
-                          <small className="mb-0 ms-3 text-900">
-                            Johson@gmail.com
-                          </small>
-                        </div>
-                      </a>
-                    </td>
-                    <td className="text-primary">$920</td>
-                    <td>Sep 15, 2023, 15:31</td>
-                    <td className="align-middle text-start status">
-                      <span className="badge bg-secondary">Draft</span>
-                    </td>
-                    <td>
-                      <a href="#" className="btn btn-md" type="button">
-                        <i
-                          className="fa-solid fa-eye"
-                          data-bs-toggle="modal"
-                          data-bs-target="#scrollingLong2"
-                        ></i>
-                      </a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="align-middle customer white-space-nowrap">
-                      <a
-                        className="d-flex align-items-center text-900"
-                        href="#"
-                      >
-                        <div className="avatar avatar-l">
-                          <div className="avatar-name rounded-circle">
-                            <span>R</span>
+                          <div>
+                            <h6 className="mb-0 ms-3 text-900">
+                              {lastBill?.vendor?.name}
+                            </h6>
+                            <small className="mb-0 ms-3 text-900">
+                              {lastBill?.vandor?.email}
+                            </small>
                           </div>
-                        </div>
-                        <div className="">
-                          <h6 className="mb-0 ms-3 text-900">
-                            Richard Dawkins
-                          </h6>
-                          <small className="mb-0 ms-3 text-900">
-                            Johson@gmail.com
-                          </small>
-                        </div>
-                      </a>
-                    </td>
-                    <td className="text-primary">$920</td>
-                    <td>Sep 15, 2023, 15:31</td>
-                    <td className="align-middle text-start status">
-                      <span className="badge bg-success">Paid</span>
-                    </td>
-                    <td>
-                      <a href="#" className="btn btn-md" type="button">
-                        <i
-                          className="fa-solid fa-eye"
-                          data-bs-toggle="modal"
-                          data-bs-target="#scrollingLong2"
-                        ></i>
-                      </a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="align-middle customer white-space-nowrap">
-                      <a
-                        className="d-flex align-items-center text-900"
-                        href="#"
-                      >
-                        <div className="avatar avatar-l">
-                          <div className="avatar-name rounded-circle">
-                            <span>R</span>
-                          </div>
-                        </div>
-                        <div className="">
-                          <h6 className="mb-0 ms-3 text-900">
-                            Richard Dawkins
-                          </h6>
-                          <small className="mb-0 ms-3 text-900">
-                            Johson@gmail.com
-                          </small>
-                        </div>
-                      </a>
-                    </td>
-                    <td className="text-primary">$920 </td>
-                    <td>Sep 15, 2023, 15:31 </td>
-                    <td className="align-middle text-start status">
-                      <span className="badge bg-secondary">Approved</span>
-                    </td>
-                    <td>
-                      <a href="#" className="btn btn-md" type="button">
-                        <i
-                          className="fa-solid fa-eye"
-                          data-bs-toggle="modal"
-                          data-bs-target="#scrollingLong2"
-                        ></i>
-                      </a>
-                    </td>
-                  </tr>
+                        </a>
+                      </td>
+
+                      <td className="text-primary">
+                        $ {lastBill?.totalAmount || 0}
+                      </td>
+
+                      <td>
+                        {new Date(lastBill?.billDate).toLocaleString("en-US", {
+                          month: "short",
+                          day: "numeric",
+                          year: "numeric",
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })}
+                      </td>
+
+                      <td className="align-middle text-start status">
+                        <span className="badge bg-secondary">
+                          {lastBill?.status || "Draft"}
+                        </span>
+                      </td>
+
+                      <td>
+                        <a href="#" className="btn btn-md" type="button">
+                          <i
+                            className="fa-solid fa-eye"
+                            data-bs-toggle="modal"
+                            data-bs-target="#scrollingLong2"
+                          ></i>
+                        </a>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
