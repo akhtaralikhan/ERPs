@@ -107,14 +107,14 @@ const DashboardHome = () => {
                       </p>
                     </div>
                     <div className="col-lg-4">
-                      <a href="connect-bank.html">
+                      <Link to="/ConnectBank">
                         <button
                           className="btn btn-primary me-1 mb-1 text-uppercase w-100"
                           type="button"
                         >
                           Connect your bank account
                         </button>
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>

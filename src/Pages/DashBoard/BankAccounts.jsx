@@ -3,12 +3,26 @@ import { Link } from "react-router-dom";
 import { getBankAccount } from "../../redux/bankAccounts/actions";
 import { useRedux } from "../../hooks/useRedux";
 import { getCurrencyDefault } from "../../redux/dashboard/actions";
+import { createSelector } from "reselect";
 
 const BankAccounts = () => {
   const [selectedOption, setSelectedOption] = useState("paypal");
 
-
   const { dispatch, useAppSelector } = useRedux();
+
+  const userData = createSelector(
+    (state) => state.dashboardReducer,
+    (state) => ({
+
+      bankAccount: state.bankAccount,
+      cardReports: state.cardReports,
+    })
+  );
+
+  const {
+    bankAccount,
+    cardReports,
+  } = useAppSelector(userData);
 
   useEffect(() => {
     dispatch(getBankAccount())
@@ -36,7 +50,7 @@ const BankAccounts = () => {
                       </p>
                     </div>
                     <div className="col-lg-4">
-                      <Link to="connect-bank.html">
+                      <Link to="/ConnectBank">
                         <button
                           className="btn btn-primary me-1 mb-1 text-uppercase w-100"
                           type="button"
@@ -53,12 +67,14 @@ const BankAccounts = () => {
                   <h2 className="mb-2">Bank accounts</h2>
                 </div>
                 <div className="col-lg-6 text-end">
-                  <button
-                    className="btn btn-primary me-1 mb-1 text-uppercase"
-                    type="button"
-                  >
-                    Connect your bank account
-                  </button>
+                  <Link to="/ConnectBank">
+                    <button
+                      className="btn btn-primary me-1 mb-1 text-uppercase w-100"
+                      type="button"
+                    >
+                      Connect your bank account
+                    </button>
+                  </Link>
                 </div>
               </div>
 
@@ -73,12 +89,12 @@ const BankAccounts = () => {
                         <div className="card-body border-bottom">
                           <div className="row">
                             <div className="col-6">
-                              <h5 className="mb-3">Total balance (Manual)</h5>
-                              <h4 className="text-primary">$4.00M</h4>
+                              <h5 className="mb-3">{cardReports[3]?.name}</h5>
+                              <h4 className="text-primary">${cardReports[3]?.total}</h4>
                             </div>
                             <div className="col-6">
                               <h5 className="mb-3">Total pending (Manual)</h5>
-                              <h4 className="text-primary">$4.00M</h4>
+                              <h4 className="text-primary">${cardReports[3]?.monthTotal}</h4>
                             </div>
                           </div>
                         </div>
@@ -262,392 +278,81 @@ const BankAccounts = () => {
                               </th>
                             </tr>
                           </thead>
-                          <tbody className="list">
-                            <tr>
-                              <td className="align-middle ps-3 name">union</td>
-                              <td className="align-middle email">
-                                Sep 10, 2023, 07:59
-                              </td>
-                              <td className="align-middle age">alam khan</td>
-                              <td className="align-middle age">12345678910</td>
-                              <td className="align-middle age"> INR2000.00</td>
-                              <td className="align-middle age"> INR2000.00</td>
-                              <td className="align-middle age"> Manual</td>
-                              <td className="align-middle white-space-nowrap text-end pe-0">
-                                <div className="font-sans-serif btn-reveal-trigger position-static">
-                                  <button
-                                    className="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
-                                    type="button"
-                                    data-bs-toggle="dropdown"
-                                    data-boundary="window"
-                                    aria-haspopup="true"
-                                    aria-expanded="false"
-                                    data-bs-reference="parent"
-                                  >
-                                    <svg
-                                      className="svg-inline--fa fa-ellipsis fs--2"
-                                      aria-hidden="true"
-                                      focusable="false"
-                                      data-prefix="fas"
-                                      data-icon="ellipsis"
-                                      role="img"
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      viewBox="0 0 448 512"
-                                      data-fa-i2svg=""
+                          {bankAccount.map((item, idx) => (
+                            <tbody className="list">
+                              <tr>
+                                <td className="align-middle ps-3 name">{item?.bankName}</td>
+                                <td className="align-middle email">
+                                  {new Date(item?.createdAt).toLocaleString("en-US", {
+                                    month: "short",
+                                    day: "numeric",
+                                    year: "numeric",
+                                    hour: "numeric",
+                                    minute: "2-digit",
+                                    hour12: true,
+                                  })}
+                                </td>
+                                <td className="align-middle age">{item?.bankHolderName}</td>
+                                <td className="align-middle age">{item?.accountNumber}</td>
+                                <td className="align-middle age"> {item?.pendingBalance}</td>
+                                <td className="align-middle age">{item?.balance}</td>
+                                <td className="align-middle age"> {item?.type}</td>
+                                <td className="align-middle white-space-nowrap text-end pe-0">
+                                  <div className="font-sans-serif btn-reveal-trigger position-static">
+                                    <button
+                                      className="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
+                                      type="button"
+                                      data-bs-toggle="dropdown"
+                                      data-boundary="window"
+                                      aria-haspopup="true"
+                                      aria-expanded="false"
+                                      data-bs-reference="parent"
                                     >
-                                      <path
-                                        fill="currentColor"
-                                        d="M120 256C120 286.9 94.93 312 64 312C33.07 312 8 286.9 8 256C8 225.1 33.07 200 64 200C94.93 200 120 225.1 120 256zM280 256C280 286.9 254.9 312 224 312C193.1 312 168 286.9 168 256C168 225.1 193.1 200 224 200C254.9 200 280 225.1 280 256zM328 256C328 225.1 353.1 200 384 200C414.9 200 440 225.1 440 256C440 286.9 414.9 312 384 312C353.1 312 328 286.9 328 256z"
-                                      ></path>
-                                    </svg>
-                                    {/* 
+                                      <svg
+                                        className="svg-inline--fa fa-ellipsis fs--2"
+                                        aria-hidden="true"
+                                        focusable="false"
+                                        data-prefix="fas"
+                                        data-icon="ellipsis"
+                                        role="img"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 448 512"
+                                        data-fa-i2svg=""
+                                      >
+                                        <path
+                                          fill="currentColor"
+                                          d="M120 256C120 286.9 94.93 312 64 312C33.07 312 8 286.9 8 256C8 225.1 33.07 200 64 200C94.93 200 120 225.1 120 256zM280 256C280 286.9 254.9 312 224 312C193.1 312 168 286.9 168 256C168 225.1 193.1 200 224 200C254.9 200 280 225.1 280 256zM328 256C328 225.1 353.1 200 384 200C414.9 200 440 225.1 440 256C440 286.9 414.9 312 384 312C353.1 312 328 286.9 328 256z"
+                                        ></path>
+                                      </svg>
+                                      {/* 
                                 //   <!-- <span className="fas fa-ellipsis-h fs--2"></span> Font Awesome fontawesome.com --> */}
-                                  </button>
-                                  <div className="dropdown-menu dropdown-menu-end py-2">
-                                    <Link
-                                      className="dropdown-item"
-                                      to="#!"
-                                      type="button"
-                                      data-bs-toggle="modal"
-                                      data-bs-target="#edit-modal"
-                                    >
-                                      Edit
-                                    </Link>
-                                    <div className="dropdown-divider"></div>
-                                    <Link
-                                      className="dropdown-item text-danger"
-                                      to="#!"
-                                      type="button"
-                                      data-bs-toggle="modal"
-                                      data-bs-target="#verticallyCentered"
-                                    >
-                                      Delete
-                                    </Link>
+                                    </button>
+                                    <div className="dropdown-menu dropdown-menu-end py-2">
+                                      <Link
+                                        className="dropdown-item"
+                                        to="#!"
+                                        type="button"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#edit-modal"
+                                      >
+                                        Edit
+                                      </Link>
+                                      <div className="dropdown-divider"></div>
+                                      <Link
+                                        className="dropdown-item text-danger"
+                                        to="#!"
+                                        type="button"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#verticallyCentered"
+                                      >
+                                        Delete
+                                      </Link>
+                                    </div>
                                   </div>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td className="align-middle ps-3 name">union</td>
-                              <td className="align-middle email">
-                                Sep 10, 2023, 07:59
-                              </td>
-                              <td className="align-middle age">alam khan</td>
-                              <td className="align-middle age">12345678910</td>
-                              <td className="align-middle age"> INR2000.00</td>
-                              <td className="align-middle age"> INR2000.00</td>
-                              <td className="align-middle age"> Manual</td>
-                              <td className="align-middle white-space-nowrap text-end pe-0">
-                                <div className="font-sans-serif btn-reveal-trigger position-static">
-                                  <button
-                                    className="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
-                                    type="button"
-                                    data-bs-toggle="dropdown"
-                                    data-boundary="window"
-                                    aria-haspopup="true"
-                                    aria-expanded="false"
-                                    data-bs-reference="parent"
-                                  >
-                                    <svg
-                                      className="svg-inline--fa fa-ellipsis fs--2"
-                                      aria-hidden="true"
-                                      focusable="false"
-                                      data-prefix="fas"
-                                      data-icon="ellipsis"
-                                      role="img"
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      viewBox="0 0 448 512"
-                                      data-fa-i2svg=""
-                                    >
-                                      <path
-                                        fill="currentColor"
-                                        d="M120 256C120 286.9 94.93 312 64 312C33.07 312 8 286.9 8 256C8 225.1 33.07 200 64 200C94.93 200 120 225.1 120 256zM280 256C280 286.9 254.9 312 224 312C193.1 312 168 286.9 168 256C168 225.1 193.1 200 224 200C254.9 200 280 225.1 280 256zM328 256C328 225.1 353.1 200 384 200C414.9 200 440 225.1 440 256C440 286.9 414.9 312 384 312C353.1 312 328 286.9 328 256z"
-                                      ></path>
-                                    </svg>
-                                    {/* 
-                                //   <!-- <span className="fas fa-ellipsis-h fs--2"></span> Font Awesome fontawesome.com --> */}
-                                  </button>
-                                  <div className="dropdown-menu dropdown-menu-end py-2">
-                                    <Link
-                                      className="dropdown-item"
-                                      to="#!"
-                                      type="button"
-                                      data-bs-toggle="modal"
-                                      data-bs-target="#edit-modal"
-                                    >
-                                      Edit
-                                    </Link>
-                                    <div className="dropdown-divider"></div>
-                                    <Link
-                                      className="dropdown-item text-danger"
-                                      to="#!"
-                                      type="button"
-                                      data-bs-toggle="modal"
-                                      data-bs-target="#verticallyCentered"
-                                    >
-                                      Delete
-                                    </Link>
-                                  </div>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td className="align-middle ps-3 name">union</td>
-                              <td className="align-middle email">
-                                Sep 10, 2023, 07:59
-                              </td>
-                              <td className="align-middle age">alam khan</td>
-                              <td className="align-middle age">12345678910</td>
-                              <td className="align-middle age"> INR2000.00</td>
-                              <td className="align-middle age"> INR2000.00</td>
-                              <td className="align-middle age"> Manual</td>
-                              <td className="align-middle white-space-nowrap text-end pe-0">
-                                <div className="font-sans-serif btn-reveal-trigger position-static">
-                                  <button
-                                    className="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
-                                    type="button"
-                                    data-bs-toggle="dropdown"
-                                    data-boundary="window"
-                                    aria-haspopup="true"
-                                    aria-expanded="false"
-                                    data-bs-reference="parent"
-                                  >
-                                    <svg
-                                      className="svg-inline--fa fa-ellipsis fs--2"
-                                      aria-hidden="true"
-                                      focusable="false"
-                                      data-prefix="fas"
-                                      data-icon="ellipsis"
-                                      role="img"
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      viewBox="0 0 448 512"
-                                      data-fa-i2svg=""
-                                    >
-                                      <path
-                                        fill="currentColor"
-                                        d="M120 256C120 286.9 94.93 312 64 312C33.07 312 8 286.9 8 256C8 225.1 33.07 200 64 200C94.93 200 120 225.1 120 256zM280 256C280 286.9 254.9 312 224 312C193.1 312 168 286.9 168 256C168 225.1 193.1 200 224 200C254.9 200 280 225.1 280 256zM328 256C328 225.1 353.1 200 384 200C414.9 200 440 225.1 440 256C440 286.9 414.9 312 384 312C353.1 312 328 286.9 328 256z"
-                                      ></path>
-                                    </svg>
-                                    {/* 
-                                //   <!-- <span className="fas fa-ellipsis-h fs--2"></span> Font Awesome fontawesome.com --> */}
-                                  </button>
-                                  <div className="dropdown-menu dropdown-menu-end py-2">
-                                    <Link
-                                      className="dropdown-item"
-                                      to="#!"
-                                      type="button"
-                                      data-bs-toggle="modal"
-                                      data-bs-target="#edit-modal"
-                                    >
-                                      Edit
-                                    </Link>
-                                    <div className="dropdown-divider"></div>
-                                    <Link
-                                      className="dropdown-item text-danger"
-                                      to="#!"
-                                      type="button"
-                                      data-bs-toggle="modal"
-                                      data-bs-target="#verticallyCentered"
-                                    >
-                                      Delete
-                                    </Link>
-                                  </div>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td className="align-middle ps-3 name">union</td>
-                              <td className="align-middle email">
-                                Sep 10, 2023, 07:59
-                              </td>
-                              <td className="align-middle age">alam khan</td>
-                              <td className="align-middle age">12345678910</td>
-                              <td className="align-middle age"> INR2000.00</td>
-                              <td className="align-middle age"> INR2000.00</td>
-                              <td className="align-middle age"> Manual</td>
-                              <td className="align-middle white-space-nowrap text-end pe-0">
-                                <div className="font-sans-serif btn-reveal-trigger position-static">
-                                  <button
-                                    className="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
-                                    type="button"
-                                    data-bs-toggle="dropdown"
-                                    data-boundary="window"
-                                    aria-haspopup="true"
-                                    aria-expanded="false"
-                                    data-bs-reference="parent"
-                                  >
-                                    <svg
-                                      className="svg-inline--fa fa-ellipsis fs--2"
-                                      aria-hidden="true"
-                                      focusable="false"
-                                      data-prefix="fas"
-                                      data-icon="ellipsis"
-                                      role="img"
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      viewBox="0 0 448 512"
-                                      data-fa-i2svg=""
-                                    >
-                                      <path
-                                        fill="currentColor"
-                                        d="M120 256C120 286.9 94.93 312 64 312C33.07 312 8 286.9 8 256C8 225.1 33.07 200 64 200C94.93 200 120 225.1 120 256zM280 256C280 286.9 254.9 312 224 312C193.1 312 168 286.9 168 256C168 225.1 193.1 200 224 200C254.9 200 280 225.1 280 256zM328 256C328 225.1 353.1 200 384 200C414.9 200 440 225.1 440 256C440 286.9 414.9 312 384 312C353.1 312 328 286.9 328 256z"
-                                      ></path>
-                                    </svg>
-                                    {/* 
-                                //   <!-- <span className="fas fa-ellipsis-h fs--2"></span> Font Awesome fontawesome.com --> */}
-                                  </button>
-                                  <div className="dropdown-menu dropdown-menu-end py-2">
-                                    <Link
-                                      className="dropdown-item"
-                                      to="#!"
-                                      type="button"
-                                      data-bs-toggle="modal"
-                                      data-bs-target="#edit-modal"
-                                    >
-                                      Edit
-                                    </Link>
-                                    <div className="dropdown-divider"></div>
-                                    <Link
-                                      className="dropdown-item text-danger"
-                                      to="#!"
-                                      type="button"
-                                      data-bs-toggle="modal"
-                                      data-bs-target="#verticallyCentered"
-                                    >
-                                      Delete
-                                    </Link>
-                                  </div>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td className="align-middle ps-3 name">union</td>
-                              <td className="align-middle email">
-                                Sep 10, 2023, 07:59
-                              </td>
-                              <td className="align-middle age">alam khan</td>
-                              <td className="align-middle age">12345678910</td>
-                              <td className="align-middle age"> INR2000.00</td>
-                              <td className="align-middle age"> INR2000.00</td>
-                              <td className="align-middle age"> Manual</td>
-                              <td className="align-middle white-space-nowrap text-end pe-0">
-                                <div className="font-sans-serif btn-reveal-trigger position-static">
-                                  <button
-                                    className="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
-                                    type="button"
-                                    data-bs-toggle="dropdown"
-                                    data-boundary="window"
-                                    aria-haspopup="true"
-                                    aria-expanded="false"
-                                    data-bs-reference="parent"
-                                  >
-                                    <svg
-                                      className="svg-inline--fa fa-ellipsis fs--2"
-                                      aria-hidden="true"
-                                      focusable="false"
-                                      data-prefix="fas"
-                                      data-icon="ellipsis"
-                                      role="img"
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      viewBox="0 0 448 512"
-                                      data-fa-i2svg=""
-                                    >
-                                      <path
-                                        fill="currentColor"
-                                        d="M120 256C120 286.9 94.93 312 64 312C33.07 312 8 286.9 8 256C8 225.1 33.07 200 64 200C94.93 200 120 225.1 120 256zM280 256C280 286.9 254.9 312 224 312C193.1 312 168 286.9 168 256C168 225.1 193.1 200 224 200C254.9 200 280 225.1 280 256zM328 256C328 225.1 353.1 200 384 200C414.9 200 440 225.1 440 256C440 286.9 414.9 312 384 312C353.1 312 328 286.9 328 256z"
-                                      ></path>
-                                    </svg>
-                                    {/* 
-                                //   <!-- <span className="fas fa-ellipsis-h fs--2"></span> Font Awesome fontawesome.com --> */}
-                                  </button>
-                                  <div className="dropdown-menu dropdown-menu-end py-2">
-                                    <Link
-                                      className="dropdown-item"
-                                      to="#!"
-                                      type="button"
-                                      data-bs-toggle="modal"
-                                      data-bs-target="#edit-modal"
-                                    >
-                                      Edit
-                                    </Link>
-                                    <div className="dropdown-divider"></div>
-                                    <Link
-                                      className="dropdown-item text-danger"
-                                      to="#!"
-                                      type="button"
-                                      data-bs-toggle="modal"
-                                      data-bs-target="#verticallyCentered"
-                                    >
-                                      Delete
-                                    </Link>
-                                  </div>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td className="align-middle ps-3 name">union</td>
-                              <td className="align-middle email">
-                                Sep 10, 2023, 07:59
-                              </td>
-                              <td className="align-middle age">alam khan</td>
-                              <td className="align-middle age">12345678910</td>
-                              <td className="align-middle age"> INR2000.00</td>
-                              <td className="align-middle age"> INR2000.00</td>
-                              <td className="align-middle age"> Manual</td>
-                              <td className="align-middle white-space-nowrap text-end pe-0">
-                                <div className="font-sans-serif btn-reveal-trigger position-static">
-                                  <button
-                                    className="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
-                                    type="button"
-                                    data-bs-toggle="dropdown"
-                                    data-boundary="window"
-                                    aria-haspopup="true"
-                                    aria-expanded="false"
-                                    data-bs-reference="parent"
-                                  >
-                                    <svg
-                                      className="svg-inline--fa fa-ellipsis fs--2"
-                                      aria-hidden="true"
-                                      focusable="false"
-                                      data-prefix="fas"
-                                      data-icon="ellipsis"
-                                      role="img"
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      viewBox="0 0 448 512"
-                                      data-fa-i2svg=""
-                                    >
-                                      <path
-                                        fill="currentColor"
-                                        d="M120 256C120 286.9 94.93 312 64 312C33.07 312 8 286.9 8 256C8 225.1 33.07 200 64 200C94.93 200 120 225.1 120 256zM280 256C280 286.9 254.9 312 224 312C193.1 312 168 286.9 168 256C168 225.1 193.1 200 224 200C254.9 200 280 225.1 280 256zM328 256C328 225.1 353.1 200 384 200C414.9 200 440 225.1 440 256C440 286.9 414.9 312 384 312C353.1 312 328 286.9 328 256z"
-                                      ></path>
-                                    </svg>
-                                    {/* 
-                                //   <!-- <span className="fas fa-ellipsis-h fs--2"></span> Font Awesome fontawesome.com --> */}
-                                  </button>
-                                  <div className="dropdown-menu dropdown-menu-end py-2">
-                                    <Link
-                                      className="dropdown-item"
-                                      to="#!"
-                                      type="button"
-                                      data-bs-toggle="modal"
-                                      data-bs-target="#edit-modal"
-                                    >
-                                      Edit
-                                    </Link>
-                                    <div className="dropdown-divider"></div>
-                                    <Link
-                                      className="dropdown-item text-danger"
-                                      to="#!"
-                                      type="button"
-                                      data-bs-toggle="modal"
-                                      data-bs-target="#verticallyCentered"
-                                    >
-                                      Delete
-                                    </Link>
-                                  </div>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
+                                </td>
+                              </tr>
+                            </tbody>
+                          ))}
                         </table>
                       </div>
                       <div className="d-flex justify-content-between mt-3">
