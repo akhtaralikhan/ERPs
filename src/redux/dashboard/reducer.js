@@ -54,6 +54,18 @@ const dashboardReducer = (state = INIT_STATE, action) => {
                         monthlyTransactions: action.payload.data,
                         loading: false,
                     };
+                case dashboardTypes.YEAR_TRANSACTIONS:
+                    return {
+                        ...state,
+                        monthlyTransactions: action.payload.data,
+                        loading: false,
+                    };
+                case dashboardTypes.WEEK_TRANSACTIONS:
+                    return {
+                        ...state,
+                        monthlyTransactions: action.payload.data,
+                        loading: false,
+                    };
                 case dashboardTypes.MONTH_ACTIVITY:
                     return {
                         ...state,
@@ -124,6 +136,8 @@ const dashboardReducer = (state = INIT_STATE, action) => {
                 case dashboardTypes.SOCIAL_LOGIN:
                 case dashboardTypes.SETTING_TYPES_GENERAL:
                 case dashboardTypes.MONTH_TRANSACTIONS:
+                case dashboardTypes.YEAR_TRANSACTIONS:
+                case dashboardTypes.WEEK_TRANSACTIONS:
                 case dashboardTypes.MONTH_ACTIVITY:
                 case dashboardTypes.CARDREPORTS:
                 case dashboardTypes.INNOVOICE_LAST:
@@ -145,6 +159,8 @@ const dashboardReducer = (state = INIT_STATE, action) => {
 
         case dashboardTypes.SUMMARY:
         case dashboardTypes.MONTH_TRANSACTIONS:
+        case dashboardTypes.YEAR_TRANSACTIONS:
+        case dashboardTypes.WEEK_TRANSACTIONS:
         case dashboardTypes.SOCIAL_LOGIN:
         case dashboardTypes.SETTING_TYPES_GENERAL:
         case dashboardTypes.MONTH_ACTIVITY:

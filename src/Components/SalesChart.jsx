@@ -1,8 +1,10 @@
-// SalesChart.jsx
 import React from "react";
 import ReactECharts from "echarts-for-react";
 
-const SalesChart = () => {
+const SalesChart = ({ chartLabel = [], linesData = [] }) => {
+  const lineNames = ["Profits", "Incomes", "Expenses"];
+  const lineColors = ["#3874ff", "#0097eb", "#f39c12"];
+
   const options = {
     tooltip: {
       trigger: "axis",
@@ -16,33 +18,23 @@ const SalesChart = () => {
       },
     },
     legend: {
-      data: ["May 30", "Apr 30"],
+      data: lineNames.slice(0, linesData.length),
     },
     xAxis: {
       type: "category",
-      data: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+      data: chartLabel,
     },
     yAxis: {
       type: "value",
     },
-    series: [
-      {
-        name: "May 30",
-        type: "line",
-        data: [120, 200, 150, 80, 300, 220],
-        itemStyle: {
-          color: "#3874ff",
-        },
+    series: linesData.map((data, i) => ({
+      name: lineNames[i] || `Line ${i + 1}`,
+      type: "line",
+      data,
+      itemStyle: {
+        color: lineColors[i] || "#888888",
       },
-      {
-        name: "Apr 30",
-        type: "line",
-        data: [100, 180, 130, 160, 550, 200],
-        itemStyle: {
-          color: "#0097eb",
-        },
-      },
-    ],
+    })),
   };
 
   return (

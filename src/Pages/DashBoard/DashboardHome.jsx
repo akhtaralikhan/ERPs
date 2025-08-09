@@ -6,6 +6,8 @@ import { useRedux } from "../../hooks/useRedux";
 import { getBankAccount, getBillsLast, getCardReports, getCurrencyDefault, getEstimatesLast, getGoalsLast, getInnovoiceLast, getInvoiceReport, getMonthActivity, getMonthTransactions, getRevenueTotal, getSettingTypesGeneral, getSettingTypesLicense, getSettingTypesPayment, getSummary, getTransactionsLast, getWeekActivity, getWeekTransactions, getYearActivity, getYearTransactions, socialLoginAction } from "../../redux/dashboard/actions";
 import { createSelector } from "reselect";
 import moment from "moment";
+import InvoiceAnalyticsChart from "../../Components/InvoiceAnalyticsChart";
+import { Link } from "react-router-dom";
 
 
 
@@ -86,17 +88,6 @@ const DashboardHome = () => {
     }, []);
   }
 
-  //time foramte 
-  const invoiceTime = (moment(lastInvoice[0]?.invoiceDate).format("MMM D, YYYY, HH:mm"));
-
-  //badge color
-  const badgeClass =
-      item.category === "Income"
-        ? "bg-primary"
-        : item.category === "Expense"
-        ? "bg-warning"
-        : "bg-info"; // default for ManualJournal
-
   return (
     <>
       <div className="content">
@@ -110,12 +101,8 @@ const DashboardHome = () => {
                 <div className="card">
                   <div className="row align-items-center p-3">
                     <div className="col-lg-8">
-                      <p className="m-0">
+                      <p className="mb-3">
                         Connect your Stripe account to receive online payments
-                        from your customers.
-                      </p>
-                      <p className="m-0">
-                        Connect your PayPal account to receive online payments
                         from your customers.
                       </p>
                     </div>
@@ -136,37 +123,39 @@ const DashboardHome = () => {
                 <div className="col-12 col-xxl-12">
                   <div className="row g-3">
                     {cardReports?.map((report, index) => (
-                      <div className="card h-100" key={index}>
-                        <div className="card-body">
-                          <div className="d-flex justify-content-between">
-                            <div>
-                              <h5 className="mb-1">
-                                {report?.name}
-                                <span className="badge badge-phoenix badge-phoenix-warning rounded-pill fs--1 ms-2">
-                                  <span className="badge-label">
-                                    {report?.isIncreasing
-                                      ? `+ ${report?.percentage}`
-                                      : `- ${report?.percentage}`} %
+                      <div className="col-12 col-md-6" key={index}>
+                        <div className="card">
+                          <div className="card-body">
+                            <div className="d-flex justify-content-between">
+                              <div>
+                                <h5 className="mb-1">
+                                  {report?.name}
+                                  <span className="badge badge-phoenix badge-phoenix-warning rounded-pill fs--1 ms-2">
+                                    <span className="badge-label">
+                                      {report?.isIncreasing
+                                        ? `+ ${report?.percentage}`
+                                        : `- ${report?.percentage}`} %
+                                    </span>
                                   </span>
-                                </span>
-                              </h5>
-                              <h6 className="text-700">
-                                {report?.monthTotal} This month
-                              </h6>
+                                </h5>
+                                <h6 className="text-700">
+                                  {report?.monthTotal} This month
+                                </h6>
+                              </div>
+                              <h4>{report?.total}</h4>
                             </div>
-                            <h4>{report?.total}</h4>
-                          </div>
 
-                          <div className="mt-2">
-                            <div className="d-flex align-items-center">
-                              <h6 className="text-900 fw-semi-bold flex-1 mb-0">
-                                since last month
-                              </h6>
-                              <h6 className="text-900 fw-semi-bold mb-0">
-                                {report?.isIncreasing
-                                  ? `+ ${report?.perfomance}`
-                                  : `- ${report?.perfomance}`} %
-                              </h6>
+                            <div className="mt-2">
+                              <div className="d-flex align-items-center">
+                                <h6 className="text-900 fw-semi-bold flex-1 mb-0">
+                                  since last month
+                                </h6>
+                                <h6 className="text-900 fw-semi-bold mb-0">
+                                  {report?.isIncreasing
+                                    ? `+ ${report?.perfomance}`
+                                    : `- ${report?.perfomance}`} %
+                                </h6>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -200,7 +189,7 @@ const DashboardHome = () => {
                 className="echart-total-sales-chart"
                 style={{ minHeight: "320px", width: "100%" }}
               >
-                <SalesChart />
+                <SalesChart chartLabel={monthlyTransactions?.chartLabel || []} linesData={monthlyTransactions?.linesData || []} />
               </div>
               <div className="row mt-5">
                 {summary?.map((item, index) => (
@@ -239,13 +228,13 @@ const DashboardHome = () => {
                     </div>
                   </div>
                   <div className="col-auto">
-                    <a
-                      href="transactions.html"
+                    <Link
+                      to="/Transations"
                       className="btn btn-primary"
                       type="button"
                     >
                       View All
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -260,24 +249,34 @@ const DashboardHome = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {lastTransactions.map((item, index) => (
-                    <tr key={index}>
-                      <td>
-                        {new Date(item.date).toLocaleString("en-US", {
-                          month: "short",
-                          day: "numeric",
-                          year: "numeric",
-                          hour: "numeric",
-                          minute: "2-digit",
-                          hour12: true,
-                        })}
-                      </td>
-                      <td className="align-middle text-start status">
-                        <span className={`badge ${badgeClass}`}>{item.category}</span>
-                      </td>
-                      <td className="text-primary">${item.amount}</td>
-                    </tr>
-                  ))}
+                  {lastTransactions.map((item, index) => {
+                    const badgeClass =
+                      item.category === "Income"
+                        ? "bg-primary"
+                        : item.category === "Expense"
+                          ? "bg-warning"
+                          : "bg-info";
+
+                    return (
+                      <tr key={index}>
+                        <td>
+                          {new Date(item.date).toLocaleString("en-US", {
+                            month: "short",
+                            day: "numeric",
+                            year: "numeric",
+                            hour: "numeric",
+                            minute: "2-digit",
+                            hour12: true,
+                          })}
+                        </td>
+                        <td className="align-middle text-start status">
+                          <span className={`badge ${badgeClass}`}>{item.category}</span>
+                        </td>
+                        <td className="text-primary">${item.amount}</td>
+                      </tr>
+                    );
+                  })}
+
                 </tbody>
 
               </table>
@@ -290,13 +289,13 @@ const DashboardHome = () => {
                   className="mb-0 d-none d-sm-block me-3 fw-semi-bold text-900"
                   data-list-info="data-list-info"
                 ></p>
-                <a className="fw-semi-bold" href="#!" data-list-view="*">
+                <Link className="fw-semi-bold" to="/Transations" data-list-view="*">
                   View all
                   <span
                     className="fas fa-angle-right ms-1"
                     data-fa-transform="down-1"
                   ></span>
-                </a>
+                </Link>
                 <a
                   className="fw-semi-bold d-none"
                   href="#!"
@@ -353,13 +352,13 @@ const DashboardHome = () => {
                     </div>
                   </div>
                   <div className="col-auto">
-                    <a
-                      href="invoice.html"
-                      className="btn btn-sm btn-primary"
+                    <Link
+                      to="/Invoice"
+                      className="btn btn-primary"
                       type="button"
                     >
                       View All
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -444,13 +443,13 @@ const DashboardHome = () => {
                   className="mb-0 d-none d-sm-block me-3 fw-semi-bold text-900"
                   data-list-info="data-list-info"
                 ></p>
-                <a className="fw-semi-bold" href="#!" data-list-view="*">
+                <Link className="fw-semi-bold" to="/Invoice" data-list-view="*">
                   View all
                   <span
                     className="fas fa-angle-right ms-1"
                     data-fa-transform="down-1"
                   ></span>
-                </a>
+                </Link>
                 <a
                   className="fw-semi-bold d-none"
                   href="#!"
@@ -489,36 +488,13 @@ const DashboardHome = () => {
               <div className="row g-3 justify-content-between align-items-center">
                 <div className="col-12 col-md">
                   <h4 className="text-900 mb-0" data-anchor="data-anchor">
-                    Share dataset
+                    Report dataset
                   </h4>
                 </div>
               </div>
             </div>
-            <div className="card-body p-0">
-              <div className="collapse code-collapse" id="share-dataset-code">
-                <pre className="scrollbar" style={{ maxHeight: "420px" }}>
-                  <code className="language-html">
-                    {/* <!-- Find the JS file for the following chart at:
-                         src/js/charts/echarts/examples/share-dataset-chart.js --> */}
-                    {/* <!-- If you are not using gulp based workflow, you can
-                         find the transpiled code at:
-                         public/assets/js/echarts-example.js -->  */}
-                    <div
-                      className="echart-share-dataset-chart-example"
-                      style={{ minHeight: "500px" }}
-                    ></div>
-                  </code>
-                </pre>
-              </div>
-
-              <div className="p-4 code-to-copy">
-                {/* <!-- Find the JS file for the following chart at: src/js/charts/echarts/examples/share-dataset-chart.js-->
-              <!-- If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/echarts-example.js--> */}
-                <div
-                  className="echart-share-dataset-chart-example"
-                  style={{ minHeight: "500px" }}
-                ></div>
-              </div>
+            <div className="">
+              <InvoiceAnalyticsChart data={report} />
             </div>
           </div>
         </div>
@@ -549,13 +525,13 @@ const DashboardHome = () => {
                     </div>
                   </div>
                   <div className="col-auto">
-                    <a
-                      href="/Estimates"
-                      className="btn btn-sm btn-primary"
+                    <Link
+                      to="/Estimates"
+                      className="btn btn-primary"
                       type="button"
                     >
                       View All
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -635,13 +611,13 @@ const DashboardHome = () => {
                   className="mb-0 d-none d-sm-block me-3 fw-semi-bold text-900"
                   data-list-info="data-list-info"
                 ></p>
-                <a className="fw-semi-bold" href="#!" data-list-view="*">
+                <Link className="fw-semi-bold" to="/Estimates" data-list-view="*">
                   View all
                   <span
                     className="fas fa-angle-right ms-1"
                     data-fa-transform="down-1"
                   ></span>
-                </a>
+                </Link>
                 <a
                   className="fw-semi-bold d-none"
                   href="#!"
@@ -698,13 +674,13 @@ const DashboardHome = () => {
                     </div>
                   </div>
                   <div className="col-auto">
-                    <a
-                      href="bills.html"
-                      className="btn btn-sm btn-primary"
+                    <Link
+                      to="/Bills"
+                      className="btn btn-primary"
                       type="button"
                     >
                       View All
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -784,13 +760,13 @@ const DashboardHome = () => {
                   className="mb-0 d-none d-sm-block me-3 fw-semi-bold text-900"
                   data-list-info="data-list-info"
                 ></p>
-                <a className="fw-semi-bold" href="#!" data-list-view="*">
+                <Link className="fw-semi-bold" to="/Bills" data-list-view="*">
                   View all
                   <span
                     className="fas fa-angle-right ms-1"
                     data-fa-transform="down-1"
                   ></span>
-                </a>
+                </Link>
                 <a
                   className="fw-semi-bold d-none"
                   href="#!"
@@ -1097,7 +1073,7 @@ const DashboardHome = () => {
             </div>
           </div>
         </footer>
-      </div>
+      </div >
       <div className="support-chat-container">
         <div className="container-fluid support-chat">
           <div className="card bg-white">
