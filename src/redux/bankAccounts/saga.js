@@ -1,6 +1,6 @@
 import { call, put, takeEvery } from "redux-saga/effects";
 import { bankAccountActionTypes } from "./types";
-import { bankAccountApi, currencyDefaultApi } from "../../api/BankAccounts";
+import { bankAccountApi, currenciesApi, currencyDefaultApi, deleteBankAccountApi, editBankAccountApi, editBankDetailsApi } from "../../api/BankAccounts";
 // import { ApiResponseError, ApiResponseSuccess } from "./actions";
 
 export const ApiResponseSuccess = (actionType, data) => ({
@@ -47,3 +47,69 @@ export function* currencyDefaultSaga() {
     yield takeEvery(bankAccountActionTypes.CURRENCY_DEFAULT, currencyDefault);
 }
 
+
+function* currencies() {
+
+    try {
+        const response = yield call(currenciesApi);
+        yield put(ApiResponseSuccess(bankAccountActionTypes.CURRENCY, response.data));
+    } catch (error) {
+        yield put(ApiResponseError(bankAccountActionTypes.CURRENCY, error?.response?.data || "Failed"));
+    }
+}
+
+export function* currenciesSaga() {
+    yield takeEvery(bankAccountActionTypes.CURRENCY, currencies);
+}
+
+
+function* editBankAccount(id) {
+    try {
+
+        const response = yield call(editBankAccountApi, id);
+
+        yield put(ApiResponseSuccess(bankAccountActionTypes.EDITBANK_ACCOUNT, response.data));
+    } catch (error) {
+        yield put(
+            ApiResponseError(bankAccountActionTypes.EDITBANK_ACCOUNT, error.response?.data || "edit bank account failed")
+        );
+    }
+}
+
+export function* editBankAccountSaga() {
+    yield takeEvery(bankAccountActionTypes.EDITBANK_ACCOUNT, editBankAccount);
+}
+
+function* deleteBankAccount(userId) {
+    try {
+
+        const response = yield call(deleteBankAccountApi, userId);
+
+        yield put(ApiResponseSuccess(bankAccountActionTypes.DELETEBANK_ACCOUNT, response.data));
+    } catch (error) {
+        console.log("error", error);
+
+    }
+}
+
+export function* deleteBankAccountSaga() {
+    yield takeEvery(bankAccountActionTypes.DELETEBANK_ACCOUNT, deleteBankAccount);
+}
+
+function* editBankDetails(action) {
+    try {
+        const { user } = action.payload;
+
+        const response = yield call(editBankDetailsApi, user);
+
+        yield put(ApiResponseSuccess(bankAccountActionTypes.EDITBANK_ACCOUNT_DETAILS, response.data));
+    } catch (error) {
+        yield put(
+            ApiResponseError(bankAccountActionTypes.EDITBANK_ACCOUNT_DETAILS, error.response?.data || "edit bank details  failed")
+        );
+    }
+}
+
+export default function* editBankDetailsSaga() {
+    yield takeEvery(bankAccountActionTypes.EDITBANK_ACCOUNT_DETAILS, editBankDetails);
+}

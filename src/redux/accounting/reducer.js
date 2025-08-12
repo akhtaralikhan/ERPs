@@ -1,21 +1,21 @@
 import { AccountingActionTypes } from "./types";
 
-// export const INIT_STATE = {
-//     SOCIAL_LOGIN: {},
-//     settingTypeGeneral: {},
-//     settingTypePayment: {},
-//     SubsriptionTenant: {},
-//     bankaccount: {},
-//     settingTypeLicense: {},
-//     manualjournal: [],
-//     transaction: [],
-//     currencyDefault: {},
-//     chartaccounts: [],
-//     assets: [],
-//     loading: false,
-//     isDataFetched: false,
-//     error: "",
-// };
+export const INIT_STATE = {
+    SOCIAL_LOGIN: {},
+    settingTypeGeneral: {},
+    settingTypePayment: {},
+    SubsriptionTenant: {},
+    bankaccount: {},
+    settingTypeLicense: {},
+    manualjournal: [],
+    transaction: [],
+    currencyDefault: {},
+    chartaccounts: [],
+    assets: [],
+    loading: false,
+    isDataFetched: false,
+    error: "",
+};
 
 // const AccountingReducer = (state = INIT_STATE, action) => {
 //     switch (action.type) {
@@ -135,7 +135,7 @@ import { AccountingActionTypes } from "./types";
 
 // export default AccountingReducer;
 
-const AccountingReducer = (state = INIT_STATE, action) => {
+const Accounting = (state = INIT_STATE, action) => {
     switch (action.type) {
         case AccountingActionTypes.API_RESPONSE_SUCCESS:
             switch (action.payload.actionType) {
@@ -318,4 +318,4 @@ const AccountingReducer = (state = INIT_STATE, action) => {
     }
 };
 
-export default AccountingReducer;
+export default Accounting;

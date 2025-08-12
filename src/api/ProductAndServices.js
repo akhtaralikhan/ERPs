@@ -62,6 +62,100 @@ export const getServicesApi = async () => {
     return response;
 };
 
+export const getCategoryApi = async () => {
+
+    const response = await axios.get(
+        BASE_URL + endPoints.productAndServices.category,
+        {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+        }
+    );
+
+    return response;
+};
+
+
+export const getTaxApi = async () => {
+
+    const response = await axios.get(
+        BASE_URL + endPoints.productAndServices.taxe,
+        {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+        }
+    );
+
+    return response;
+};
+
+
+export const editProductApi = async (userId) => {
+
+    const response = await axios.get(
+        BASE_URL + endPoints.productAndServices.product + `/${userId.payload}`,
+        {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+        }
+    );
+
+    return response;
+};
+
+export const deleteProductApi = async (userId) => {
+
+    const response = await axios.get(
+        BASE_URL + endPoints.productAndServices.product + `/${userId.payload}`,
+        {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+        }
+    );
+
+    return response;
+};
+
+
+export const editProductDataDetailsApi = async (credentials) => {
+    const payload = {
+
+        name: credentials.name,
+        sku: credentials.sku,
+        salePrice: credentials.salePrice,
+        purchasePrice: credentials.purchasePrice,
+        categoryId: credentials.categoryId,
+        taxId: credentials.taxId,
+        description: credentials.description,
+        createdById: credentials.createdById,
+        id: credentials.id,
+    };
+
+    const body = JSON.stringify(payload);
+
+    const response = await axios.put(
+        BASE_URL + endPoints.productAndServices.product,
+        body,
+        {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+        }
+    );
+
+    return response;
+};
+
+
 
 
 

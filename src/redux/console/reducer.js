@@ -160,7 +160,7 @@ export const INIT_STATE = {
     error: "",
 };
 
-const ConsoleReducer = (state = INIT_STATE, action) => {
+const Console = (state = INIT_STATE, action) => {
     switch (action.type) {
         case ConsoleActionTypes.API_RESPONSE_SUCCESS:
             switch (action.payload.actionType) {
@@ -351,4 +351,4 @@ const ConsoleReducer = (state = INIT_STATE, action) => {
 };
 
 
-export default ConsoleReducer;
+export default Console;

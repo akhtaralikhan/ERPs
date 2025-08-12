@@ -20,7 +20,7 @@ export const INIT_STATE = {
     error: null,
 };
 
-const dashboardReducer = (state = INIT_STATE, action) => {
+const dashboard = (state = INIT_STATE, action) => {
     switch (action.type) {
         case dashboardTypes.API_RESPONSE_SUCCESS:
             switch (action.payload.actionType) {
@@ -184,4 +184,4 @@ const dashboardReducer = (state = INIT_STATE, action) => {
     }
 };
 
-export default dashboardReducer;
+export default dashboard;

@@ -8,8 +8,8 @@ import loginSaga from "./auth/login/LoginSaga";
 import { AuthLoginActionTypes } from "./auth/login/types";
 import { createBankAccountSaga, getSubscriptionsTenant3Saga } from "./console/saga";
 import { bankaccountSaga, cardReportSaga, currencyDefaultSaga, invoiceReportSaga, lastBillsSaga, lastEstimatesSaga, lastGoalsSaga, lastInvoiceSaga, lastTransactionsSaga, monthlyActivitySaga, monthlyTransactionSaga, revenueTotalSaga, settingTypeGeneralSaga, settingTypeLicenseSaga, settingTypePaymentSaga, SocialLoginSaga, summarySaga, weekActivitySaga, weekTransactionSaga, yearlyActivitySaga, yearlyTransactionSaga } from "./dashboard/saga";
-import { bankAccountSaga } from "./bankAccounts/saga";
-import { productSaga, servicesSaga } from "./productAndServices/saga";
+import editBankDetailsSaga, { bankAccountSaga, currenciesSaga, deleteBankAccountSaga, editBankAccountSaga } from "./bankAccounts/saga";
+import editProductDataDetailsSaga, { categorySaga, editProductSaga, productSaga, servicesSaga, taxSaga } from "./productAndServices/saga";
 import { creditNoteSaga, currencySaga, customerSaga, goalsSaga, invoiceSaga, proposalSaga, revenueSaga } from "./sales/saga";
 import { billSaga, debitNotesSaga, paymentSaga, vendorSaga } from "./expenses/saga";
 import registerUserSaga from "./auth/register/saga";
@@ -39,9 +39,17 @@ export default function* rootSaga() {
         invoiceReportSaga(),
         lastGoalsSaga(),
         bankAccountSaga(),
+        editBankAccountSaga(),
+        editBankDetailsSaga(),
+        deleteBankAccountSaga(),
+        currenciesSaga(),
         currencyDefaultSaga(),
         productSaga(),
         servicesSaga(),
+        categorySaga(),
+        taxSaga(),
+        editProductSaga(),
+        editProductDataDetailsSaga(),
         proposalSaga(),
         invoiceSaga(),
         currencySaga(),

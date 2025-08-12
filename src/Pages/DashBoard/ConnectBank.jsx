@@ -41,7 +41,6 @@ const ConnectBank = () => {
                 <div class="card-body">
                   <div class="row">
                     <div class="text-center">
-                      <img src="" alt="" />
                       <p>
                         Connect your Stripe account to receive online payments
                         from your customers.
@@ -61,7 +60,6 @@ const ConnectBank = () => {
                   </div>
                   <div class="row">
                     <div class="text-center">
-                      <img src="" alt="" />
                       <p>
                         Connect your PayPal account to receive online payments
                         from your customers.
@@ -82,7 +80,6 @@ const ConnectBank = () => {
                   </div>
                   <div class="row">
                     <div class="text-center">
-                      <img src="" alt="" />
                       <p>Add manually and manage yours bank accounts</p>
                       <button
                         class="btn btn-primary me-1 mb-1 text-uppercase "
@@ -362,25 +359,7 @@ const ConnectBank = () => {
 
               {/* <!-- Edit modal --> */}
 
-              <footer class="footer position-absolute">
-                <div class="row g-0 justify-content-between align-items-center h-100">
-                  <div class="col-12 col-sm-auto text-center">
-                    <p class="mb-0 mt-2 mt-sm-0 text-900">
-                      All Right Reserved
-                      <span class="d-none d-sm-inline-block"></span>
-                      <span class="d-none d-sm-inline-block mx-1">|</span>
-                      <br class="d-sm-none" />
-                      2023 &copy;
-                      <a class="mx-1" href="#">
-                        microhind
-                      </a>
-                    </p>
-                  </div>
-                  <div class="col-12 col-sm-auto text-center">
-                    <p class="mb-0 text-600">v1.13.0</p>
-                  </div>
-                </div>
-              </footer>
+
             </div>
           </div>
         </div>

@@ -15,7 +15,7 @@ const initialState = {
   error: null,
 };
 
-const salesReducer = (state = initialState, action) => {
+const sales = (state = initialState, action) => {
   switch (action.type) {
     case salesActionTypes.API_RESPONSE_SUCCESS:
       switch (action.payload.actionType) {
@@ -121,4 +121,4 @@ const salesReducer = (state = initialState, action) => {
   }
 };
 
-export default salesReducer;
+export default sales;

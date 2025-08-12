@@ -3,12 +3,14 @@ import { bankAccountActionTypes } from "./types";
 export const INIT_STATE = {
     bankAccount: [],
     currencyDefault: {},
+    editData: {},
+    currency: [],
     loading: false,
     isDataFetched: false,
     error: "",
 };
 
-const bankAccountsReducer = (state = INIT_STATE, action) => {
+const bankAccounts = (state = INIT_STATE, action) => {
     switch (action.type) {
         case bankAccountActionTypes.API_RESPONSE_SUCCESS:
             switch (action.payload.actionType) {
@@ -16,6 +18,13 @@ const bankAccountsReducer = (state = INIT_STATE, action) => {
                     return {
                         ...state,
                         bankAccount: action.payload.data,
+                        loading: false,
+                        isDataFetched: true,
+                    };
+                case bankAccountActionTypes.EDITBANK_ACCOUNT:
+                    return {
+                        ...state,
+                        editData: action.payload.data,
                         loading: false,
                         isDataFetched: true,
                     };
@@ -27,7 +36,13 @@ const bankAccountsReducer = (state = INIT_STATE, action) => {
                         loading: false,
                         isDataFetched: true,
                     };
-
+                case bankAccountActionTypes.CURRENCY:
+                    return {
+                        ...state,
+                        currency: action.payload.data,
+                        loading: false,
+                        isDataFetched: true,
+                    }
                 default:
                     return { ...state };
             }
@@ -42,6 +57,8 @@ const bankAccountsReducer = (state = INIT_STATE, action) => {
 
         case bankAccountActionTypes.BANK_ACCOUNT:
         case bankAccountActionTypes.CURRENCY_DEFAULT:
+        case bankAccountActionTypes.EDITBANK_ACCOUNT:
+        case bankAccountActionTypes.CURRENCY:
             return {
                 ...state,
                 loading: true,
@@ -54,4 +71,4 @@ const bankAccountsReducer = (state = INIT_STATE, action) => {
     }
 };
 
-export default bankAccountsReducer;
+export default bankAccounts;

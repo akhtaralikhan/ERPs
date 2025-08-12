@@ -3,19 +3,60 @@ import { Link } from "react-router-dom";
 import { useRedux } from "../../hooks/useRedux";
 import { getSubscriptionsTenant3Action } from "../../redux/console/actions";
 import { getCurrencyDefault } from "../../redux/dashboard/actions";
-import { getProducts } from "../../redux/productAndServices/actions";
+import { editProductData, getCatergory, getProducts } from "../../redux/productAndServices/actions";
+import { createSelector } from "reselect";
+import EditProductAndServicesModal from "../../Components/EditProductAndServicesModal";
+import { editData } from "../../redux/bankAccounts/actions";
+
 
 const Product = () => {
-  const [selectedCategory, setSelectedCategory] = useState("Food");
-  const [selectedTax, setSelectedTax] = useState("IVA1 (12%)");
-
   const { dispatch, useAppSelector } = useRedux();
+
+  const userData = createSelector(
+    (state) => state.productAndServices,
+    (state) => ({
+      products: state.products,
+    })
+  );
+  const { products } = useAppSelector(userData);
+
+  const bankAccountData = createSelector(
+    (state) => state.bankAccounts,
+    (state) => ({
+      selectedProduct: state.editData,
+    })
+  );
+
+  const { selectedProduct } = useAppSelector(bankAccountData);
+
+console.log("selectedProduct", selectedProduct);
+
 
   useEffect(() => {
     dispatch(getSubscriptionsTenant3Action());
     dispatch(getCurrencyDefault())
     dispatch(getProducts())
   }, []);
+  //handle click 
+  const [modalMode, setModalMode] = useState("add");
+  const [modalData, setModalData] = useState(null);
+
+  const handleAddClick = () => {
+    setModalMode("add");
+    setModalData(null);
+    dispatch(editData(id))
+  };
+
+  const handleEditClick = (product) => {
+    setModalMode("edit");
+    setModalData(product);
+    dispatch(editData(id))
+    dispatch(editProductData(product.id))
+  };
+
+  const handleDeleteClick = (id) => {
+    dispatch(editData(id))
+  }
 
 
 
@@ -39,7 +80,7 @@ const Product = () => {
                       </p>
                     </div>
                     <div className="col-lg-4">
-                      <Link to="connect-bank.html">
+                      <Link to="/ConnectBank">
                         <button
                           className="btn btn-primary me-1 mb-1 text-uppercase w-100"
                           type="button"
@@ -63,9 +104,9 @@ const Product = () => {
                             type="button"
                             data-bs-toggle="modal"
                             data-bs-target="#edit-modal"
+                            onClick={handleAddClick}
                           >
-                            <i className="fa fa-solid fa-plus me-3"></i>New
-                            Product
+                            <i className="fa fa-solid fa-plus me-3"></i>New Product
                           </button>
                         </div>
                         <div className="card-body border-bottom">
@@ -142,363 +183,75 @@ const Product = () => {
                                     </th>
                                   </tr>
                                 </thead>
-                                <tbody className="list">
-                                  <tr>
-                                    <td className="align-middle ps-3 name">
-                                      <Link to="#">G500 </Link>
-                                    </td>
-                                    <td className="align-middle email">
-                                      Sep 10, 2023, 07:59
-                                    </td>
-                                    <td className="align-middle age">Food</td>
-                                    <td className="align-middle age">G500</td>
-                                    <td className="align-middle age">
-                                      IVA1 (12%)
-                                    </td>
-                                    <td className="align-middle age">
-                                      $12500
-                                    </td>
-                                    <td className="align-middle age">
-                                      $15500
-                                    </td>
-                                    <td className="align-middle white-space-nowrap text-end pe-0">
-                                      <div className="font-sans-serif btn-reveal-trigger position-static">
-                                        <button
-                                          className="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
-                                          type="button"
-                                          data-bs-toggle="dropdown"
-                                          data-boundary="window"
-                                          aria-haspopup="true"
-                                          aria-expanded="false"
-                                          data-bs-reference="parent"
-                                        >
-                                          <svg
-                                            className="svg-inline--fa fa-ellipsis fs--2"
-                                            aria-hidden="true"
-                                            focusable="false"
-                                            data-prefix="fas"
-                                            data-icon="ellipsis"
-                                            role="img"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 448 512"
-                                            data-fa-i2svg=""
-                                          >
-                                            <path
-                                              fill="currentColor"
-                                              d="M120 256C120 286.9 94.93 312 64 312C33.07 312 8 286.9 8 256C8 225.1 33.07 200 64 200C94.93 200 120 225.1 120 256zM280 256C280 286.9 254.9 312 224 312C193.1 312 168 286.9 168 256C168 225.1 193.1 200 224 200C254.9 200 280 225.1 280 256zM328 256C328 225.1 353.1 200 384 200C414.9 200 440 225.1 440 256C440 286.9 414.9 312 384 312C353.1 312 328 286.9 328 256z"
-                                            ></path>
-                                          </svg>
-                                          {/* <!-- <span className="fas fa-ellipsis-h fs--2"></span> Font Awesome fontawesome.com --> */}
-                                        </button>
-                                        <div className="dropdown-menu dropdown-menu-end py-2">
-                                          <Link
-                                            className="dropdown-item"
-                                            to="#!"
+                                {products.map((product, index) => (
+                                  <tbody className="list">
+                                    <tr>
+                                      <td className="align-middle ps-3 name">
+                                        <Link to="#">{product?.name}</Link>
+                                      </td>
+                                      <td className="align-middle email">
+                                        {new Date(product?.createdAt).toLocaleString("en-US", {
+                                          month: "short",
+                                          day: "numeric",
+                                          year: "numeric",
+                                          hour: "numeric",
+                                          minute: "2-digit",
+                                          hour12: true,
+                                        })}
+                                      </td>
+                                      <td className="align-middle age">{product?.category?.name}</td>
+                                      <td className="align-middle age">{product?.sku ? product?.sku : "N/A"}</td>
+                                      <td className="align-middle age">
+                                        {product?.tax?.name}({product?.tax?.rate}%)
+                                      </td>
+                                      <td className="align-middle age">
+                                        ${product?.purchasePrice}
+                                      </td>
+                                      <td className="align-middle age">
+                                        ${product?.salePrice}
+                                      </td>
+                                      <td className="align-middle white-space-nowrap text-end pe-0">
+                                        <div className="font-sans-serif btn-reveal-trigger position-static">
+                                          <button
+                                            className="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
                                             type="button"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#edit-modal"
+                                            data-bs-toggle="dropdown"
+                                            data-boundary="window"
+                                            aria-haspopup="true"
+                                            aria-expanded="false"
+                                            data-bs-reference="parent"
                                           >
-                                            Edit
-                                          </Link>
-                                          <div className="dropdown-divider"></div>
-                                          <Link
-                                            className="dropdown-item text-danger"
-                                            to="#!"
-                                            type="button"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#verticallyCentered"
-                                          >
-                                            Delete
-                                          </Link>
+                                            <i className="fas fa-ellipsis fs--2"></i>
+                                          </button>
+                                          <div className="dropdown-menu dropdown-menu-end py-2">
+
+                                            <Link
+                                              className="dropdown-item"
+                                              to="#!"
+                                              type="button"
+                                              data-bs-toggle="modal"
+                                              data-bs-target="#edit-modal"
+                                              onClick={() => handleEditClick(product)}
+                                            >
+                                              Edit
+                                            </Link>
+                                            <div className="dropdown-divider"></div>
+                                            <Link
+                                              className="dropdown-item text-danger"
+                                              to="#!"
+                                              type="button"
+                                              data-bs-toggle="modal"
+                                              data-bs-target="#verticallyCentered"
+                                              onClick={() => handleDeleteClick(item.id)}
+                                            >
+                                              Delete
+                                            </Link>
+                                          </div>
                                         </div>
-                                      </div>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td className="align-middle ps-3 name">
-                                      <Link to="#">G500 </Link>
-                                    </td>
-                                    <td className="align-middle email">
-                                      Sep 10, 2023, 07:59
-                                    </td>
-                                    <td className="align-middle age">Food</td>
-                                    <td className="align-middle age">G500</td>
-                                    <td className="align-middle age">
-                                      IVA1 (12%)
-                                    </td>
-                                    <td className="align-middle age">
-                                      $12500
-                                    </td>
-                                    <td className="align-middle age">
-                                      $15500
-                                    </td>
-                                    <td className="align-middle white-space-nowrap text-end pe-0">
-                                      <div className="font-sans-serif btn-reveal-trigger position-static">
-                                        <button
-                                          className="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
-                                          type="button"
-                                          data-bs-toggle="dropdown"
-                                          data-boundary="window"
-                                          aria-haspopup="true"
-                                          aria-expanded="false"
-                                          data-bs-reference="parent"
-                                        >
-                                          <svg
-                                            className="svg-inline--fa fa-ellipsis fs--2"
-                                            aria-hidden="true"
-                                            focusable="false"
-                                            data-prefix="fas"
-                                            data-icon="ellipsis"
-                                            role="img"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 448 512"
-                                            data-fa-i2svg=""
-                                          >
-                                            <path
-                                              fill="currentColor"
-                                              d="M120 256C120 286.9 94.93 312 64 312C33.07 312 8 286.9 8 256C8 225.1 33.07 200 64 200C94.93 200 120 225.1 120 256zM280 256C280 286.9 254.9 312 224 312C193.1 312 168 286.9 168 256C168 225.1 193.1 200 224 200C254.9 200 280 225.1 280 256zM328 256C328 225.1 353.1 200 384 200C414.9 200 440 225.1 440 256C440 286.9 414.9 312 384 312C353.1 312 328 286.9 328 256z"
-                                            ></path>
-                                          </svg>
-                                          {/* <!-- <span className="fas fa-ellipsis-h fs--2"></span> Font Awesome fontawesome.com --> */}
-                                        </button>
-                                        <div className="dropdown-menu dropdown-menu-end py-2">
-                                          <Link
-                                            className="dropdown-item"
-                                            to="#!"
-                                            type="button"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#edit-modal"
-                                          >
-                                            Edit
-                                          </Link>
-                                          <div className="dropdown-divider"></div>
-                                          <Link
-                                            className="dropdown-item text-danger"
-                                            to="#!"
-                                            type="button"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#verticallyCentered"
-                                          >
-                                            Delete
-                                          </Link>
-                                        </div>
-                                      </div>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td className="align-middle ps-3 name">
-                                      <Link to="#">G500 </Link>
-                                    </td>
-                                    <td className="align-middle email">
-                                      Sep 10, 2023, 07:59
-                                    </td>
-                                    <td className="align-middle age">Food</td>
-                                    <td className="align-middle age">G500</td>
-                                    <td className="align-middle age">
-                                      IVA1 (12%)
-                                    </td>
-                                    <td className="align-middle age">
-                                      $12500
-                                    </td>
-                                    <td className="align-middle age">
-                                      $15500
-                                    </td>
-                                    <td className="align-middle white-space-nowrap text-end pe-0">
-                                      <div className="font-sans-serif btn-reveal-trigger position-static">
-                                        <button
-                                          className="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
-                                          type="button"
-                                          data-bs-toggle="dropdown"
-                                          data-boundary="window"
-                                          aria-haspopup="true"
-                                          aria-expanded="false"
-                                          data-bs-reference="parent"
-                                        >
-                                          <svg
-                                            className="svg-inline--fa fa-ellipsis fs--2"
-                                            aria-hidden="true"
-                                            focusable="false"
-                                            data-prefix="fas"
-                                            data-icon="ellipsis"
-                                            role="img"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 448 512"
-                                            data-fa-i2svg=""
-                                          >
-                                            <path
-                                              fill="currentColor"
-                                              d="M120 256C120 286.9 94.93 312 64 312C33.07 312 8 286.9 8 256C8 225.1 33.07 200 64 200C94.93 200 120 225.1 120 256zM280 256C280 286.9 254.9 312 224 312C193.1 312 168 286.9 168 256C168 225.1 193.1 200 224 200C254.9 200 280 225.1 280 256zM328 256C328 225.1 353.1 200 384 200C414.9 200 440 225.1 440 256C440 286.9 414.9 312 384 312C353.1 312 328 286.9 328 256z"
-                                            ></path>
-                                          </svg>
-                                          {/* <!-- <span className="fas fa-ellipsis-h fs--2"></span> Font Awesome fontawesome.com --> */}
-                                        </button>
-                                        <div className="dropdown-menu dropdown-menu-end py-2">
-                                          <Link
-                                            className="dropdown-item"
-                                            to="#!"
-                                            type="button"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#edit-modal"
-                                          >
-                                            Edit
-                                          </Link>
-                                          <div className="dropdown-divider"></div>
-                                          <Link
-                                            className="dropdown-item text-danger"
-                                            to="#!"
-                                            type="button"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#verticallyCentered"
-                                          >
-                                            Delete
-                                          </Link>
-                                        </div>
-                                      </div>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td className="align-middle ps-3 name">
-                                      <Link to="#">G500 </Link>
-                                    </td>
-                                    <td className="align-middle email">
-                                      Sep 10, 2023, 07:59
-                                    </td>
-                                    <td className="align-middle age">Food</td>
-                                    <td className="align-middle age">G500</td>
-                                    <td className="align-middle age">
-                                      IVA1 (12%)
-                                    </td>
-                                    <td className="align-middle age">
-                                      $12500
-                                    </td>
-                                    <td className="align-middle age">
-                                      $15500
-                                    </td>
-                                    <td className="align-middle white-space-nowrap text-end pe-0">
-                                      <div className="font-sans-serif btn-reveal-trigger position-static">
-                                        <button
-                                          className="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
-                                          type="button"
-                                          data-bs-toggle="dropdown"
-                                          data-boundary="window"
-                                          aria-haspopup="true"
-                                          aria-expanded="false"
-                                          data-bs-reference="parent"
-                                        >
-                                          <svg
-                                            className="svg-inline--fa fa-ellipsis fs--2"
-                                            aria-hidden="true"
-                                            focusable="false"
-                                            data-prefix="fas"
-                                            data-icon="ellipsis"
-                                            role="img"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 448 512"
-                                            data-fa-i2svg=""
-                                          >
-                                            <path
-                                              fill="currentColor"
-                                              d="M120 256C120 286.9 94.93 312 64 312C33.07 312 8 286.9 8 256C8 225.1 33.07 200 64 200C94.93 200 120 225.1 120 256zM280 256C280 286.9 254.9 312 224 312C193.1 312 168 286.9 168 256C168 225.1 193.1 200 224 200C254.9 200 280 225.1 280 256zM328 256C328 225.1 353.1 200 384 200C414.9 200 440 225.1 440 256C440 286.9 414.9 312 384 312C353.1 312 328 286.9 328 256z"
-                                            ></path>
-                                          </svg>
-                                          {/* <!-- <span className="fas fa-ellipsis-h fs--2"></span> Font Awesome fontawesome.com --> */}
-                                        </button>
-                                        <div className="dropdown-menu dropdown-menu-end py-2">
-                                          <Link
-                                            className="dropdown-item"
-                                            to="#!"
-                                            type="button"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#edit-modal"
-                                          >
-                                            Edit
-                                          </Link>
-                                          <div className="dropdown-divider"></div>
-                                          <Link
-                                            className="dropdown-item text-danger"
-                                            to="#!"
-                                            type="button"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#verticallyCentered"
-                                          >
-                                            Delete
-                                          </Link>
-                                        </div>
-                                      </div>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td className="align-middle ps-3 name">
-                                      <Link to="#">G500 </Link>
-                                    </td>
-                                    <td className="align-middle email">
-                                      Sep 10, 2023, 07:59
-                                    </td>
-                                    <td className="align-middle age">Food</td>
-                                    <td className="align-middle age">G500</td>
-                                    <td className="align-middle age">
-                                      IVA1 (12%)
-                                    </td>
-                                    <td className="align-middle age">
-                                      $12500
-                                    </td>
-                                    <td className="align-middle age">
-                                      $15500
-                                    </td>
-                                    <td className="align-middle white-space-nowrap text-end pe-0">
-                                      <div className="font-sans-serif btn-reveal-trigger position-static">
-                                        <button
-                                          className="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
-                                          type="button"
-                                          data-bs-toggle="dropdown"
-                                          data-boundary="window"
-                                          aria-haspopup="true"
-                                          aria-expanded="false"
-                                          data-bs-reference="parent"
-                                        >
-                                          <svg
-                                            className="svg-inline--fa fa-ellipsis fs--2"
-                                            aria-hidden="true"
-                                            focusable="false"
-                                            data-prefix="fas"
-                                            data-icon="ellipsis"
-                                            role="img"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 448 512"
-                                            data-fa-i2svg=""
-                                          >
-                                            <path
-                                              fill="currentColor"
-                                              d="M120 256C120 286.9 94.93 312 64 312C33.07 312 8 286.9 8 256C8 225.1 33.07 200 64 200C94.93 200 120 225.1 120 256zM280 256C280 286.9 254.9 312 224 312C193.1 312 168 286.9 168 256C168 225.1 193.1 200 224 200C254.9 200 280 225.1 280 256zM328 256C328 225.1 353.1 200 384 200C414.9 200 440 225.1 440 256C440 286.9 414.9 312 384 312C353.1 312 328 286.9 328 256z"
-                                            ></path>
-                                          </svg>
-                                          {/* <!-- <span className="fas fa-ellipsis-h fs--2"></span> Font Awesome fontawesome.com --> */}
-                                        </button>
-                                        <div className="dropdown-menu dropdown-menu-end py-2">
-                                          <Link
-                                            className="dropdown-item"
-                                            to="#!"
-                                            type="button"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#edit-modal"
-                                          >
-                                            Edit
-                                          </Link>
-                                          <div className="dropdown-divider"></div>
-                                          <Link
-                                            className="dropdown-item text-danger"
-                                            to="#!"
-                                            type="button"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#verticallyCentered"
-                                          >
-                                            Delete
-                                          </Link>
-                                        </div>
-                                      </div>
-                                    </td>
-                                  </tr>
-                                </tbody>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                ))}
                               </table>
                             </div>
                             <div className="d-flex justify-content-between mt-3">
@@ -670,189 +423,23 @@ const Product = () => {
 
               {/* <!-- delete modal -->
                         <!-- Edit modal --> */}
+              <EditProductAndServicesModal
+                mode={modalMode}
+                initialData={modalData}
+                onSave={(data) => {
+                  if (modalMode === "edit") {
+                    // update API call
+                    // dispatch(editProductData(product.id))
+                  } else {
+                    // create API call
+                  }
+                }}
+              />
 
-              <div
-                className="modal fade"
-                id="edit-modal"
-                tabIndex={-1}
-                aria-labelledby="edit-modalModalLabel"
-                aria-hidden="true"
-                style={{ display: "none" }}
-              >
-                <div className="modal-dialog modal-dialog-centered">
-                  <div className="modal-content">
-                    <div className="modal-header">
-                      <h5 className="modal-title" id="edit-modalModalLabel">
-                        Products
-                      </h5>
-                      <button
-                        className="btn p-1"
-                        type="button"
-                        data-bs-dismiss="modal"
-                        aria-label="Close"
-                      >
-                        <svg
-                          className="svg-inline--fa fa-xmark fs--1"
-                          aria-hidden="true"
-                          focusable="false"
-                          data-prefix="fas"
-                          data-icon="xmark"
-                          role="img"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 320 512"
-                          data-fa-i2svg=""
-                        >
-                          <path
-                            fill="currentColor"
-                            d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"
-                          ></path>
-                        </svg>
-                      </button>
-                    </div>
-                    <div className="modal-body">
-                      <div className="mb-3">
-                        <label className="form-label" htmlFor="inputtext">
-                          Name * :
-                        </label>
-                        <input
-                          className="form-control"
-                          id="inputtext"
-                          type="text"
-                          placeholder="Name "
-                        />
-                      </div>
-                      <div className="mb-3">
-                        <label className="form-label" htmlFor="inputtext">
-                          Sku :
-                        </label>
-                        <input
-                          className="form-control"
-                          id="inputtext"
-                          type="text"
-                          placeholder="Sku"
-                        />
-                      </div>
-                      <div className="mb-3">
-                        <label className="form-label" htmlFor="inputtext">
-                          Sale price ($) :
-                        </label>
-                        <input
-                          className="form-control"
-                          id="inputtext"
-                          type="text"
-                          placeholder="Sale price ($)"
-                        />
-                      </div>
-                      <div className="mb-3">
-                        <label className="form-label" htmlFor="inputtext">
-                          Purchase price ($) * :
-                        </label>
-                        <input
-                          className="form-control"
-                          id="inputtext"
-                          type="text"
-                          placeholder="Purchase price ($)"
-                        />
-                      </div>
-                      <div className="mb-3">
-                        <label className="form-label" htmlFor="inputtext">
-                          Category * :
-                        </label>
-                        <select
-                          className="form-select"
-                          aria-label="Default select example"
-                          value={selectedCategory}
-                          onChange={(e) => setSelectedCategory(e.target.value)}
-                        >
-                          <option defaultValue="">Food</option>
-                          <option value="1">Test Product</option>
-                          <option value="2">cate2</option>
-                          <option value="3">sale1</option>
-                          <option value="3">chocolate</option>
-                          <option value="3">Godex</option>
-                        </select>
-                        <button
-                          className="btn btn-soft-primary small"
-                          type="button"
-                        >
-                          <i className="fa fa-solid fa-plus me-2"></i> New
-                          Category
-                        </button>
-                      </div>
-                      <div className="mb-3">
-                        <label className="form-label" htmlFor="inputtext">
-                          Tax * :
-                        </label>
-                        <select
-                          className="form-select"
-                          aria-label="Default select example"
-                          value={selectedTax}
-                          onChange={(e) => setSelectedTax(e.target.value)}
-                        >
-                          <option defaultValue="">IVA1 (12%)</option>
-                          <option value="1">Consumption Tax (5%)</option>
-                          <option value="2">Service Charge (5%)</option>
-                          <option value="3">tax2 (5%)</option>
-                          <option value="3">bahrain tax (10%)</option>
-                          <option value="3">VAT7 (7%)</option>
-                        </select>
-                        <button
-                          className="btn btn-soft-primary small"
-                          type="button"
-                        >
-                          <i className="fa fa-solid fa-plus me-2"></i> New Tax
-                        </button>
-                      </div>
-                      <div className="mb-3">
-                        <label className="form-label" htmlFor="exampleTextarea">
-                          Description :
-                        </label>
-                        <textarea
-                          className="form-control"
-                          id="exampleTextarea"
-                          rows="3"
-                          placeholder="Description"
-                          defaultValue=""
-                        />
-                      </div>
-                    </div>
-                    <div className="modal-footer">
-                      <button className="btn btn-primary" type="button">
-                        Save
-                      </button>
-                      <button
-                        className="btn btn-outline-danger"
-                        type="button"
-                        data-bs-dismiss="modal"
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
 
               {/* <!-- Edit modal --> */}
 
-              <footer className="footer position-absolute">
-                <div className="row g-0 justify-content-between align-items-center h-100">
-                  <div className="col-12 col-sm-auto text-center">
-                    <p className="mb-0 mt-2 mt-sm-0 text-900">
-                      All Right Reserved
-                      <span className="d-none d-sm-inline-block"></span>
-                      <span className="d-none d-sm-inline-block mx-1">|</span>
-                      <br className="d-sm-none" />
-                      2023 &copy;
-                      <Link className="mx-1" to="#">
-                        microhind
-                      </Link>
-                    </p>
-                  </div>
-                  <div className="col-12 col-sm-auto text-center">
-                    <p className="mb-0 text-600">v1.13.0</p>
-                  </div>
-                </div>
-              </footer>
+
             </div>
             <div className="support-chat-container">
               <div className="container-fluid support-chat">

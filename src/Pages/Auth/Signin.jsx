@@ -27,11 +27,10 @@ const Signin = () => {
   const methods = useForm({ defaultValues, resolver });
 
   const {
-    handleSubmit, // add this on form submission  <Form onSubmit={handleSubmit(onSubmitForm)} />
-    register, // on each input field use register to register the input and change input into formInput
-    // register={register}
-    control, // use control={control} on each form input field
-    formState: { errors }, // on each fotm input errors={errors}
+    handleSubmit,
+    register,
+    control,
+    formState: { errors },
   } = methods;
 
   const { dispatch, useAppSelector } = useRedux();
@@ -75,11 +74,10 @@ const Signin = () => {
     const payload = {
       email: data.email,
       password: data.password,
-      rememberMe: isChecked, 
+      rememberMe: isChecked,
     };
 
     dispatch(loginUser(payload));
-    console.log("Form submitted with data:", payload);
   };
 
 

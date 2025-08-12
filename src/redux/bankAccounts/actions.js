@@ -31,6 +31,26 @@ export const getCurrencyDefault = () => ({
 });
 
 
-export const getBankAccount = () => ({
+export const getCurrency = () => ({
+    type: bankAccountActionTypes.CURRENCY,
+});
+
+
+export const getBankAccountAction = () => ({
     type: bankAccountActionTypes.BANK_ACCOUNT,
 });
+
+export const editData = (id) => ({
+    type: bankAccountActionTypes.EDITBANK_ACCOUNT,
+    payload: id,
+});
+
+export const DeleteBankAccount = (userId) => ({
+    type: bankAccountActionTypes.DELETEBANK_ACCOUNT,
+    payload: userId,
+});
+
+export const editBankAccountDetails = (user) => ({
+    type: bankAccountActionTypes.EDITBANK_ACCOUNT_DETAILS,
+    payload: { user },
+})

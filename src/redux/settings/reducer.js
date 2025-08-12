@@ -111,7 +111,7 @@ const initialState = {
     error: null,
 };
 
-const SettingsReducer = (state = initialState, action) => {
+const Settings = (state = initialState, action) => {
     switch (action.type) {
 
         case SettingsActionTypes.API_RESPONSE_SUCCESS: {
@@ -191,4 +191,4 @@ const SettingsReducer = (state = initialState, action) => {
     }
 };
 
-export default SettingsReducer;
+export default Settings;

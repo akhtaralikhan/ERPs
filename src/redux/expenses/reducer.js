@@ -10,7 +10,7 @@ const initialState = {
     error: null,
 };
 
-const expensesReducer = (state = initialState, action) => {
+const expenses = (state = initialState, action) => {
     switch (action.type) {
         case expensesActionTypes.API_RESPONSE_SUCCESS:
             switch (action.payload.actionType) {
@@ -70,4 +70,4 @@ const expensesReducer = (state = initialState, action) => {
     }
 };
 
-export default expensesReducer;
+export default expenses;

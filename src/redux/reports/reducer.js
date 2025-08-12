@@ -71,7 +71,7 @@ const initialState = {
     error: "",
 };
 
-const reportsReducer = (state = initialState, action) => {
+const reports = (state = initialState, action) => {
     switch (action.type) {
         case reportsActionTypes.API_RESPONSE_SUCCESS:
             switch (action.payload.actionType) {
@@ -172,4 +172,4 @@ const reportsReducer = (state = initialState, action) => {
     }
 };
 
-export default reportsReducer;
+export default reports;

@@ -35,12 +35,15 @@ export const endPoints = {
     bankaccount: {
         bankaccount: "bankaccount",
         currencyDefault: "currency/default",
+        currency: "currency",
     },
     productAndServices: {
         product: "product",
         currencyDefault: "currency/default",
         subscriptionTenant: `Subscriptions/tenant/${userData?.data?.id}`,
         service: "service",
+        category:"category",
+        taxe: "taxe",
     },
     sales: {
         proposal: "proposal",
