@@ -1,21 +1,109 @@
-import React from 'react'
+import React, { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { useRedux } from "../hooks/useRedux";
+import { createSelector } from "reselect";
+import { Link } from "react-router-dom";
 
-function EstimatesModal() {
+const EstimatesModal = ({ mode = "add", initialData = null, onSave }) => {
+    const { dispatch, useAppSelector } = useRedux();
+
+    const userData = createSelector(
+        (state) => state.sales,
+        (state) => ({
+            customers: state.customers,
+            currency: state.currency,
+        })
+    );
+
+    const { customers, currency } = useAppSelector(userData);
+
+    const createdById = initialData?.createdById;
+
+    const { register, handleSubmit, reset } = useForm({
+        defaultValues: {
+            customer: "",
+            date: "",
+            expireAt: "",
+            currency: "",
+            reference: "",
+            number: "",
+        },
+    });
+
+    useEffect(() => {
+        console.log(initialData);
+
+        if (mode === "edit" && initialData) {
+            reset({
+                customer: initialData.customer || "",
+                date: formatDateForInput(initialData.issueDate),
+                expireAt: formatDateForInput(initialData.issueDate),
+                currency: initialData.currency.name || "",
+                reference: initialData.totalAmount || "",
+                number: initialData.customer.phone || "",
+            });
+        } else {
+            reset({
+                customer: "",
+                date: "",
+                expireAt: "",
+                currency: "",
+                reference: "",
+                number: "",
+            });
+        }
+    }, [mode, initialData, reset]);
+    useEffect(() => {
+        if (mode === "edit" && initialData) {
+            reset({
+                customer: initialData.customer || "",
+                date: initialData.issueDate?.split("T")[0] || "",
+                expireAt: initialData.expireAt?.split("T")[0] || "",
+                currency: initialData.currency?.name || "",
+                reference: initialData.totalAmount || "",
+                number: initialData.customer?.phone || "",
+            });
+        } else {
+            reset({
+                customer: "",
+                date: "",
+                expireAt: "",
+                currency: "",
+                reference: "",
+                number: "",
+            });
+        }
+    }, [mode, initialData, reset]);
+
+
+    const formatDateForInput = (dateString) => {
+        if (!dateString) return "";
+        return dateString.split("T")[0];
+    };
+
+    const submitHandler = (data) => {
+        onSave(data);
+        const modalEl = document.getElementById("edit-modal");
+        if (modalEl) {
+            const modalInstance = window.bootstrap.Modal.getInstance(modalEl);
+            modalInstance?.hide();
+        }
+    };
+
     return (
         <div
             className="modal fade"
             id="edit-modal"
-            tabIndex={-1}
+            tabIndex="-1"
             aria-labelledby="edit-modalModalLabel"
             aria-hidden="true"
-            //   style="display: none;"
-            style={{ display: "none" }}
         >
             <div className="modal-dialog modal-dialog-centered">
                 <div className="modal-content">
+                    {/* Header */}
                     <div className="modal-header">
                         <h5 className="modal-title" id="edit-modalModalLabel">
-                            New Estimates
+                            {mode === "edit" ? "Edit Estimate" : "New Estimate"}
                         </h5>
                         <button
                             className="btn p-1"
@@ -23,128 +111,112 @@ function EstimatesModal() {
                             data-bs-dismiss="modal"
                             aria-label="Close"
                         >
-                            <svg
-                                className="svg-inline--fa fa-xmark fs--1"
-                                aria-hidden="true"
-                                focusable="false"
-                                data-prefix="fas"
-                                data-icon="xmark"
-                                role="img"
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 320 512"
-                                data-fa-i2svg=""
-                            >
-                                <path
-                                    fill="currentColor"
-                                    d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"
-                                ></path>
-                            </svg>
+                            <i className="fa fa-xmark fs--1"></i>
                         </button>
                     </div>
-                    <div className="modal-body">
-                        <div className="mb-3">
-                            <label className="form-label" htmlFor="inputtext">
-                                Customer * :
-                            </label>
-                            <select
-                                className="form-select"
-                                aria-label="Default select example"
-                            >
-                                <option defaultValue="">Customer </option>
-                                <option value="1">Customer 2</option>
-                                <option value="2">Customer </option>
-                            </select>
 
+                    {/* Body */}
+                    <form onSubmit={handleSubmit(submitHandler)}>
+                        <div className="modal-body">
+                            {/* Customer */}
+                            <div className="mb-3">
+                                <label className="form-label">Customer *</label>
+                                <select
+                                    className="form-select"
+                                    {...register("customer", { required: true })}
+                                >
+                                    {customers.map((customer, idx) => (
+                                        <option value={customer.id} key={idx}>{customer.name}</option>
+                                    ))}
+                                </select>
+                                <button className="btn btn-soft-primary small mt-2" type="button">
+                                    <Link className="fa fa-solid fa-plus me-2"></Link> New Category
+                                </button>
+                            </div>
+
+                            {/* Date */}
+                            <div className="mb-3">
+                                <label className="form-label">Date *</label>
+                                <input
+                                    className="form-control"
+                                    type="date"
+                                    {...register("date", { required: true })}
+                                />
+                            </div>
+
+                            {/* Expire At */}
+                            <div className="mb-3">
+                                <label className="form-label">Expire at</label>
+                                <input
+                                    className="form-control"
+                                    type="date"
+                                    {...register("expireAt")}
+                                />
+                            </div>
+
+                            {/* Currency */}
+                            <div className="mb-3">
+                                <label className="form-label">Currency *</label>
+                                <select
+                                    className="form-select"
+                                    {...register("currency", { required: true })}
+                                >
+                                    {currency.map((curr, idx) => (
+                                        <option value={curr.id} key={idx}>{curr.name} ({curr.symbol})</option>
+                                    ))}
+
+                                </select>
+                            </div>
+
+                            {/* Reference */}
+                            <div className="mb-3">
+                                <label className="form-label">Reference</label>
+                                <input
+                                    className="form-control"
+                                    type="text"
+                                    placeholder="Purchase price ($)"
+                                    {...register("reference")}
+                                />
+                            </div>
+
+                            {/* Status */}
+                            <div className="mb-3">
+                                <label className="form-label">Status</label>
+                                <span className="badge badge-phoenix fs--2 badge-phoenix-secondary">
+                                    <span className="badge-label">Draft</span>
+                                </span>
+                            </div>
+
+                            {/* Number */}
+                            <div className="mb-3">
+                                <label className="form-label">Number *</label>
+                                <input
+                                    className="form-control"
+                                    type="text"
+                                    placeholder="Order Number"
+                                    {...register("number", { required: true })}
+                                />
+                            </div>
+                        </div>
+
+                        {/* Footer */}
+                        <div className="modal-footer">
+                            <button className="btn btn-primary" type="submit">
+                                Save
+                            </button>
                             <button
-                                className="btn btn-soft-primary small"
+                                className="btn btn-outline-danger"
                                 type="button"
+                                data-bs-dismiss="modal"
                             >
-                                <i className="fa fa-solid fa-plus me-2"></i> New
-                                Category
+                                Cancel
                             </button>
                         </div>
-                        <div className="mb-3">
-                            <label className="form-label" htmlFor="datepicker">
-                                Date * :
-                            </label>
-                            <input
-                                className="form-control"
-                                id="inputtext"
-                                type="date"
-                                placeholder="date"
-                            />
-                        </div>
-                        <div className="mb-3">
-                            <label className="form-label" htmlFor="datepicker">
-                                Expire at :
-                            </label>
-                            <input
-                                className="form-control"
-                                id="inputtext"
-                                type="date"
-                                placeholder="date"
-                            />
-                        </div>
-                        <div className="mb-3">
-                            <label className="form-label" htmlFor="inputtext">
-                                Currency * :
-                            </label>
-                            <select
-                                className="form-select"
-                                aria-label="Default select example"
-                            >
-                                <option defaultValue="">Customer </option>
-                                <option value="1">Customer 2</option>
-                                <option value="2">Customer </option>
-                            </select>
-                        </div>
-                        <div className="mb-3">
-                            <label className="form-label" htmlFor="inputtext">
-                                Reference :
-                            </label>
-                            <input
-                                className="form-control"
-                                id="inputtext"
-                                type="text"
-                                placeholder="Purchase price ($)"
-                            />
-                        </div>
-                        <div className="mb-3">
-                            <label className="form-label" htmlFor="inputtext">
-                                Status :
-                            </label>
-                            <span className="badge badge-phoenix fs--2 badge-phoenix-secondary">
-                                <span className="badge-label">Draft</span>
-                            </span>
-                        </div>
-                        <div className="mb-3">
-                            <label className="form-label" htmlFor="inputtext">
-                                Number * :
-                            </label>
-                            <input
-                                className="form-control"
-                                id="inputtext"
-                                type="text"
-                                placeholder="Order Number"
-                            />
-                        </div>
-                    </div>
-                    <div className="modal-footer">
-                        <button className="btn btn-primary" type="button">
-                            Save
-                        </button>
-                        <button
-                            className="btn btn-outline-danger"
-                            type="button"
-                            data-bs-dismiss="modal"
-                        >
-                            Cancel
-                        </button>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default EstimatesModal
+export default EstimatesModal;

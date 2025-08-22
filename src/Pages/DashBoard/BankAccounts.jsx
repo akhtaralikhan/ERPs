@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import { useRedux } from "../../hooks/useRedux";
 import { getCurrencyDefault } from "../../redux/dashboard/actions";
 import { createSelector } from "reselect";
-import DeleteBankAccountModal from "../../Components/DeleteBankAccountModal";
 import BankAccountModal from "../../Components/BankAccountModal";
 import { editData, getBankAccountAction, getCurrency } from "../../redux/bankAccounts/actions";
+import DeleteDataModal from "../../Components/DeleteDataModal";
 
 const BankAccounts = () => {
 
@@ -38,6 +38,9 @@ const BankAccounts = () => {
 
   const [activeTab, setActiveTab] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
+  const endPoint = "bankAccount";
+  const modalId = "verticallyCentered";
+  const userId = selectedBankAccount?.id;
 
   const filteredAccounts = useMemo(() => {
     return bankAccount.filter((item) => {
@@ -295,7 +298,11 @@ const BankAccounts = () => {
               </div>
 
               {/* <!-- delete modal --> */}
-              <DeleteBankAccountModal selectedBankAccount={selectedBankAccount} />
+              <DeleteDataModal
+                userId={userId}
+                endPoint={endPoint}
+                modalId={modalId}
+              />
               {/* <!-- Edit modal --> */}
               <BankAccountModal selectedBankAccount={selectedBankAccount} />
             </div>

@@ -1,13 +1,33 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useRedux } from "../../hooks/useRedux";
 import { getSubscriptionsTenant3Action } from "../../redux/console/actions";
-import { getProposals } from "../../redux/sales/actions";
+import { editProposalData, getCurrency, getCustomers, getProposals } from "../../redux/sales/actions";
 import EstimatesModal from "../../Components/EstimatesModal";
-import DeleteEstimatesModal from "../../Components/DeleteEstimatesModal";
+import DeleteDataModal from "../../Components/DeleteDataModal";
+import ChatSupport from "../../Components/ChatSupport";
+import { createSelector } from "reselect";
+import { Link } from "react-router-dom";
+
 
 const Estimates = () => {
 
   const { dispatch, useAppSelector } = useRedux();
+
+  const userData = createSelector(
+    (state) => state.sales,
+    (state) => ({
+      proposals: state.proposals,
+    })
+  );
+  const { proposals } = useAppSelector(userData);
+
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredProposal = proposals.filter(proposal =>
+    proposal?.customer?.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    proposal?.customer?.email?.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
 
   useEffect(() => {
     dispatch(getSubscriptionsTenant3Action());
@@ -15,6 +35,29 @@ const Estimates = () => {
 
   }, []);
 
+  //handle click 
+  // State
+  const [modalMode, setModalMode] = useState("add");
+  const [modalData, setModalData] = useState(null);
+  const [selectedId, setSelectedId] = useState(null);
+  const endPoint = "proposal";
+
+  // --- Click handlers ---
+  const handleAddClick = () => {
+    setModalMode("add");
+    setModalData(null);
+  };
+
+  const handleEditClick = (propsal) => {
+    setModalMode("edit");
+    setModalData(propsal);
+    dispatch(getCurrency());
+    dispatch(getCustomers());
+  };
+
+  const handleDeleteClick = (id) => {
+    setSelectedId(id);
+  };
 
   return (
     <>
@@ -56,13 +99,13 @@ const Estimates = () => {
                         <div className="card-header d-flex justify-content-between align-items-center">
                           <h4>Estimates</h4>
                           <button
-                            className="btn btn-primary me-1 mb-1 text-uppercase"
+                            className="btn btn-primary"
                             type="button"
                             data-bs-toggle="modal"
                             data-bs-target="#edit-modal"
+                            onClick={handleAddClick}
                           >
-                            <i className="fa fa-solid fa-plus me-3"></i>New
-                            Estimates
+                            New Estimates
                           </button>
                         </div>
                         <div className="card-body border-bottom">
@@ -81,10 +124,13 @@ const Estimates = () => {
                                   type="search"
                                   placeholder="Search"
                                   aria-label="Search"
+                                  value={searchTerm}
+                                  onChange={(e) => setSearchTerm(e.target.value)}
                                 />
                                 <span className="fas fa-search search-box-icon"></span>
                               </form>
                             </div>
+
                             <div className="table-responsive">
                               <table className="table table-striped table-sm fs--1 mb-0">
                                 <thead>
@@ -133,650 +179,121 @@ const Estimates = () => {
                                     </th>
                                   </tr>
                                 </thead>
-                                <tbody className="list">
-                                  <tr>
-                                    <td className="align-middle ps-3 name">
-                                      <a href="#">#EST7</a>
-                                    </td>
-                                    <td className="align-middle customer white-space-nowrap">
-                                      <a
-                                        className="d-flex align-items-center text-900"
-                                        href="#"
-                                      >
-                                        <div className="avatar avatar-l">
-                                          <div className="avatar-name rounded-circle">
-                                            <span>R</span>
+                                {filteredProposal?.map((proposal, idx) => (
+                                  <tbody className="list" key={idx}>
+                                    <tr>
+                                      <td className="align-middle ps-3 name">
+                                        <Link to="#">{proposal?.reference}</Link>
+
+                                      </td>
+                                      <td className="align-middle customer white-space-nowrap">
+                                        <a
+                                          className="d-flex align-items-center text-900"
+                                          href="#"
+                                        >
+                                          <div className="avatar avatar-l">
+                                            <div className="avatar-name rounded-circle">
+                                              <span>{proposal?.customer?.name?.charAt(0)?.toUpperCase()}</span>
+
+                                            </div>
+                                          </div>
+                                          <div className="">
+                                            <h6 className="mb-0 ms-3 text-900">
+                                              {proposal?.customer?.name || "John Doe"}
+                                            </h6>
+                                            <small className="mb-0 ms-3 text-900">
+                                              {proposal?.customer?.email}
+                                            </small>
+                                          </div>
+                                        </a>
+                                      </td>
+                                      <td className="align-middle email">
+                                        {new Date(proposal?.issueDate).toLocaleString("en-US", {
+                                          month: "short",
+                                          day: "numeric",
+                                          year: "numeric",
+                                          hour: "numeric",
+                                          minute: "2-digit",
+                                          hour12: true,
+                                        })}
+                                      </td>
+                                      <td className="align-middle email">
+                                        {new Date(proposal?.issueDate).toLocaleString("en-US", {
+                                          month: "short",
+                                          day: "numeric",
+                                          year: "numeric",
+                                          hour: "numeric",
+                                          minute: "2-digit",
+                                          hour12: true,
+                                        })}
+                                      </td>
+                                      <td className="align-middle text-primary">
+                                        {" "}
+                                        {proposal?.totalAmount}
+                                      </td>
+                                      <td className="align-middle">
+                                        <span className="badge bg-success">
+                                          {proposal?.status}
+                                        </span>
+                                      </td>
+                                      <td className="align-middle white-space-nowrap pe-0">
+                                        <div className="font-sans-serif btn-reveal-trigger position-static">
+                                          <button
+                                            className="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
+                                            type="button"
+                                            data-bs-toggle="dropdown"
+                                            data-boundary="window"
+                                            aria-haspopup="true"
+                                            aria-expanded="false"
+                                            data-bs-reference="parent"
+                                          >
+                                            <i className="fa fa-ellipsis fs--2"></i>
+
+                                          </button>
+                                          <div className="dropdown-menu dropdown-menu-end py-2">
+                                            <a
+                                              className="dropdown-item"
+                                              href="#!"
+                                            >
+                                              Forword
+                                            </a>
+                                            <a
+                                              className="dropdown-item"
+                                              href="#!"
+                                              type="button"
+                                              data-bs-toggle="modal"
+                                              data-bs-target="#edit-modal"
+                                            >
+                                              View
+                                            </a>
+                                            <Link
+                                              className="dropdown-item"
+                                              to="#!"
+                                              type="button"
+                                              data-bs-toggle="modal"
+                                              data-bs-target="#edit-modal"
+                                              onClick={() => handleEditClick(proposal)} // <-- pass item
+                                            >
+                                              Edit
+                                            </Link>
+                                            <div className="dropdown-divider"></div>
+                                            <Link
+                                              className="dropdown-item text-danger"
+                                              to="#!"
+                                              data-bs-toggle="modal"
+                                              data-bs-target="#verticallyCentered"
+                                              onClick={() => handleDeleteClick(proposal.id)} // <-- pass ID
+                                            >
+                                              Delete
+                                            </Link>
                                           </div>
                                         </div>
-                                        <div className="">
-                                          <h6 className="mb-0 ms-3 text-900">
-                                            Richard Dawkins
-                                          </h6>
-                                          <small className="mb-0 ms-3 text-900">
-                                            Johson@gmail.com
-                                          </small>
-                                        </div>
-                                      </a>
-                                    </td>
-                                    <td className="align-middle">
-                                      Apr 25, 2023, 18:08
-                                    </td>
-                                    <td className="align-middle text-warning">
-                                      Apr 25, 2023, 18:08
-                                    </td>
-                                    <td className="align-middle text-primary">
-                                      {" "}
-                                      BHD1680
-                                    </td>
-                                    <td className="align-middle">
-                                      <span className="badge bg-success">
-                                        Accepted
-                                      </span>
-                                    </td>
-                                    <td className="align-middle white-space-nowrap pe-0">
-                                      <div className="font-sans-serif btn-reveal-trigger position-static">
-                                        <button
-                                          className="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
-                                          type="button"
-                                          data-bs-toggle="dropdown"
-                                          data-boundary="window"
-                                          aria-haspopup="true"
-                                          aria-expanded="false"
-                                          data-bs-reference="parent"
-                                        >
-                                          <svg
-                                            className="svg-inline--fa fa-ellipsis fs--2"
-                                            aria-hidden="true"
-                                            focusable="false"
-                                            data-prefix="fas"
-                                            data-icon="ellipsis"
-                                            role="img"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 448 512"
-                                            data-fa-i2svg=""
-                                          >
-                                            <path
-                                              fill="currentColor"
-                                              d="M120 256C120 286.9 94.93 312 64 312C33.07 312 8 286.9 8 256C8 225.1 33.07 200 64 200C94.93 200 120 225.1 120 256zM280 256C280 286.9 254.9 312 224 312C193.1 312 168 286.9 168 256C168 225.1 193.1 200 224 200C254.9 200 280 225.1 280 256zM328 256C328 225.1 353.1 200 384 200C414.9 200 440 225.1 440 256C440 286.9 414.9 312 384 312C353.1 312 328 286.9 328 256z"
-                                            ></path>
-                                          </svg>
-                                          {/* <!-- <span className="fas fa-ellipsis-h fs--2"></span> Font Awesome fontawesome.com --> */}
-                                        </button>
-                                        <div className="dropdown-menu dropdown-menu-end py-2">
-                                          <a
-                                            className="dropdown-item"
-                                            href="#!"
-                                          >
-                                            Forword
-                                          </a>
-                                          <a
-                                            className="dropdown-item"
-                                            href="#!"
-                                            type="button"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#edit-modal"
-                                          >
-                                            View
-                                          </a>
-                                          <a
-                                            className="dropdown-item"
-                                            href="#!"
-                                            type="button"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#edit-modal"
-                                          >
-                                            Edit
-                                          </a>
-                                          <div className="dropdown-divider"></div>
-                                          <a
-                                            className="dropdown-item text-danger"
-                                            href="#!"
-                                            type="button"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#verticallyCentered"
-                                          >
-                                            Delete
-                                          </a>
-                                        </div>
-                                      </div>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td className="align-middle ps-3 name">
-                                      <a href="#">#EST7</a>
-                                    </td>
-                                    <td className="align-middle customer white-space-nowrap">
-                                      <a
-                                        className="d-flex align-items-center text-900"
-                                        href="#"
-                                      >
-                                        <div className="avatar avatar-l">
-                                          <div className="avatar-name rounded-circle">
-                                            <span>R</span>
-                                          </div>
-                                        </div>
-                                        <div className="">
-                                          <h6 className="mb-0 ms-3 text-900">
-                                            Richard Dawkins
-                                          </h6>
-                                          <small className="mb-0 ms-3 text-900">
-                                            Johson@gmail.com
-                                          </small>
-                                        </div>
-                                      </a>
-                                    </td>
-                                    <td className="align-middle">
-                                      Apr 25, 2023, 18:08
-                                    </td>
-                                    <td className="align-middle text-warning">
-                                      Apr 25, 2023, 18:08
-                                    </td>
-                                    <td className="align-middle text-primary">
-                                      {" "}
-                                      BHD1680
-                                    </td>
-                                    <td className="align-middle">
-                                      <span className="badge bg-success">
-                                        Accepted
-                                      </span>
-                                    </td>
-                                    <td className="align-middle white-space-nowrap pe-0">
-                                      <div className="font-sans-serif btn-reveal-trigger position-static">
-                                        <button
-                                          className="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
-                                          type="button"
-                                          data-bs-toggle="dropdown"
-                                          data-boundary="window"
-                                          aria-haspopup="true"
-                                          aria-expanded="false"
-                                          data-bs-reference="parent"
-                                        >
-                                          <svg
-                                            className="svg-inline--fa fa-ellipsis fs--2"
-                                            aria-hidden="true"
-                                            focusable="false"
-                                            data-prefix="fas"
-                                            data-icon="ellipsis"
-                                            role="img"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 448 512"
-                                            data-fa-i2svg=""
-                                          >
-                                            <path
-                                              fill="currentColor"
-                                              d="M120 256C120 286.9 94.93 312 64 312C33.07 312 8 286.9 8 256C8 225.1 33.07 200 64 200C94.93 200 120 225.1 120 256zM280 256C280 286.9 254.9 312 224 312C193.1 312 168 286.9 168 256C168 225.1 193.1 200 224 200C254.9 200 280 225.1 280 256zM328 256C328 225.1 353.1 200 384 200C414.9 200 440 225.1 440 256C440 286.9 414.9 312 384 312C353.1 312 328 286.9 328 256z"
-                                            ></path>
-                                          </svg>
-                                          {/* <!-- <span className="fas fa-ellipsis-h fs--2"></span> Font Awesome fontawesome.com --> */}
-                                        </button>
-                                        <div className="dropdown-menu dropdown-menu-end py-2">
-                                          <a
-                                            className="dropdown-item"
-                                            href="#!"
-                                          >
-                                            Forword
-                                          </a>
-                                          <a
-                                            className="dropdown-item"
-                                            href="#!"
-                                            type="button"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#edit-modal"
-                                          >
-                                            View
-                                          </a>
-                                          <a
-                                            className="dropdown-item"
-                                            href="#!"
-                                            type="button"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#edit-modal"
-                                          >
-                                            Edit
-                                          </a>
-                                          <div className="dropdown-divider"></div>
-                                          <a
-                                            className="dropdown-item text-danger"
-                                            href="#!"
-                                            type="button"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#verticallyCentered"
-                                          >
-                                            Delete
-                                          </a>
-                                        </div>
-                                      </div>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td className="align-middle ps-3 name">
-                                      <a href="#">#EST7</a>
-                                    </td>
-                                    <td className="align-middle customer white-space-nowrap">
-                                      <a
-                                        className="d-flex align-items-center text-900"
-                                        href="#"
-                                      >
-                                        <div className="avatar avatar-l">
-                                          <div className="avatar-name rounded-circle">
-                                            <span>R</span>
-                                          </div>
-                                        </div>
-                                        <div className="">
-                                          <h6 className="mb-0 ms-3 text-900">
-                                            Richard Dawkins
-                                          </h6>
-                                          <small className="mb-0 ms-3 text-900">
-                                            Johson@gmail.com
-                                          </small>
-                                        </div>
-                                      </a>
-                                    </td>
-                                    <td className="align-middle">
-                                      Apr 25, 2023, 18:08
-                                    </td>
-                                    <td className="align-middle text-warning">
-                                      Apr 25, 2023, 18:08
-                                    </td>
-                                    <td className="align-middle text-primary">
-                                      {" "}
-                                      BHD1680
-                                    </td>
-                                    <td className="align-middle">
-                                      <span className="badge bg-success">
-                                        Accepted
-                                      </span>
-                                    </td>
-                                    <td className="align-middle white-space-nowrap pe-0">
-                                      <div className="font-sans-serif btn-reveal-trigger position-static">
-                                        <button
-                                          className="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
-                                          type="button"
-                                          data-bs-toggle="dropdown"
-                                          data-boundary="window"
-                                          aria-haspopup="true"
-                                          aria-expanded="false"
-                                          data-bs-reference="parent"
-                                        >
-                                          <svg
-                                            className="svg-inline--fa fa-ellipsis fs--2"
-                                            aria-hidden="true"
-                                            focusable="false"
-                                            data-prefix="fas"
-                                            data-icon="ellipsis"
-                                            role="img"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 448 512"
-                                            data-fa-i2svg=""
-                                          >
-                                            <path
-                                              fill="currentColor"
-                                              d="M120 256C120 286.9 94.93 312 64 312C33.07 312 8 286.9 8 256C8 225.1 33.07 200 64 200C94.93 200 120 225.1 120 256zM280 256C280 286.9 254.9 312 224 312C193.1 312 168 286.9 168 256C168 225.1 193.1 200 224 200C254.9 200 280 225.1 280 256zM328 256C328 225.1 353.1 200 384 200C414.9 200 440 225.1 440 256C440 286.9 414.9 312 384 312C353.1 312 328 286.9 328 256z"
-                                            ></path>
-                                          </svg>
-                                          {/* <!-- <span className="fas fa-ellipsis-h fs--2"></span> Font Awesome fontawesome.com --> */}
-                                        </button>
-                                        <div className="dropdown-menu dropdown-menu-end py-2">
-                                          <a
-                                            className="dropdown-item"
-                                            href="#!"
-                                          >
-                                            Forword
-                                          </a>
-                                          <a
-                                            className="dropdown-item"
-                                            href="#!"
-                                            type="button"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#edit-modal"
-                                          >
-                                            View
-                                          </a>
-                                          <a
-                                            className="dropdown-item"
-                                            href="#!"
-                                            type="button"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#edit-modal"
-                                          >
-                                            Edit
-                                          </a>
-                                          <div className="dropdown-divider"></div>
-                                          <a
-                                            className="dropdown-item text-danger"
-                                            href="#!"
-                                            type="button"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#verticallyCentered"
-                                          >
-                                            Delete
-                                          </a>
-                                        </div>
-                                      </div>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td className="align-middle ps-3 name">
-                                      <a href="#">#EST7</a>
-                                    </td>
-                                    <td className="align-middle customer white-space-nowrap">
-                                      <a
-                                        className="d-flex align-items-center text-900"
-                                        href="#"
-                                      >
-                                        <div className="avatar avatar-l">
-                                          <div className="avatar-name rounded-circle">
-                                            <span>R</span>
-                                          </div>
-                                        </div>
-                                        <div className="">
-                                          <h6 className="mb-0 ms-3 text-900">
-                                            Richard Dawkins
-                                          </h6>
-                                          <small className="mb-0 ms-3 text-900">
-                                            Johson@gmail.com
-                                          </small>
-                                        </div>
-                                      </a>
-                                    </td>
-                                    <td className="align-middle">
-                                      Apr 25, 2023, 18:08
-                                    </td>
-                                    <td className="align-middle text-warning">
-                                      Apr 25, 2023, 18:08
-                                    </td>
-                                    <td className="align-middle text-primary">
-                                      {" "}
-                                      BHD1680
-                                    </td>
-                                    <td className="align-middle">
-                                      <span className="badge bg-success">
-                                        Accepted
-                                      </span>
-                                    </td>
-                                    <td className="align-middle white-space-nowrap pe-0">
-                                      <div className="font-sans-serif btn-reveal-trigger position-static">
-                                        <button
-                                          className="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
-                                          type="button"
-                                          data-bs-toggle="dropdown"
-                                          data-boundary="window"
-                                          aria-haspopup="true"
-                                          aria-expanded="false"
-                                          data-bs-reference="parent"
-                                        >
-                                          <svg
-                                            className="svg-inline--fa fa-ellipsis fs--2"
-                                            aria-hidden="true"
-                                            focusable="false"
-                                            data-prefix="fas"
-                                            data-icon="ellipsis"
-                                            role="img"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 448 512"
-                                            data-fa-i2svg=""
-                                          >
-                                            <path
-                                              fill="currentColor"
-                                              d="M120 256C120 286.9 94.93 312 64 312C33.07 312 8 286.9 8 256C8 225.1 33.07 200 64 200C94.93 200 120 225.1 120 256zM280 256C280 286.9 254.9 312 224 312C193.1 312 168 286.9 168 256C168 225.1 193.1 200 224 200C254.9 200 280 225.1 280 256zM328 256C328 225.1 353.1 200 384 200C414.9 200 440 225.1 440 256C440 286.9 414.9 312 384 312C353.1 312 328 286.9 328 256z"
-                                            ></path>
-                                          </svg>
-                                          {/* <!-- <span className="fas fa-ellipsis-h fs--2"></span> Font Awesome fontawesome.com --> */}
-                                        </button>
-                                        <div className="dropdown-menu dropdown-menu-end py-2">
-                                          <a
-                                            className="dropdown-item"
-                                            href="#!"
-                                          >
-                                            Forword
-                                          </a>
-                                          <a
-                                            className="dropdown-item"
-                                            href="#!"
-                                            type="button"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#edit-modal"
-                                          >
-                                            View
-                                          </a>
-                                          <a
-                                            className="dropdown-item"
-                                            href="#!"
-                                            type="button"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#edit-modal"
-                                          >
-                                            Edit
-                                          </a>
-                                          <div className="dropdown-divider"></div>
-                                          <a
-                                            className="dropdown-item text-danger"
-                                            href="#!"
-                                            type="button"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#verticallyCentered"
-                                          >
-                                            Delete
-                                          </a>
-                                        </div>
-                                      </div>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td className="align-middle ps-3 name">
-                                      <a href="#">#EST7</a>
-                                    </td>
-                                    <td className="align-middle customer white-space-nowrap">
-                                      <a
-                                        className="d-flex align-items-center text-900"
-                                        href="#"
-                                      >
-                                        <div className="avatar avatar-l">
-                                          <div className="avatar-name rounded-circle">
-                                            <span>R</span>
-                                          </div>
-                                        </div>
-                                        <div className="">
-                                          <h6 className="mb-0 ms-3 text-900">
-                                            Richard Dawkins
-                                          </h6>
-                                          <small className="mb-0 ms-3 text-900">
-                                            Johson@gmail.com
-                                          </small>
-                                        </div>
-                                      </a>
-                                    </td>
-                                    <td className="align-middle">
-                                      Apr 25, 2023, 18:08
-                                    </td>
-                                    <td className="align-middle text-warning">
-                                      Apr 25, 2023, 18:08
-                                    </td>
-                                    <td className="align-middle text-primary">
-                                      {" "}
-                                      BHD1680
-                                    </td>
-                                    <td className="align-middle">
-                                      <span className="badge bg-success">
-                                        Accepted
-                                      </span>
-                                    </td>
-                                    <td className="align-middle white-space-nowrap pe-0">
-                                      <div className="font-sans-serif btn-reveal-trigger position-static">
-                                        <button
-                                          className="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
-                                          type="button"
-                                          data-bs-toggle="dropdown"
-                                          data-boundary="window"
-                                          aria-haspopup="true"
-                                          aria-expanded="false"
-                                          data-bs-reference="parent"
-                                        >
-                                          <svg
-                                            className="svg-inline--fa fa-ellipsis fs--2"
-                                            aria-hidden="true"
-                                            focusable="false"
-                                            data-prefix="fas"
-                                            data-icon="ellipsis"
-                                            role="img"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 448 512"
-                                            data-fa-i2svg=""
-                                          >
-                                            <path
-                                              fill="currentColor"
-                                              d="M120 256C120 286.9 94.93 312 64 312C33.07 312 8 286.9 8 256C8 225.1 33.07 200 64 200C94.93 200 120 225.1 120 256zM280 256C280 286.9 254.9 312 224 312C193.1 312 168 286.9 168 256C168 225.1 193.1 200 224 200C254.9 200 280 225.1 280 256zM328 256C328 225.1 353.1 200 384 200C414.9 200 440 225.1 440 256C440 286.9 414.9 312 384 312C353.1 312 328 286.9 328 256z"
-                                            ></path>
-                                          </svg>
-                                          {/* <!-- <span className="fas fa-ellipsis-h fs--2"></span> Font Awesome fontawesome.com --> */}
-                                        </button>
-                                        <div className="dropdown-menu dropdown-menu-end py-2">
-                                          <a
-                                            className="dropdown-item"
-                                            href="#!"
-                                          >
-                                            Forword
-                                          </a>
-                                          <a
-                                            className="dropdown-item"
-                                            href="#!"
-                                            type="button"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#edit-modal"
-                                          >
-                                            View
-                                          </a>
-                                          <a
-                                            className="dropdown-item"
-                                            href="#!"
-                                            type="button"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#edit-modal"
-                                          >
-                                            Edit
-                                          </a>
-                                          <div className="dropdown-divider"></div>
-                                          <a
-                                            className="dropdown-item text-danger"
-                                            href="#!"
-                                            type="button"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#verticallyCentered"
-                                          >
-                                            Delete
-                                          </a>
-                                        </div>
-                                      </div>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td className="align-middle ps-3 name">
-                                      <a href="#">#EST7</a>
-                                    </td>
-                                    <td className="align-middle customer white-space-nowrap">
-                                      <a
-                                        className="d-flex align-items-center text-900"
-                                        href="#"
-                                      >
-                                        <div className="avatar avatar-l">
-                                          <div className="avatar-name rounded-circle">
-                                            <span>R</span>
-                                          </div>
-                                        </div>
-                                        <div className="">
-                                          <h6 className="mb-0 ms-3 text-900">
-                                            Richard Dawkins
-                                          </h6>
-                                          <small className="mb-0 ms-3 text-900">
-                                            Johson@gmail.com
-                                          </small>
-                                        </div>
-                                      </a>
-                                    </td>
-                                    <td className="align-middle">
-                                      Apr 25, 2023, 18:08
-                                    </td>
-                                    <td className="align-middle text-warning">
-                                      Apr 25, 2023, 18:08
-                                    </td>
-                                    <td className="align-middle text-primary">
-                                      {" "}
-                                      BHD1680
-                                    </td>
-                                    <td className="align-middle">
-                                      <span className="badge bg-success">
-                                        Accepted
-                                      </span>
-                                    </td>
-                                    <td className="align-middle white-space-nowrap pe-0">
-                                      <div className="font-sans-serif btn-reveal-trigger position-static">
-                                        <button
-                                          className="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
-                                          type="button"
-                                          data-bs-toggle="dropdown"
-                                          data-boundary="window"
-                                          aria-haspopup="true"
-                                          aria-expanded="false"
-                                          data-bs-reference="parent"
-                                        >
-                                          <svg
-                                            className="svg-inline--fa fa-ellipsis fs--2"
-                                            aria-hidden="true"
-                                            focusable="false"
-                                            data-prefix="fas"
-                                            data-icon="ellipsis"
-                                            role="img"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 448 512"
-                                            data-fa-i2svg=""
-                                          >
-                                            <path
-                                              fill="currentColor"
-                                              d="M120 256C120 286.9 94.93 312 64 312C33.07 312 8 286.9 8 256C8 225.1 33.07 200 64 200C94.93 200 120 225.1 120 256zM280 256C280 286.9 254.9 312 224 312C193.1 312 168 286.9 168 256C168 225.1 193.1 200 224 200C254.9 200 280 225.1 280 256zM328 256C328 225.1 353.1 200 384 200C414.9 200 440 225.1 440 256C440 286.9 414.9 312 384 312C353.1 312 328 286.9 328 256z"
-                                            ></path>
-                                          </svg>
-                                          {/* <!-- <span className="fas fa-ellipsis-h fs--2"></span> Font Awesome fontawesome.com --> */}
-                                        </button>
-                                        <div className="dropdown-menu dropdown-menu-end py-2">
-                                          <a
-                                            className="dropdown-item"
-                                            href="#!"
-                                          >
-                                            Forword
-                                          </a>
-                                          <a
-                                            className="dropdown-item"
-                                            href="#!"
-                                            type="button"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#edit-modal"
-                                          >
-                                            View
-                                          </a>
-                                          <a
-                                            className="dropdown-item"
-                                            href="#!"
-                                            type="button"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#edit-modal"
-                                          >
-                                            Edit
-                                          </a>
-                                          <div className="dropdown-divider"></div>
-                                          <a
-                                            className="dropdown-item text-danger"
-                                            href="#!"
-                                            type="button"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#verticallyCentered"
-                                          >
-                                            Delete
-                                          </a>
-                                        </div>
-                                      </div>
-                                    </td>
-                                  </tr>
-                                </tbody>
+                                      </td>
+                                    </tr>
+
+                                  </tbody>
+                                ))}
+
                               </table>
                             </div>
                             <div className="d-flex justify-content-between mt-3">
@@ -793,23 +310,7 @@ const Estimates = () => {
                                   data-list-pagination="prev"
                                   disabled=""
                                 >
-                                  <svg
-                                    className="svg-inline--fa fa-chevron-left"
-                                    aria-hidden="true"
-                                    focusable="false"
-                                    data-prefix="fas"
-                                    data-icon="chevron-left"
-                                    role="img"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 320 512"
-                                    data-fa-i2svg=""
-                                  >
-                                    <path
-                                      fill="currentColor"
-                                      d="M224 480c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25l192-192c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l169.4 169.4c12.5 12.5 12.5 32.75 0 45.25C240.4 476.9 232.2 480 224 480z"
-                                    ></path>
-                                  </svg>
-                                  {/* <!-- <span className="fas fa-chevron-left"></span> Font Awesome fontawesome.com --> */}
+                                  <i className="fa fa-chevron-left"></i>
                                 </button>
                                 <ul className="mb-0 pagination">
                                   <li className="active">
@@ -852,23 +353,8 @@ const Estimates = () => {
                                   className="page-link pe-0"
                                   data-list-pagination="next"
                                 >
-                                  <svg
-                                    className="svg-inline--fa fa-chevron-right"
-                                    aria-hidden="true"
-                                    focusable="false"
-                                    data-prefix="fas"
-                                    data-icon="chevron-right"
-                                    role="img"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 320 512"
-                                    data-fa-i2svg=""
-                                  >
-                                    <path
-                                      fill="currentColor"
-                                      d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"
-                                    ></path>
-                                  </svg>
-                                  {/* <!-- <span className="fas fa-chevron-right"></span> Font Awesome fontawesome.com --> */}
+                                  <i className="fa fa-chevron-right"></i>
+
                                 </button>
                               </div>
                             </div>
@@ -882,160 +368,29 @@ const Estimates = () => {
               <hr className="bg-200 mb-6 mt-4" />
 
               {/* <!-- delete modal --> */}
-              <DeleteEstimatesModal />
+              <DeleteDataModal
+                userId={selectedId}
+                endPoint={endPoint}
+                modalId="verticallyCentered"
+              />
 
               {/* <!-- delete modal -->
                         <!-- Edit modal --> */}
-
-              <EstimatesModal />
+              <EstimatesModal
+                mode={modalMode}
+                initialData={modalData}
+                onSave={(data) => {
+                  if (modalMode === "edit") {
+                    dispatch(editProposalData(data.id));
+                  } else {
+                    // dispatch(createProductData(data)); make it 
+                  }
+                }}
+              />
               {/* <!-- Edit modal --> */}
 
             </div>
-            <div className="support-chat-container">
-              <div className="container-fluid support-chat">
-                <div className="card bg-white">
-                  <div className="card-header d-flex flex-between-center px-4 py-3 border-bottom">
-                    <h5 className="mb-0 d-flex align-items-center gap-2">
-                      Demo widget
-                      <span className="fa-solid fa-circle text-success fs--3"></span>
-                    </h5>
-                    <div className="btn-reveal-trigger">
-                      <button
-                        className="btn btn-link p-0 dropdown-toggle dropdown-caret-none transition-none d-flex"
-                        type="button"
-                        id="support-chat-dropdown"
-                        data-bs-toggle="dropdown"
-                        data-boundary="window"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                        data-bs-reference="parent"
-                      >
-                        <span className="fas fa-ellipsis-h text-900"></span>
-                      </button>
-                      <div
-                        className="dropdown-menu dropdown-menu-end py-2"
-                        aria-labelledby="support-chat-dropdown"
-                      >
-                        <a className="dropdown-item" href="#!">
-                          Request a callback
-                        </a>
-                        <a className="dropdown-item" href="#!">
-                          Search in chat
-                        </a>
-                        <a className="dropdown-item" href="#!">
-                          Show history
-                        </a>
-                        <a className="dropdown-item" href="#!">
-                          Report to Admin
-                        </a>
-                        <a className="dropdown-item btn-support-chat" href="#!">
-                          Close Support
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="card-body chat p-0">
-                    <div className="d-flex flex-column-reverse scrollbar h-100 p-3">
-                      <div className="text-end mt-6">
-                        <a
-                          className="mb-2 d-inline-flex align-items-center text-decoration-none text-1100 hover-bg-soft rounded-pill border border-primary py-2 ps-4 pe-3"
-                          href="#!"
-                        >
-                          <p className="mb-0 fw-semi-bold fs--1">
-                            I need help with something
-                          </p>
-                          <span className="fa-solid fa-paper-plane text-primary fs--1 ms-3"></span>
-                        </a>
-                        <a
-                          className="mb-2 d-inline-flex align-items-center text-decoration-none text-1100 hover-bg-soft rounded-pill border border-primary py-2 ps-4 pe-3"
-                          href="#!"
-                        >
-                          <p className="mb-0 fw-semi-bold fs--1">
-                            I can’t reorder a product I previously ordered
-                          </p>
-                          <span className="fa-solid fa-paper-plane text-primary fs--1 ms-3"></span>
-                        </a>
-                        <a
-                          className="mb-2 d-inline-flex align-items-center text-decoration-none text-1100 hover-bg-soft rounded-pill border border-primary py-2 ps-4 pe-3"
-                          href="#!"
-                        >
-                          <p className="mb-0 fw-semi-bold fs--1">
-                            How do I place an order?
-                          </p>
-                          <span className="fa-solid fa-paper-plane text-primary fs--1 ms-3"></span>
-                        </a>
-                        <a
-                          className="false d-inline-flex align-items-center text-decoration-none text-1100 hover-bg-soft rounded-pill border border-primary py-2 ps-4 pe-3"
-                          href="#!"
-                        >
-                          <p className="mb-0 fw-semi-bold fs--1">
-                            My payment method not working
-                          </p>
-                          <span className="fa-solid fa-paper-plane text-primary fs--1 ms-3"></span>
-                        </a>
-                      </div>
-                      <div className="text-center mt-auto">
-                        <div className="avatar avatar-3xl status-online">
-                          <img
-                            className="rounded-circle border border-3 border-white"
-                            src="src/assets/img/team/30.webp"
-                            alt=""
-                          />
-                        </div>
-                        <h5 className="mt-2 mb-3">Eric</h5>
-                        <p className="text-center text-black mb-0">
-                          Ask us anything – we’ll get back to you here or by
-                          email within 24 hours.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="card-footer d-flex align-items-center gap-2 border-top ps-3 pe-4 py-3">
-                    <div className="d-flex align-items-center flex-1 gap-3 border rounded-pill px-4">
-                      <input
-                        className="form-control outline-none border-0 flex-1 fs--1 px-0"
-                        type="text"
-                        placeholder="Write message"
-                      />
-                      <label
-                        className="btn btn-link d-flex p-0 text-500 fs--1 border-0"
-                        htmlFor="supportChatPhotos"
-                      >
-                        <span className="fa-solid fa-image"></span>
-                      </label>
-                      <input
-                        className="d-none"
-                        type="file"
-                        accept="image/*"
-                        id="supportChatPhotos"
-                      />
-                      <label
-                        className="btn btn-link d-flex p-0 text-500 fs--1 border-0"
-                        htmlFor="supportChatAttachment"
-                      >
-                        {" "}
-                        <span className="fa-solid fa-paperclip"></span>
-                      </label>
-                      <input
-                        className="d-none"
-                        type="file"
-                        id="supportChatAttachment"
-                      />
-                    </div>
-                    <button className="btn p-0 border-0 send-btn">
-                      <span className="fa-solid fa-paper-plane fs--1"></span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-              <button className="btn p-0 border border-200 btn-support-chat">
-                <span className="fs-0 btn-text text-primary text-nowrap">
-                  Chat demo
-                </span>
-                <span className="fa-solid fa-circle text-success fs--1 ms-2"></span>
-                <span className="fa-solid fa-chevron-down text-primary fs-1"></span>
-              </button>
-            </div>
+            <ChatSupport />
           </div>
         </div>
       </div>

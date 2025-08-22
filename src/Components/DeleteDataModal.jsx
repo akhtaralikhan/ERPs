@@ -1,16 +1,14 @@
 import React from 'react'
 import { useRedux } from '../hooks/useRedux';
-import { DeleteBankAccount, getBankAccountAction } from '../redux/bankAccounts/actions';
+import { DeleteDataAction, getBankAccountAction } from '../redux/bankAccounts/actions';
 
-function DeleteBankAccountModal({ selectedBankAccount }) {
+function DeleteDataModal({ userId, endPoint, modalId }) {
     const { dispatch, useAppSelector } = useRedux();
 
-    const userId = selectedBankAccount?.id
-
     const handleDeleteBankAccount = (e) => {
-        dispatch(DeleteBankAccount(userId))
+        dispatch(DeleteDataAction(userId, endPoint));
         dispatch(getBankAccountAction());
-        const modalEl = document.querySelector("#verticallyCentered");
+        const modalEl = document.querySelector(`#${modalId}`);
         if (modalEl) {
             const modalInstance = bootstrap.Modal.getInstance(modalEl);
             if (modalInstance) modalInstance.hide();
@@ -72,4 +70,4 @@ function DeleteBankAccountModal({ selectedBankAccount }) {
     )
 }
 
-export default DeleteBankAccountModal
+export default DeleteDataModal

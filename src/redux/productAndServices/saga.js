@@ -1,6 +1,6 @@
 import { call, put, takeEvery } from "redux-saga/effects";
 import { productAndServicesTypes } from "./types";
-import { deleteProductApi, editProductApi, editProductDataDetailsApi, getCategoryApi, getProductsApi, getServicesApi, getTaxApi } from "../../api/ProductAndServices";
+import { createProductDataDetailsApi, deleteProductApi, editProductApi, editProductDataDetailsApi, getCategoryApi, getProductsApi, getServicesApi, getTaxApi } from "../../api/ProductAndServices";
 
 export const ApiResponseSuccess = (actionType, data) => ({
     type: productAndServicesTypes.API_RESPONSE_SUCCESS,
@@ -116,14 +116,34 @@ function* editProductDataDetails(action) {
 
         const response = yield call(editProductDataDetailsApi, user);
 
-        yield put(ApiResponseSuccess(productAndServicesTypes.EDIT_SERVICES_DATA_DETAILS, response.data));
+        yield put(ApiResponseSuccess(productAndServicesTypes.EDIT_PRODUCT_DATA_DETAILS, response.data));
     } catch (error) {
         yield put(
-            ApiResponseError(productAndServicesTypes.EDIT_SERVICES_DATA_DETAILS, error.response?.data || "edit bank details  failed")
+            ApiResponseError(productAndServicesTypes.EDIT_PRODUCT_DATA_DETAILS, error.response?.data || "edit bank details  failed")
         );
     }
 }
 
-export default function* editProductDataDetailsSaga() {
-    yield takeEvery(productAndServicesTypes.EDIT_SERVICES_DATA_DETAILS, editProductDataDetails);
+export  function* editProductDataDetailsSaga() {
+    yield takeEvery(productAndServicesTypes.EDIT_PRODUCT_DATA_DETAILS, editProductDataDetails);
+}
+
+
+
+function* createProductDataDetails(action) {
+    try {
+        const { user } = action.payload;
+
+        const response = yield call(createProductDataDetailsApi, user);
+
+        yield put(ApiResponseSuccess(productAndServicesTypes.CREATE_PRODUCT_DATA, response.data));
+    } catch (error) {
+        yield put(
+            ApiResponseError(productAndServicesTypes.CREATE_PRODUCT_DATA, error.response?.data || "edit bank details  failed")
+        );
+    }
+}
+
+export  function* createProductSaga() {
+    yield takeEvery(productAndServicesTypes.CREATE_PRODUCT_DATA, createProductDataDetails);
 }

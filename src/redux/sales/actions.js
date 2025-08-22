@@ -39,3 +39,8 @@ export const getGoals = () => ({
 export const getCreditNotes = () => ({
   type: salesActionTypes.CREDITNOTES,
 });
+
+export const editProposalData = (id) => ({
+  type: salesActionTypes.EDIT_PROPOSAL_DATA,
+  payload: id,
+});

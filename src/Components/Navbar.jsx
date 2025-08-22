@@ -62,42 +62,18 @@ const Navbar = () => {
             <div className="d-flex align-items-center">
               <div className="d-flex align-items-center">
                 <img
-                  src="src/assets/img/icons/logo.png"
+                  src="src/assets/img/icons/MainIcon.png"
                   alt="phoenix"
                   style={{ width: "27px" }}
                 />
-                <p className="logo-text ms-2 d-none d-sm-block">phoenix</p>
+                <p className="logo-text ms-2 d-none d-sm-block">Business ERP</p>
               </div>
             </div>
           </Link>
         </div>
-        <div
-          className="search-box navbar-top-search-box d-none d-lg-block"
-          data-list='{"valueNames":["title"]}'
-          style={{ width: "25rem" }}
-        >
-          <form
-            className="position-relative"
-            data-bs-toggle="search"
-            data-bs-display="static"
-          >
-            <input
-              className="form-control search-input fuzzy-search rounded-pill form-control-sm"
-              type="search"
-              placeholder="Search..."
-              aria-label="Search"
-            />
-            <span className="fas fa-search search-box-icon"></span>
-          </form>
-          <div
-            className="btn-close position-absolute end-0 top-50 translate-middle cursor-pointer shadow-none"
-            data-bs-dismiss="search"
-          >
-            <button
-              className="btn btn-link btn-close-falcon p-0"
-              aria-label="Close"
-            ></button>
-          </div>
+        <div>
+          
+            
           <div className="dropdown-menu border border-300 font-base start-0 py-0 overflow-hidden w-100">
             <div className="scrollbar-overlay" style={{ maxHeight: "30rem" }}>
               <div className="list pb-3">
@@ -384,6 +360,7 @@ const Navbar = () => {
               </label>
             </div>
           </li>
+          
           <li className="nav-item dropdown">
             <Link
               className="nav-link"
@@ -1007,7 +984,7 @@ const Navbar = () => {
                         </span>
                       </div>
                     </div>
-                    <h6 className="mt-2 text-black">{user.data.fullname}</h6>
+                    <h6 className="mt-2 text-black">{user?.data?.fullname}</h6>
                   </div>
                   <div className="mb-3 mx-3">
                     <input

@@ -1,6 +1,6 @@
 import { call, put, takeEvery } from "redux-saga/effects";
 import { salesActionTypes } from "./types";
-import { creditnotesApi, currencyApi, customerApi, goalApi, invoiceApi, proposalsApi, revenueApi, totalRevenueApi } from "../../api/Sales";
+import { createProposalDataDetailsApi, creditnotesApi, currencyApi, customerApi, deleteProposalApi, editProposalApi, editProposalDataDetailsApi, goalApi, invoiceApi, proposalsApi, revenueApi, totalRevenueApi } from "../../api/Sales";
 
 export const ApiResponseSuccess = (actionType, data) => ({
     type: salesActionTypes.API_RESPONSE_SUCCESS,
@@ -134,7 +134,7 @@ export function* creditNoteSaga() {
 // function* customer() {
 
 //     try {
-//         const response = yield call(customerApi);
+// const response = yield call(customerApi);
 //         yield put(ApiResponseSuccess(salesActionTypes.CUSTOMER, response.data));
 //     } catch (error) {
 //         yield put(ApiResponseError(salesActionTypes.CUSTOMER, error?.response?.data || "Failed"));
@@ -144,3 +144,76 @@ export function* creditNoteSaga() {
 // export function* customerSaga() {
 //     yield takeEvery(salesActionTypes.CUSTOMER, customer);
 // }
+
+
+
+function* editProposal(id) {
+    try {
+
+        const response = yield call(editProposalApi, id);
+
+        yield put(ApiResponseSuccess(salesActionTypes.EDIT_PROPOSAL_DATA, response.data));
+    } catch (error) {
+        yield put(
+            ApiResponseError(salesActionTypes.EDIT_PROPOSAL_DATA, error.response?.data || "edit bank account failed")
+        );
+    }
+}
+
+export function* editProposalSaga() {
+    yield takeEvery(salesActionTypes.EDIT_PROPOSAL_DATA, editProposal);
+}
+
+function* deleteProduct(userId) {
+    try {
+
+        const response = yield call(deleteProposalApi, userId);
+
+        yield put(ApiResponseSuccess(salesActionTypes.DELETE_PROPOSAL_DATA, response.data));
+    } catch (error) {
+        console.log("error", error);
+
+    }
+}
+
+export function* deleteProductSaga() {
+    yield takeEvery(salesActionTypes.DELETE_PROPOSAL_DATA, deleteProduct);
+}
+
+function* editProposalDataDetails(action) {
+    try {
+        const { user } = action.payload;
+
+        const response = yield call(editProposalDataDetailsApi, user);
+
+        yield put(ApiResponseSuccess(salesActionTypes.EDIT_PROPOSAL_DATA_DETAILS, response.data));
+    } catch (error) {
+        yield put(
+            ApiResponseError(salesActionTypes.EDIT_PROPOSAL_DATA_DETAILS, error.response?.data || "edit bank details  failed")
+        );
+    }
+}
+
+export function* editProposalDataDetailsSaga() {
+    yield takeEvery(salesActionTypes.EDIT_PROPOSAL_DATA_DETAILS, editProposalDataDetails);
+}
+
+
+
+function* createProposalDataDetails(action) {
+    try {
+        const { user } = action.payload;
+
+        const response = yield call(createProposalDataDetailsApi, user);
+
+        yield put(ApiResponseSuccess(salesActionTypes.CREATE_PROPOSAL_DATA, response.data));
+    } catch (error) {
+        yield put(
+            ApiResponseError(salesActionTypes.CREATE_PROPOSAL_DATA, error.response?.data || "edit bank details  failed")
+        );
+    }
+}
+
+export function* createProposalSaga() {
+    yield takeEvery(salesActionTypes.CREATE_PROPOSAL_DATA, createProposalDataDetails);
+}

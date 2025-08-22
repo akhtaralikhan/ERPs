@@ -45,9 +45,9 @@ export const editData = (id) => ({
     payload: id,
 });
 
-export const DeleteBankAccount = (userId) => ({
+export const DeleteDataAction = (userId, endPoint) => ({
     type: bankAccountActionTypes.DELETEBANK_ACCOUNT,
-    payload: userId,
+    payload: { userId, endPoint },
 });
 
 export const editBankAccountDetails = (user) => ({

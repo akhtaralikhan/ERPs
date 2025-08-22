@@ -103,11 +103,11 @@ const Signin = () => {
                     ></div>
                     <div className="position-relative px-4 px-lg-7 pt-7 pb-7 pb-sm-5 text-center text-md-start pb-lg-7 pb-md-7">
                       <h3 className="mb-3 text-black fs-1">
-                        Phoenix Authentication
+                       Business ERP Solution
                       </h3>
                       <p className="text-700">
                         Give yourself some hassle-free development process with
-                        the uniqueness of Phoenix!
+                        the uniqueness of Business ERP Solution!
                       </p>
                       <ul className="list-unstyled mb-0 w-max-content w-md-auto mx-auto">
                         <li className="d-flex align-items-center">
@@ -152,7 +152,7 @@ const Signin = () => {
                           >
                             <div className="d-flex align-items-center fw-bolder fs-5 d-inline-block">
                               <img
-                                src="src/assets/img/icons/logo.png"
+                                src="src/assets/img/icons/MainIcon.png"
                                 alt="phoenix"
                                 width="58"
                               />

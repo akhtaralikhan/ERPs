@@ -145,3 +145,97 @@ export const creditnotesApi = async () => {
 
     return response;
 };
+
+
+export const editProposalApi = async (userId) => {
+
+    const response = await axios.get(
+        BASE_URL + endPoints.sales.proposal + `/${userId.payload}`,
+        {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+        }
+    );
+
+    return response;
+};
+
+export const deleteProposalApi = async (userId) => {
+
+    const response = await axios.get(
+        BASE_URL + endPoints.sales.proposal + `/${userId.payload}`,
+        {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+        }
+    );
+
+    return response;
+};
+
+
+export const editProposalDataDetailsApi = async (credentials) => {
+    const payload = {
+
+        name: credentials.name,
+        sku: credentials.sku,
+        salePrice: credentials.salePrice,
+        purchasePrice: credentials.purchasePrice,
+        categoryId: credentials.categoryId,
+        taxId: credentials.taxId,
+        description: credentials.description,
+        createdById: credentials.createdById,
+        id: credentials.id,
+    };
+
+    const body = JSON.stringify(payload);
+
+    const response = await axios.put(
+        BASE_URL + endPoints.sales.proposal,
+        body,
+        {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+        }
+    );
+
+    return response;
+};
+
+
+export const createProposalDataDetailsApi = async (credentials) => {
+    const payload = {
+
+        name: credentials.name,
+        sku: credentials.sku,
+        salePrice: credentials.salePrice,
+        purchasePrice: credentials.purchasePrice,
+        categoryId: credentials.categoryId,
+        taxId: credentials.taxId,
+        description: credentials.description,
+        createdById: credentials.createdById,
+    };
+
+    const body = JSON.stringify(payload);
+
+    const response = await axios.post(
+        BASE_URL + endPoints.sales.proposal,
+        body,
+        {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+        }
+    );
+
+    return response;
+};
+
+

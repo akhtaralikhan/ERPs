@@ -39,6 +39,16 @@ export const editProductDataDetails = (user) => ({
     payload: { user },
 })
 
+export const createProductData = (user) => ({
+    type: productAndServicesTypes.CREATE_PRODUCT_DATA,
+    payload: { user },
+});
+
+export const createServicesData = (user) => ({
+    type: productAndServicesTypes.CREATE_SERVICES_DATA,
+    payload: { user },
+});
+
 export const editServicesData = (id) => ({
     type: productAndServicesTypes.EDIT_SERVICES_DATA,
     payload: id,

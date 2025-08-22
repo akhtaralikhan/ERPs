@@ -156,6 +156,36 @@ export const editProductDataDetailsApi = async (credentials) => {
 };
 
 
+export const createProductDataDetailsApi = async (credentials) => {
+    const payload = {
+
+        name: credentials.name,
+        sku: credentials.sku,
+        salePrice: credentials.salePrice,
+        purchasePrice: credentials.purchasePrice,
+        categoryId: credentials.categoryId,
+        taxId: credentials.taxId,
+        description: credentials.description,
+        createdById: credentials.createdById,
+    };
+
+    const body = JSON.stringify(payload);
+
+    const response = await axios.post(
+        BASE_URL + endPoints.productAndServices.product,
+        body,
+        {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+        }
+    );
+
+    return response;
+};
+
+
 
 
 

@@ -53,6 +53,30 @@ const DashboardHome = () => {
 
   const [isSelected, setIsSelected] = useState("month");
 
+
+  //api call
+  if (token) {
+    useEffect(() => {
+      dispatch(getCardReports())
+      dispatch(getSubscriptionsTenant3Action());
+      dispatch(getSummary())
+      dispatch(getBankAccount())
+      dispatch(socialLoginAction())
+      dispatch(getSettingTypesGeneral())
+      dispatch(getSettingTypesPayment())
+      dispatch(getSettingTypesLicense())
+      dispatch(getInnovoiceLast())
+      dispatch(getEstimatesLast())
+      dispatch(getBillsLast())
+      dispatch(getTransactionsLast())
+      dispatch(getCurrencyDefault())
+      dispatch(getRevenueTotal())
+      dispatch(getInvoiceReport())
+      dispatch(getGoalsLast())
+    }, []);
+  }
+
+
   useEffect(() => {
     if (isSelected === "month") {
       dispatch(getMonthTransactions());
@@ -65,28 +89,6 @@ const DashboardHome = () => {
       dispatch(getWeekActivity());
     }
   }, [isSelected, dispatch]);
-
-  //api call
-  if (token) {
-    useEffect(() => {
-      dispatch(getSubscriptionsTenant3Action());
-      dispatch(getSummary())
-      dispatch(getBankAccount())
-      dispatch(socialLoginAction())
-      dispatch(getSettingTypesGeneral())
-      dispatch(getSettingTypesPayment())
-      dispatch(getSettingTypesLicense())
-      dispatch(getCardReports())
-      dispatch(getInnovoiceLast())
-      dispatch(getEstimatesLast())
-      dispatch(getBillsLast())
-      dispatch(getTransactionsLast())
-      dispatch(getCurrencyDefault())
-      dispatch(getRevenueTotal())
-      dispatch(getInvoiceReport())
-      dispatch(getGoalsLast())
-    }, []);
-  }
 
   return (
     <>

@@ -62,7 +62,7 @@ const Sidebar = () => {
                       <span data-feather="check-square"></span>
                     </span>
                     <span className="nav-link-text-wrapper">
-                      <span className="nav-link-text">Bank Accounts</span>
+                      <span className="nav-link-text">Super Admin</span>
                     </span>
                   </div>
                 </NavLink>
@@ -83,7 +83,7 @@ const Sidebar = () => {
                     <span className="nav-link-icon">
                       <span data-feather="shopping-bag"></span>
                     </span>
-                    <span className="nav-link-text">Product & Services</span>
+                    <span className="nav-link-text">POS</span>
                   </div>
                 </Link>
                 <div className="parent-wrapper label-1">
@@ -93,7 +93,7 @@ const Sidebar = () => {
                     id="product-services"
                   >
                     <li className="collapsed-nav-item-title d-none">
-                      Product & Services
+                      POS
                     </li>
                     <li className="nav-item">
                       <NavLink
@@ -103,7 +103,7 @@ const Sidebar = () => {
                         aria-expanded="false"
                       >
                         <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Product</span>
+                          <span className="nav-link-text">Item Cart</span>
                         </div>
                       </NavLink>
                       {/* <!-- more inner pages--> */}
@@ -116,7 +116,7 @@ const Sidebar = () => {
                         aria-expanded="false"
                       >
                         <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Services</span>
+                          <span className="nav-link-text">Side Invoive</span>
                         </div>
                       </NavLink>
                       {/* <!-- more inner pages--> */}
@@ -127,7 +127,7 @@ const Sidebar = () => {
             </li>
             <li className="nav-item">
               {/* <!-- label--> */}
-              <p className="navbar-vertical-label">Sales & Expenses</p>
+              {/* <p className="navbar-vertical-label">Sales & Expenses</p> */}
               <hr className="navbar-vertical-line" />
               {/* <!-- parent pages--> */}
               <div className="nav-item-wrapper">
@@ -147,7 +147,7 @@ const Sidebar = () => {
                     <span className="nav-link-icon">
                       <i className="fa-regular fa-credit-card"></i>
                     </span>
-                    <span className="nav-link-text">Sale</span>
+                    <span className="nav-link-text">Manage Sales</span>
                   </div>
                 </Link>
                 <div className="parent-wrapper label-1">
@@ -156,7 +156,7 @@ const Sidebar = () => {
                     data-bs-parent="#navbarVerticalCollapse"
                     id="sale"
                   >
-                    <li className="collapsed-nav-item-title d-none">Sale</li>
+                    <li className="collapsed-nav-item-title d-none">Manage Sales</li>
                     <li className="nav-item">
                       <NavLink
                         className="nav-link"
@@ -165,7 +165,7 @@ const Sidebar = () => {
                         aria-expanded="false"
                       >
                         <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Estimates</span>
+                          <span className="nav-link-text">Invoive</span>
                         </div>
                       </NavLink>
                       {/* <!-- more inner pages--> */}
@@ -178,7 +178,7 @@ const Sidebar = () => {
                         aria-expanded="false"
                       >
                         <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Invoices</span>
+                          <span className="nav-link-text">Manual Invoice</span>
                         </div>
                       </NavLink>
                       {/* <!-- more inner pages--> */}
@@ -192,7 +192,7 @@ const Sidebar = () => {
                       >
                         <div className="d-flex align-items-center">
                           <span className="nav-link-text">
-                            Recurring invoices
+                           Draft Invoice
                           </span>
                         </div>
                       </NavLink>
@@ -206,7 +206,7 @@ const Sidebar = () => {
                         aria-expanded="false"
                       >
                         <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Incomes</span>
+                          <span className="nav-link-text">Quote Invoice</span>
                         </div>
                       </NavLink>
                       {/* <!-- more inner pages--> */}
@@ -219,7 +219,7 @@ const Sidebar = () => {
                         aria-expanded="false"
                       >
                         <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Credit notes</span>
+                          <span className="nav-link-text">Manage Customer Info</span>
                         </div>
                       </NavLink>
                       {/* <!-- more inner pages--> */}
@@ -232,7 +232,7 @@ const Sidebar = () => {
                         aria-expanded="false"
                       >
                         <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Customers</span>
+                          <span className="nav-link-text">Sales Return Log</span>
                         </div>
                       </NavLink>
                       {/* <!-- more inner pages--> */}
@@ -243,10 +243,136 @@ const Sidebar = () => {
               <div className="nav-item-wrapper">
                 <Link
                   className="nav-link dropdown-indicator label-1"
-                  to="#expenses"
+                  to="#purchase"
                   role="button"
                   data-bs-toggle="collapse"
                   aria-expanded="true"
+                  aria-controls="purchase"
+                  data-bs-target="#purchase"
+                  id="purchase"
+                >
+                  <div className="d-flex align-items-center">
+                    <div className="dropdown-indicator-icon">
+                      <span className="fas fa-caret-right"></span>
+                    </div>
+                    <span className="nav-link-icon">
+                      <i className="fa-regular fa-credit-card"></i>
+                    </span>
+                    <span className="nav-link-text">Manage Purchase</span>
+                  </div>
+                </Link>
+                <div className="parent-wrapper label-1">
+                  <ul
+                    className="nav collapse parent"
+                    data-bs-parent="#navbarVerticalCollapse"
+                    id="purchase"
+                  >
+                    <li className="collapsed-nav-item-title d-none">
+                      Expenses
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Purchases Invoice</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Expenses"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Purchases Invoice Draft</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/DebitNotes"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Purchases Invoice Quote</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Vendors"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Manage Supplier</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Vendors"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Purchase Return Log</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Vendors"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Manage Supplier</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Vendors"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Manage Supplier</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    
+                  </ul>
+                </div>
+              </div>
+              <div className="nav-item-wrapper">
+                <Link
+                  className="nav-link dropdown-indicator collapsed label-1"
+                  to="#expenses"
+                  role="button"
+                  data-bs-toggle="collapse"
+                  aria-expanded="false"
                   aria-controls="expenses"
                   data-bs-target="#expenses"
                 >
@@ -257,7 +383,7 @@ const Sidebar = () => {
                     <span className="nav-link-icon">
                       <i className="fa-regular fa-credit-card"></i>
                     </span>
-                    <span className="nav-link-text">Expenses</span>
+                    <span className="nav-link-text">Manage Expense</span>
                   </div>
                 </Link>
                 <div className="parent-wrapper label-1">
@@ -277,7 +403,7 @@ const Sidebar = () => {
                         aria-expanded="false"
                       >
                         <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Bills</span>
+                          <span className="nav-link-text">Expense Summary</span>
                         </div>
                       </NavLink>
                       {/* <!-- more inner pages--> */}
@@ -290,33 +416,54 @@ const Sidebar = () => {
                         aria-expanded="false"
                       >
                         <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Expenses</span>
+                          <span className="nav-link-text">Expense Type</span>
                         </div>
                       </NavLink>
                       {/* <!-- more inner pages--> */}
+                    </li> 
+                  </ul>
+                </div>
+              </div>
+
+               <div className="nav-item-wrapper">
+                <Link
+                  className="nav-link dropdown-indicator collapsed label-1"
+                  to="#branch"
+                  role="button"
+                  data-bs-toggle="collapse"
+                  aria-expanded="false"
+                  aria-controls="branch"
+                  data-bs-target="#branch"
+                  id="branch"
+                >
+                  <div className="d-flex align-items-center">
+                    <div className="dropdown-indicator-icon">
+                      <span className="fas fa-caret-right"></span>
+                    </div>
+                    <span className="nav-link-icon">
+                      <i className="fa-regular fa-credit-card"></i>
+                    </span>
+                    <span className="nav-link-text">Manage Branch</span>
+                  </div>
+                </Link>
+                <div className="parent-wrapper label-1">
+                  <ul
+                    className="nav collapse parent"
+                    data-bs-parent="#navbarVerticalCollapse"
+                    id="branch"
+                  >
+                    <li className="collapsed-nav-item-title d-none">
+                      Branch
                     </li>
                     <li className="nav-item">
                       <NavLink
                         className="nav-link"
-                        to="/DebitNotes"
+                        to="/Bills"
                         data-bs-toggle=""
                         aria-expanded="false"
                       >
                         <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Debit notes</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Vendors"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Vendors</span>
+                          <span className="nav-link-text">Branch</span>
                         </div>
                       </NavLink>
                       {/* <!-- more inner pages--> */}
@@ -324,112 +471,11 @@ const Sidebar = () => {
                   </ul>
                 </div>
               </div>
-              {/* <!-- parent pages--> */}
-            </li>
 
-            <li className="nav-item">
-              {/* <!-- label--> */}
-              <p className="navbar-vertical-label">Accounting</p>
-              <hr className="navbar-vertical-line" />
-              {/* <!-- parent pages--> */}
-              <div className="nav-item-wrapper">
-                <NavLink
-                  className="nav-link label-1"
-                  to="/ManualJournals"
-                  role="button"
-                  data-bs-toggle=""
-                  aria-expanded="false"
-                >
-                  <div className="d-flex align-items-center">
-                    <span className="nav-link-icon">
-                      <span data-feather="file-text"></span>
-                    </span>
-                    <span className="nav-link-text-wrapper">
-                      <span className="nav-link-text">Manual journals</span>
-                    </span>
-                  </div>
-                </NavLink>
-              </div>
-              <div className="nav-item-wrapper">
-                <NavLink
-                  className="nav-link label-1"
-                  to="/Transations"
-                  role="button"
-                  data-bs-toggle=""
-                  aria-expanded="false"
-                >
-                  <div className="d-flex align-items-center">
-                    <span className="nav-link-icon">
-                      <i className="fa-solid fa-arrow-right-arrow-left"></i>
-                    </span>
-                    <span className="nav-link-text-wrapper">
-                      <span className="nav-link-text">Transactions</span>
-                    </span>
-                  </div>
-                </NavLink>
-              </div>
-              <div className="nav-item-wrapper">
-                <NavLink
-                  className="nav-link label-1"
-                  to="/ChartsOfAccount"
-                  role="button"
-                  data-bs-toggle=""
-                  aria-expanded="false"
-                >
-                  <div className="d-flex align-items-center">
-                    <span className="nav-link-icon">
-                      <span data-feather="book"></span>
-                    </span>
-                    <span className="nav-link-text-wrapper">
-                      <span className="nav-link-text">Chart of accounts</span>
-                    </span>
-                  </div>
-                </NavLink>
-              </div>
-              <div className="nav-item-wrapper">
-                <NavLink
-                  className="nav-link label-1"
-                  to="/Assets"
-                  role="button"
-                  data-bs-toggle=""
-                  aria-expanded="false"
-                >
-                  <div className="d-flex align-items-center">
-                    <span className="nav-link-icon">
-                      <span data-feather="briefcase"></span>
-                    </span>
-                    <span className="nav-link-text-wrapper">
-                      <span className="nav-link-text">Assets</span>
-                    </span>
-                  </div>
-                </NavLink>
-              </div>
-              {/* <!-- parent pages--> */}
-            </li>
-            <li className="nav-item">
-              {/* <!-- label--> */}
-              <p className="navbar-vertical-label">Reports</p>
-              <hr className="navbar-vertical-line" />
-              {/* <!-- parent pages--> */}
-              <div className="nav-item-wrapper">
-                <NavLink
-                  className="nav-link label-1"
-                  to="/Report"
-                  role="button"
-                  data-bs-toggle=""
-                  aria-expanded="false"
-                >
-                  <div className="d-flex align-items-center">
-                    <span className="nav-link-icon">
-                      <span data-feather="bar-chart-2"></span>
-                    </span>
-                    <span className="nav-link-text-wrapper">
-                      <span className="nav-link-text">Reports</span>
-                    </span>
-                  </div>
-                </NavLink>
-              </div>
-            </li>
+
+              
+              
+            </li>                
             <li className="nav-item">
               {/* <!-- label--> */}
               <p className="navbar-vertical-label">Settings</p>
@@ -485,7 +531,7 @@ const Sidebar = () => {
           <span className="uil uil-left-arrow-to-left fs-0"></span>
           <span className="uil uil-arrow-from-right fs-0"></span>
           <span className="navbar-vertical-footer-text ms-2">
-            Collapsed View
+            Collapsed View                
           </span>
         </button>
       </div>

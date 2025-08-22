@@ -6,7 +6,8 @@ import { getCurrencyDefault } from "../../redux/dashboard/actions";
 import { editProductData, getCatergory, getProducts } from "../../redux/productAndServices/actions";
 import { createSelector } from "reselect";
 import EditProductAndServicesModal from "../../Components/EditProductAndServicesModal";
-import { editData } from "../../redux/bankAccounts/actions";
+import DeleteDataModal from "../../Components/DeleteDataModal";
+import ChatSupport from "../../Components/ChatSupport";
 
 
 const Product = () => {
@@ -20,16 +21,12 @@ const Product = () => {
   );
   const { products } = useAppSelector(userData);
 
-  const bankAccountData = createSelector(
-    (state) => state.bankAccounts,
-    (state) => ({
-      selectedProduct: state.editData,
-    })
+  const [searchTerm, setSearchTerm] = useState("");
+  const filteredProducts = products.filter(product =>
+    product?.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    product?.category?.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    product?.sku?.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
-  const { selectedProduct } = useAppSelector(bankAccountData);
-
-console.log("selectedProduct", selectedProduct);
 
 
   useEffect(() => {
@@ -38,25 +35,27 @@ console.log("selectedProduct", selectedProduct);
     dispatch(getProducts())
   }, []);
   //handle click 
+  // State
   const [modalMode, setModalMode] = useState("add");
   const [modalData, setModalData] = useState(null);
+  const [selectedId, setSelectedId] = useState(null);
+  const endPoint = "product";
+  const calledFrom = "product";
 
+  // --- Click handlers ---
   const handleAddClick = () => {
     setModalMode("add");
     setModalData(null);
-    dispatch(editData(id))
   };
 
   const handleEditClick = (product) => {
     setModalMode("edit");
     setModalData(product);
-    dispatch(editData(id))
-    dispatch(editProductData(product.id))
   };
 
   const handleDeleteClick = (id) => {
-    dispatch(editData(id))
-  }
+    setSelectedId(id);
+  };
 
 
 
@@ -125,6 +124,8 @@ console.log("selectedProduct", selectedProduct);
                                   type="search"
                                   placeholder="Search"
                                   aria-label="Search"
+                                  value={searchTerm}
+                                  onChange={(e) => setSearchTerm(e.target.value)}
                                 />
                                 <span className="fas fa-search search-box-icon"></span>
                               </form>
@@ -183,8 +184,8 @@ console.log("selectedProduct", selectedProduct);
                                     </th>
                                   </tr>
                                 </thead>
-                                {products.map((product, index) => (
-                                  <tbody className="list">
+                                {filteredProducts.map((product, index) => (
+                                  <tbody className="list" key={index}>
                                     <tr>
                                       <td className="align-middle ps-3 name">
                                         <Link to="#">{product?.name}</Link>
@@ -231,7 +232,7 @@ console.log("selectedProduct", selectedProduct);
                                               type="button"
                                               data-bs-toggle="modal"
                                               data-bs-target="#edit-modal"
-                                              onClick={() => handleEditClick(product)}
+                                              onClick={() => handleEditClick(product)} // <-- pass item
                                             >
                                               Edit
                                             </Link>
@@ -239,13 +240,13 @@ console.log("selectedProduct", selectedProduct);
                                             <Link
                                               className="dropdown-item text-danger"
                                               to="#!"
-                                              type="button"
                                               data-bs-toggle="modal"
                                               data-bs-target="#verticallyCentered"
-                                              onClick={() => handleDeleteClick(item.id)}
+                                              onClick={() => handleDeleteClick(product.id)} // <-- pass ID
                                             >
                                               Delete
                                             </Link>
+
                                           </div>
                                         </div>
                                       </td>
@@ -268,22 +269,7 @@ console.log("selectedProduct", selectedProduct);
                                   data-list-pagination="prev"
                                   disabled=""
                                 >
-                                  <svg
-                                    className="svg-inline--fa fa-chevron-left"
-                                    aria-hidden="true"
-                                    focusable="false"
-                                    data-prefix="fas"
-                                    data-icon="chevron-left"
-                                    role="img"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 320 512"
-                                    data-fa-i2svg=""
-                                  >
-                                    <path
-                                      fill="currentColor"
-                                      d="M224 480c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25l192-192c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l169.4 169.4c12.5 12.5 12.5 32.75 0 45.25C240.4 476.9 232.2 480 224 480z"
-                                    ></path>
-                                  </svg>
+                                  <i className="fa fa-chevron-left"></i>
                                   {/* <!-- <span className="fas fa-chevron-left"></span> Font Awesome fontawesome.com --> */}
                                 </button>
                                 <ul className="mb-0 pagination">
@@ -327,23 +313,7 @@ console.log("selectedProduct", selectedProduct);
                                   className="page-link pe-0"
                                   data-list-pagination="next"
                                 >
-                                  <svg
-                                    className="svg-inline--fa fa-chevron-right"
-                                    aria-hidden="true"
-                                    focusable="false"
-                                    data-prefix="fas"
-                                    data-icon="chevron-right"
-                                    role="img"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 320 512"
-                                    data-fa-i2svg=""
-                                  >
-                                    <path
-                                      fill="currentColor"
-                                      d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"
-                                    ></path>
-                                  </svg>
-                                  {/* <!-- <span className="fas fa-chevron-right"></span> Font Awesome fontawesome.com --> */}
+                                  <i className="fa fa-chevron-right"></i>
                                 </button>
                               </div>
                             </div>
@@ -357,234 +327,30 @@ console.log("selectedProduct", selectedProduct);
               <hr className="bg-200 mb-6 mt-4" />
 
               {/* <!-- delete modal --> */}
+              {/* Delete Modal */}
+              <DeleteDataModal
+                userId={selectedId}   // now only for delete
+                endPoint={endPoint}
+                modalId="verticallyCentered"
+              />
 
-              <div
-                className="modal fade"
-                id="verticallyCentered"
-                tabIndex={-1}
-                aria-labelledby="verticallyCenteredModalLabel"
-                aria-hidden="true"
-                style={{ display: "none" }}
-              >
-                <div className="modal-dialog modal-dialog-centered">
-                  <div className="modal-content">
-                    <div className="modal-header">
-                      <h5
-                        className="modal-title"
-                        id="verticallyCenteredModalLabel"
-                      >
-                        Deleting...
-                      </h5>
-                      <button
-                        className="btn p-1"
-                        type="button"
-                        data-bs-dismiss="modal"
-                        aria-label="Close"
-                      >
-                        <svg
-                          className="svg-inline--fa fa-xmark fs--1"
-                          aria-hidden="true"
-                          focusable="false"
-                          data-prefix="fas"
-                          data-icon="xmark"
-                          role="img"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 320 512"
-                          data-fa-i2svg=""
-                        >
-                          <path
-                            fill="currentColor"
-                            d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"
-                          ></path>
-                        </svg>
-                        {/* <!-- <span className="fas fa-times fs--1"></span> Font Awesome fontawesome.com --> */}
-                      </button>
-                    </div>
-                    <div className="modal-body">
-                      <p className="text-700 lh-lg mb-0">
-                        Are you sure you want to continue ?
-                      </p>
-                    </div>
-                    <div className="modal-footer">
-                      <button className="btn btn-primary" type="button">
-                        Delete
-                      </button>
-                      <button
-                        className="btn btn-outline-primary"
-                        type="button"
-                        data-bs-dismiss="modal"
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* <!-- delete modal -->
-                        <!-- Edit modal --> */}
+              {/* Edit / Add Modal */}
               <EditProductAndServicesModal
+                calledFrom={calledFrom}
                 mode={modalMode}
                 initialData={modalData}
                 onSave={(data) => {
                   if (modalMode === "edit") {
-                    // update API call
-                    // dispatch(editProductData(product.id))
+                    dispatch(editProductData(data.id));
                   } else {
-                    // create API call
+                    // dispatch(createProductData(data)); make it 
                   }
                 }}
               />
-
-
               {/* <!-- Edit modal --> */}
 
-
             </div>
-            <div className="support-chat-container">
-              <div className="container-fluid support-chat">
-                <div className="card bg-white">
-                  <div className="card-header d-flex flex-between-center px-4 py-3 border-bottom">
-                    <h5 className="mb-0 d-flex align-items-center gap-2">
-                      Demo widget
-                      <span className="fa-solid fa-circle text-success fs--3"></span>
-                    </h5>
-                    <div className="btn-reveal-trigger">
-                      <button
-                        className="btn btn-link p-0 dropdown-toggle dropdown-caret-none transition-none d-flex"
-                        type="button"
-                        id="support-chat-dropdown"
-                        data-bs-toggle="dropdown"
-                        data-boundary="window"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                        data-bs-reference="parent"
-                      >
-                        <span className="fas fa-ellipsis-h text-900"></span>
-                      </button>
-                      <div
-                        className="dropdown-menu dropdown-menu-end py-2"
-                        aria-labelledby="support-chat-dropdown"
-                      >
-                        <a className="dropdown-item" href="#!">
-                          Request a callback
-                        </a>
-                        <a className="dropdown-item" href="#!">
-                          Search in chat
-                        </a>
-                        <a className="dropdown-item" href="#!">
-                          Show history
-                        </a>
-                        <a className="dropdown-item" href="#!">
-                          Report to Admin
-                        </a>
-                        <a className="dropdown-item btn-support-chat" href="#!">
-                          Close Support
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="card-body chat p-0">
-                    <div className="d-flex flex-column-reverse scrollbar h-100 p-3">
-                      <div className="text-end mt-6">
-                        <a
-                          className="mb-2 d-inline-flex align-items-center text-decoration-none text-1100 hover-bg-soft rounded-pill border border-primary py-2 ps-4 pe-3"
-                          href="#!"
-                        >
-                          <p className="mb-0 fw-semi-bold fs--1">
-                            I need help with something
-                          </p>
-                          <span className="fa-solid fa-paper-plane text-primary fs--1 ms-3"></span>
-                        </a>
-                        <a
-                          className="mb-2 d-inline-flex align-items-center text-decoration-none text-1100 hover-bg-soft rounded-pill border border-primary py-2 ps-4 pe-3"
-                          href="#!"
-                        >
-                          <p className="mb-0 fw-semi-bold fs--1">
-                            I can’t reorder a product I previously ordered
-                          </p>
-                          <span className="fa-solid fa-paper-plane text-primary fs--1 ms-3"></span>
-                        </a>
-                        <a
-                          className="mb-2 d-inline-flex align-items-center text-decoration-none text-1100 hover-bg-soft rounded-pill border border-primary py-2 ps-4 pe-3"
-                          href="#!"
-                        >
-                          <p className="mb-0 fw-semi-bold fs--1">
-                            How do I place an order?
-                          </p>
-                          <span className="fa-solid fa-paper-plane text-primary fs--1 ms-3"></span>
-                        </a>
-                        <a
-                          className="false d-inline-flex align-items-center text-decoration-none text-1100 hover-bg-soft rounded-pill border border-primary py-2 ps-4 pe-3"
-                          href="#!"
-                        >
-                          <p className="mb-0 fw-semi-bold fs--1">
-                            My payment method not working
-                          </p>
-                          <span className="fa-solid fa-paper-plane text-primary fs--1 ms-3"></span>
-                        </a>
-                      </div>
-                      <div className="text-center mt-auto">
-                        <div className="avatar avatar-3xl status-online">
-                          <img
-                            className="rounded-circle border border-3 border-white"
-                            src="src/assets/img/team/30.webp"
-                            alt=""
-                          />
-                        </div>
-                        <h5 className="mt-2 mb-3">Eric</h5>
-                        <p className="text-center text-black mb-0">
-                          Ask us anything – we’ll get back to you here or by
-                          email within 24 hours.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="card-footer d-flex align-items-center gap-2 border-top ps-3 pe-4 py-3">
-                    <div className="d-flex align-items-center flex-1 gap-3 border rounded-pill px-4">
-                      <input
-                        className="form-control outline-none border-0 flex-1 fs--1 px-0"
-                        type="text"
-                        placeholder="Write message"
-                      />
-                      <label
-                        className="btn btn-link d-flex p-0 text-500 fs--1 border-0"
-                        htmlFor="supportChatPhotos"
-                      >
-                        <span className="fa-solid fa-image"></span>
-                      </label>
-                      <input
-                        className="d-none"
-                        type="file"
-                        accept="image/*"
-                        id="supportChatPhotos"
-                      />
-                      <label
-                        className="btn btn-link d-flex p-0 text-500 fs--1 border-0"
-                        htmlFor="supportChatAttachment"
-                      >
-                        <span className="fa-solid fa-paperclip"></span>
-                      </label>
-                      <input
-                        className="d-none"
-                        type="file"
-                        id="supportChatAttachment"
-                      />
-                    </div>
-                    <button className="btn p-0 border-0 send-btn">
-                      <span className="fa-solid fa-paper-plane fs--1"></span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-              <button className="btn p-0 border border-200 btn-support-chat">
-                <span className="fs-0 btn-text text-primary text-nowrap">
-                  Chat demo
-                </span>
-                <span className="fa-solid fa-circle text-success fs--1 ms-2"></span>
-                <span className="fa-solid fa-chevron-down text-primary fs-1"></span>
-              </button>
-            </div>
+            <ChatSupport />
           </div>
         </div>
       </div>

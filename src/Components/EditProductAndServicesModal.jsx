@@ -2,23 +2,25 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { createSelector } from "reselect";
 import { useRedux } from "../hooks/useRedux";
-import { getCatergory, getTax } from "../redux/productAndServices/actions";
+import { createProductData, editProductDataDetails, getCatergory, getTax } from "../redux/productAndServices/actions";
 
-function EditProductAndServicesModal({ mode = "add", initialData = null, onSave }) {
+function EditProductAndServicesModal({ mode = "add", initialData = null, onSave, calledFrom }) {
 
     const { dispatch, useAppSelector } = useRedux();
 
     const userData = createSelector(
-        (state) => state.bankAccounts,
+        (state) => state.productAndServices,
         (state) => ({
-            currencies: state.currency,
+            category: state.category,
+            tax: state.tax,
         })
     );
 
-    const { currencies } = useAppSelector(userData);
+    const { category, tax } = useAppSelector(userData);
 
-    const [selectedCategory, setSelectedCategory] = useState("Food");
-    const [selectedTax, setSelectedTax] = useState("IVA1 (12%)");
+    const [selectedCategory, setSelectedCategory] = useState("");
+    const [selectedTax, setSelectedTax] = useState("");
+    const createdById = initialData?.createdById
 
     const { register, handleSubmit, reset } = useForm({
         defaultValues: {
@@ -26,9 +28,11 @@ function EditProductAndServicesModal({ mode = "add", initialData = null, onSave 
             sku: "",
             salePrice: "",
             purchasePrice: "",
-            category: "Food",
-            tax: "IVA1 (12%)",
+            categoryId: "Food",
+            taxId: "",
             description: "",
+            createdById: createdById,
+            id: "",
         },
     });
 
@@ -39,36 +43,58 @@ function EditProductAndServicesModal({ mode = "add", initialData = null, onSave 
                 sku: initialData.sku || "",
                 salePrice: initialData.salePrice || "",
                 purchasePrice: initialData.purchasePrice || "",
-                category: initialData.category || "Food",
-                tax: initialData.tax || "IVA1 (12%)",
-                description: initialData.description || "",
+                categoryId: category?.[0]?.id || 0,
+                taxId: initialData.tax?.id || "", description: initialData.description || "",
+                createdById: createdById || "",
+                id: initialData.id || "",
             });
-            setSelectedCategory(initialData.category || "Food");
-            setSelectedTax(initialData.tax || "IVA1 (12%)");
+            setSelectedCategory(initialData.category.id || "Food");
+            setSelectedTax(initialData.tax?.id || "");
         } else {
             reset({
                 name: "",
                 sku: "",
                 salePrice: "",
                 purchasePrice: "",
-                category: "Food",
-                tax: "IVA1 (12%)",
+                categoryId: category?.[0]?.id || 0,
+                taxId: "",
                 description: "",
+                createdById: createdById,
+                id: "",
             });
-            setSelectedCategory("Food");
-            setSelectedTax("IVA1 (12%)");
+            setSelectedCategory("");
+            setSelectedTax(")");
         }
     }, [mode, initialData, reset]);
 
+
+
     useEffect(() => {
-        dispatch(getCatergory());
-        dispatch(getTax());
-    }, [])
+        if (createdById) {
+            reset((prev) => ({
+                ...prev,
+                createdById: createdById
+            }));
+        }
+    }, [createdById, reset]);
 
 
-    const onSubmit = (data) => {
+    const handleSave = (data) => {
+        data.categoryId = Number(data.categoryId);
+        data.createdById = Number(data.createdById);
+        if (mode === "edit") {
+            dispatch(editProductDataDetails(data));
+        } else if (mode === "add") {
+            dispatch(createProductData(data));
+        }
+
         onSave(data);
-    };
+        const modalEl = document.querySelector("#edit-modal");
+        if (modalEl) {
+            const modalInstance = bootstrap.Modal.getInstance(modalEl);
+            if (modalInstance) modalInstance.hide();
+        }
+    }
 
     return (
         <div
@@ -80,7 +106,7 @@ function EditProductAndServicesModal({ mode = "add", initialData = null, onSave 
         >
             <div className="modal-dialog modal-dialog-centered">
                 <div className="modal-content">
-                    <form onSubmit={handleSubmit(onSubmit)}>
+                    <form onSubmit={handleSubmit(handleSave)}>
                         <div className="modal-header">
                             <h5 className="modal-title">
                                 {mode === "edit" ? "Edit Product" : "Add Product"}
@@ -119,40 +145,52 @@ function EditProductAndServicesModal({ mode = "add", initialData = null, onSave 
                             <div className="mb-3">
                                 <label className="form-label">Category *</label>
                                 <select
-                                    {...register("category")}
+                                    {...register("categoryId", { valueAsNumber: true })}
                                     className="form-select"
                                     value={selectedCategory}
-                                    onChange={(e) => setSelectedCategory(e.target.value)}
+                                    onChange={(e) => setSelectedCategory(Number(e.target.value))}
                                 >
-                                    <option value="Food">Food</option>
-                                    <option value="Test Product">Test Product</option>
-                                    <option value="cate2">cate2</option>
-                                    <option value="sale1">sale1</option>
-                                    <option value="chocolate">chocolate</option>
-                                    <option value="Godex">Godex</option>
+                                    {category
+                                        ?.filter(cat => {
+                                            if (calledFrom === "product") {
+                                                return cat.type === "product";
+                                            }
+                                            if (calledFrom === "service") {
+                                                return cat.type === "service";
+                                            }
+                                            return true;
+                                        })
+                                        .map(cat => (
+                                            <option key={cat.id} value={cat.id}>
+                                                {cat?.name}
+                                            </option>
+                                        ))}
                                 </select>
+
                             </div>
 
                             <div className="mb-3">
                                 <label className="form-label">Tax *</label>
                                 <select
-                                    {...register("tax")}
+                                    {...register("taxId")}
                                     className="form-select"
                                     value={selectedTax}
                                     onChange={(e) => setSelectedTax(e.target.value)}
                                 >
-                                    <option value="IVA1 (12%)">IVA1 (12%)</option>
-                                    <option value="Consumption Tax (5%)">Consumption Tax (5%)</option>
-                                    <option value="Service Charge (5%)">Service Charge (5%)</option>
-                                    <option value="tax2 (5%)">tax2 (5%)</option>
-                                    <option value="bahrain tax (10%)">bahrain tax (10%)</option>
-                                    <option value="VAT7 (7%)">VAT7 (7%)</option>
+                                    {tax && tax.map((taxItem) => (
+                                        <option key={taxItem.id} value={taxItem.id}>
+                                            {taxItem?.name} ({taxItem?.rate}%)
+                                        </option>
+                                    ))}
                                 </select>
+
                             </div>
 
                             <div className="mb-3">
                                 <label className="form-label">Description</label>
                                 <textarea {...register("description")} className="form-control" rows="3" placeholder="Description" />
+                                <input type="hidden" {...register("createdById", { valueAsNumber: true })} value={createdById} className="d-none" />
+                                <input type="hidden" {...register("id", { valueAsNumber: true })} className="d-none" />
                             </div>
                         </div>
 

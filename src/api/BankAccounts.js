@@ -63,9 +63,10 @@ export const editBankAccountApi = async (id) => {
     return response;
 };
 
-export const deleteBankAccountApi = async (userId) => {
+export const deleteDataApi = async ({ userId, endPoint }) => {
+
     const response = await axios.delete(
-        BASE_URL + endPoints.bankaccount.bankaccount + `/${userId.payload}`,
+        `${BASE_URL}${endPoint}/${userId}`,
         {
             headers: {
                 "Content-Type": "application/json",
@@ -76,7 +77,6 @@ export const deleteBankAccountApi = async (userId) => {
 
     return response;
 };
-
 
 
 export const editBankDetailsApi = async (credentials) => {

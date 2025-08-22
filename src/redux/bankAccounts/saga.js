@@ -1,6 +1,6 @@
 import { call, put, takeEvery } from "redux-saga/effects";
 import { bankAccountActionTypes } from "./types";
-import { bankAccountApi, currenciesApi, currencyDefaultApi, deleteBankAccountApi, editBankAccountApi, editBankDetailsApi } from "../../api/BankAccounts";
+import { bankAccountApi, currenciesApi, currencyDefaultApi, deleteDataApi, editBankAccountApi, editBankDetailsApi } from "../../api/BankAccounts";
 // import { ApiResponseError, ApiResponseSuccess } from "./actions";
 
 export const ApiResponseSuccess = (actionType, data) => ({
@@ -76,21 +76,22 @@ function* editBankAccount(id) {
     }
 }
 
+
 export function* editBankAccountSaga() {
     yield takeEvery(bankAccountActionTypes.EDITBANK_ACCOUNT, editBankAccount);
 }
-
-function* deleteBankAccount(userId) {
+function* deleteBankAccount(action) {
     try {
+        const { userId, endPoint } = action.payload;
 
-        const response = yield call(deleteBankAccountApi, userId);
+        const response = yield call(deleteDataApi, { userId, endPoint });
 
         yield put(ApiResponseSuccess(bankAccountActionTypes.DELETEBANK_ACCOUNT, response.data));
     } catch (error) {
         console.log("error", error);
-
     }
 }
+
 
 export function* deleteBankAccountSaga() {
     yield takeEvery(bankAccountActionTypes.DELETEBANK_ACCOUNT, deleteBankAccount);
