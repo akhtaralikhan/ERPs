@@ -1,0 +1,191 @@
+.containerFluid{
+    background-color: rgba(203 ,208 ,221 ,1);
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    padding: 0 1rem;
+    margin:0 auto;
+}
+.fs--1{
+        font-size: 12.8px;
+}
+.bgHolder{
+    position: absolute;
+    height: 100%;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    mix-blend-mode: overlay;
+    z-index: 0;
+}
+
+.boxContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding:2rem 0  !important ;
+    min-height: 100vh;
+    flex-wrap: flex;
+}
+
+.card{
+    border: 1px solid rgba(227, 230, 237, 1);
+    border-radius: 0.5rem;
+    background-color: #fff;
+    z-index: 3; 
+}
+
+.bothDiv{
+    display: flex;
+    align-items: center;
+    padding: 1.5rem 0 1.5rem 1.5rem;
+}
+
+.firstCard{
+    position: relative;
+    width: 24rem;   
+}
+
+@media(min-width:786px){
+    .firstCard{
+     width: 17.875rem !important;
+    }
+}
+@media(min-width:992px){
+    .firstCard{
+     width: 23.4375rem !important;
+    }
+}
+
+.bgImage{
+    position: relative;
+    background-size: cover !important;
+    background-position: center !important;
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-color: rgba(239, 242, 246) !important;
+    border-radius: 0.5rem;
+}
+
+.upperCard{
+    position: relative;
+    padding: 48px;
+}
+
+.upperCard h3{
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 16px;
+}
+
+.upperCard p{
+    word-break: break-word;
+    color: rgb(82 91 117);
+    margin-bottom: 16px;
+}
+.upperCard ul li span {
+    color:rgb(82 91 117);
+    font-weight: 600 !important;
+}
+.lowerCard{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 7.5rem;
+    padding-bottom: 2.5rem;
+    
+}
+
+.lowerCard img{
+     width: 17.93rem;
+     height: 14.18rem;
+     background-size: cover;
+     background-position: center;
+}
+
+@media(max-width:786px){
+    .lowerCard{
+        display: none;
+    }
+}
+
+.secondCard{
+    max-width:18.75rem;
+    margin: auto;
+    position: relative;
+}
+
+.logoContainer{
+    text-align: center;
+    margin-bottom: 3rem !important;
+}
+
+.logoContainer img{
+    margin-bottom: 1.5rem;
+}
+
+.logoContainer h3{
+    color: #222834;
+    font-size: 25px;
+    margin-bottom: 4px;
+    font-weight: 800;
+}
+
+.logoContainer p{
+    color: #525B75;
+    font-size: 16px;
+    margin-bottom: 16px;
+}
+
+.button{
+    padding: 10px 24px !important;
+    background-color: #f5f7f4 !important;
+    color: #31374A !important;
+    margin-bottom: 16px !important;
+    width: 100%;
+    font-size: 12.8px !important;
+    font-weight: 700 !important;
+    border: none;
+    border-radius: 5px !important;
+}
+
+.email{
+    position: relative;
+    margin: 16px 0px;
+}
+
+.email hr{
+    background-color: rgb(227 230 237);
+}
+
+.email div{
+    position: absolute;
+    top: 0;
+    left: 9rem !important;
+    transform: translate(-50%,-50%);
+    background-color: #fff;
+    padding: 0.5rem;
+    font-size: 12.8px;
+    color:#6E7891;
+    font-weight: 700;
+}
+
+a{
+    text-decoration: none !important;
+}
+
+.flex-between-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 0 !important;
+}
+
+.fs--1{
+    font-size: 12.8px !important;
+}
