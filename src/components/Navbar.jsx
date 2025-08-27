@@ -21,7 +21,7 @@ const Navbar = () => {
 
   const { isUserLogin, error, loginLoading, isUserLogout, user } = useAppSelector(userData);
 
-  const profilePic = `${(user.data?.fullname || '').split(' ').map((n) => n[0]).join('').toUpperCase()}`;
+  const profilePic = "faizan";
 
   // handleSignout
 

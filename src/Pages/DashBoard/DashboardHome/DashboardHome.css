@@ -1,0 +1,12 @@
+.content{
+    min-height: 100vh;
+    padding: 6rem 1.5rem 6.375rem;
+}
+
+@media(min-width:992px){
+    .content{
+        padding-left: 2.5rem !important;
+        padding-right: 2.5rem !important;
+        margin-left: 15.875rem !important;
+    }
+}

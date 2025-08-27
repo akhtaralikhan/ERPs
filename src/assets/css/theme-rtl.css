@@ -13,6 +13,25 @@
 /* -------------------------------------------------------------------------- */
 /*                                  Utilities                                 */
 /* -------------------------------------------------------------------------- */
+.c-overlay{
+  position: absolute;
+  left: 0;
+  right: 0;
+  top:0;
+  bottom: 0;
+  background:  rgba(0,15,152,0.3);    
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  cursor: pointer;
+  
+}
+
+.content{
+    min-height: 100vh;
+    padding: 6rem 1.5rem 6.375rem;
+}
 :root,
 :root.light,
 :root .light {

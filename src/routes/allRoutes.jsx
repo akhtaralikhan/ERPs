@@ -2,11 +2,11 @@
 import SignUp from "../Pages/Auth/SignUp";
 import ForgetPassword from "../Pages/Auth/ForgetPassword";
 // Dashboard Pages
-import DashboardHome from "../pages/Dashboard/DashboardHome";
+import DashboardHome from "../pages/Dashboard/DashboardHome/DashboardHome.jsx";
 import Product from "../pages/Dashboard/Product";
 import Services from "../pages/Dashboard/Services";
 import Estimates from "../pages/Dashboard/Estimates";
-import BankAccounts from "../pages/Dashboard/BankAccounts";
+import BankAccounts from "../pages/Dashboard/BankAccount/BankAccounts";
 import Invoice from "../pages/Dashboard/Invoice";
 import RecurringInvoice from "../pages/Dashboard/RecurringInvoice";
 import Income from "../pages/Dashboard/Income";

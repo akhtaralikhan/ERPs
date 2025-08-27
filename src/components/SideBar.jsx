@@ -24,8 +24,8 @@ const Sidebar = () => {
   }, []);
 
   return (
-    <nav className="navbar navbar-vertical navbar-expand-lg">
-      <div className="collapse navbar-collapse" id="navbarVerticalCollapse">
+    <nav className="navbar navbar-vertical navbar-expand-lg h-100">
+      <div className="collapse navbar-collapse pb-5" id="navbarVerticalCollapse">
         {/* <!-- scrollbar removed--> */}
         <div className="navbar-vertical-content">
           <ul className="navbar-nav flex-column" id="navbarVerticalNav">
@@ -92,8 +92,18 @@ const Sidebar = () => {
                     data-bs-parent="#navbarVerticalCollapse"
                     id="product-services"
                   >
-                    <li className="collapsed-nav-item-title d-none">
-                      POS
+                   <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">POS</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
                     </li>
                     <li className="nav-item">
                       <NavLink
@@ -156,7 +166,19 @@ const Sidebar = () => {
                     data-bs-parent="#navbarVerticalCollapse"
                     id="sale"
                   >
-                    <li className="collapsed-nav-item-title d-none">Manage Sales</li>
+                   <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Manage Sales</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
                     <li className="nav-item">
                       <NavLink
                         className="nav-link"
@@ -192,7 +214,7 @@ const Sidebar = () => {
                       >
                         <div className="d-flex align-items-center">
                           <span className="nav-link-text">
-                           Draft Invoice
+                            Draft Invoice
                           </span>
                         </div>
                       </NavLink>
@@ -242,14 +264,14 @@ const Sidebar = () => {
               </div>
               <div className="nav-item-wrapper">
                 <Link
+                  to="#"
+                  onClick={(e) => e.preventDefault()}
                   className="nav-link dropdown-indicator label-1"
-                  to="#purchase"
                   role="button"
                   data-bs-toggle="collapse"
                   aria-expanded="true"
                   aria-controls="purchase"
                   data-bs-target="#purchase"
-                  id="purchase"
                 >
                   <div className="d-flex align-items-center">
                     <div className="dropdown-indicator-icon">
@@ -267,8 +289,18 @@ const Sidebar = () => {
                     data-bs-parent="#navbarVerticalCollapse"
                     id="purchase"
                   >
-                    <li className="collapsed-nav-item-title d-none">
-                      Expenses
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Expenses</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
                     </li>
                     <li className="nav-item">
                       <NavLink
@@ -309,7 +341,7 @@ const Sidebar = () => {
                       </NavLink>
                       {/* <!-- more inner pages--> */}
                     </li>
-                    
+
                     <li className="nav-item">
                       <NavLink
                         className="nav-link"
@@ -362,7 +394,7 @@ const Sidebar = () => {
                       </NavLink>
                       {/* <!-- more inner pages--> */}
                     </li>
-                    
+
                   </ul>
                 </div>
               </div>
@@ -392,8 +424,18 @@ const Sidebar = () => {
                     data-bs-parent="#navbarVerticalCollapse"
                     id="expenses"
                   >
-                    <li className="collapsed-nav-item-title d-none">
-                      Expenses
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Expenses</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
                     </li>
                     <li className="nav-item">
                       <NavLink
@@ -420,21 +462,21 @@ const Sidebar = () => {
                         </div>
                       </NavLink>
                       {/* <!-- more inner pages--> */}
-                    </li> 
+                    </li>
                   </ul>
                 </div>
               </div>
 
-               <div className="nav-item-wrapper">
+              <div className="nav-item-wrapper">
                 <Link
                   className="nav-link dropdown-indicator collapsed label-1"
-                  to="#branch"
+                  to="#"
                   role="button"
                   data-bs-toggle="collapse"
                   aria-expanded="false"
-                  aria-controls="branch"
-                  data-bs-target="#branch"
-                  id="branch"
+                  aria-controls="ManageBranch"
+                  data-bs-target="#ManageBranch"
+                  onClick={(e) => e.preventDefault()} // stops navigation
                 >
                   <div className="d-flex align-items-center">
                     <div className="dropdown-indicator-icon">
@@ -450,10 +492,20 @@ const Sidebar = () => {
                   <ul
                     className="nav collapse parent"
                     data-bs-parent="#navbarVerticalCollapse"
-                    id="branch"
+                    id="ManageBranch"
                   >
-                    <li className="collapsed-nav-item-title d-none">
-                      Branch
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Branch</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
                     </li>
                     <li className="nav-item">
                       <NavLink
@@ -471,69 +523,1091 @@ const Sidebar = () => {
                   </ul>
                 </div>
               </div>
-
-
-              
-              
-            </li>                
-            <li className="nav-item">
-              {/* <!-- label--> */}
-              <p className="navbar-vertical-label">Settings</p>
-              <hr className="navbar-vertical-line" />
-              {/* <!-- parent pages--> */}
               <div className="nav-item-wrapper">
-                <NavLink
-                  className="nav-link label-1"
-                  to="/Settings"
+                <Link
+                  className="nav-link dropdown-indicator collapsed label-1"
+                  to="#"
                   role="button"
-                  data-bs-toggle=""
+                  data-bs-toggle="collapse"
                   aria-expanded="false"
+                  aria-controls="MangeItem"
+                  data-bs-target="#MangeItem"
+                  onClick={(e) => e.preventDefault()} // stops navigation
                 >
                   <div className="d-flex align-items-center">
+                    <div className="dropdown-indicator-icon">
+                      <span className="fas fa-caret-right"></span>
+                    </div>
                     <span className="nav-link-icon">
-                      <span data-feather="settings"></span>
+                      <i className="fa-regular fa-credit-card"></i>
                     </span>
-                    <span className="nav-link-text-wrapper">
-                      <span className="nav-link-text">Settings</span>
-                    </span>
+                    <span className="nav-link-text">Manage Item</span>
                   </div>
-                </NavLink>
+                </Link>
+                <div className="parent-wrapper label-1">
+                  <ul
+                    className="nav collapse parent"
+                    data-bs-parent="#navbarVerticalCollapse"
+                    id="MangeItem"
+                  >
+                   <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Branch</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Item</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Out Of Stock</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Low In Stock</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Demage Item Details</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Item History</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Manage Warehouse</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div className="nav-item-wrapper">
+                <Link
+                  className="nav-link dropdown-indicator collapsed label-1"
+                  to="#"
+                  role="button"
+                  data-bs-toggle="collapse"
+                  aria-expanded="false"
+                  aria-controls="SystemSettings"
+                  data-bs-target="#SystemSettings"
+                  onClick={(e) => e.preventDefault()} // stops navigation
+                >
+                  <div className="d-flex align-items-center">
+                    <div className="dropdown-indicator-icon">
+                      <span className="fas fa-caret-right"></span>
+                    </div>
+                    <span className="nav-link-icon">
+                      <i className="fa-regular fa-credit-card"></i>
+                    </span>
+                    <span className="nav-link-text">System Settings</span>
+                  </div>
+                </Link>
+                <div className="parent-wrapper label-1">
+                  <ul
+                    className="nav collapse parent"
+                    data-bs-parent="#navbarVerticalCollapse"
+                    id="SystemSettings"
+                  >
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Company Info</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Email Config</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Manage Currency</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Payment Type</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Payment Status</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Customer Type</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Vat Percentage</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Categories</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Unit Of Measure</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Manage Warehouse</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div className="nav-item-wrapper">
+                <Link
+                  className="nav-link dropdown-indicator collapsed label-1"
+                  to="#"
+                  role="button"
+                  data-bs-toggle="collapse"
+                  aria-expanded="false"
+                  aria-controls="HumanResources"
+                  data-bs-target="#HumanResources"
+                  onClick={(e) => e.preventDefault()} // stops navigation
+                >
+                  <div className="d-flex align-items-center">
+                    <div className="dropdown-indicator-icon">
+                      <span className="fas fa-caret-right"></span>
+                    </div>
+                    <span className="nav-link-icon">
+                      <i className="fa-regular fa-credit-card"></i>
+                    </span>
+                    <span className="nav-link-text">Human Resources</span>
+                  </div>
+                </Link>
+                <div className="parent-wrapper label-1">
+                  <ul
+                    className="nav collapse parent"
+                    data-bs-parent="#navbarVerticalCollapse"
+                    id="HumanResources"
+                  >
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Attandace </span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Email Config</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Manage Currency</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Payment Type</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Payment Status</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Customer Type</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Vat Percentage</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Categories</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Unit Of Measure</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Manage Warehouse</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div className="nav-item-wrapper">
+                <Link
+                  className="nav-link dropdown-indicator collapsed label-1"
+                  to="#"
+                  role="button"
+                  data-bs-toggle="collapse"
+                  aria-expanded="false"
+                  aria-controls="manageUserRole"
+                  data-bs-target="#manageUserRole"
+                  onClick={(e) => e.preventDefault()} // stops navigation
+                >
+                  <div className="d-flex align-items-center">
+                    <div className="dropdown-indicator-icon">
+                      <span className="fas fa-caret-right"></span>
+                    </div>
+                    <span className="nav-link-icon">
+                      <i className="fa-regular fa-credit-card"></i>
+                    </span>
+                    <span className="nav-link-text">Manage User Role</span>
+                  </div>
+                </Link>
+                <div className="parent-wrapper label-1">
+                  <ul
+                    className="nav collapse parent"
+                    data-bs-parent="#navbarVerticalCollapse"
+                    id="manageUserRole"
+                  >
+                   <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Manage User Role</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">System Role</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div className="nav-item-wrapper">
+                <Link
+                  className="nav-link dropdown-indicator collapsed label-1"
+                  to="#"
+                  role="button"
+                  data-bs-toggle="collapse"
+                  aria-expanded="false"
+                  aria-controls="ManageUser"
+                  data-bs-target="#ManageUser"
+                  onClick={(e) => e.preventDefault()} // stops navigation
+                >
+                  <div className="d-flex align-items-center">
+                    <div className="dropdown-indicator-icon">
+                      <span className="fas fa-caret-right"></span>
+                    </div>
+                    <span className="nav-link-icon">
+                      <i className="fa-regular fa-credit-card"></i>
+                    </span>
+                    <span className="nav-link-text">Manage User</span>
+                  </div>
+                </Link>
+                <div className="parent-wrapper label-1">
+                  <ul
+                    className="nav collapse parent"
+                    data-bs-parent="#navbarVerticalCollapse"
+                    id="ManageUser"
+                  >
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">
+                            User Management
+                          </span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Identity Setting</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Email Setting</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Send Email History </span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Login History</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Audit Logs</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">User Info From Browser</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">JWT Token</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div className="nav-item-wrapper">
+                <Link
+                  className="nav-link dropdown-indicator collapsed label-1"
+                  to="#"
+                  role="button"
+                  data-bs-toggle="collapse"
+                  aria-expanded="false"
+                  aria-controls="ItemReport"
+                  data-bs-target="#ItemReport"
+                  onClick={(e) => e.preventDefault()} // stops navigation
+                >
+                  <div className="d-flex align-items-center">
+                    <div className="dropdown-indicator-icon">
+                      <span className="fas fa-caret-right"></span>
+                    </div>
+                    <span className="nav-link-icon">
+                      <i className="fa-regular fa-credit-card"></i>
+                    </span>
+                    <span className="nav-link-text">Item Report</span>
+                  </div>
+                </Link>
+                <div className="parent-wrapper label-1">
+                  <ul
+                    className="nav collapse parent"
+                    data-bs-parent="#navbarVerticalCollapse"
+                    id="ItemReport"
+                  >
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">High In Demand</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text"> Low In Demand </span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Highest Earning</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Lowest Earning </span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div className="nav-item-wrapper">
+                <Link
+                  className="nav-link dropdown-indicator collapsed label-1"
+                  to="#"
+                  role="button"
+                  data-bs-toggle="collapse"
+                  aria-expanded="false"
+                  aria-controls="SalesReport"
+                  data-bs-target="#SalesReport"
+                  onClick={(e) => e.preventDefault()} // stops navigation
+                >
+                  <div className="d-flex align-items-center">
+                    <div className="dropdown-indicator-icon">
+                      <span className="fas fa-caret-right"></span>
+                    </div>
+                    <span className="nav-link-icon">
+                      <i className="fa-regular fa-credit-card"></i>
+                    </span>
+                    <span className="nav-link-text">Sales Report</span>
+                  </div>
+                </Link>
+                <div className="parent-wrapper label-1">
+                  <ul
+                    className="nav collapse parent"
+                    data-bs-parent="#navbarVerticalCollapse"
+                    id="SalesReport"
+                  >
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Transaction summary</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Produxt Wise Sale</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Transaction Dretails</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Transaction By Day</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Transaction By Month</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Transaction By Year</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div className="nav-item-wrapper">
+                <Link
+                  className="nav-link dropdown-indicator collapsed label-1"
+                  to="#"
+                  role="button"
+                  data-bs-toggle="collapse"
+                  aria-expanded="false"
+                  aria-controls="PurchaseReport"
+                  data-bs-target="#PurchaseReport"
+                  onClick={(e) => e.preventDefault()} // stops navigation
+                >
+                  <div className="d-flex align-items-center">
+                    <div className="dropdown-indicator-icon">
+                      <span className="fas fa-caret-right"></span>
+                    </div>
+                    <span className="nav-link-icon">
+                      <i className="fa-regular fa-credit-card"></i>
+                    </span>
+                    <span className="nav-link-text">Purchase Report</span>
+                  </div>
+                </Link>
+                <div className="parent-wrapper label-1">
+                  <ul
+                    className="nav collapse parent"
+                    data-bs-parent="#navbarVerticalCollapse"
+                    id="PurchaseReport"
+                  >
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Purchases Summary</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Purchase Details</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Transaction By Day</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Transaction By Month</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Transaction By Year</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div className="nav-item-wrapper">
+                <Link
+                  className="nav-link dropdown-indicator collapsed label-1"
+                  to="#"
+                  role="button"
+                  data-bs-toggle="collapse"
+                  aria-expanded="false"
+                  aria-controls="ExpenseReport"
+                  data-bs-target="#ExpenseReport"
+                  onClick={(e) => e.preventDefault()} // stops navigation
+                >
+                  <div className="d-flex align-items-center">
+                    <div className="dropdown-indicator-icon">
+                      <span className="fas fa-caret-right"></span>
+                    </div>
+                    <span className="nav-link-icon">
+                      <i className="fa-regular fa-credit-card"></i>
+                    </span>
+                    <span className="nav-link-text">Expense Report</span>
+                  </div>
+                </Link>
+                <div className="parent-wrapper label-1">
+                  <ul
+                    className="nav collapse parent"
+                    data-bs-parent="#navbarVerticalCollapse"
+                    id="ExpenseReport"
+                  >
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Expense Summary</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Expense Details</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Expense By Day</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Expense By Month</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Expense By Year</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div className="nav-item-wrapper">
+                <Link
+                  className="nav-link dropdown-indicator collapsed label-1"
+                  to="#"
+                  role="button"
+                  data-bs-toggle="collapse"
+                  aria-expanded="false"
+                  aria-controls="OtherReport"
+                  data-bs-target="#OtherReport"
+                  onClick={(e) => e.preventDefault()} // stops navigation
+                >
+                  <div className="d-flex align-items-center">
+                    <div className="dropdown-indicator-icon">
+                      <span className="fas fa-caret-right"></span>
+                    </div>
+                    <span className="nav-link-icon">
+                      <i className="fa-regular fa-credit-card"></i>
+                    </span>
+                    <span className="nav-link-text">Other Report</span>
+                  </div>
+                </Link>
+                <div className="parent-wrapper label-1">
+                  <ul
+                    className="nav collapse parent"
+                    data-bs-parent="#navbarVerticalCollapse"
+                    id="OtherReport"
+                  >
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Summary Report</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Attandace Report</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link"
+                        to="/Bills"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-text">Print Barcode</span>
+                        </div>
+                      </NavLink>
+                      {/* <!-- more inner pages--> */}
+                    </li>
+                  </ul>
+                </div>
               </div>
             </li>
-            {isSuperAdmin &&
-              <li className="nav-item">
-                {/* <!-- label--> */}
-                <p className="navbar-vertical-label">Super Admin</p>
-                <hr className="navbar-vertical-line" />
-                {/* <!-- parent pages--> */}
-                <div className="nav-item-wrapper">
-                  <NavLink
-                    className="nav-link label-1"
-                    to="/Console"
-                    role="button"
-                    data-bs-toggle=""
-                    aria-expanded="false"
-                  >
-                    <div className="d-flex align-items-center">
-                      <span className="nav-link-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-codepen"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"></polygon><line x1="12" y1="22" x2="12" y2="15.5"></line><polyline points="22 8.5 12 15.5 2 8.5"></polyline><polyline points="2 15.5 12 8.5 22 15.5"></polyline><line x1="12" y1="2" x2="12" y2="8.5"></line></svg></span>
-                      <span className="nav-link-text-wrapper">
-                        <span className="nav-link-text">Console</span>
-                      </span>
-                    </div>
-                  </NavLink>
-                </div>
-              </li>}
           </ul>
         </div>
-      </div>
-      <div className="navbar-vertical-footer">
-        <button className="btn navbar-vertical-toggle border-0 fw-semi-bold w-100 white-space-nowrap d-flex align-items-center">
-          <span className="uil uil-left-arrow-to-left fs-0"></span>
-          <span className="uil uil-arrow-from-right fs-0"></span>
-          <span className="navbar-vertical-footer-text ms-2">
-            Collapsed View                
-          </span>
-        </button>
       </div>
     </nav>
   );

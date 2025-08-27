@@ -1,42 +1,49 @@
-import React from "react";
-import ReactECharts from "echarts-for-react";
+import React from 'react'
+import ReactEcharts from 'echarts-for-react'
 
-const InvoiceAnalyticsChart = ({ data = [] }) => {
+function InvoiceAnalyticsChart() {
+   
+    const  data = [
+        { name: "Paid", value: 40 },
+        { name: "Pending", value: 25 },
+        { name: "Overdue", value: 15 },
+        { name: "Cancelled", value: 20 },
+    ] 
     const options = {
-        tooltip: {
-            trigger: "item",
+        tooltip:{
+            trigger:"item",
         },
-        legend: {
-            orient: "vertical",
-            right: 10,
-            top: "center",
+        legend:{
+            orient:"vertical",
+            top:"center",
+            right:"10"
         },
-        series: [
+        series:[
             {
-                name: "Invoices",
-                type: "pie",
-                radius: "60%",
-                data: data.map(item => ({
-                    value: item.value,
-                    name: item.name,
+                name:"invoices",
+                type:"pie",
+                radius:"60%",
+                data:data.map((item)=>({
+                    value:item.value,
+                    name:item.name,
                 })),
-                label: {
-                    formatter: "{b}", // show only name
+                label:{
+                    formatter: "{b}",
                 },
                 itemStyle: {
                     borderRadius: 5,
-                    borderColor: "#fff",
-                    borderWidth: 2,
+                    borderColor:"#fff",
+                    borderWidth:2,
                 },
             },
         ],
-    };
 
-    return (
-        <div style={{ height: 400 }}>
-            <ReactECharts option={options} style={{ height: "100%" }} />
-        </div>
-    );
-};
+    }
+  return (
+    <div style={{height:400}}>
+      <ReactEcharts option={options} style={{height:"100%"}}/>
+    </div>
+  )
+}
 
-export default InvoiceAnalyticsChart;
+export default InvoiceAnalyticsChart
