@@ -62,7 +62,7 @@ const Sidebar = () => {
                       <span data-feather="check-square"></span>
                     </span>
                     <span className="nav-link-text-wrapper">
-                      <span className="nav-link-text">Super Admin</span>
+                      <span className="nav-link-text">Business ERP</span>
                     </span>
                   </div>
                 </NavLink>
@@ -95,20 +95,7 @@ const Sidebar = () => {
                    <li className="nav-item">
                       <NavLink
                         className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">POS</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Product"
+                        to="/ItemCart"
                         data-bs-toggle=""
                         aria-expanded="false"
                       >
@@ -118,10 +105,11 @@ const Sidebar = () => {
                       </NavLink>
                       {/* <!-- more inner pages--> */}
                     </li>
+                  
                     <li className="nav-item">
                       <NavLink
                         className="nav-link"
-                        to="/Services"
+                        to="/SideInvoice"
                         data-bs-toggle=""
                         aria-expanded="false"
                       >
@@ -130,7 +118,7 @@ const Sidebar = () => {
                         </div>
                       </NavLink>
                       {/* <!-- more inner pages--> */}
-                    </li>
+                     </li>
                   </ul>
                 </div>
               </div>
@@ -169,7 +157,7 @@ const Sidebar = () => {
                    <li className="nav-item">
                       <NavLink
                         className="nav-link"
-                        to="/Bills"
+                        to="/ManageSales"
                         data-bs-toggle=""
                         aria-expanded="false"
                       >
@@ -179,7 +167,7 @@ const Sidebar = () => {
                       </NavLink>
                       {/* <!-- more inner pages--> */}
                     </li>
-                    <li className="nav-item">
+                    {/* <li className="nav-item">
                       <NavLink
                         className="nav-link"
                         to="/Estimates"
@@ -190,12 +178,11 @@ const Sidebar = () => {
                           <span className="nav-link-text">Invoive</span>
                         </div>
                       </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
+                    </li> */}
                     <li className="nav-item">
                       <NavLink
                         className="nav-link"
-                        to="/Invoice"
+                        to="/ManualInvoices"
                         data-bs-toggle=""
                         aria-expanded="false"
                       >
@@ -208,7 +195,7 @@ const Sidebar = () => {
                     <li className="nav-item">
                       <NavLink
                         className="nav-link"
-                        to="/RecurringInvoice"
+                        to="/DraftInvoice"
                         data-bs-toggle=""
                         aria-expanded="false"
                       >

@@ -109,31 +109,86 @@ export const dashboardData = [
 
   // groceryData.js
 export const groceryData = [
-  { id: 1, title: "Apples", description: "Fresh red apples from the farm.", image: "src/assets/img/bg/apple.png" },
-  { id: 2, title: "Bananas", description: "Sweet and ripe bananas.", image: "src/assets/img/bg/olive.jpg" },
-  { id: 3, title: "Oranges", description: "Juicy oranges full of vitamin C.", image: "https://via.placeholder.com/150" },
-  { id: 4, title: "Tomatoes", description: "Organic red tomatoes.", image: "https://via.placeholder.com/150" },
-  { id: 5, title: "Potatoes", description: "Fresh farm potatoes.", image: "https://via.placeholder.com/150" },
-  { id: 6, title: "Onions", description: "Healthy and fresh onions.", image: "https://via.placeholder.com/150" },
-  { id: 7, title: "Carrots", description: "Crunchy and sweet carrots.", image: "https://via.placeholder.com/150" },
-  { id: 8, title: "Spinach", description: "Fresh green spinach leaves.", image: "https://via.placeholder.com/150" },
-  { id: 9, title: "Broccoli", description: "Healthy broccoli florets.", image: "https://via.placeholder.com/150" },
-  { id: 10, title: "Cucumber", description: "Cool and fresh cucumbers.", image: "https://via.placeholder.com/150" },
-  { id: 11, title: "Milk", description: "Fresh cow milk.", image: "https://via.placeholder.com/150" },
-  { id: 12, title: "Cheese", description: "Tasty cheddar cheese.", image: "https://via.placeholder.com/150" },
-  { id: 13, title: "Eggs", description: "Farm fresh eggs.", image: "https://via.placeholder.com/150" },
-  { id: 14, title: "Butter", description: "Creamy unsalted butter.", image: "https://via.placeholder.com/150" },
-  { id: 15, title: "Yogurt", description: "Healthy plain yogurt.", image: "https://via.placeholder.com/150" },
-  { id: 16, title: "Rice", description: "Premium Basmati rice.", image: "https://via.placeholder.com/150" },
-  { id: 17, title: "Wheat Flour", description: "Organic whole wheat flour.", image: "https://via.placeholder.com/150" },
-  { id: 18, title: "Sugar", description: "Refined white sugar.", image: "https://via.placeholder.com/150" },
-  { id: 19, title: "Salt", description: "Pure edible salt.", image: "https://via.placeholder.com/150" },
-  { id: 20, title: "Cooking Oil", description: "Refined sunflower oil.", image: "https://via.placeholder.com/150" },
-  { id: 21, title: "Tea", description: "Premium black tea.", image: "https://via.placeholder.com/150" },
-  { id: 22, title: "Coffee", description: "Fresh roasted coffee beans.", image: "https://via.placeholder.com/150" },
-  { id: 23, title: "Pasta", description: "Healthy durum wheat pasta.", image: "https://via.placeholder.com/150" },
-  { id: 24, title: "Tomato Sauce", description: "Delicious tomato sauce.", image: "https://via.placeholder.com/150" },
-  { id: 25, title: "Spices Mix", description: "Aromatic mixed spices.", image: "https://via.placeholder.com/150" }
+  { id: 1, title: "Curd", description: "Fresh red apples from the farm.", image: "src/assets/img/bg/curd.jpg", price: 120 },
+  { id: 2, title: "Olive", description: "health thing.", image: "src/assets/img/bg/olive.jpg", price: 60 },
+  { id: 3, title: "Apple", description: "Juicy oranges full of vitamin C.", image: "src/assets/img/bg/applee.png", price: 90 },
+  { id: 5, title: "Honey", description: "Fresh farm Honey.", image: "src/assets/img/bg/honey.jpg", price: 40 },
+  { id: 4, title: "Bananas", description: "Organic red tomatoes.", image: "src/assets/img/bg/banana.jpg", price: 50 },
+  { id: 6, title: "Onions", description: "Healthy and fresh onions.", image: "src/assets/img/bg/onions.jpg", price: 45 },
+  { id: 7, title: "Carrots", description: "Crunchy and sweet carrots.", image: "src/assets/img/bg/carrot.jpg", price: 70 },
+  { id: 8, title: "Spinach", description: "Fresh green spinach leaves.", image: "src/assets/img/bg/spinach.jpg", price: 30 },
+  { id: 9, title: "Broccoli", description: "Healthy broccoli florets.", image: "src/assets/img/bg/broccoli.jpg", price: 110 },
+  { id: 11, title: "Milk", description: "Fresh cow milk.", image: "src/assets/img/bg/milk.jpg", price: 60 },
+  { id: 12, title: "Cheese", description: "Tasty cheddar cheese.", image: "src/assets/img/bg/cheese.jpg", price: 250 },
+  { id: 13, title: "Eggs", description: "Farm fresh eggs.", image: "src/assets/img/bg/eggs.jpg", price: 70 },
 ];
 
 
+export const ManageinvoiceData = [
+  {
+    "id": "INV1",
+    "customer": "Walk in Customer",
+    "branch": "Main Branch",
+    "subTotal": 840,
+    "discount": 0,
+    "vat": 66.61,
+    "grandTotal": 906.61,
+    "paidAmount": 0,
+    "dueAmount": 906.61,
+    "createdDate": "5/13/2022",
+    "status": "UnPaid"
+  },
+  {
+    "id": "INV2",
+    "customer": "Walk in Customer",
+    "branch": "Main Branch",
+    "subTotal": 252,
+    "discount": 0,
+    "vat": 8.61,
+    "grandTotal": 260.61,
+    "paidAmount": 0,
+    "dueAmount": 260.61,
+    "createdDate": "5/13/2022",
+    "status": "UnPaid"
+  },
+  {
+    "id": "INV3",
+    "customer": "John Doe",
+    "branch": "Main Branch",
+    "subTotal": 1200,
+    "discount": 50,
+    "vat": 115,
+    "grandTotal": 1265,
+    "paidAmount": 500,
+    "dueAmount": 765,
+    "createdDate": "5/14/2022",
+    "status": "Partial"
+  },
+  {
+    "id": "INV4",
+    "customer": "Jane Smith",
+    "branch": "Branch A",
+    "subTotal": 500,
+    "discount": 20,
+    "vat": 45,
+    "grandTotal": 525,
+    "paidAmount": 525,
+    "dueAmount": 0,
+    "createdDate": "5/15/2022",
+    "status": "Paid"
+  },
+  {
+    "id": "INV5",
+    "customer": "Michael Johnson",
+    "branch": "Branch B",
+    "subTotal": 300,
+    "discount": 0,
+    "vat": 27,
+    "grandTotal": 327,
+    "paidAmount": 0,
+    "dueAmount": 327,
+    "createdDate": "5/15/2022",
+    "status": "UnPaid"
+  }
+]
+ 

@@ -17,10 +17,10 @@ function DashboardHome() {
       <ConnectBank/>
       <div className="row align-items-center g-4">
         <div className="col-12 col-xxl-12">
-          <div className="row g-3">
+          <div className="row g-1 pb-0">
             {dashboardData.map((data, idx) => (
-              <div className="col-12 col-md-6" key={idx}>
-                <div className="card">
+              <div className="col-12 col-md-6 " key={idx}>
+                <div className="card shadow mb-3">
                   <div className="card-body">
                     <div className="d-flex justify-content-between">
                       <div>
