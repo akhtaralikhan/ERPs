@@ -210,7 +210,7 @@ const Sidebar = () => {
                     <li className="nav-item">
                       <NavLink
                         className="nav-link"
-                        to="/Incomes"
+                        to="/QuoteInvoice"
                         data-bs-toggle=""
                         aria-expanded="false"
                       >
@@ -223,12 +223,12 @@ const Sidebar = () => {
                     <li className="nav-item">
                       <NavLink
                         className="nav-link"
-                        to="/CreditNotes"
+                        to="/customerInfo"
                         data-bs-toggle=""
                         aria-expanded="false"
                       >
                         <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Manage Customer Info</span>
+                          <span className="nav-link-text">Manage Customer</span>
                         </div>
                       </NavLink>
                       {/* <!-- more inner pages--> */}
@@ -236,7 +236,7 @@ const Sidebar = () => {
                     <li className="nav-item">
                       <NavLink
                         className="nav-link"
-                        to="/Customer"
+                        to="/SalesReturn"
                         data-bs-toggle=""
                         aria-expanded="false"
                       >
@@ -276,23 +276,11 @@ const Sidebar = () => {
                     data-bs-parent="#navbarVerticalCollapse"
                     id="purchase"
                   >
+                    
                     <li className="nav-item">
                       <NavLink
                         className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Expenses</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
+                        to="/PurchaseInvoice"
                         data-bs-toggle=""
                         aria-expanded="false"
                       >
@@ -305,7 +293,7 @@ const Sidebar = () => {
                     <li className="nav-item">
                       <NavLink
                         className="nav-link"
-                        to="/Expenses"
+                        to="/PurchaseInvoiceDraft"
                         data-bs-toggle=""
                         aria-expanded="false"
                       >
@@ -318,7 +306,7 @@ const Sidebar = () => {
                     <li className="nav-item">
                       <NavLink
                         className="nav-link"
-                        to="/DebitNotes"
+                        to="/PurchaseInvoiceQuote"
                         data-bs-toggle=""
                         aria-expanded="false"
                       >
@@ -332,7 +320,7 @@ const Sidebar = () => {
                     <li className="nav-item">
                       <NavLink
                         className="nav-link"
-                        to="/Vendors"
+                        to="/ManageSupplier"
                         data-bs-toggle=""
                         aria-expanded="false"
                       >
@@ -345,7 +333,7 @@ const Sidebar = () => {
                     <li className="nav-item">
                       <NavLink
                         className="nav-link"
-                        to="/Vendors"
+                        to="/PurchaseReturn"
                         data-bs-toggle=""
                         aria-expanded="false"
                       >
@@ -355,33 +343,6 @@ const Sidebar = () => {
                       </NavLink>
                       {/* <!-- more inner pages--> */}
                     </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Vendors"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Manage Supplier</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Vendors"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Manage Supplier</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-
                   </ul>
                 </div>
               </div>

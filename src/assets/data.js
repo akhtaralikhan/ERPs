@@ -142,6 +142,19 @@ export const ManageinvoiceData = [
     "id": "INV2",
     "customer": "Walk in Customer",
     "branch": "Main Branch",
+    "subTotal": 840,
+    "discount": 0,
+    "vat": 66.61,
+    "grandTotal": 906.61,
+    "paidAmount": 0,
+    "dueAmount": 906.61,
+    "createdDate": "5/13/2022",
+    "status": "UnPaid"
+  },
+  {
+    "id": "INV2",
+    "customer": "Walk in Customer",
+    "branch": "Main Branch",
     "subTotal": 252,
     "discount": 0,
     "vat": 8.61,
@@ -192,3 +205,291 @@ export const ManageinvoiceData = [
   }
 ]
  
+
+export const customerInfo = [
+  {
+    "id": 1,
+    "name": "John Doe",
+    "companyName": "Tech Solutions Ltd.",
+    "type": "Normal",
+    "phone": "+14155552671",
+    "email": "john.doe@example.com",
+    "billingAddress": "New York, USA",
+    "createdDate": "2023-02-20"
+  },
+  {
+    "id": 2,
+    "name": "Jane Smith",
+    "companyName": "Global Enterprises",
+    "type": "Normal",
+    "phone": "+447911123456",
+    "email": "jane.smith@example.com",
+    "billingAddress": "London, UK",
+    "createdDate": "2023-02-20"
+  },
+  {
+    "id": 3,
+    "name": "Carlos Lopez",
+    "companyName": "Innovate Corp",
+    "type": "Premium",
+    "phone": "+5215512345678",
+    "email": "carlos.lopez@example.com",
+    "billingAddress": "Mexico City, Mexico",
+    "createdDate": "2023-02-20"
+  },
+  {
+    "id": 4,
+    "name": "Ayesha Khan",
+    "companyName": "ABC Limited",
+    "type": "Normal",
+    "phone": "+923001112233",
+    "email": "ayesha.khan@example.com",
+    "billingAddress": "Karachi, Pakistan",
+    "createdDate": "2023-02-20"
+  },
+  {
+    "id": 5,
+    "name": "Michael Johnson",
+    "companyName": "XYZ Solutions",
+    "type": "Normal",
+    "phone": "+16135550000",
+    "email": "michael.johnson@example.com",
+    "billingAddress": "Toronto, Canada",
+    "createdDate": "2023-02-20"
+  },
+  {
+    "id": 6,
+    "name": "Sophia Lee",
+    "companyName": "Bright Future Inc.",
+    "type": "Premium",
+    "phone": "+821012345678",
+    "email": "sophia.lee@example.com",
+    "billingAddress": "Seoul, South Korea",
+    "createdDate": "2023-02-20"
+  },
+  {
+    "id": 7,
+    "name": "David Brown",
+    "companyName": "FutureTech",
+    "type": "Normal",
+    "phone": "+33123456789",
+    "email": "david.brown@example.com",
+    "billingAddress": "Paris, France",
+    "createdDate": "2023-02-20"
+  }
+]
+
+export const salesReturnData = [
+  {
+    id: 1,
+    refId: "REF-1001",
+    invoiceNo: "INV-2023-001",
+    customer: "John Doe",
+    note: "First order payment",
+    createdDate: "2023-02-20"
+  },
+  {
+    id: 2,
+    refId: "REF-1002",
+    invoiceNo: "INV-2023-002",
+    customer: "Jane Smith",
+    note: "Monthly subscription",
+    createdDate: "2023-02-21"
+  },
+  {
+    id: 3,
+    refId: "REF-1003",
+    invoiceNo: "INV-2023-003",
+    customer: "Carlos Lopez",
+    note: "Annual plan purchase",
+    createdDate: "2023-02-22"
+  },
+  {
+    id: 4,
+    refId: "REF-1004",
+    invoiceNo: "INV-2023-004",
+    customer: "Ayesha Khan",
+    note: "Software license renewal",
+    createdDate: "2023-02-23"
+  },
+  {
+    id: 5,
+    refId: "REF-1005",
+    invoiceNo: "INV-2023-005",
+    customer: "Michael Johnson",
+    note: "Product upgrade",
+    createdDate: "2023-02-24"
+  }
+];
+export const purchaseReturnData = [
+  {
+    id: 1,
+    refId: "REF-1001",
+    invoiceNo: "INV-2023-001",
+    customer: "John Doe",
+    note: "First order payment",
+    createdDate: "2023-02-20"
+  },
+  {
+    id: 2,
+    refId: "REF-1002",
+    invoiceNo: "INV-2023-002",
+    customer: "Jane Smith",
+    note: "Monthly subscription",
+    createdDate: "2023-02-21"
+  },
+  {
+    id: 3,
+    refId: "REF-1003",
+    invoiceNo: "INV-2023-003",
+    customer: "Carlos Lopez",
+    note: "Annual plan purchase",
+    createdDate: "2023-02-22"
+  },
+  {
+    id: 4,
+    refId: "REF-1004",
+    invoiceNo: "INV-2023-004",
+    customer: "Ayesha Khan",
+    note: "Software license renewal",
+    createdDate: "2023-02-23"
+  },
+  {
+    id: 5,
+    refId: "REF-1005",
+    invoiceNo: "INV-2023-005",
+    customer: "Michael Johnson",
+    note: "Product upgrade",
+    createdDate: "2023-02-24"
+  }
+];
+
+
+export const  purchaseInvoiceData = [
+  {
+    "id": "PINV5",
+    "supplier": "Walk in Supplier",
+    "subTotal": 9700,
+    "discount": 0,
+    "vat": 429.5,
+    "grandTotal": 10129.5,
+    "paidAmount": 0,
+    "dueAmount": 10129.5,
+    "createdDate": "10/7/2022",
+    "status": "UnPaid"
+  },
+  {
+    "id": "PINV4",
+    "supplier": "Walk in Supplier",
+    "subTotal": 13700,
+    "discount": 0,
+    "vat": 864.5,
+    "grandTotal": 14564.5,
+    "paidAmount": 0,
+    "dueAmount": 14564.5,
+    "createdDate": "10/7/2022",
+    "status": "UnPaid"
+  },
+  {
+    "id": "PINV3",
+    "supplier": "Walk in Supplier",
+    "subTotal": 108000,
+    "discount": 0,
+    "vat": 48600,
+    "grandTotal": 156600,
+    "paidAmount": 0,
+    "dueAmount": 156600,
+    "createdDate": "10/7/2022",
+    "status": "UnPaid"
+  },
+  {
+    "id": "PINV2",
+    "supplier": "Walk in Supplier",
+    "subTotal": 700,
+    "discount": 0,
+    "vat": 24.5,
+    "grandTotal": 724.5,
+    "paidAmount": 0,
+    "dueAmount": 724.5,
+    "createdDate": "10/7/2022",
+    "status": "UnPaid"
+  },
+  {
+    "id": "PINV1",
+    "supplier": "Walk in Supplier",
+    "subTotal": 52200,
+    "discount": 0,
+    "vat": 7302,
+    "grandTotal": 59502,
+    "paidAmount": 59502,
+    "dueAmount": 0,
+    "createdDate": "10/7/2022",
+    "status": "Paid"
+  }
+]
+
+export const manageSupplier = [
+  {
+    id: 1,
+    name: "Unilever",
+    contactPerson: "TBD",
+    email: "dev@gmail.com",
+    phone: "01699000",
+    address: "Dhaka",
+    createdDate: "2023-02-20"
+  },
+  {
+    id: 2,
+    name: "PHP",
+    contactPerson: "TBD",
+    email: "dev@gmail.com",
+    phone: "01699000",
+    address: "Dhaka",
+    createdDate: "2023-02-20"
+  },
+  {
+    id: 3,
+    name: "Microsoft",
+    contactPerson: "TBD",
+    email: "dev@gmail.com",
+    phone: "01699000",
+    address: "USA",
+    createdDate: "2023-02-20"
+  },
+  {
+    id: 4,
+    name: "Amazon",
+    contactPerson: "TBD",
+    email: "dev@gmail.com",
+    phone: "01699000",
+    address: "USA",
+    createdDate: "2023-02-20"
+  },
+  {
+    id: 5,
+    name: "Google",
+    contactPerson: "TBD",
+    email: "dev@gmail.com",
+    phone: "01699000",
+    address: "USA",
+    createdDate: "2023-02-20"
+  },
+  {
+    id: 6,
+    name: "Common Supplier",
+    contactPerson: "TBD",
+    email: "dev@gmail.com",
+    phone: "01699000",
+    address: "Dhaka",
+    createdDate: "2023-02-20"
+  },
+  {
+    id: 7,
+    name: "Walk in Supplier",
+    contactPerson: "TBD",
+    email: "walkin@gmail.com",
+    phone: "01699000",
+    address: "Washington",
+    createdDate: "2023-02-20"
+  }
+];

@@ -60,16 +60,16 @@ const ManualInvoices = () => {
       <table className='table table-hover  table-sm fs-9 mb-0' style={{fontSize:"13px"}}>
         <thead>
           <tr className='bg-light fs-9 cursor-pointer'>
-            <th className='border-top sort' data-sort="id">Id</th>
-            <th className='border-top sort' data-sort="name">Customer</th>
-            <th className='border-top' data-sort="branch">Branch</th>
-            <th className='border-top' data-sort="subTotal">Sub Total</th>
-            <th className='border-top' data-sort="discount">Discount</th>
-            <th className='border-top' data-sort="vat">VAT</th>
-            <th className='border-top' data-sort="grandTotal">Grand Total</th>
-            <th className='border-top' data-sort="paidAmount">Paid Amount</th>
-            <th className='border-top' data-sort="dueAmount">Due Amount</th>
-            <th className='border-top' data-sort="createdDate">Created Date</th>
+            <th className='border-top sort position-relative' data-sort="id">Id</th>
+            <th className='border-top sort position-relative' data-sort="name">Customer</th>
+            <th className='border-top sort position-relative' data-sort="branch">Branch</th>
+            <th className='border-top sort position-relative' data-sort="subTotal">Sub Total</th>
+            <th className='border-top sort position-relative' data-sort="discount">Discount</th>
+            <th className='border-top sort position-relative' data-sort="vat">VAT</th>
+            <th className='border-top sort position-relative' data-sort="grandTotal">Grand Total</th>
+            <th className='border-top sort position-relative' data-sort="paidAmount">Paid Amount</th>
+            <th className='border-top sort position-relative' data-sort="dueAmount">Due Amount</th>
+            <th className='border-top sort position-relative' data-sort="createdDate">Created Date</th>
             <th className='border-top' data-sort="status">Status</th>
             <th className='border-top' >Actions</th>
           </tr>

@@ -1,9 +1,9 @@
+import { customerInfo } from '../../assets/data';
 import React, { useState,useEffect } from 'react'
-import {ManageinvoiceData} from '../../assets/data';
 import AddPaymentModal from '../../Components/AddPaymentModal';
 import List from 'list.js'
 
-export default function QuoteInvoice() {
+export default function CustomerInfo() {
 
       useEffect(() => {
     const options = {
@@ -13,21 +13,28 @@ export default function QuoteInvoice() {
         "createdDate", "status"
       ],
       page: 3,
-      pagination: [{
-        paginationClass: "pagination"  // matches <ul class="pagination">
-      }]  
+      pagination: {
+        innerWindow:1,
+        outerWindow:1
+      }
     };
       new List("invoice-table", options);
     }, []);
   
-
   const [showModal,setShowModal] = useState(false);
+  const [searchTerm,setSearchTerm] = useState("")
+  const filteredData = customerInfo.filter((customerData)=>
+   customerData?.name?.toLowerCase().includes(searchTerm.toLowerCase())
+  )
   return (
     <div className='content'>
-        
+        {/* <div className="mb-5">
+        <h2 className='fw-bolder'>Draft Invoice</h2>
+      </div> */}
+
       <div className="card  ">
         <div className="upper-card d-flex  border-bottom p-4 col-12">
-          <div className="col-6"><h4 className='fw-bold col-6 pt-2'>Quote Invoices</h4></div>
+          <div className="col-6"><h4 className='fw-bold col-6 pt-2'>Customer Info</h4></div>
           <div className="col-6 text-end "><button className='btn btn-primary ' onClick={()=>setShowModal(true)}>+ Add Payment</button>
           {showModal && <AddPaymentModal showModal={showModal} setShowModal={setShowModal}/>}
           </div>
@@ -36,7 +43,7 @@ export default function QuoteInvoice() {
       <div className="search-bars  d-flex   p-4 pb-0 mb-2 ">
         <div className="search-box mb-3 position-lg-relative ">
         <form className="position-relative">
-            <input className="form-control search-input search form-control-sm  pt-2 pb-2" type="search" placeholder="Search" aria-label="Search" />
+            <input className="form-control search-input search form-control-sm  pt-2 pb-2" onChange={(e)=>setSearchTerm(e.target.value)} type="search" placeholder="Search" aria-label="Search" />
            <span className="fas fa-search search-box-icon"></span>
         </form>
        </div>
@@ -47,35 +54,29 @@ export default function QuoteInvoice() {
       <table className='table table-hover  table-sm fs-9 mb-0' style={{fontSize:"13px"}}>
         <thead>
           <tr className='bg-light fs-9 cursor-pointer'>
-            <th className='border-top sort position-relative' data-sort="id">Id</th>
-            <th className='border-top sort position-relative' data-sort="name">Customer</th>
-            <th className='border-top sort position-relative' data-sort="branch" >Branch</th>
-            <th className='border-top sort position-relative' data-sort="subTotal" >Sub Total</th>
-            <th className='border-top sort position-relative' data-sort="discount" >Discount</th>
-            <th className='border-top sort position-relative' data-sort="vat" >VAT</th>
-            <th className='border-top sort position-relative' data-sort="grandTotal" >Grand Total</th>
-            <th className='border-top sort position-relative' data-sort="paidAmount" >Paid Amount</th>
-            <th className='border-top sort position-relative' data-sort="dueAmount" >Due Amount</th>
-            <th className='border-top sort position-relative' data-sort="createdDate" >Created Date</th>
-            <th className='border-top sort position-relative' data-sort="status" >Status</th>
-            <th className='border-top' >Actions</th>
+            <th className="sort position-relative  white-space-nowrap" data-sort="id">Id</th>
+            <th className='sort position-relative  white-space-nowrap' data-sort="name">Name</th>
+            <th className="sort position-relative  white-space-nowrap" data-sort="companyName">Company Name</th>
+            <th className="sort position-relative  white-space-nowrap" data-sort="type">Type</th>
+            <th className="sort position-relative  white-space-nowrap" data-sort="phone">Phone</th>
+            <th className="sort position-relative  white-space-nowrap" data-sort="email">Email</th>
+            <th className="sort position-relative white-space-nowrap" data-sort="billingAddress">Billing Address</th>
+            <th className="sort position-relative  white-space-nowrap" data-sort="createdDate" >Created Date</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody className='list'>
-          {ManageinvoiceData.map((invoiceData,index)=>(
+          {filteredData.map((customerData,index)=>(
            <tr key={index}>
-             <td className="id">{invoiceData.id}</td>
-             <td className='name'>{invoiceData.customer}</td>
-             <td className="branch">{invoiceData.branch}</td>
-             <td className="subTotal">{invoiceData.subTotal}</td>
-             <td className="discount">{invoiceData.discount}</td>
-             <td className="vat">{invoiceData.vat}</td>
-             <td className="grandTotal">{invoiceData.grandTotal}</td>
-             <td className="paidAmount">{invoiceData.paidAmount}</td>
-             <td className="dueAmount">{invoiceData.dueAmount}</td>
-             <td className="createdDate">{invoiceData.createdDate}</td>
-             <td><span className='badge badge-phoenix badge-phoenix-primary'>{invoiceData.status}</span></td>
-             <td className='cursor-pointer ps-4'>...</td>
+             <td className='id'>{customerData.id}</td>
+             <td  className='name'>{customerData.name}</td>
+             <td className='companyName'>{customerData.companyName}</td>
+             <td className='type'>{customerData.type}</td>
+             <td className='phone'>{customerData.phone}</td>
+             <td className='email'>{customerData.email}</td>
+             <td className='billingAddress'>{customerData.billingAddress}</td>
+             <td className='createdDate'>{customerData.createdDate}</td>
+             <td>...</td>
            </tr>
           ))}
         </tbody>

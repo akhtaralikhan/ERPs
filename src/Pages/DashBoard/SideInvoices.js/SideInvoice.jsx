@@ -56,7 +56,7 @@ export default function SideInvoice() {
       <hr className='mb-7' style={{height:"1px"}}/>
       <div className="side-invoice table-responsive">
          <table className='table table-hover mb-3 table-sm fs-9'>
-                    <thead >
+                    <thead>
                       <tr className='p-4'>
                         <th className='border-top'>Item</th>
                         <th className='border-top'>Title</th>

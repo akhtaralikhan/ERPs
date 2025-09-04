@@ -12934,6 +12934,14 @@ textarea.form-control.is-invalid {
     --phoenix-text-opacity: 1;
     color: rgba(255, 255, 255, .5) !important
 }
+.text-body-tertiary {
+    --phoenix-text-opacity: 1;
+    color: rgba(var(--phoenix-tertiary-color-rgb), var(--phoenix-text-opacity)) !important;
+}
+
+.fw-semibold {
+    font-weight: 600 !important;
+}
 
 .text-reset {
     --phoenix-text-opacity: 1;

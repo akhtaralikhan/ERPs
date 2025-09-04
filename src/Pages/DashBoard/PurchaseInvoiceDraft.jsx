@@ -1,42 +1,54 @@
-import React, { useState,useEffect } from 'react'
-import {ManageinvoiceData} from '../../assets/data';
+import React,{useEffect, useState} from 'react';
+import { purchaseInvoiceData } from '../../assets/data';
+import List from "list.js";
 import AddPaymentModal from '../../Components/AddPaymentModal';
-import List from 'list.js'
 
-export default function QuoteInvoice() {
-
-      useEffect(() => {
-    const options = {
-      valueNames: [
-        "name", "id", "branch", "subTotal", "discount", 
-        "vat", "grandTotal", "paidAmount", "dueAmount", 
-        "createdDate", "status"
-      ],
-      page: 3,
-      pagination: [{
-        paginationClass: "pagination"  // matches <ul class="pagination">
-      }]  
-    };
-      new List("invoice-table", options);
-    }, []);
+const PurchaseInvoiceDraft = () => {
   
-
   const [showModal,setShowModal] = useState(false);
+    useEffect(() => {
+  const options = {
+    valueNames: [
+      "name", "id", "branch", "subTotal", "discount", 
+      "vat", "grandTotal", "paidAmount", "dueAmount", 
+      "createdDate", "status"
+    ],
+    page: 3,
+    pagination: [{
+      paginationClass: "pagination"  // matches <ul class="pagination">
+    }]  
+  };
+    new List("invoice-table", options);
+  }, []);
+
   return (
     <div className='content'>
-        
+      {/* <div className="mb-5">
+        <h2 className='fw-bolder'>Purchase Invoice List</h2>
+      </div> */}
+
       <div className="card  ">
         <div className="upper-card d-flex  border-bottom p-4 col-12">
-          <div className="col-6"><h4 className='fw-bold col-6 pt-2'>Quote Invoices</h4></div>
+          <div className="col-6"><h4 className='fw-bold col-6 pt-2'>Purchase Invoice Draft</h4></div>
           <div className="col-6 text-end "><button className='btn btn-primary ' onClick={()=>setShowModal(true)}>+ Add Payment</button>
           {showModal && <AddPaymentModal showModal={showModal} setShowModal={setShowModal}/>}
           </div>
         </div>
         
-      <div className="search-bars  d-flex   p-4 pb-0 mb-2 ">
+      <div className="search-bars  d-flex justify-content-between  p-4 pb-0 mb-2 ">
+        <div className="start-end-data col-4 d-flex gap-3 ">
+            <div className="start col-6">
+                <label htmlFor="startDate" className='form-label ' style={{fontSize:"12px"}} >Start Date :</label>
+                <input type="date" className='form-control' id='startDate' placeholder="dd/mm/yyyy"/>
+            </div>
+            <div className="end col-6">
+                <label htmlFor="endDate" className='form-label' style={{fontSize:"12px"}}>End Date : </label>
+                <input type="date" className='form-control' id='endDate' placeholder="dd/mm/yyyy"/>
+            </div>
+        </div>
         <div className="search-box mb-3 position-lg-relative ">
         <form className="position-relative">
-            <input className="form-control search-input search form-control-sm  pt-2 pb-2" type="search" placeholder="Search" aria-label="Search" />
+            <input className="form-control search-input search form-control-sm mt-4 pt-2 pb-2" type="search" placeholder="Search" aria-label="Search" />
            <span className="fas fa-search search-box-icon"></span>
         </form>
        </div>
@@ -46,29 +58,27 @@ export default function QuoteInvoice() {
     <div className="div table-responsive p-4 pt-0" id='invoice-table'>
       <table className='table table-hover  table-sm fs-9 mb-0' style={{fontSize:"13px"}}>
         <thead>
-          <tr className='bg-light fs-9 cursor-pointer'>
-            <th className='border-top sort position-relative' data-sort="id">Id</th>
-            <th className='border-top sort position-relative' data-sort="name">Customer</th>
-            <th className='border-top sort position-relative' data-sort="branch" >Branch</th>
-            <th className='border-top sort position-relative' data-sort="subTotal" >Sub Total</th>
-            <th className='border-top sort position-relative' data-sort="discount" >Discount</th>
-            <th className='border-top sort position-relative' data-sort="vat" >VAT</th>
-            <th className='border-top sort position-relative' data-sort="grandTotal" >Grand Total</th>
-            <th className='border-top sort position-relative' data-sort="paidAmount" >Paid Amount</th>
-            <th className='border-top sort position-relative' data-sort="dueAmount" >Due Amount</th>
-            <th className='border-top sort position-relative' data-sort="createdDate" >Created Date</th>
-            <th className='border-top sort position-relative' data-sort="status" >Status</th>
-            <th className='border-top' >Actions</th>
+          <tr className='bg-light fs-9 cursor-pointer'>     
+           <th>ID</th>
+           <th>Supplier</th>
+           <th>Sub Total</th>
+           <th>Discount</th>
+           <th>VAT</th>
+           <th>Grand Total</th>
+           <th>Paid Amount</th>
+           <th>Due Amount</th>
+           <th>Created Date</th>
+           <th>Status</th>
+           <th>Action</th>
           </tr>
         </thead>
         <tbody className='list'>
-          {ManageinvoiceData.map((invoiceData,index)=>(
+          {purchaseInvoiceData.map((invoiceData,index)=>(
            <tr key={index}>
              <td className="id">{invoiceData.id}</td>
-             <td className='name'>{invoiceData.customer}</td>
-             <td className="branch">{invoiceData.branch}</td>
-             <td className="subTotal">{invoiceData.subTotal}</td>
-             <td className="discount">{invoiceData.discount}</td>
+             <td className='name'>{invoiceData.supplier}</td>
+             <td className="branch">{invoiceData.subTotal}</td>
+             <td className="subTotal">{invoiceData.discount}</td>
              <td className="vat">{invoiceData.vat}</td>
              <td className="grandTotal">{invoiceData.grandTotal}</td>
              <td className="paidAmount">{invoiceData.paidAmount}</td>
@@ -100,6 +110,10 @@ export default function QuoteInvoice() {
           </div>
       </div>
   </div>
-    </div>
+      
+   </div>
+    
   )
 }
+
+export default PurchaseInvoiceDraft

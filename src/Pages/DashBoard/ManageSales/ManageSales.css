@@ -33,3 +33,66 @@
     left: 100%;
   }
 }
+
+
+/* .sort[data-sort]::after {
+  content: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMCIgaGVpZ2h0PSIxMiIgdmlld0JveD0iMCAwIDEwIDEyIj4KICA8cGF0aCBkPSJNNSA yIEw4IDUgSDIgWiIgZmlsbD0iIzZFNzg5MSIvPgogIDxwYXRoIGQ9Ik01IDEwIEwyIDcgSDggWiIgZmlsbD0iIzZFNzg5MSIvPgo8L3N2Zz4=");
+  margin-left: 5px;
+  white-space: nowrap;
+  margin-top: 10px;
+}
+
+
+.sort.desc::after{
+  content: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNyIgaGVpZ2h0PSI0IiB2aWV3Qm94PSIwIDAgNyA0IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Ik0zLjUgNEwwIDAuNUg3TDMuNSA0WiIgZmlsbD0iIzZFNzg5MSIvPgo8L3N2Zz4=");
+}
+.sort.asc::after{
+  content: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNyIgaGVpZ2h0PSI0IiB2aWV3Qm94PSIwIDAgNyA0IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Ik0zLjUgNEwwIDAuNUg3TDMuNSA0WiIgZmlsbD0iIzZFNzg5MSIvPgo8L3N2Zz4=");
+
+} */
+
+/* Default (unsorted): show both arrows */
+.sort[data-sort]:not(.asc):not(.desc)::after {
+  content: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMCIgaGVpZ2h0PSIxMiIgdmlld0JveD0iMCAwIDEwIDEyIj4KICA8cGF0aCBkPSJNNSA yIEw4IDUgSDIgWiIgZmlsbD0iIzZFNzg5MSIvPgogIDxwYXRoIGQ9Ik01IDEwIEwyIDcgSDggWiIgZmlsbD0iIzZFNzg5MSIvPgo8L3N2Zz4=");
+  margin-left: 5px;
+  white-space: nowrap;
+  position: relative;
+  top: 2px;
+  /* margin-top: 10px; */
+}
+
+/* Descending */
+.sort.desc::after {
+  content: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNyIgaGVpZ2h0PSI0IiB2aWV3Qm94PSIwIDAgNyA0IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Ik0zLjUgNEwwIDAuNUg3TDMuNSA0WiIgZmlsbD0iIzZFNzg5MSIvPgo8L3N2Zz4=");
+  margin-left: 5px;
+}
+
+/* Ascending */
+.sort.asc::after {
+  content: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNyIgaGVpZ2h0PSI0IiB2aWV3Qm94PSIwIDAgNyA0IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Ik0zLjUgMEw3IDQgMC41IDRaIiBmaWxsPSIjNkU3ODkxIi8+Cjwvc3ZnPg==");
+  margin-left: 5px;
+   position: absolute;
+  top: 8px;
+}
+
+.pagination li {
+  cursor: pointer;
+}
+.pagination li.active a {
+  background-color: #2049b3 !important;
+  border-color: #6e7891 !important;
+  color: #fff !important;
+}
+
+
+.page-item:not(.active) .page-link:hover {
+  background-color: transparent !important;
+  color: inherit !important;
+}
+
+.id-hover:hover{
+  cursor: pointer;
+  text-decoration: underline;
+  color: rgb(23, 23, 23);
+  font-weight: 600 ;
+}

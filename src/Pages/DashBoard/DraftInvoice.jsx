@@ -1,8 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect} from 'react'
 import {ManageinvoiceData} from '../../assets/data';
 import AddPaymentModal from '../../Components/AddPaymentModal';
+import List from 'list.js'
 export default function DraftInvoice() {
   const [showModal,setShowModal] = useState(false);
+      useEffect(() => {
+    const options = {
+      valueNames: [
+        "name", "id", "branch", "subTotal", "discount", 
+        "vat", "grandTotal", "paidAmount", "dueAmount", 
+        "createdDate", "status"
+      ],
+      page: 3,
+      pagination: [{
+        paginationClass: "pagination"  // matches <ul class="pagination">
+      }]  
+    };
+      new List("invoice-table", options);
+    }, []);
+  
   return (
     <div className='content'>
         {/* <div className="mb-5">
@@ -31,18 +47,18 @@ export default function DraftInvoice() {
       <table className='table table-hover  table-sm fs-9 mb-0' style={{fontSize:"13px"}}>
         <thead>
           <tr className='bg-light fs-9 cursor-pointer'>
-            <th className='border-top sort' data-sort="id">Id</th>
-            <th className='border-top sort' data-sort="name">Customer</th>
-            <th className='border-top' data-sort="branch">Branch</th>
-            <th className='border-top' data-sort="subTotal">Sub Total</th>
-            <th className='border-top' data-sort="discount">Discount</th>
-            <th className='border-top' data-sort="vat">VAT</th>
-            <th className='border-top' data-sort="grandTotal">Grand Total</th>
-            <th className='border-top' data-sort="paidAmount">Paid Amount</th>
-            <th className='border-top' data-sort="dueAmount">Due Amount</th>
-            <th className='border-top' >Created Date</th>
-            <th className='border-top' >Status</th>
-            <th className='border-top' >Actions</th>
+            <th className='border-top sort position-relative white-space-nowrap' data-sort="id">Id</th>
+            <th className='border-top sort position-relative white-space-nowrap' data-sort="name">Customer</th>
+            <th className='border-top sort position-relative white-space-nowrap' data-sort="branch">Branch</th>
+            <th className='border-top sort position-relative white-space-nowrap' data-sort="subTotal">Sub Total</th>
+            <th className='border-top sort position-relative white-space-nowrap' data-sort="discount">Discount</th>
+            <th className='border-top sort position-relative white-space-nowrap' data-sort="vat">VAT</th>
+            <th className='border-top sort position-relative white-space-nowrap' data-sort="grandTotal">Grand Total</th>
+            <th className='border-top sort position-relative white-space-nowrap' data-sort="paidAmount">Paid Amount</th>
+            <th className='border-top sort position-relative white-space-nowrap' data-sort="dueAmount">Due Amount</th>
+            <th className='border-top sort position-relative white-space-nowrap' >Created Date</th>
+            <th className='border-top sort position-relative white-space-nowrap' >Status</th>
+            <th className='border-top sort position-relative white-space-nowrap' >Actions</th>
           </tr>
         </thead>
         <tbody className='list'>
