@@ -136,12 +136,14 @@ export const ManageinvoiceData = [
     "paidAmount": 0,
     "dueAmount": 906.61,
     "createdDate": "5/13/2022",
-    "status": "UnPaid"
+    "status": "UnPaid",
+    "customerImg":"src/assets/img/bg/girl.jpg"
   },
   {
     "id": "INV2",
     "customer": "Walk in Customer",
     "branch": "Main Branch",
+    "customerImg":"src/assets/img/bg/man.jpg",
     "subTotal": 840,
     "discount": 0,
     "vat": 66.61,
@@ -149,7 +151,7 @@ export const ManageinvoiceData = [
     "paidAmount": 0,
     "dueAmount": 906.61,
     "createdDate": "5/13/2022",
-    "status": "UnPaid"
+    "status": "Paid"
   },
   {
     "id": "INV2",
@@ -161,6 +163,7 @@ export const ManageinvoiceData = [
     "grandTotal": 260.61,
     "paidAmount": 0,
     "dueAmount": 260.61,
+    "customerImg":"src/assets/img/bg/boy.jpg",
     "createdDate": "5/13/2022",
     "status": "UnPaid"
   },
@@ -168,6 +171,7 @@ export const ManageinvoiceData = [
     "id": "INV3",
     "customer": "John Doe",
     "branch": "Main Branch",
+    // "customerImg":"src/assets/img/bg/banana.jpg",
     "subTotal": 1200,
     "discount": 50,
     "vat": 115,
@@ -179,7 +183,7 @@ export const ManageinvoiceData = [
   },
   {
     "id": "INV4",
-    "customer": "Jane Smith",
+    "customer": "dane Smith",
     "branch": "Branch A",
     "subTotal": 500,
     "discount": 20,
@@ -187,11 +191,13 @@ export const ManageinvoiceData = [
     "grandTotal": 525,
     "paidAmount": 525,
     "dueAmount": 0,
+    // "customerImg":"src/assets/img/bg/banana.jpg",
     "createdDate": "5/15/2022",
     "status": "Paid"
   },
   {
     "id": "INV5",
+    // "customerImg":"src/assets/img/bg/banana.jpg",
     "customer": "Michael Johnson",
     "branch": "Branch B",
     "subTotal": 300,
@@ -204,7 +210,7 @@ export const ManageinvoiceData = [
     "status": "UnPaid"
   }
 ]
- 
+
 
 export const customerInfo = [
   {

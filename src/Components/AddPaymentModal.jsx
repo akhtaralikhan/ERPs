@@ -48,11 +48,11 @@ function AddPaymentModal({ showModal, setShowModal }) {
 
   return (
     <div>
-      <Modal isOpen={showModal} toggle={toggle} size="lg">
+      <Modal isOpen={showModal} toggle={toggle} size="md">
         <ModalHeader>
           Add Invoice{" "}
           <i
-            style={{ margin: "0px 0px 0px 333px" }}
+            style={{ margin: "0px 0px 0px 603px" }}
             className="fa fa-xmark fs--1 text-danger cursor-pointer"
             onClick={toggle}
           ></i>

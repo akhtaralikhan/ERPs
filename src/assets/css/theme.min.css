@@ -12936,7 +12936,11 @@ textarea.form-control.is-invalid {
 }
 .text-body-tertiary {
     --phoenix-text-opacity: 1;
-    color: rgba(var(--phoenix-tertiary-color-rgb), var(--phoenix-text-opacity)) !important;
+    color:rgba(82,91,117,1) !important;
+}
+
+.fs-9{
+  font-size: 0.8rem !important;
 }
 
 .fw-semibold {
