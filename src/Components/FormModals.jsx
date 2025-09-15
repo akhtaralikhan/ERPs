@@ -200,10 +200,11 @@ export const MainModal = ({
         </select>
       </div>
       <button
+      type="button"
         onClick={() => setModal("notMain")}
         className="btn btn-soft-primary"
       >
-        <span className="fa fa-solid fa-plus me-2" /> New Supplier
+        <span className="fa fa-solid fa-plus me-2" /> Add Customer
       </button>
       <div class="mb-2">
         <label class="form-label" for="basic-form-email">

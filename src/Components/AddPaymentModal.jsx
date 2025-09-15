@@ -67,7 +67,7 @@ function AddPaymentModal({ showModal, setShowModal }) {
                   modal === "Main"
                     ? "border-bottom-0  text-none"
                     : " text-primary"
-                }  border-end p-2 fw-semi-bold px-6 `}
+                }  border-end p-2 fw-semi-bold px-6 cursor-pointer `}
               >
                 Main{" "}
               </label>
@@ -79,7 +79,7 @@ function AddPaymentModal({ showModal, setShowModal }) {
                   modal === "others"
                     ? "border-bottom-0 text-none"
                     : " text-primary"
-                } border-end p-2 fw-semi-bold  px-6`}
+                } border-end p-2 fw-semi-bold  px-6 cursor-pointer`}
               >
                 Others
               </label>
@@ -88,9 +88,9 @@ function AddPaymentModal({ showModal, setShowModal }) {
                 onClick={() => setModal("notMain")}
                 className={` ${
                   modal === "notMain"
-                    ? "border-bottom-0 text-none"
+                    ? "border-bottom-0 text-none "
                     : " text-primary"
-                }  py-2 fw-semi-bold  px-5 white-space-nowrap`}
+                }  py-2 fw-semi-bold  px-5 white-space-nowrap cursor-pointer`}
               >
                 Add New Customer
               </label>

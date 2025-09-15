@@ -18,6 +18,12 @@
     --phoenix-bg-opacity: 1;
     background-color: rgba(255,255,255,1) !important;
 }
+@media (max-width: 575.98px) {
+  .content {
+    min-height: 100vh; /* keep it full height on small screens too */
+    padding: 5rem 1rem 6rem 1rem; /* adjust padding for mobile */
+  }
+}
 
 .fade-section {
   opacity: 0;
@@ -22099,6 +22105,7 @@ html {
 @media (min-width: 576px) {
   .content {
     padding-bottom: 4rem;
+    min-height: 100vh;
   }
 }
 

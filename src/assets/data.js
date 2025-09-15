@@ -215,7 +215,7 @@ export const ManageinvoiceData = [
 export const customerInfo = [
   {
     "id": 1,
-    "name": "John Doe",
+    "customer": "John Doe",
     "companyName": "Tech Solutions Ltd.",
     "type": "Normal",
     "phone": "+14155552671",
@@ -225,7 +225,7 @@ export const customerInfo = [
   },
   {
     "id": 2,
-    "name": "Jane Smith",
+    "customer": "Jane Smith",
     "companyName": "Global Enterprises",
     "type": "Normal",
     "phone": "+447911123456",
@@ -235,7 +235,7 @@ export const customerInfo = [
   },
   {
     "id": 3,
-    "name": "Carlos Lopez",
+    "customer": "Carlos Lopez",
     "companyName": "Innovate Corp",
     "type": "Premium",
     "phone": "+5215512345678",
@@ -245,7 +245,7 @@ export const customerInfo = [
   },
   {
     "id": 4,
-    "name": "Ayesha Khan",
+    "customer": "Ayesha Khan",
     "companyName": "ABC Limited",
     "type": "Normal",
     "phone": "+923001112233",
@@ -255,7 +255,7 @@ export const customerInfo = [
   },
   {
     "id": 5,
-    "name": "Michael Johnson",
+    "customer": "Michael Johnson",
     "companyName": "XYZ Solutions",
     "type": "Normal",
     "phone": "+16135550000",
@@ -265,7 +265,7 @@ export const customerInfo = [
   },
   {
     "id": 6,
-    "name": "Sophia Lee",
+    "customer": "Sophia Lee",
     "companyName": "Bright Future Inc.",
     "type": "Premium",
     "phone": "+821012345678",
@@ -275,7 +275,7 @@ export const customerInfo = [
   },
   {
     "id": 7,
-    "name": "David Brown",
+    "customer": "David Brown",
     "companyName": "FutureTech",
     "type": "Normal",
     "phone": "+33123456789",
