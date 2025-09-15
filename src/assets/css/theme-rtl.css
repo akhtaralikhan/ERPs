@@ -13,6 +13,12 @@
 /* -------------------------------------------------------------------------- */
 /*                                  Utilities                                 */
 /* -------------------------------------------------------------------------- */
+
+.bg-body-emphasis {
+    --phoenix-bg-opacity: 1;
+    background-color: rgba(255,255,255,1) !important;
+}
+
 .fade-section {
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
