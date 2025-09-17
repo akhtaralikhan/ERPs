@@ -258,6 +258,53 @@
     --phoenix-kanban-column-hover-bg: var(--phoenix-white)
 }
 
+
+body.light {
+    --background-color: #f5f7fa;
+    --text-color: #000;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+body.dark {
+    --background-color: #121212;
+    --text-color: #fff;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.NewColorChange {
+    background-color: var(--background-color);
+}
+
+.NewChangeColor {
+    color: var(--phoenix-body-color);
+}
+
+.table-responsive thead tr th,
+.table-responsive tbody tr td {
+    color: var(--phoenix-body-color);
+}
+
+/* .table-responsive tbody tr td {
+    font-weight: 700;
+} */
+
+.table-responsive tbody tr td a {
+    color: var(--phoenix-link-color);
+}
+
+.navbar {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: var(--phoenix-1100);
+}
+
 :root .nav-slim,
 :root.light .nav-slim,
 :root .light .nav-slim {
@@ -12934,13 +12981,14 @@ textarea.form-control.is-invalid {
     --phoenix-text-opacity: 1;
     color: rgba(255, 255, 255, .5) !important
 }
+
 .text-body-tertiary {
     --phoenix-text-opacity: 1;
-    color:rgba(82,91,117,1) !important;
+    color: rgba(82, 91, 117, 1) !important;
 }
 
-.fs-9{
-  font-size: 0.8rem !important;
+.fs-9 {
+    font-size: 0.8rem !important;
 }
 
 .fw-semibold {
@@ -13365,7 +13413,11 @@ textarea.form-control.is-invalid {
 }
 
 .rounded-circle {
-    border-radius: 50% !important
+    border-radius: 50% !important;
+    height: 2.5rem;
+    width: 2.5rem;
+    align-items: center;
+    justify-content: center;
 }
 
 .rounded-pill {
@@ -25992,11 +26044,26 @@ html {
         padding-right: 2.5rem !important;
         margin-left: 15.875rem !important;
     }
+
+    .content-dashboard {
+        margin-top: 3.5rem !important;
+        /* padding-left: 2.5rem !important; */
+        /* padding-right: 2.5rem !important; */
+        margin-left: 15.875rem !important;
+    }
 }
 
 
 @media(min-width: 576px) {
     .content {
+        padding-bottom: 4rem;
+        /* padding-bottom: 6rem; */
+        /* padding-left: 2.5rem;
+        padding-right: 2.5rem;
+        margin-left: 15.875rem; */
+    }
+
+    .content-dashboard {
         padding-bottom: 4rem;
         /* padding-bottom: 6rem; */
         /* padding-left: 2.5rem;
@@ -26020,9 +26087,9 @@ html {
     }
 }
 
-@media(min-width: 992px) {
-    .footer {
-        padding: 0 2.5rem
+@media (min-width: 992px) {
+     .footer {
+        padding-left: calc(15.875rem + 2.5rem);
     }
 }
 

@@ -22123,9 +22123,9 @@ html {
   }
 }
 @media (min-width: 992px) {
-  .footer {
-    padding: 0 2.5rem;
-  }
+    .app-layout.sidebar-expanded .footer {
+        padding-left: calc(15.875rem + 2.5rem);
+    }
 }
 
 .bullet-item {
