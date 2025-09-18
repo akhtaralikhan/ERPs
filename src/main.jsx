@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 import StoreContextProvider from "./context/storeContext";
 import { ThemeProvider } from "./context/ThemeContext";
+import "./index.css"; 
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 

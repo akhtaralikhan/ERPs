@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import feather from "feather-icons";
 
-const Sidebar = () => {
+const Sidebar = ({ collapsed, setCollapsed }) => {
   const [isSuperAdmin, setIsSuperAdmin] = useState(false);
+  // const [collapsed, setCollapsed] = useState(false); // collapsed state
+  const [flyoutTop, setFlyoutTop] = useState(0);
 
   useEffect(() => {
     const userData = localStorage.getItem("userData");
@@ -12,7 +14,6 @@ const Sidebar = () => {
       setIsSuperAdmin(true);
     }
   }, [isSuperAdmin]);
-
 
   useEffect(() => {
     feather.replace();
@@ -23,1541 +24,1708 @@ const Sidebar = () => {
     }
   }, []);
 
+  const Padding_left = collapsed ? "1rem" : "1.75rem";
+
   return (
-    <nav className="navbar navbar-vertical navbar-expand-lg h-100">
-      <div className="collapse navbar-collapse pb-5" id="navbarVerticalCollapse">
-        {/* <!-- scrollbar removed--> */}
-        <div className="navbar-vertical-content">
-          <ul className="navbar-nav flex-column" id="navbarVerticalNav">
-            <li className="nav-item">
-              {/* <!-- parent pages--> */}
-              <div className="nav-item-wrapper">
-                <NavLink
-                  className="nav-link label-1"
-                  to="/"
-                  role="button"
-                  data-bs-toggle=""
-                  aria-expanded="false"
-                >
-                  <div className="d-flex align-items-center">
-                    <span className="nav-link-icon">
-                      <span data-feather="pie-chart"></span>
-                    </span>
-                    <span className="nav-link-text-wrapper">
-                      <span className="nav-link-text">Dashboard</span>
-                    </span>
-                  </div>
-                </NavLink>
-              </div>
-              <div className="nav-item-wrapper">
-                <NavLink
-                  className="nav-link label-1"
-                  to="/BankAccounts"
-                  role="button"
-                  data-bs-toggle=""
-                  aria-expanded="false"
-                >
-                  <div className="d-flex align-items-center">
-                    <span className="nav-link-icon">
-                      <span data-feather="check-square"></span>
-                    </span>
-                    <span className="nav-link-text-wrapper">
-                      <span className="nav-link-text">Business ERP</span>
-                    </span>
-                  </div>
-                </NavLink>
-              </div>
-              <div className="nav-item-wrapper">
-                <Link
-                  className="nav-link dropdown-indicator label-1"
-                  role="button"
-                  data-bs-toggle="collapse"
-                  aria-expanded="true"
-                  aria-controls="product-services"
-                  data-bs-target="#product-services"
-                >
-                  <div className="d-flex align-items-center">
-                    <div className="dropdown-indicator-icon">
-                      <span className="fas fa-caret-right"></span>
-                    </div>
-                    <span className="nav-link-icon">
-                      <span data-feather="shopping-bag"></span>
-                    </span>
-                    <span className="nav-link-text">POS</span>
-                  </div>
-                </Link>
-                <div className="parent-wrapper label-1">
-                  <ul
-                    className="nav collapse parent"
-                    data-bs-parent="#navbarVerticalCollapse"
-                    id="product-services"
+    <>
+      {/* Internal CSS */}
+      <style>
+        {`
+        /* Transition for smooth collapsing */
+        .navbar-vertical {
+          transition: width 0.3s ease;
+        }
+        .navbar-vertical.collapsed {
+          width: 80px;
+        }
+
+        /* Hide text when collapsed */
+        .navbar-vertical.collapsed .nav-link-text-wrapper,
+        .navbar-vertical.collapsed .navbar-vertical-footer-text,
+        .navbar-vertical.collapsed .navbar-vertical-label {
+          display: none !important;
+        }
+
+        /* Keep icons centered */
+        .navbar-vertical .nav-link-icon {
+          justify-content: center;
+          min-width: 40px;
+        }
+
+        /* Disable bootstrap collapse when sidebar is collapsed */
+        .navbar-vertical.collapsed .collapse.parent {
+          display: none !important;
+        }
+
+        /* Flyout menu on hover */
+        // .navbar-vertical.collapsed .nav-item-wrapper:hover > .nav-link-text-wrapper {
+        //   display: block !important;
+        //   position: absolute;
+        //   left: 100%;
+        //   top: 0;
+        //   background: #fff;
+        //   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        //   border-radius: 8px;
+        //   min-width: 220px;
+        //   z-index: 1050;
+        //   padding: 6px 0;
+        // }
+
+        .navbar-vertical.collapsed .nav-link-text-wrapper .nav-link {
+          padding: 8px 16px;
+          white-space: nowrap;
+        }
+        .navbar-vertical.collapsed .nav-item-wrapper:hover .dropdown-indicator-icon span {
+  transform: rotate(90deg);
+  transition: transform 0.3s ease;
+}
+
+    .navbar-vertical.navbar-expand-lg .navbar-vertical-content .navbar-nav .nav-link {
+        padding-top: .35rem;
+        padding-bottom: .35rem;
+        padding-left: ${Padding_left};
+        margin-left: .75rem;
+        margin-right: .75rem;
+        border-radius: .5rem;
+    }
+        /* Flyout label when collapsed */
+.navbar-vertical.collapsed .nav-link .nav-flyout-label {
+  position: absolute;
+  left: 100%; /* show on the right of the sidebar */
+    top: 15%;
+  transform: translateY(-50%);
+  background: #fff;
+  padding: 4px 10px;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  white-space: nowrap;
+  z-index: 2000;
+  margin-left: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  display: none; /* hidden until hover */
+}
+
+/* Show only on hover of icon */
+.navbar-vertical.collapsed .nav-item-wrapper:hover .nav-link .nav-flyout-label {
+  display: block;
+  padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 16px;
+    width: 220px;
+    background: #fff;
+    margin-left: 16px;
+    border-radius: .5rem;
+    border: 1px solid var(--phoenix-navbar-vertical-border-color);
+}
+
+    .navbar-vertical-collapsed .navbar-vertical.navbar-expand-lg .navbar-vertical-content {
+        /* overflow: visible; */
+    }
+
+    .transition-arrow {
+  transition: transform 0.3s ease;
+  display: inline-block;
+}
+
+.transition-arrow.rotated {
+  transform: rotate(180deg);
+}
+      .navbar-vertical.navbar-expand-lg .navbar-vertical-footer .uil-arrow-from-right {
+         display: block; 
+    }
+
+    /* Default expanded sidebar */
+.navbar-vertical .navbar-vertical-footer {
+  position: fixed;
+  width: 15.875rem; /* match expanded width */
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  bottom: 0;
+  border-top: 1px solid var(--phoenix-navbar-footer-border-color);
+  transition: width 0.3s ease;
+}
+
+/* Collapsed state */
+.navbar-vertical.collapsed .navbar-vertical-footer {
+  width: 80px; /* match collapsed width */
+}
+
+/* Flyout wrapper */
+// .sidebar-flyout {
+//   position: absolute;
+//   left: 80px; /* match collapsed width */
+//   top: 0;
+//   background: #fff;
+//   border: 1px solid var(--phoenix-navbar-vertical-border-color);
+//   border-radius: 8px;
+//   min-width: 220px;
+//   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+//   z-index: 2000;
+//   padding: 8px 0;
+//   display: none;
+// }
+
+.sidebar-flyout {
+  position: fixed;            /* fixed => always overlay */
+  left: 80px;                 /* collapsed width ke just baad */
+  top: auto;                  /* runtime pe adjust hoga */
+  background: #fff;
+  border: 1px solid var(--phoenix-navbar-vertical-border-color);
+  border-radius: 8px;
+  min-width: 220px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 3000;
+  padding: 8px 0;
+  display: none;
+}
+
+/* Show on hover */
+// .navbar-vertical.collapsed .nav-item-wrapper:hover > .sidebar-flyout {
+//   display: block;
+// }
+
+.navbar-vertical.collapsed .nav-item-wrapper:hover > .sidebar-flyout,
+.navbar-vertical.collapsed .sidebar-flyout:hover {
+  display: block;
+}
+
+/* Flyout title */
+.sidebar-flyout-title {
+  font-weight: 600;
+  padding: 6px 16px;
+  font-size: 0.875rem;
+  color: #333;
+}
+
+/* Flyout links */
+.sidebar-flyout .nav-link {
+  display: block;
+  padding: 6px 16px;
+  color: #333;
+  text-decoration: none;
+}
+.sidebar-flyout .nav-link:hover {
+  background: #f5f5f5;
+  color: #007bff;
+}
+
+.navbar-vertical .navbar-vertical-line.Flyout {
+    display: block;
+    // margin: 0px;
+    }
+
+    /* Flyout arrow for collapsed sidebar */
+.sidebar-flyout:after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  width: 1rem;
+  height: 1rem;
+  background: inherit;
+  top: 0.85rem;
+  left: -9px;
+  transform: rotate(45deg);
+  border-bottom-left-radius: 0.125rem;
+  border-width: 0 0 1px 1px;
+  border-style: solid;
+  border-color: var(--phoenix-navbar-vertical-border-color);
+}
+
+html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::-webkit-scrollbar { 
+    display: none;
+
+}
+
+      `}
+      </style>
+      <nav
+        className={`sidebar navbar navbar-vertical navbar-expand-lg ${collapsed ? "collapsed" : ""
+          }`}
+      >
+        <div className="collapse navbar-collapse" id="navbarVerticalCollapse">
+          {/* <!-- scrollbar removed--> */}
+          <div className="navbar-vertical-content">
+            <div className="Huzaifa">
+              <ul className="navbar-nav flex-column" id="navbarVerticalNav">
+                <li className="nav-item">
+                  {/* <!-- parent pages--> */}
+                  <div
+                    className="nav-item-wrapper"
+                    onMouseEnter={(e) => {
+                      const rect = e.currentTarget.getBoundingClientRect();
+                      setFlyoutTop(rect.top); // yahan se flyoutTop update hoga
+                    }}
                   >
-                   <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/ItemCart"
-                        data-bs-toggle=""
-                        aria-expanded="false"
+                    <NavLink className="nav-link label-1" to="/" role="button">
+                      <div className="d-flex align-items-center">
+                        <span className="nav-link-icon">
+                          <span data-feather="pie-chart"></span>
+                        </span>
+
+                        {/* normal inline text if not collapsed */}
+                        {!collapsed && (
+                          <span className="nav-link-text-wrapper">
+                            <span className="nav-link-text">Main Dashboard</span>
+                          </span>
+                        )}
+                      </div>
+                    </NavLink>
+
+                    {/* 👇 yahan flyout version paste karo */}
+                    {collapsed && (
+                      <div
+                        className="sidebar-flyout"
+                        style={{ top: `${flyoutTop}px` }}
                       >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Item Cart</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                  
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/SideInvoice"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Side Invoive</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                     </li>
-                  </ul>
-                </div>
-              </div>
-            </li>
-            <li className="nav-item">
-              {/* <!-- label--> */}
-              {/* <p className="navbar-vertical-label">Sales & Expenses</p> */}
-              <hr className="navbar-vertical-line" />
-              {/* <!-- parent pages--> */}
-              <div className="nav-item-wrapper">
-                <Link
-                  className="nav-link dropdown-indicator label-1"
-                  to=""
-                  role="button"
-                  data-bs-toggle="collapse"
-                  aria-expanded="true"
-                  aria-controls="sale"
-                  data-bs-target="#sale"
-                >
-                  <div className="d-flex align-items-center">
-                    <div className="dropdown-indicator-icon">
-                      <span className="fas fa-caret-right"></span>
-                    </div>
-                    <span className="nav-link-icon">
-                      <i className="fa-regular fa-credit-card"></i>
-                    </span>
-                    <span className="nav-link-text">Manage Sales</span>
+                        <NavLink to="/" className="nav-link">
+                          Main Dashboard
+                        </NavLink>
+                      </div>
+                    )}
                   </div>
-                </Link>
-                <div className="parent-wrapper label-1">
-                  <ul
-                    className="nav collapse parent"
-                    data-bs-parent="#navbarVerticalCollapse"
-                    id="sale"
+                  <div
+                    className="nav-item-wrapper"
+                    onMouseEnter={(e) => {
+                      const rect = e.currentTarget.getBoundingClientRect();
+                      setFlyoutTop(rect.top); // yahan se flyoutTop update hoga
+                    }}
                   >
-                   <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/ManageSales"
-                        data-bs-toggle=""
-                        aria-expanded="false"
+                    <NavLink
+                      className="nav-link label-1"
+                      to="/BusinessERP/Index"
+                      role="button"
+                      data-bs-toggle=""
+                      aria-expanded="false"
+                    >
+                      <div className="d-flex align-items-center">
+                        <span className="nav-link-icon">
+                          <span data-feather="check-square"></span>
+                        </span>
+                        {!collapsed && (
+                          <span className="nav-link-text-wrapper">
+                            <span className="nav-link-text">Business ERP </span>
+                          </span>
+                        )}
+                      </div>
+                    </NavLink>
+
+                    {/* 👇 yahan flyout version paste karo */}
+                    {collapsed && (
+                      <div
+                        className="sidebar-flyout"
+                        style={{ top: `${flyoutTop}px` }}
                       >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Manage Sales</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    {/* <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Estimates"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Invoive</span>
-                        </div>
-                      </NavLink>
-                    </li> */}
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/ManualInvoices"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Manual Invoice</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/DraftInvoice"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
+                        <NavLink to="/BusinessERP/Index" className="nav-link">
+                          Business ERP
+                        </NavLink>
+                      </div>
+                    )}
+                  </div>
+                  <div
+                    className="nav-item-wrapper"
+                    onMouseEnter={(e) => {
+                      const rect = e.currentTarget.getBoundingClientRect();
+                      setFlyoutTop(rect.top); // yahan se flyoutTop update hoga
+                    }}
+                  >
+                    <Link
+                      className="nav-link dropdown-indicator label-1"
+                      role="button"
+                      data-bs-toggle={collapsed ? "" : "collapse"}
+                      aria-expanded="true"
+                      aria-controls="POS"
+                      data-bs-target="#POS"
+                    >
+                      <div className="d-flex align-items-center">
+                        {!collapsed && (
+                          <div className="dropdown-indicator-icon">
+                            <span className="fas fa-caret-right"></span>
+                          </div>
+                        )}
+                        <span className="nav-link-icon">
+                          <span data-feather="shopping-bag"></span>
+                        </span>
+                        {!collapsed && (
                           <span className="nav-link-text">
+                            POS
+                          </span>
+                        )}
+                      </div>
+                    </Link>
+                    <div className="parent-wrapper label-1">
+                      <ul
+                        className="nav collapse parent"
+                        data-bs-parent="#navbarVerticalCollapse"
+                        id="POS"
+                      >
+                        <li className="collapsed-nav-item-title d-none">
+                          POS
+                        </li>
+                        <li className="nav-item">
+                          <NavLink className="nav-link" to="/ItemCart/Index">
+                            <div className="d-flex align-items-center">
+                              <span className="nav-link-text">Item Cart</span>
+                            </div>
+                          </NavLink>
+                          {/* <!-- more inner pages--> */}
+                        </li>
+                        <li className="nav-item">
+                          <NavLink className="nav-link" to="/ItemCart/ItemCartSideInvoice">
+                            <div className="d-flex align-items-center">
+                              <span className="nav-link-text">Side Invoice</span>
+                            </div>
+                          </NavLink>
+                          {/* <!-- more inner pages--> */}
+                        </li>
+                      </ul>
+                    </div>
+                    {/* collapsed flyout (hover) */}
+                    {collapsed && (
+                      <div
+                        className="sidebar-flyout"
+                        style={{ top: `${flyoutTop}px` }}
+                      >
+                        <div className="sidebar-flyout-title">
+                          POS
+                        </div>
+                        <NavLink className="nav-link" to="/ItemCart/Index">
+                          Item Cart
+                        </NavLink>
+                        <NavLink className="nav-link" to="/ItemCart/ItemCartSideInvoice">
+                          Side Invoice
+                        </NavLink>
+                      </div>
+                    )}
+                  </div>
+                </li>
+                <li className="nav-item">
+                  {/* <!-- label--> */}
+                  <p className="navbar-vertical-label">Management</p>
+                  <hr className="navbar-vertical-line" />
+                  {/* <!-- parent pages--> */}
+                  <div
+                    className="nav-item-wrapper"
+                    onMouseEnter={(e) => {
+                      const rect = e.currentTarget.getBoundingClientRect();
+                      setFlyoutTop(rect.top); // yahan se flyoutTop update hoga
+                    }}
+                  >
+                    <Link
+                      className="nav-link dropdown-indicator label-1"
+                      to=""
+                      role="button"
+                      data-bs-toggle={collapsed ? "" : "collapse"}
+                      aria-expanded="true"
+                      aria-controls="sale"
+                      data-bs-target="#sale"
+                    >
+                      <div className="d-flex align-items-center">
+                        {!collapsed && (
+                          <div className="dropdown-indicator-icon">
+                            <span className="fas fa-caret-right"></span>
+                          </div>
+                        )}
+                        <span className="nav-link-icon">
+                          <i className="fa-regular fa-credit-card"></i>
+                        </span>
+                        {!collapsed && (
+                          <span className="nav-link-text-wrapper">
+                            <span className="nav-link-text">Manage Sales</span>
+                          </span>
+                        )}
+                      </div>
+                    </Link>
+
+                    {/* normal expanded submenu */}
+                    <div className="parent-wrapper label-1">
+                      <ul
+                        className="nav collapse parent"
+                        data-bs-parent="#navbarVerticalCollapse"
+                        id="sale"
+                      >
+                        <li className="nav-item">
+                          <NavLink className="nav-link" to="/Payment/Index">
+                            Invoice
+                          </NavLink>
+                        </li>
+                        <li className="nav-item">
+                          <NavLink className="nav-link" to="/PaymentManual/Index">
+                            Manual Invoice
+                          </NavLink>
+                        </li>
+                        <li className="nav-item">
+                          <NavLink className="nav-link" to="/PaymentDraft/Index">
                             Draft Invoice
+                          </NavLink>
+                        </li>
+                        <li className="nav-item">
+                          <NavLink className="nav-link" to="/PaymentQuote/Index">
+                            Quote Invoice
+                          </NavLink>
+                        </li>
+                        <li className="nav-item">
+                          <NavLink className="nav-link" to="/CustomerInfo/Index">
+                            Manage Customer Info
+                          </NavLink>
+                        </li>
+                        <li className="nav-item">
+                          <NavLink className="nav-link" to="/ReturnLog/SalesReturnIndex">
+                            Sales Return Log
+                          </NavLink>
+                        </li>
+                      </ul>
+                    </div>
+
+                    {/* flyout version (only shows when collapsed & hovered) */}
+                    {collapsed && (
+                      <div
+                        className="sidebar-flyout"
+                        style={{ top: `${flyoutTop}px` }}
+                      >
+                        <div className="sidebar-flyout-title">Manage Sales</div>
+                        <NavLink className="nav-link" to="/Payment/Index">
+                          Invoice
+                        </NavLink>
+                        <NavLink className="nav-link" to="/PaymentManual/Index">
+                          Manual Invoice
+                        </NavLink>
+                        <NavLink className="nav-link" to="/PaymentDraft/Index">
+                          Draft Invoice
+                        </NavLink>
+                        <NavLink className="nav-link" to="/PaymentQuote/Index">
+                          Quote Invoice
+                        </NavLink>
+                        <NavLink className="nav-link" to="/CustomerInfo/Index">
+                          Manage Customer Info
+                        </NavLink>
+                        <NavLink className="nav-link" to="/ReturnLog/SalesReturnIndex">
+                          Sales Return Log
+                        </NavLink>
+                      </div>
+                    )}
+                  </div>
+                  <div
+                    className="nav-item-wrapper"
+                    onMouseEnter={(e) => {
+                      const rect = e.currentTarget.getBoundingClientRect();
+                      setFlyoutTop(rect.top); // yahan se flyoutTop update hoga
+                    }}
+                  >
+                    <Link
+                      className="nav-link dropdown-indicator label-1"
+                      to="#expenses"
+                      role="button"
+                      data-bs-toggle={collapsed ? "" : "collapse"}
+                      aria-expanded="true"
+                      aria-controls="expenses"
+                      data-bs-target="#expenses"
+                    >
+                      <div className="d-flex align-items-center">
+                        {!collapsed && (
+                          <div className="dropdown-indicator-icon">
+                            <span className="fas fa-caret-right"></span>
+                          </div>
+                        )}
+                        <span className="nav-link-icon">
+                          <i className="fa-regular fa-credit-card"></i>
+                        </span>
+                        {!collapsed && (
+                          <span className="nav-link-text-wrapper">
+                            <span className="nav-link-text">Manage Purchases</span>
                           </span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/QuoteInvoice"
-                        data-bs-toggle=""
-                        aria-expanded="false"
+                        )}
+                      </div>
+                    </Link>
+                    <div className="parent-wrapper label-1">
+                      <ul
+                        className="nav collapse parent"
+                        data-bs-parent="#navbarVerticalCollapse"
+                        id="expenses"
                       >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Quote Invoice</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/customerInfo"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Manage Customer</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/SalesReturn"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Sales Return Log</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div className="nav-item-wrapper">
-                <Link
-                  to="#"
-                  onClick={(e) => e.preventDefault()}
-                  className="nav-link dropdown-indicator label-1"
-                  role="button"
-                  data-bs-toggle="collapse"
-                  aria-expanded="true"
-                  aria-controls="purchase"
-                  data-bs-target="#purchase"
-                >
-                  <div className="d-flex align-items-center">
-                    <div className="dropdown-indicator-icon">
-                      <span className="fas fa-caret-right"></span>
+                        <li className="collapsed-nav-item-title d-none">
+                          Manage Purchases
+                        </li>
+                        <li className="nav-item">
+                          <NavLink
+                            className="nav-link"
+                            to="/PurchasesPayment/Index"
+                            data-bs-toggle=""
+                            aria-expanded="false"
+                          >
+                            <div className="d-flex align-items-center">
+                              <span className="nav-link-text">Purchase Invoice</span>
+                            </div>
+                          </NavLink>
+                          {/* <!-- more inner pages--> */}
+                        </li>
+                        <li className="nav-item">
+                          <NavLink
+                            className="nav-link"
+                            to="/PurchasesPaymentDraft/Index"
+                            data-bs-toggle=""
+                            aria-expanded="false"
+                          >
+                            <div className="d-flex align-items-center">
+                              <span className="nav-link-text">Purchase Invoice Draft</span>
+                            </div>
+                          </NavLink>
+                          {/* <!-- more inner pages--> */}
+                        </li>
+                        <li className="nav-item">
+                          <NavLink
+                            className="nav-link"
+                            to="/PurchasesPaymentQuote/Index"
+                            data-bs-toggle=""
+                            aria-expanded="false"
+                          >
+                            <div className="d-flex align-items-center">
+                              <span className="nav-link-text">Purchase Invoice Quote</span>
+                            </div>
+                          </NavLink>
+                          {/* <!-- more inner pages--> */}
+                        </li>
+                        <li className="nav-item">
+                          <NavLink
+                            className="nav-link"
+                            to="/Supplier/Index"
+                            data-bs-toggle=""
+                            aria-expanded="false"
+                          >
+                            <div className="d-flex align-items-center">
+                              <span className="nav-link-text">Manage Supplier</span>
+                            </div>
+                          </NavLink>
+                          {/* <!-- more inner pages--> */}
+                        </li>
+                        <li className="nav-item ps-3">
+                          <NavLink
+                            className="nav-link"
+                            to="/ReturnLog/PurchaseReturnIndex"
+                            data-bs-toggle=""
+                            aria-expanded="false"
+                          >
+                            <div className="d-flex align-items-center">
+                              Prchase Return Log
+                            </div>
+                          </NavLink>
+                        </li>
+                      </ul>
                     </div>
-                    <span className="nav-link-icon">
-                      <i className="fa-regular fa-credit-card"></i>
-                    </span>
-                    <span className="nav-link-text">Manage Purchase</span>
+                    {/* flyout version (only shows when collapsed & hovered) */}
+                    {collapsed && (
+                      <div
+                        className="sidebar-flyout"
+                        style={{ top: `${flyoutTop}px` }}
+                      >
+                        <div className="sidebar-flyout-title">Manage Purchases</div>
+                        <NavLink className="nav-link" to="/PurchasesPayment/Index">
+                          Purchase Invoice
+                        </NavLink>
+                        <NavLink className="nav-link" to="/PurchasesPaymentDraft/Index">
+                          Purchase Invoice Draft
+                        </NavLink>
+                        <NavLink className="nav-link" to="/PurchasesPaymentQuote/Index">
+                          Purchase Invoice Quote
+                        </NavLink>
+                        <NavLink className="nav-link" to="/Supplier/Index">
+                          Manage Supplier
+                        </NavLink>
+                        <NavLink className="nav-link" to="/ReturnLog/PurchaseReturnIndex">
+                          Purchase Return Log
+                        </NavLink>
+                      </div>
+                    )}
                   </div>
-                </Link>
-                <div className="parent-wrapper label-1">
-                  <ul
-                    className="nav collapse parent"
-                    data-bs-parent="#navbarVerticalCollapse"
-                    id="purchase"
+                  {/* <!-- parent pages--> */}
+                  <div
+                    className="nav-item-wrapper"
+                    onMouseEnter={(e) => {
+                      const rect = e.currentTarget.getBoundingClientRect();
+                      setFlyoutTop(rect.top); // yahan se flyoutTop update hoga
+                    }}
                   >
-                    
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/PurchaseInvoice"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Purchases Invoice</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/PurchaseInvoiceDraft"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Purchases Invoice Draft</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/PurchaseInvoiceQuote"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Purchases Invoice Quote</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
+                    <Link
+                      className="nav-link dropdown-indicator label-1"
+                      to=""
+                      role="button"
+                      data-bs-toggle={collapsed ? "" : "collapse"}
+                      aria-expanded="true"
+                      aria-controls="ManageExpense"
+                      data-bs-target="#ManageExpense"
+                    >
+                      <div className="d-flex align-items-center">
+                        {!collapsed && (
+                          <div className="dropdown-indicator-icon">
+                            <span className="fas fa-caret-right"></span>
+                          </div>
+                        )}
+                        <span className="nav-link-icon">
+                          <i className="fa-regular fa-credit-card"></i>
+                        </span>
+                        {!collapsed && (
+                          <span className="nav-link-text-wrapper">
+                            <span className="nav-link-text">Manage Expenses</span>
+                          </span>
+                        )}
+                      </div>
+                    </Link>
 
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/ManageSupplier"
-                        data-bs-toggle=""
-                        aria-expanded="false"
+                    {/* normal expanded submenu */}
+                    <div className="parent-wrapper label-1">
+                      <ul
+                        className="nav collapse parent"
+                        data-bs-parent="#navbarVerticalCollapse"
+                        id="ManageExpense"
                       >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Manage Supplier</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/PurchaseReturn"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Purchase Return Log</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div className="nav-item-wrapper">
-                <Link
-                  className="nav-link dropdown-indicator collapsed label-1"
-                  to="#expenses"
-                  role="button"
-                  data-bs-toggle="collapse"
-                  aria-expanded="false"
-                  aria-controls="expenses"
-                  data-bs-target="#expenses"
-                >
-                  <div className="d-flex align-items-center">
-                    <div className="dropdown-indicator-icon">
-                      <span className="fas fa-caret-right"></span>
+                        <li className="nav-item">
+                          <NavLink className="nav-link" to="/ExpenseSummary/Index">
+                            Expenses Summary
+                          </NavLink>
+                        </li>
+                        <li className="nav-item">
+                          <NavLink className="nav-link" to="/ExpenseType/Index">
+                            Expenses Type
+                          </NavLink>
+                        </li>
+                      </ul>
                     </div>
-                    <span className="nav-link-icon">
-                      <i className="fa-regular fa-credit-card"></i>
-                    </span>
-                    <span className="nav-link-text">Manage Expense</span>
-                  </div>
-                </Link>
-                <div className="parent-wrapper label-1">
-                  <ul
-                    className="nav collapse parent"
-                    data-bs-parent="#navbarVerticalCollapse"
-                    id="expenses"
-                  >
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Expenses</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Expense Summary</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Expenses"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Expense Type</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                  </ul>
-                </div>
-              </div>
 
-              <div className="nav-item-wrapper">
-                <Link
-                  className="nav-link dropdown-indicator collapsed label-1"
-                  to="#"
-                  role="button"
-                  data-bs-toggle="collapse"
-                  aria-expanded="false"
-                  aria-controls="ManageBranch"
-                  data-bs-target="#ManageBranch"
-                  onClick={(e) => e.preventDefault()} // stops navigation
-                >
-                  <div className="d-flex align-items-center">
-                    <div className="dropdown-indicator-icon">
-                      <span className="fas fa-caret-right"></span>
-                    </div>
-                    <span className="nav-link-icon">
-                      <i className="fa-regular fa-credit-card"></i>
-                    </span>
-                    <span className="nav-link-text">Manage Branch</span>
+                    {/* flyout version (only shows when collapsed & hovered) */}
+                    {collapsed && (
+                      <div
+                        className="sidebar-flyout"
+                        style={{ top: `${flyoutTop}px` }}
+                      >
+                        <div className="sidebar-flyout-title">Manage Expenses</div>
+                        <NavLink className="nav-link" to="/ExpenseSummary/Index">
+                          Expenses Summary
+                        </NavLink>
+                        <NavLink className="nav-link" to="/ExpenseType/Index">
+                          Expenses Type
+                        </NavLink>
+                      </div>
+                    )}
                   </div>
-                </Link>
-                <div className="parent-wrapper label-1">
-                  <ul
-                    className="nav collapse parent"
-                    data-bs-parent="#navbarVerticalCollapse"
-                    id="ManageBranch"
+                  {/* <!-- parent pages--> */}
+                  <div
+                    className="nav-item-wrapper"
+                    onMouseEnter={(e) => {
+                      const rect = e.currentTarget.getBoundingClientRect();
+                      setFlyoutTop(rect.top); // yahan se flyoutTop update hoga
+                    }}
                   >
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
+                    <Link
+                      className="nav-link dropdown-indicator label-1"
+                      to=""
+                      role="button"
+                      data-bs-toggle={collapsed ? "" : "collapse"}
+                      aria-expanded="true"
+                      aria-controls="ManageBranch"
+                      data-bs-target="#ManageBranch"
+                    >
+                      <div className="d-flex align-items-center">
+                        {!collapsed && (
+                          <div className="dropdown-indicator-icon">
+                            <span className="fas fa-caret-right"></span>
+                          </div>
+                        )}
+                        <span className="nav-link-icon">
+                          <i className="fa-regular fa-credit-card"></i>
+                        </span>
+                        {!collapsed && (
+                          <span className="nav-link-text-wrapper">
+                            <span className="nav-link-text">Manage Branch</span>
+                          </span>
+                        )}
+                      </div>
+                    </Link>
+
+                    {/* normal expanded submenu */}
+                    <div className="parent-wrapper label-1">
+                      <ul
+                        className="nav collapse parent"
+                        data-bs-parent="#navbarVerticalCollapse"
+                        id="ManageBranch"
                       >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Branch</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Branch</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div className="nav-item-wrapper">
-                <Link
-                  className="nav-link dropdown-indicator collapsed label-1"
-                  to="#"
-                  role="button"
-                  data-bs-toggle="collapse"
-                  aria-expanded="false"
-                  aria-controls="MangeItem"
-                  data-bs-target="#MangeItem"
-                  onClick={(e) => e.preventDefault()} // stops navigation
-                >
-                  <div className="d-flex align-items-center">
-                    <div className="dropdown-indicator-icon">
-                      <span className="fas fa-caret-right"></span>
+                        <li className="nav-item">
+                          <NavLink className="nav-link" to="/Branch/Index">
+                            Branch
+                          </NavLink>
+                        </li>
+                      </ul>
                     </div>
-                    <span className="nav-link-icon">
-                      <i className="fa-regular fa-credit-card"></i>
-                    </span>
-                    <span className="nav-link-text">Manage Item</span>
+
+                    {/* flyout version (only shows when collapsed & hovered) */}
+                    {collapsed && (
+                      <div
+                        className="sidebar-flyout"
+                        style={{ top: `${flyoutTop}px` }}
+                      >
+                        <div className="sidebar-flyout-title">Manage Branch</div>
+                        <NavLink className="nav-link" to="/Branch/Index">
+                          Branch
+                        </NavLink>
+                      </div>
+                    )}
                   </div>
-                </Link>
-                <div className="parent-wrapper label-1">
-                  <ul
-                    className="nav collapse parent"
-                    data-bs-parent="#navbarVerticalCollapse"
-                    id="MangeItem"
+                  {/* <!-- parent pages--> */}
+                  <div
+                    className="nav-item-wrapper"
+                    onMouseEnter={(e) => {
+                      const rect = e.currentTarget.getBoundingClientRect();
+                      setFlyoutTop(rect.top); // yahan se flyoutTop update hoga
+                    }}
                   >
-                   <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
+                    <Link
+                      className="nav-link dropdown-indicator label-1"
+                      to=""
+                      role="button"
+                      data-bs-toggle={collapsed ? "" : "collapse"}
+                      aria-expanded="true"
+                      aria-controls="ManageItems"
+                      data-bs-target="#ManageItems"
+                    >
+                      <div className="d-flex align-items-center">
+                        {!collapsed && (
+                          <div className="dropdown-indicator-icon">
+                            <span className="fas fa-caret-right"></span>
+                          </div>
+                        )}
+                        <span className="nav-link-icon">
+                          <i className="fa-regular fa-credit-card"></i>
+                        </span>
+                        {!collapsed && (
+                          <span className="nav-link-text-wrapper">
+                            <span className="nav-link-text">Manage Items</span>
+                          </span>
+                        )}
+                      </div>
+                    </Link>
+
+                    {/* normal expanded submenu */}
+                    <div className="parent-wrapper label-1">
+                      <ul
+                        className="nav collapse parent"
+                        data-bs-parent="#navbarVerticalCollapse"
+                        id="ManageItems"
                       >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Branch</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Item</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Out Of Stock</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Low In Stock</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Demage Item Details</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Item History</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Manage Warehouse</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div className="nav-item-wrapper">
-                <Link
-                  className="nav-link dropdown-indicator collapsed label-1"
-                  to="#"
-                  role="button"
-                  data-bs-toggle="collapse"
-                  aria-expanded="false"
-                  aria-controls="SystemSettings"
-                  data-bs-target="#SystemSettings"
-                  onClick={(e) => e.preventDefault()} // stops navigation
-                >
-                  <div className="d-flex align-items-center">
-                    <div className="dropdown-indicator-icon">
-                      <span className="fas fa-caret-right"></span>
+                        <li className="nav-item">
+                          <NavLink className="nav-link" to="/Items/Index">
+                            Item
+                          </NavLink>
+                        </li>
+                        <li className="nav-item">
+                          <NavLink className="nav-link" to="/Items/LowInStockItem">
+                            Low In Stock
+                          </NavLink>
+                        </li>
+                        <li className="nav-item">
+                          <NavLink className="nav-link" to="/DamageItemDetails/Index">
+                            Damage Item Details
+                          </NavLink>
+                        </li>
+                        <li className="nav-item">
+                          <NavLink className="nav-link" to="/ItemsHistory/Index">
+                            Item History
+                          </NavLink>
+                        </li>
+                        <li className="nav-item">
+                          <NavLink className="nav-link" to="/Warehouse/Index">
+                            Manage Warehouse
+                          </NavLink>
+                        </li>
+                      </ul>
                     </div>
-                    <span className="nav-link-icon">
-                      <i className="fa-regular fa-credit-card"></i>
-                    </span>
-                    <span className="nav-link-text">System Settings</span>
+
+                    {/* flyout version (only shows when collapsed & hovered) */}
+                    {collapsed && (
+                      <div
+                        className="sidebar-flyout"
+                        style={{ top: `${flyoutTop}px` }}
+                      >
+                        <div className="sidebar-flyout-title">Manage Items</div>
+                        <NavLink className="nav-link" to="/Items/Index">
+                          Item
+                        </NavLink>
+                        <NavLink className="nav-link" to="/Items/LowInStockItem">
+                          Low In Stock
+                        </NavLink>
+                        <NavLink className="nav-link" to="/DamageItemDetails/Index">
+                          Damage Item Details
+                        </NavLink>
+                        <NavLink className="nav-link" to="/ItemsHistory/Index">
+                          Item History
+                        </NavLink>
+                        <NavLink className="nav-link" to="/Warehouse/Index">
+                          Manage Warehouse
+                        </NavLink>
+                      </div>
+                    )}
                   </div>
-                </Link>
-                <div className="parent-wrapper label-1">
-                  <ul
-                    className="nav collapse parent"
-                    data-bs-parent="#navbarVerticalCollapse"
-                    id="SystemSettings"
+                  {/* <!-- parent pages--> */}
+                  <div
+                    className="nav-item-wrapper"
+                    onMouseEnter={(e) => {
+                      const rect = e.currentTarget.getBoundingClientRect();
+                      setFlyoutTop(rect.top); // yahan se flyoutTop update hoga
+                    }}
                   >
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
+                    <Link
+                      className="nav-link dropdown-indicator label-1"
+                      to=""
+                      role="button"
+                      data-bs-toggle={collapsed ? "" : "collapse"}
+                      aria-expanded="true"
+                      aria-controls="SystemSettings"
+                      data-bs-target="#SystemSettings"
+                    >
+                      <div className="d-flex align-items-center">
+                        {!collapsed && (
+                          <div className="dropdown-indicator-icon">
+                            <span className="fas fa-caret-right"></span>
+                          </div>
+                        )}
+                        <span className="nav-link-icon">
+                          <i className="fa-regular fa-credit-card"></i>
+                        </span>
+                        {!collapsed && (
+                          <span className="nav-link-text-wrapper">
+                            <span className="nav-link-text">System Settings</span>
+                          </span>
+                        )}
+                      </div>
+                    </Link>
+
+                    {/* normal expanded submenu */}
+                    <div className="parent-wrapper label-1">
+                      <ul
+                        className="nav collapse parent"
+                        data-bs-parent="#navbarVerticalCollapse"
+                        id="SystemSettings"
                       >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Company Info</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Email Config</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Manage Currency</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Payment Type</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Payment Status</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Customer Type</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Vat Percentage</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Categories</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Unit Of Measure</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Manage Warehouse</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div className="nav-item-wrapper">
-                <Link
-                  className="nav-link dropdown-indicator collapsed label-1"
-                  to="#"
-                  role="button"
-                  data-bs-toggle="collapse"
-                  aria-expanded="false"
-                  aria-controls="HumanResources"
-                  data-bs-target="#HumanResources"
-                  onClick={(e) => e.preventDefault()} // stops navigation
-                >
-                  <div className="d-flex align-items-center">
-                    <div className="dropdown-indicator-icon">
-                      <span className="fas fa-caret-right"></span>
+                        <li className="nav-item">
+                          <NavLink className="nav-link" to="/CompanyInfo/Index">
+                            Company Info
+                          </NavLink>
+                        </li>
+                        <li className="nav-item">
+                          <NavLink className="nav-link" to="/EmailConfig/Index">
+                            Email Config
+                          </NavLink>
+                        </li>
+                        <li className="nav-item">
+                          <NavLink className="nav-link" to="/Currency/Index">
+                            Manage Currency
+                          </NavLink>
+                        </li>
+                        <li className="nav-item">
+                          <NavLink className="nav-link" to="/PaymentType/Index">
+                            Payment Type
+                          </NavLink>
+                        </li>
+                        <li className="nav-item">
+                          <NavLink className="nav-link" to="/PaymentStatus/Index">
+                            Payment Status
+                          </NavLink>
+                        </li>
+                        <li className="nav-item">
+                          <NavLink className="nav-link" to="/CustomerType/Index">
+                            Customer Type
+                          </NavLink>
+                        </li>
+                        <li className="nav-item">
+                          <NavLink className="nav-link" to="/Categories/Index">
+                            Categories
+                          </NavLink>
+                        </li>
+                        <li className="nav-item">
+                          <NavLink className="nav-link" to="/">
+                            Unit Of Measures
+                          </NavLink>
+                        </li>
+                        <li className="nav-item">
+                          <NavLink className="nav-link" to="/VatPercentage/Index">
+                            Vat Percentage
+                          </NavLink>
+                        </li>
+                      </ul>
                     </div>
-                    <span className="nav-link-icon">
-                      <i className="fa-regular fa-credit-card"></i>
-                    </span>
-                    <span className="nav-link-text">Human Resources</span>
+
+                    {/* flyout version (only shows when collapsed & hovered) */}
+                    {collapsed && (
+                      <div
+                        className="sidebar-flyout"
+                        style={{ top: `${flyoutTop}px` }}
+                      >
+                        <div className="sidebar-flyout-title">System Settings</div>
+
+                        <NavLink className="nav-link" to="/CompanyInfo/Index">
+                          Company Info
+                        </NavLink>
+                        <NavLink className="nav-link" to="/EmailConfig/Index">
+                          Email Config
+                        </NavLink>
+                        <NavLink className="nav-link" to="/Currency/Index">
+                          Manage Currency
+                        </NavLink>
+                        <NavLink className="nav-link" to="/PaymentType/Index">
+                          Payment Type
+                        </NavLink>
+                        <NavLink className="nav-link" to="/PaymentStatus/Index">
+                          Payment Status
+                        </NavLink>
+                        <NavLink className="nav-link" to="/CustomerType/Index">
+                          Customer Type
+                        </NavLink>
+                        <NavLink className="nav-link" to="/Categories/Index">
+                          Categories
+                        </NavLink>
+                        <NavLink className="nav-link" to="/">
+                          Unit Of Measures
+                        </NavLink>
+                        <NavLink className="nav-link" to="/VatPercentage/Index">
+                          Vat Percentage
+                        </NavLink>
+                      </div>
+                    )}
                   </div>
-                </Link>
-                <div className="parent-wrapper label-1">
-                  <ul
-                    className="nav collapse parent"
-                    data-bs-parent="#navbarVerticalCollapse"
-                    id="HumanResources"
+                  {/* <!-- parent pages--> */}
+                  <div
+                    className="nav-item-wrapper"
+                    onMouseEnter={(e) => {
+                      const rect = e.currentTarget.getBoundingClientRect();
+                      setFlyoutTop(rect.top); // yahan se flyoutTop update hoga
+                    }}
                   >
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
+                    <Link
+                      className="nav-link dropdown-indicator label-1"
+                      to=""
+                      role="button"
+                      data-bs-toggle={collapsed ? "" : "collapse"}
+                      aria-expanded="true"
+                      aria-controls="HumanResource"
+                      data-bs-target="#HumanResource"
+                    >
+                      <div className="d-flex align-items-center">
+                        {!collapsed && (
+                          <div className="dropdown-indicator-icon">
+                            <span className="fas fa-caret-right"></span>
+                          </div>
+                        )}
+                        <span className="nav-link-icon">
+                          <i className="fa-regular fa-credit-card"></i>
+                        </span>
+                        {!collapsed && (
+                          <span className="nav-link-text-wrapper">
+                            <span className="nav-link-text">Human Resource</span>
+                          </span>
+                        )}
+                      </div>
+                    </Link>
+
+                    {/* normal expanded submenu */}
+                    <div className="parent-wrapper label-1">
+                      <ul
+                        className="nav collapse parent"
+                        data-bs-parent="#navbarVerticalCollapse"
+                        id="HumanResource"
                       >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Attandace </span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Email Config</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Manage Currency</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Payment Type</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Payment Status</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Customer Type</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Vat Percentage</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Categories</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Unit Of Measure</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Manage Warehouse</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div className="nav-item-wrapper">
-                <Link
-                  className="nav-link dropdown-indicator collapsed label-1"
-                  to="#"
-                  role="button"
-                  data-bs-toggle="collapse"
-                  aria-expanded="false"
-                  aria-controls="manageUserRole"
-                  data-bs-target="#manageUserRole"
-                  onClick={(e) => e.preventDefault()} // stops navigation
-                >
-                  <div className="d-flex align-items-center">
-                    <div className="dropdown-indicator-icon">
-                      <span className="fas fa-caret-right"></span>
+                        <li className="nav-item">
+                          <NavLink className="nav-link" to="/Attendance/Index">
+                            Attandance
+                          </NavLink>
+                        </li>
+                        <li className="nav-item">
+                          <NavLink className="nav-link" to="/Employee/Index">
+                            Manage Employee
+                          </NavLink>
+                        </li>
+                        <li className="nav-item">
+                          <NavLink className="nav-link" to="/Designation/Index">
+                            Designation
+                          </NavLink>
+                        </li>
+                        <li className="nav-item">
+                          <NavLink className="nav-link" to="/Department/Index">
+                            Department
+                          </NavLink>
+                        </li>
+                        <li className="nav-item">
+                          <NavLink className="nav-link" to="/">
+                            Sub Department
+                          </NavLink>
+                        </li>
+                      </ul>
                     </div>
-                    <span className="nav-link-icon">
-                      <i className="fa-regular fa-credit-card"></i>
-                    </span>
-                    <span className="nav-link-text">Manage User Role</span>
+
+                    {/* flyout version (only shows when collapsed & hovered) */}
+                    {collapsed && (
+                      <div
+                        className="sidebar-flyout"
+                        style={{ top: `${flyoutTop}px` }}
+                      >
+                        <div className="sidebar-flyout-title">Human Resource</div>
+
+                        <NavLink className="nav-link" to="/Attendance/Index">
+                          Attandance
+                        </NavLink>
+                        <NavLink className="nav-link" to="/Employee/Index">
+                          Manage Employee
+                        </NavLink>
+                        <NavLink className="nav-link" to="/Designation/Index">
+                          Designation
+                        </NavLink>
+                        <NavLink className="nav-link" to="/Department/Index">
+                          Department
+                        </NavLink>
+                        <NavLink className="nav-link" to="/">
+                          Sub Department
+                        </NavLink>
+                      </div>
+                    )}
                   </div>
-                </Link>
-                <div className="parent-wrapper label-1">
-                  <ul
-                    className="nav collapse parent"
-                    data-bs-parent="#navbarVerticalCollapse"
-                    id="manageUserRole"
+                  {/* <!-- parent pages--> */}
+                  <div
+                    className="nav-item-wrapper"
+                    onMouseEnter={(e) => {
+                      const rect = e.currentTarget.getBoundingClientRect();
+                      setFlyoutTop(rect.top); // yahan se flyoutTop update hoga
+                    }}
                   >
-                   <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
+                    <Link
+                      className="nav-link dropdown-indicator label-1"
+                      to=""
+                      role="button"
+                      data-bs-toggle={collapsed ? "" : "collapse"}
+                      aria-expanded="true"
+                      aria-controls="ManageUserRoles"
+                      data-bs-target="#ManageUserRoles"
+                    >
+                      <div className="d-flex align-items-center">
+                        {!collapsed && (
+                          <div className="dropdown-indicator-icon">
+                            <span className="fas fa-caret-right"></span>
+                          </div>
+                        )}
+                        <span className="nav-link-icon">
+                          <i className="fa-regular fa-credit-card"></i>
+                        </span>
+                        {!collapsed && (
+                          <span className="nav-link-text-wrapper">
+                            <span className="nav-link-text">
+                              Manage User Roles</span>
+                          </span>
+                        )}
+                      </div>
+                    </Link>
+
+                    {/* normal expanded submenu */}
+                    <div className="parent-wrapper label-1">
+                      <ul
+                        className="nav collapse parent"
+                        data-bs-parent="#navbarVerticalCollapse"
+                        id="ManageUserRoles"
                       >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Manage User Role</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">System Role</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div className="nav-item-wrapper">
-                <Link
-                  className="nav-link dropdown-indicator collapsed label-1"
-                  to="#"
-                  role="button"
-                  data-bs-toggle="collapse"
-                  aria-expanded="false"
-                  aria-controls="ManageUser"
-                  data-bs-target="#ManageUser"
-                  onClick={(e) => e.preventDefault()} // stops navigation
-                >
-                  <div className="d-flex align-items-center">
-                    <div className="dropdown-indicator-icon">
-                      <span className="fas fa-caret-right"></span>
+                        <li className="nav-item">
+                          <NavLink className="nav-link" to="/ManageUserRoles/Index">
+                            Manage User Roles
+                          </NavLink>
+                        </li>
+                        <li className="nav-item">
+                          <NavLink className="nav-link" to="/SystemRole/Index">
+                            System Roles
+                          </NavLink>
+                        </li>
+                      </ul>
                     </div>
-                    <span className="nav-link-icon">
-                      <i className="fa-regular fa-credit-card"></i>
-                    </span>
-                    <span className="nav-link-text">Manage User</span>
-                  </div>
-                </Link>
-                <div className="parent-wrapper label-1">
-                  <ul
-                    className="nav collapse parent"
-                    data-bs-parent="#navbarVerticalCollapse"
-                    id="ManageUser"
-                  >
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
+
+                    {/* flyout version (only shows when collapsed & hovered) */}
+                    {collapsed && (
+                      <div
+                        className="sidebar-flyout"
+                        style={{ top: `${flyoutTop}px` }}
                       >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">
+                        <div className="sidebar-flyout-title">
+                          Manage User Roles</div>
+                        <NavLink className="nav-link" to="/ManageUserRoles/Index">
+                          Manage User Roles
+                        </NavLink>
+                        <NavLink className="nav-link" to="/SystemRole/Index">
+                          System Roles
+                        </NavLink>
+                      </div>
+                    )}
+                  </div>
+                  {/* <!-- parent pages--> */}
+                  <div
+                    className="nav-item-wrapper"
+                    onMouseEnter={(e) => {
+                      const rect = e.currentTarget.getBoundingClientRect();
+                      setFlyoutTop(rect.top); // yahan se flyoutTop update hoga
+                    }}
+                  >
+                    <Link
+                      className="nav-link dropdown-indicator label-1"
+                      to=""
+                      role="button"
+                      data-bs-toggle={collapsed ? "" : "collapse"}
+                      aria-expanded="true"
+                      aria-controls="ManageUser"
+                      data-bs-target="#ManageUser"
+                    >
+                      <div className="d-flex align-items-center">
+                        {!collapsed && (
+                          <div className="dropdown-indicator-icon">
+                            <span className="fas fa-caret-right"></span>
+                          </div>
+                        )}
+                        <span className="nav-link-icon">
+                          <i className="fa-regular fa-credit-card"></i>
+                        </span>
+                        {!collapsed && (
+                          <span className="nav-link-text-wrapper">
+                            <span className="nav-link-text">Manage User</span>
+                          </span>
+                        )}
+                      </div>
+                    </Link>
+
+                    {/* normal expanded submenu */}
+                    <div className="parent-wrapper label-1">
+                      <ul
+                        className="nav collapse parent"
+                        data-bs-parent="#navbarVerticalCollapse"
+                        id="ManageUser"
+                      >
+                        <li className="nav-item">
+                          <NavLink className="nav-link" to="/UserManagement/Index">
                             User Management
+                          </NavLink>
+                        </li>
+                        <li className="nav-item">
+                          <NavLink className="nav-link" to="/IdentitySetting/Index">
+                            Identity Settings
+                          </NavLink>
+                        </li>
+                        <li className="nav-item">
+                          <NavLink className="nav-link" to="/EmailSetting/Index">
+                            Email Settings
+                          </NavLink>
+                        </li>
+                        <li className="nav-item">
+                          <NavLink className="nav-link" to="/SendEmailHistory/Index">
+                            Send Email History
+                          </NavLink>
+                        </li>
+                        <li className="nav-item">
+                          <NavLink className="nav-link" to="/LoginHistory/Index">
+                            Login History
+                          </NavLink>
+                        </li>
+                        <li className="nav-item">
+                          <NavLink className="nav-link" to="/AuditLogs/Index" >
+                            Audit Logs
+                          </NavLink>
+                        </li>
+                        <li className="nav-item">
+                          <NavLink className="nav-link" to="/UserInfoFromBrowser/Index">
+                            User Info From Browser
+                          </NavLink>
+                        </li>
+                        <li className="nav-item">
+                          <NavLink className="nav-link" to="/RefreshToken/Index">
+                            JWT Token
+                          </NavLink>
+                        </li>
+                      </ul>
+                    </div>
+
+                    {/* flyout version (only shows when collapsed & hovered) */}
+                    {collapsed && (
+                      <div
+                        className="sidebar-flyout"
+                        style={{ top: `${flyoutTop}px` }}
+                      >
+                        <div className="sidebar-flyout-title">Manage User</div>
+                        <NavLink className="nav-link" to="/UserManagement/Index">
+                          User Management
+                        </NavLink>
+                        <NavLink className="nav-link" to="/IdentitySetting/Index">
+                          Identity Settings
+                        </NavLink>
+                        <NavLink className="nav-link" to="/EmailSetting/Index">
+                          Email Settings
+                        </NavLink>
+                        <NavLink className="nav-link" to="/SendEmailHistory/Index">
+                          Send Email History
+                        </NavLink>
+                        <NavLink className="nav-link" to="/LoginHistory/Index">
+                          Login History
+                        </NavLink>
+                        <NavLink className="nav-link" to="/AuditLogs/Index" >
+                          Audit Logs
+                        </NavLink>
+                        <NavLink className="nav-link" to="/UserInfoFromBrowser/Index">
+                          User Info From Browser
+                        </NavLink>
+                        <NavLink className="nav-link" to="/RefreshToken/Index">
+                          JWT Token
+                        </NavLink>
+                      </div>
+                    )}
+                  </div>
+                </li>
+                <li className="nav-item">
+                  {/* <!-- label--> */}
+                  <p className="navbar-vertical-label">Reports</p>
+                  <hr className="navbar-vertical-line" />
+                  {/* <!-- parent pages--> */}
+                  <div
+                    className="nav-item-wrapper"
+                    onMouseEnter={(e) => {
+                      const rect = e.currentTarget.getBoundingClientRect();
+                      setFlyoutTop(rect.top); // yahan se flyoutTop update hoga
+                    }}
+                  >
+                    <Link
+                      className="nav-link dropdown-indicator label-1"
+                      to=""
+                      role="button"
+                      data-bs-toggle={collapsed ? "" : "collapse"}
+                      aria-expanded="true"
+                      aria-controls="ItemReports"
+                      data-bs-target="#ItemReports"
+                    >
+                      <div className="d-flex align-items-center">
+                        {!collapsed && (
+                          <div className="dropdown-indicator-icon">
+                            <span className="fas fa-caret-right"></span>
+                          </div>
+                        )}
+                        <span className="nav-link-icon">
+                          <i className="fa-regular fa-credit-card"></i>
+                        </span>
+                        {!collapsed && (
+                          <span className="nav-link-text-wrapper">
+                            <span className="nav-link-text">Item Reports</span>
+                          </span>
+                        )}
+                      </div>
+                    </Link>
+
+                    {/* normal expanded submenu */}
+                    <div className="parent-wrapper label-1">
+                      <ul
+                        className="nav collapse parent"
+                        data-bs-parent="#navbarVerticalCollapse"
+                        id="ItemReports"
+                      >
+                        <li>
+                          <NavLink className="nav-link" to="/SalesReport/HighInDemand">
+                            High In Demand
+                          </NavLink>
+                        </li>
+                        <li>
+                          <NavLink className="nav-link" to="/SalesReport/LowInDemand">
+                            Low In Demand
+                          </NavLink>
+                        </li>
+                        <li>
+                          <NavLink className="nav-link" to="/SalesReport/HighestEarning">
+                            Highest Earning
+                          </NavLink>
+                        </li>
+                        <li>
+                          <NavLink className="nav-link" to="/SalesReport/LowestEarning">
+                            Lowest Earning
+                          </NavLink>
+                        </li>
+                      </ul>
+                    </div>
+
+                    {/* flyout version (only shows when collapsed & hovered) */}
+                    {collapsed && (
+                      <div
+                        className="sidebar-flyout"
+                        style={{ top: `${flyoutTop}px` }}
+                      >
+                        <div className="sidebar-flyout-title">Item Reports</div>
+                        <NavLink className="nav-link" to="/SalesReport/HighInDemand">
+                          High In Demand
+                        </NavLink>
+                        <NavLink className="nav-link" to="/SalesReport/LowInDemand">
+                          Low In Demand
+                        </NavLink>
+                        <NavLink className="nav-link" to="/SalesReport/HighestEarning">
+                          Highest Earning
+                        </NavLink>
+                        <NavLink className="nav-link" to="/SalesReport/LowestEarning">
+                          Lowest Earning
+                        </NavLink>
+                      </div>
+                    )}
+                  </div>
+                  {/* <!-- parent pages--> */}
+                  <div
+                    className="nav-item-wrapper"
+                    onMouseEnter={(e) => {
+                      const rect = e.currentTarget.getBoundingClientRect();
+                      setFlyoutTop(rect.top); // yahan se flyoutTop update hoga
+                    }}
+                  >
+                    <Link
+                      className="nav-link dropdown-indicator label-1"
+                      to=""
+                      role="button"
+                      data-bs-toggle={collapsed ? "" : "collapse"}
+                      aria-expanded="true"
+                      aria-controls="SalesReport"
+                      data-bs-target="#SalesReport"
+                    >
+                      <div className="d-flex align-items-center">
+                        {!collapsed && (
+                          <div className="dropdown-indicator-icon">
+                            <span className="fas fa-caret-right"></span>
+                          </div>
+                        )}
+                        <span className="nav-link-icon">
+                          <i className="fa-regular fa-credit-card"></i>
+                        </span>
+                        {!collapsed && (
+                          <span className="nav-link-text-wrapper">
+                            <span className="nav-link-text">Sales Reports</span>
+                          </span>
+                        )}
+                      </div>
+                    </Link>
+
+                    {/* normal expanded submenu */}
+                    <div className="parent-wrapper label-1">
+                      <ul
+                        className="nav collapse parent"
+                        data-bs-parent="#navbarVerticalCollapse"
+                        id="SalesReport"
+                      >
+                        <li>
+                          <NavLink className="nav-link" to="/SalesReport/HighInDemand">
+                            High In Demand
+                          </NavLink>
+                        </li>
+                        <li>
+                          <NavLink className="nav-link" to="/SalesReport/LowInDemand">
+                            Low In Demand
+                          </NavLink>
+                        </li>
+                        <li>
+                          <NavLink className="nav-link" to="/SalesReport/HighestEarning">
+                            Highest Earning
+                          </NavLink>
+                        </li>
+                        <li>
+                          <NavLink className="nav-link" to="/SalesReport/LowestEarning">
+                            Lowest Earning
+                          </NavLink>
+                        </li>
+                      </ul>
+                    </div>
+
+                    {/* flyout version (only shows when collapsed & hovered) */}
+                    {collapsed && (
+                      <div
+                        className="sidebar-flyout"
+                        style={{ top: `${flyoutTop}px` }}
+                      >
+                        <div className="sidebar-flyout-title">Sales Reports</div>
+                        <NavLink className="nav-link" to="/SalesReport/HighInDemand">
+                          High In Demand
+                        </NavLink>
+                        <NavLink className="nav-link" to="/SalesReport/LowInDemand">
+                          Low In Demand
+                        </NavLink>
+                        <NavLink className="nav-link" to="/SalesReport/HighestEarning">
+                          Highest Earning
+                        </NavLink>
+                        <NavLink className="nav-link" to="/SalesReport/LowestEarning">
+                          Lowest Earning
+                        </NavLink>
+                      </div>
+                    )}
+                  </div>
+                  {/* <!-- parent pages--> */}
+                  <div
+                    className="nav-item-wrapper"
+                    onMouseEnter={(e) => {
+                      const rect = e.currentTarget.getBoundingClientRect();
+                      setFlyoutTop(rect.top); // yahan se flyoutTop update hoga
+                    }}
+                  >
+                    <NavLink
+                      className="nav-link label-1"
+                      to="/Transations"
+                      role="button"
+                      data-bs-toggle=""
+                      aria-expanded="false"
+                    >
+                      <div className="d-flex align-items-center">
+                        <span className="nav-link-icon">
+                          <i className="fa-solid fa-arrow-right-arrow-left"></i>
+                        </span>
+                        <span className="nav-link-text-wrapper">
+                          <span className="nav-link-text">Transactions</span>
+                        </span>
+                      </div>
+                    </NavLink>
+                    {collapsed && (
+                      <div
+                        className="sidebar-flyout"
+                        style={{ top: `${flyoutTop}px` }}
+                      >
+                        <NavLink to="/Transations" className="nav-link">
+                          Transactions
+                        </NavLink>
+                      </div>
+                    )}
+                  </div>
+                  <div
+                    className="nav-item-wrapper"
+                    onMouseEnter={(e) => {
+                      const rect = e.currentTarget.getBoundingClientRect();
+                      setFlyoutTop(rect.top); // yahan se flyoutTop update hoga
+                    }}
+                  >
+                    <NavLink
+                      className="nav-link label-1"
+                      to="/ChartsOfAccount"
+                      role="button"
+                      data-bs-toggle=""
+                      aria-expanded="false"
+                    >
+                      <div className="d-flex align-items-center">
+                        <span className="nav-link-icon">
+                          <span data-feather="book"></span>
+                        </span>
+                        <span className="nav-link-text-wrapper">
+                          <span className="nav-link-text">
+                            Chart of accounts
+                          </span>
+                        </span>
+                      </div>
+                    </NavLink>
+                    {collapsed && (
+                      <div
+                        className="sidebar-flyout"
+                        style={{ top: `${flyoutTop}px` }}
+                      >
+                        <NavLink to="/ChartsOfAccount" className="nav-link">
+                          Chart of accounts
+                        </NavLink>
+                      </div>
+                    )}
+                  </div>
+                  <div
+                    className="nav-item-wrapper"
+                    onMouseEnter={(e) => {
+                      const rect = e.currentTarget.getBoundingClientRect();
+                      setFlyoutTop(rect.top); // yahan se flyoutTop update hoga
+                    }}
+                  >
+                    <NavLink
+                      className="nav-link label-1"
+                      to="/Assets"
+                      role="button"
+                      data-bs-toggle=""
+                      aria-expanded="false"
+                    >
+                      <div className="d-flex align-items-center">
+                        <span className="nav-link-icon">
+                          <span data-feather="briefcase"></span>
+                        </span>
+                        <span className="nav-link-text-wrapper">
+                          <span className="nav-link-text">Assets</span>
+                        </span>
+                      </div>
+                    </NavLink>
+                    {collapsed && (
+                      <div
+                        className="sidebar-flyout"
+                        style={{ top: `${flyoutTop}px` }}
+                      >
+                        <NavLink to="/Assets" className="nav-link">
+                          Assets
+                        </NavLink>
+                      </div>
+                    )}
+                  </div>
+                  {/* <!-- parent pages--> */}
+                </li>
+                <li className="nav-item">
+                  {/* <!-- label--> */}
+                  <p className="navbar-vertical-label">Reports</p>
+                  <hr className="navbar-vertical-line" />
+                  {/* <!-- parent pages--> */}
+                  <div
+                    className="nav-item-wrapper"
+                    onMouseEnter={(e) => {
+                      const rect = e.currentTarget.getBoundingClientRect();
+                      setFlyoutTop(rect.top); // yahan se flyoutTop update hoga
+                    }}
+                  >
+                    <NavLink
+                      className="nav-link label-1"
+                      to="/Report"
+                      role="button"
+                      data-bs-toggle=""
+                      aria-expanded="false"
+                    >
+                      <div className="d-flex align-items-center">
+                        <span className="nav-link-icon">
+                          <span data-feather="bar-chart-2"></span>
+                        </span>
+                        <span className="nav-link-text-wrapper">
+                          <span className="nav-link-text">Reports</span>
+                        </span>
+                      </div>
+                    </NavLink>
+                    {/* 👇 yahan flyout version paste karo */}
+                    {collapsed && (
+                      <div
+                        className="sidebar-flyout"
+                        style={{ top: `${flyoutTop}px` }}
+                      >
+                        <NavLink to="/Report" className="nav-link">
+                          Reports
+                        </NavLink>
+                      </div>
+                    )}
+                  </div>
+                </li>
+                <li className="nav-item">
+                  {/* <!-- label--> */}
+                  <p className="navbar-vertical-label">Settings</p>
+                  <hr className="navbar-vertical-line" />
+                  {/* <!-- parent pages--> */}
+                  <div
+                    className="nav-item-wrapper"
+                    onMouseEnter={(e) => {
+                      const rect = e.currentTarget.getBoundingClientRect();
+                      setFlyoutTop(rect.top); // yahan se flyoutTop update hoga
+                    }}
+                  >
+                    <NavLink
+                      className="nav-link label-1"
+                      to="/Settings"
+                      role="button"
+                      data-bs-toggle=""
+                      aria-expanded="false"
+                    >
+                      <div className="d-flex align-items-center">
+                        <span className="nav-link-icon">
+                          <span data-feather="settings"></span>
+                        </span>
+                        <span className="nav-link-text-wrapper">
+                          <span className="nav-link-text">Settings</span>
+                        </span>
+                      </div>
+                    </NavLink>
+                    {/* 👇 yahan flyout version paste karo */}
+                    {collapsed && (
+                      <div
+                        className="sidebar-flyout"
+                        style={{ top: `${flyoutTop}px` }}
+                      >
+                        <NavLink to="/Settings" className="nav-link">
+                          Settings
+                        </NavLink>
+                      </div>
+                    )}
+                  </div>
+                </li>
+                {isSuperAdmin && (
+                  <li className="nav-item">
+                    {/* <!-- label--> */}
+                    <p className="navbar-vertical-label">Super Admin</p>
+                    <hr className="navbar-vertical-line" />
+                    {/* <!-- parent pages--> */}
+                    <div
+                      className="nav-item-wrapper"
+                      onMouseEnter={(e) => {
+                        const rect = e.currentTarget.getBoundingClientRect();
+                        setFlyoutTop(rect.top); // yahan se flyoutTop update hoga
+                      }}
+                    >
+                      <NavLink
+                        className="nav-link label-1"
+                        to="/UserProfile/Index"
+                        role="button"
+                        data-bs-toggle=""
+                        aria-expanded="false"
+                      >
+                        <div className="d-flex align-items-center">
+                          <span className="nav-link-icon">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="24px"
+                              height="24px" // bigger than 16
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              className="feather feather-codepen"
+                            >
+                              <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"></polygon>
+                              <line x1="12" y1="22" x2="12" y2="15.5"></line>
+                              <polyline points="22 8.5 12 15.5 2 8.5"></polyline>
+                              <polyline points="2 15.5 12 8.5 22 15.5"></polyline>
+                              <line x1="12" y1="2" x2="12" y2="8.5"></line>
+                            </svg>
+                          </span>
+                          <span className="nav-link-text-wrapper">
+                            <span className="nav-link-text">Super Admin</span>
                           </span>
                         </div>
                       </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Identity Setting</span>
+                      {/* 👇 yahan flyout version paste karo */}
+                      {collapsed && (
+                        <div
+                          className="sidebar-flyout"
+                          style={{ top: `${flyoutTop}px` }}
+                        >
+                          <NavLink to="/UserProfile/Index" className="nav-link">
+                            Super Admin
+                          </NavLink>
                         </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Email Setting</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Send Email History </span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Login History</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Audit Logs</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">User Info From Browser</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">JWT Token</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div className="nav-item-wrapper">
-                <Link
-                  className="nav-link dropdown-indicator collapsed label-1"
-                  to="#"
-                  role="button"
-                  data-bs-toggle="collapse"
-                  aria-expanded="false"
-                  aria-controls="ItemReport"
-                  data-bs-target="#ItemReport"
-                  onClick={(e) => e.preventDefault()} // stops navigation
-                >
-                  <div className="d-flex align-items-center">
-                    <div className="dropdown-indicator-icon">
-                      <span className="fas fa-caret-right"></span>
+                      )}
                     </div>
-                    <span className="nav-link-icon">
-                      <i className="fa-regular fa-credit-card"></i>
-                    </span>
-                    <span className="nav-link-text">Item Report</span>
-                  </div>
-                </Link>
-                <div className="parent-wrapper label-1">
-                  <ul
-                    className="nav collapse parent"
-                    data-bs-parent="#navbarVerticalCollapse"
-                    id="ItemReport"
-                  >
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">High In Demand</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text"> Low In Demand </span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Highest Earning</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Lowest Earning </span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div className="nav-item-wrapper">
-                <Link
-                  className="nav-link dropdown-indicator collapsed label-1"
-                  to="#"
-                  role="button"
-                  data-bs-toggle="collapse"
-                  aria-expanded="false"
-                  aria-controls="SalesReport"
-                  data-bs-target="#SalesReport"
-                  onClick={(e) => e.preventDefault()} // stops navigation
-                >
-                  <div className="d-flex align-items-center">
-                    <div className="dropdown-indicator-icon">
-                      <span className="fas fa-caret-right"></span>
-                    </div>
-                    <span className="nav-link-icon">
-                      <i className="fa-regular fa-credit-card"></i>
-                    </span>
-                    <span className="nav-link-text">Sales Report</span>
-                  </div>
-                </Link>
-                <div className="parent-wrapper label-1">
-                  <ul
-                    className="nav collapse parent"
-                    data-bs-parent="#navbarVerticalCollapse"
-                    id="SalesReport"
-                  >
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Transaction summary</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Produxt Wise Sale</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Transaction Dretails</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Transaction By Day</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Transaction By Month</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Transaction By Year</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div className="nav-item-wrapper">
-                <Link
-                  className="nav-link dropdown-indicator collapsed label-1"
-                  to="#"
-                  role="button"
-                  data-bs-toggle="collapse"
-                  aria-expanded="false"
-                  aria-controls="PurchaseReport"
-                  data-bs-target="#PurchaseReport"
-                  onClick={(e) => e.preventDefault()} // stops navigation
-                >
-                  <div className="d-flex align-items-center">
-                    <div className="dropdown-indicator-icon">
-                      <span className="fas fa-caret-right"></span>
-                    </div>
-                    <span className="nav-link-icon">
-                      <i className="fa-regular fa-credit-card"></i>
-                    </span>
-                    <span className="nav-link-text">Purchase Report</span>
-                  </div>
-                </Link>
-                <div className="parent-wrapper label-1">
-                  <ul
-                    className="nav collapse parent"
-                    data-bs-parent="#navbarVerticalCollapse"
-                    id="PurchaseReport"
-                  >
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Purchases Summary</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Purchase Details</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Transaction By Day</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Transaction By Month</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Transaction By Year</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div className="nav-item-wrapper">
-                <Link
-                  className="nav-link dropdown-indicator collapsed label-1"
-                  to="#"
-                  role="button"
-                  data-bs-toggle="collapse"
-                  aria-expanded="false"
-                  aria-controls="ExpenseReport"
-                  data-bs-target="#ExpenseReport"
-                  onClick={(e) => e.preventDefault()} // stops navigation
-                >
-                  <div className="d-flex align-items-center">
-                    <div className="dropdown-indicator-icon">
-                      <span className="fas fa-caret-right"></span>
-                    </div>
-                    <span className="nav-link-icon">
-                      <i className="fa-regular fa-credit-card"></i>
-                    </span>
-                    <span className="nav-link-text">Expense Report</span>
-                  </div>
-                </Link>
-                <div className="parent-wrapper label-1">
-                  <ul
-                    className="nav collapse parent"
-                    data-bs-parent="#navbarVerticalCollapse"
-                    id="ExpenseReport"
-                  >
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Expense Summary</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Expense Details</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Expense By Day</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Expense By Month</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Expense By Year</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div className="nav-item-wrapper">
-                <Link
-                  className="nav-link dropdown-indicator collapsed label-1"
-                  to="#"
-                  role="button"
-                  data-bs-toggle="collapse"
-                  aria-expanded="false"
-                  aria-controls="OtherReport"
-                  data-bs-target="#OtherReport"
-                  onClick={(e) => e.preventDefault()} // stops navigation
-                >
-                  <div className="d-flex align-items-center">
-                    <div className="dropdown-indicator-icon">
-                      <span className="fas fa-caret-right"></span>
-                    </div>
-                    <span className="nav-link-icon">
-                      <i className="fa-regular fa-credit-card"></i>
-                    </span>
-                    <span className="nav-link-text">Other Report</span>
-                  </div>
-                </Link>
-                <div className="parent-wrapper label-1">
-                  <ul
-                    className="nav collapse parent"
-                    data-bs-parent="#navbarVerticalCollapse"
-                    id="OtherReport"
-                  >
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Summary Report</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Attandace Report</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link"
-                        to="/Bills"
-                        data-bs-toggle=""
-                        aria-expanded="false"
-                      >
-                        <div className="d-flex align-items-center">
-                          <span className="nav-link-text">Print Barcode</span>
-                        </div>
-                      </NavLink>
-                      {/* <!-- more inner pages--> */}
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </li>
-          </ul>
+                  </li>
+                )}
+              </ul>
+            </div>
+          </div>
         </div>
-      </div>
-    </nav>
+        <div className="navbar-vertical-footer">
+          <button
+            className="btn navbar-vertical-toggle border-0 fw-semi-bold w-100 white-space-nowrap d-flex align-items-center"
+            onClick={() => setCollapsed(!collapsed)}
+          >
+            {collapsed ? (
+              <span className="uil uil-arrow-from-right fs-0"></span>
+            ) : (
+              <span className="uil uil-left-arrow-to-left fs-0"></span>
+            )}
+
+            {!collapsed && (
+              <span className="navbar-vertical-footer-text ms-2">
+                Collapsed View
+              </span>
+            )}
+          </button>
+        </div>
+      </nav>
+    </>
   );
 };
 

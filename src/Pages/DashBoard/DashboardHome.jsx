@@ -1,20 +1,20 @@
 import React, { useEffect, useMemo, useState } from "react";
-import SalesChart from "../../../Components/SalesChart";
-import InvoiceAnalyticsChart from "../../../Components/InvoiceAnalyticsChart";
+import SalesChart from "../../Components/SalesChart";
+import InvoiceAnalyticsChart from "../../Components/InvoiceAnalyticsChart";
 import { Link } from "react-router-dom";
-import ChatBot from "../../../Components/ChatSupport";
+import ChatBot from "../../Components/ChatBot";
 import { Container, Row, Col, Card, Nav, Navbar, Form } from "react-bootstrap";
 import { Bar, Line, Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, Title, Tooltip, Legend, CategoryScale, LinearScale, BarElement, LineElement, ArcElement, PointElement } from "chart.js";
-import TopCoupons, { PayingVsNonPaying } from "../../../Components/Charts.jsx";
+import TopCoupons, { PayingVsNonPaying } from "../../Components/Charts";
 import {
   useTable,
   usePagination,
   useSortBy,
   useGlobalFilter,
 } from "react-table";
-import DeleteModal from "../../../Components/DeleteModal";
-import ProductTable, { RecentEstimates, NewTable } from "../../../Components/MainDashboardTables";
+import DeleteModal from "../../Components/DeleteModal";
+import ProductTable, { RecentEstimates, NewTable } from "../../Components/MainDashboardTables";
 
 ChartJS.register(
   Title, Tooltip, Legend,
@@ -344,78 +344,75 @@ const DashboardHome = () => {
 
   return (
     <>
-      <div className="content-dashboard mb-5">
-        <div className="NewColorChange phoenix-toolbar d-flex align-items-center flex-wrap py-3 px-4 mb-0  gap-3 pb-6">
-          {/* Title and tabs */}
-          <div className=" p-3 row" style={{ minWidth: "170px" }}>
-            <h2 className="fw-bolder mb-1" style={{ fontSize: "2rem" }}>
-              Main Dashboard
-            </h2>
-            <p className="mb-5 fs-1">Here’s what’s going on at your business right now</p>
-            <div className="d-flex gap-4">
-              <div className="d-flex">
-                <div>
-                  <i className="fa-solid fa-circle-plus text-success fs-3 mt-2 me-3"></i>
+      <div className="content">
+        <div className="card rounded-0">
+          <div className="NewColorChange phoenix-toolbar d-flex align-items-center flex-wrap py-3 px-4 mb-0 border-bottom gap-3 ">
+            {/* Title and tabs */}
+            <div className=" p-3 row" style={{ minWidth: "170px" }}>
+              <h2 className="fw-bolder mb-1" style={{ fontSize: "2rem" }}>
+                Main Dashboard
+              </h2>
+              <p className="mb-5 fs-1">Here’s what’s going on at your business right now</p>
+              <div className="d-flex gap-4">
+                <div className="d-flex">
+                  <div>
+                    <i className="fa-solid fa-circle-plus text-success fs-3 mt-2 me-3"></i>
+                  </div>
+                  <div>
+                    <p className="fs-1 mb-0 fw-bold">60 New Products</p>
+                    <label className="form-label ps-0">Added This Month</label>
+                  </div>
                 </div>
-                <div>
-                  <p className="fs-1 mb-0 fw-bold">60 New Products</p>
-                  <label className="form-label ps-0">Added This Month</label>
+                <div className="d-flex">
+                  <div>
+                    <i className="fa-solid fa-user-plus text-info fs-3 mt-2 me-3"></i>
+                  </div>
+                  <div>
+                    <p className="fs-1 mb-0 fw-bold">1000+ New Customer</p>
+                    <label className="form-label ps-0">Joined This Month</label>
+                  </div>
                 </div>
-              </div>
-              <div className="d-flex">
-                <div>
-                  <i className="fa-solid fa-user-plus text-info fs-3 mt-2 me-3"></i>
-                </div>
-                <div>
-                  <p className="fs-1 mb-0 fw-bold">1000+ New Customer</p>
-                  <label className="form-label ps-0">Joined This Month</label>
-                </div>
-              </div>
-              <div className="d-flex">
-                <div>
-                  <i className="fa-solid fa-globe text-danger fs-3 mt-2 me-3"></i>
-                </div>
-                <div>
-                  <p className="fs-1 mb-0 fw-bold">30+ Countries</p>
-                  <label className="form-label ps-0">Use Our Services</label>
+                <div className="d-flex">
+                  <div>
+                    <i className="fa-solid fa-globe text-danger fs-3 mt-2 me-3"></i>
+                  </div>
+                  <div>
+                    <p className="fs-1 mb-0 fw-bold">30+ Countries</p>
+                    <label className="form-label ps-0">Use Our Services</label>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          {/* chart  */}
-          <div className="d-flex w-100 border-top  pt-5 justify-content-between mb-4 g-3">
-            <div className="col-auto">
-              <h3>Profit & Loss</h3>
-              <p className="text-700 lh-sm mb-0">
-                Payment received across all channels
-              </p>
+            {/* chart  */}
+            <div className="d-flex w-100 border-top  pt-5 justify-content-between mb-4 g-3">
+              <div className="col-auto">
+                <h3>Profit & Loss</h3>
+                <p className="text-700 lh-sm mb-0">
+                  Payment received across all channels
+                </p>
+              </div>
+              <div className="col-8 col-sm-4">
+                <select
+                  className="form-select form-select-sm mt-2"
+                  id="select-gross-revenue-month"
+                  value={isSelected}
+                  onChange={(e) => setIsSelected(e.target.value)}
+                >
+                  <option value="week">Week</option>
+                  <option value="month">Month</option>
+                  <option value="year">Year</option>
+                </select>
+              </div>
             </div>
-            <div className="col-8 col-sm-4">
-              <select
-                className="form-select form-select-sm mt-2"
-                id="select-gross-revenue-month"
-                value={isSelected}
-                onChange={(e) => setIsSelected(e.target.value)}
-              >
-                <option value="week">Week</option>
-                <option value="month">Month</option>
-                <option value="year">Year</option>
-              </select>
-            </div>
-          </div>
-          <div
-            className="echart-total-sales-chart"
-            style={{ minHeight: "320px", width: "100%" }}
-          >
             <SalesChart chartLabel={monthlyTransactions?.chartLabel || []} linesData={monthlyTransactions?.linesData || []} />
-          </div>
-          <div className="d-flex ">
-            {summary?.map((item, index) => (
-              <div className="col-lg-12 text-nowrap text-center col-sm-12" key={index}>
-                <p className=" m-0">{item?.title}</p>
-                <span className="">${item?.value}</span>
-              </div>
-            ))}
+            <div className="d-flex ">
+              {summary?.map((item, index) => (
+                <div className="col-lg-12 text-nowrap text-center col-sm-12" key={index}>
+                  <p className=" m-0">{item?.title}</p>
+                  <span className="">${item?.value}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
         <div className="card rounded-0">
@@ -465,7 +462,7 @@ const DashboardHome = () => {
             </div>
           </div>
           {/* last transaction  */}
-          <div className="p-5 bg-white border-top border-300">
+          <div className="p-5 bg-white border-y border-300">
             <div data-list='{"valueNames":["product","customer","rating","review","time"],"page":6}'>
               <div className="row align-items-end justify-content-between pb-5 g-3">
                 <div className="col-auto">
@@ -658,7 +655,7 @@ const DashboardHome = () => {
 
           {/* last estimate */}
           <ProductTable />
-          <div className="col-12 p-5">
+          {/* <div className="col-12 p-5">
             <div
               className="card shadow-none border border-300"
               data-component-card="data-component-card"
@@ -676,7 +673,7 @@ const DashboardHome = () => {
                 <InvoiceAnalyticsChart data={report} />
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* recent estimates  */}
           <RecentEstimates />
