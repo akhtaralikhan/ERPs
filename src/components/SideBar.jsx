@@ -1409,23 +1409,33 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                         id="SalesReport"
                       >
                         <li>
-                          <NavLink className="nav-link" to="/SalesReport/HighInDemand">
-                            High In Demand
+                          <NavLink className="nav-link" to="/SalesReport/PaymentSummaryReport">
+                            Transactions Summary
                           </NavLink>
                         </li>
                         <li>
-                          <NavLink className="nav-link" to="/SalesReport/LowInDemand">
-                            Low In Demand
+                          <NavLink className="nav-link" to="/SalesReport/ProductWiseSale">
+                            Product Wise Sales
                           </NavLink>
                         </li>
                         <li>
-                          <NavLink className="nav-link" to="/SalesReport/HighestEarning">
-                            Highest Earning
+                          <NavLink className="nav-link" to="/SalesReport/PaymentDetailReport">
+                            Transactions Details
                           </NavLink>
                         </li>
                         <li>
-                          <NavLink className="nav-link" to="/SalesReport/LowestEarning">
-                            Lowest Earning
+                          <NavLink className="nav-link" to="/SalesReport/TransactionByDay">
+                            Transactions By Day
+                          </NavLink>
+                        </li>
+                        <li>
+                          <NavLink className="nav-link" to="/SalesReport/TransactionByMonth">
+                            Transactions By Month
+                          </NavLink>
+                        </li>
+                        <li>
+                          <NavLink className="nav-link" to="/SalesReport/TransactionByYear">
+                            Transactions By Year
                           </NavLink>
                         </li>
                       </ul>
@@ -1438,17 +1448,23 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                         style={{ top: `${flyoutTop}px` }}
                       >
                         <div className="sidebar-flyout-title">Sales Reports</div>
-                        <NavLink className="nav-link" to="/SalesReport/HighInDemand">
-                          High In Demand
+                        <NavLink className="nav-link" to="/SalesReport/PaymentSummaryReport">
+                          Transactions Summary
                         </NavLink>
-                        <NavLink className="nav-link" to="/SalesReport/LowInDemand">
-                          Low In Demand
+                        <NavLink className="nav-link" to="/SalesReport/ProductWiseSale">
+                          Product Wise Sales
                         </NavLink>
-                        <NavLink className="nav-link" to="/SalesReport/HighestEarning">
-                          Highest Earning
+                        <NavLink className="nav-link" to="/SalesReport/PaymentDetailReport">
+                          Transactions Details
                         </NavLink>
-                        <NavLink className="nav-link" to="/SalesReport/LowestEarning">
-                          Lowest Earning
+                        <NavLink className="nav-link" to="/SalesReport/TransactionByDay">
+                          Transactions By Day
+                        </NavLink>
+                        <NavLink className="nav-link" to="/SalesReport/TransactionByMonth">
+                          Transactions By Month
+                        </NavLink>
+                        <NavLink className="nav-link" to="/SalesReport/TransactionByYear">
+                          Transactions By Year
                         </NavLink>
                       </div>
                     )}
@@ -1461,150 +1477,92 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                       setFlyoutTop(rect.top); // yahan se flyoutTop update hoga
                     }}
                   >
-                    <NavLink
-                      className="nav-link label-1"
-                      to="/Transations"
+                    <Link
+                      className="nav-link dropdown-indicator label-1"
+                      to=""
                       role="button"
-                      data-bs-toggle=""
-                      aria-expanded="false"
+                      data-bs-toggle={collapsed ? "" : "collapse"}
+                      aria-expanded="true"
+                      aria-controls="PurchaseReports"
+                      data-bs-target="#PurchaseReports"
                     >
                       <div className="d-flex align-items-center">
+                        {!collapsed && (
+                          <div className="dropdown-indicator-icon">
+                            <span className="fas fa-caret-right"></span>
+                          </div>
+                        )}
                         <span className="nav-link-icon">
-                          <i className="fa-solid fa-arrow-right-arrow-left"></i>
+                          <i className="fa-regular fa-credit-card"></i>
                         </span>
-                        <span className="nav-link-text-wrapper">
-                          <span className="nav-link-text">Transactions</span>
-                        </span>
-                      </div>
-                    </NavLink>
-                    {collapsed && (
-                      <div
-                        className="sidebar-flyout"
-                        style={{ top: `${flyoutTop}px` }}
-                      >
-                        <NavLink to="/Transations" className="nav-link">
-                          Transactions
-                        </NavLink>
-                      </div>
-                    )}
-                  </div>
-                  <div
-                    className="nav-item-wrapper"
-                    onMouseEnter={(e) => {
-                      const rect = e.currentTarget.getBoundingClientRect();
-                      setFlyoutTop(rect.top); // yahan se flyoutTop update hoga
-                    }}
-                  >
-                    <NavLink
-                      className="nav-link label-1"
-                      to="/ChartsOfAccount"
-                      role="button"
-                      data-bs-toggle=""
-                      aria-expanded="false"
-                    >
-                      <div className="d-flex align-items-center">
-                        <span className="nav-link-icon">
-                          <span data-feather="book"></span>
-                        </span>
-                        <span className="nav-link-text-wrapper">
-                          <span className="nav-link-text">
-                            Chart of accounts
+                        {!collapsed && (
+                          <span className="nav-link-text-wrapper">
+                            <span className="nav-link-text">Purchase Reports</span>
                           </span>
-                        </span>
+                        )}
                       </div>
-                    </NavLink>
+                    </Link>
+
+                    {/* normal expanded submenu */}
+                    <div className="parent-wrapper label-1">
+                      <ul
+                        className="nav collapse parent"
+                        data-bs-parent="#navbarVerticalCollapse"
+                        id="PurchaseReports"
+                      >
+                        <li>
+                          <NavLink className="nav-link" to="/PurchasesReport/PurchasesSummary">
+                            Purchase Summary
+                          </NavLink>
+                        </li>
+                        <li>
+                          <NavLink className="nav-link" to="/PurchasesReport/PurchasesDetail">
+                            Purchase Details
+                          </NavLink>
+                        </li>
+                        <li>
+                          <NavLink className="nav-link" to="/PurchasesReport/PurchasesTransactionByDay">
+                            Transactions By Day
+                          </NavLink>
+                        </li>
+                        <li>
+                          <NavLink className="nav-link" to="/PurchasesReport/PurchasesTransactionByMonth">
+                            Transactions By Month
+                          </NavLink>
+                        </li>
+                        <li>
+                          <NavLink className="nav-link" to="/PurchasesReport/PurchasesTransactionByYear">
+                            Transactions By Year
+                          </NavLink>
+                        </li>
+                      </ul>
+                    </div>
+
+                    {/* flyout version (only shows when collapsed & hovered) */}
                     {collapsed && (
                       <div
                         className="sidebar-flyout"
                         style={{ top: `${flyoutTop}px` }}
                       >
-                        <NavLink to="/ChartsOfAccount" className="nav-link">
-                          Chart of accounts
+                        <div className="sidebar-flyout-title">Purchase Reports</div>
+                        <NavLink className="nav-link" to="/PurchasesReport/PurchasesSummary">
+                          Purchase Summary
+                        </NavLink>
+                        <NavLink className="nav-link" to="/PurchasesReport/PurchasesDetail">
+                          Purchase Details
+                        </NavLink>
+                        <NavLink className="nav-link" to="/PurchasesReport/PurchasesTransactionByDay">
+                          Transactions By Day
+                        </NavLink>
+                        <NavLink className="nav-link" to="/PurchasesReport/PurchasesTransactionByMonth">
+                          Transactions By Month
+                        </NavLink>
+                        <NavLink className="nav-link" to="/PurchasesReport/PurchasesTransactionByYear">
+                          Transactions By Year
                         </NavLink>
                       </div>
                     )}
                   </div>
-                  <div
-                    className="nav-item-wrapper"
-                    onMouseEnter={(e) => {
-                      const rect = e.currentTarget.getBoundingClientRect();
-                      setFlyoutTop(rect.top); // yahan se flyoutTop update hoga
-                    }}
-                  >
-                    <NavLink
-                      className="nav-link label-1"
-                      to="/Assets"
-                      role="button"
-                      data-bs-toggle=""
-                      aria-expanded="false"
-                    >
-                      <div className="d-flex align-items-center">
-                        <span className="nav-link-icon">
-                          <span data-feather="briefcase"></span>
-                        </span>
-                        <span className="nav-link-text-wrapper">
-                          <span className="nav-link-text">Assets</span>
-                        </span>
-                      </div>
-                    </NavLink>
-                    {collapsed && (
-                      <div
-                        className="sidebar-flyout"
-                        style={{ top: `${flyoutTop}px` }}
-                      >
-                        <NavLink to="/Assets" className="nav-link">
-                          Assets
-                        </NavLink>
-                      </div>
-                    )}
-                  </div>
-                  {/* <!-- parent pages--> */}
-                </li>
-                <li className="nav-item">
-                  {/* <!-- label--> */}
-                  <p className="navbar-vertical-label">Reports</p>
-                  <hr className="navbar-vertical-line" />
-                  {/* <!-- parent pages--> */}
-                  <div
-                    className="nav-item-wrapper"
-                    onMouseEnter={(e) => {
-                      const rect = e.currentTarget.getBoundingClientRect();
-                      setFlyoutTop(rect.top); // yahan se flyoutTop update hoga
-                    }}
-                  >
-                    <NavLink
-                      className="nav-link label-1"
-                      to="/Report"
-                      role="button"
-                      data-bs-toggle=""
-                      aria-expanded="false"
-                    >
-                      <div className="d-flex align-items-center">
-                        <span className="nav-link-icon">
-                          <span data-feather="bar-chart-2"></span>
-                        </span>
-                        <span className="nav-link-text-wrapper">
-                          <span className="nav-link-text">Reports</span>
-                        </span>
-                      </div>
-                    </NavLink>
-                    {/* 👇 yahan flyout version paste karo */}
-                    {collapsed && (
-                      <div
-                        className="sidebar-flyout"
-                        style={{ top: `${flyoutTop}px` }}
-                      >
-                        <NavLink to="/Report" className="nav-link">
-                          Reports
-                        </NavLink>
-                      </div>
-                    )}
-                  </div>
-                </li>
-                <li className="nav-item">
-                  {/* <!-- label--> */}
-                  <p className="navbar-vertical-label">Settings</p>
-                  <hr className="navbar-vertical-line" />
                   {/* <!-- parent pages--> */}
                   <div
                     className="nav-item-wrapper"
@@ -1613,35 +1571,172 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                       setFlyoutTop(rect.top); // yahan se flyoutTop update hoga
                     }}
                   >
-                    <NavLink
-                      className="nav-link label-1"
-                      to="/Settings"
+                    <Link
+                      className="nav-link dropdown-indicator label-1"
+                      to=""
                       role="button"
-                      data-bs-toggle=""
-                      aria-expanded="false"
+                      data-bs-toggle={collapsed ? "" : "collapse"}
+                      aria-expanded="true"
+                      aria-controls="ExpenseReport"
+                      data-bs-target="#ExpenseReport"
                     >
                       <div className="d-flex align-items-center">
+                        {!collapsed && (
+                          <div className="dropdown-indicator-icon">
+                            <span className="fas fa-caret-right"></span>
+                          </div>
+                        )}
                         <span className="nav-link-icon">
-                          <span data-feather="settings"></span>
+                          <i className="fa-regular fa-credit-card"></i>
                         </span>
-                        <span className="nav-link-text-wrapper">
-                          <span className="nav-link-text">Settings</span>
-                        </span>
+                        {!collapsed && (
+                          <span className="nav-link-text-wrapper">
+                            <span className="nav-link-text">Expenses Reports</span>
+                          </span>
+                        )}
                       </div>
-                    </NavLink>
-                    {/* 👇 yahan flyout version paste karo */}
+                    </Link>
+
+                    {/* normal expanded submenu */}
+                    <div className="parent-wrapper label-1">
+                      <ul
+                        className="nav collapse parent"
+                        data-bs-parent="#navbarVerticalCollapse"
+                        id="ExpenseReport"
+                      >
+                        <li>
+                          <NavLink className="nav-link" to="/ExpenseReport/ExpenseSummaryReport">
+                            Expenses Summary
+                          </NavLink>
+                        </li>
+                        <li>
+                          <NavLink className="nav-link" to="/ExpenseReport/ExpenseDetailsReport">
+                            Expenses Details
+                          </NavLink>
+                        </li>
+                        <li>
+                          <NavLink className="nav-link" to="/ExpenseReport/ExpenseByDay">
+                            Expenses By Day
+                          </NavLink>
+                        </li>
+                        <li>
+                          <NavLink className="nav-link" to="/ExpenseReport/ExpenseByMonth">
+                            Expenses By Month
+                          </NavLink>
+                        </li>
+                        <li>
+                          <NavLink className="nav-link" to="/ExpenseReport/ExpenseByYear">
+                            Expenses By Year
+                          </NavLink>
+                        </li>
+                      </ul>
+                    </div>
+
+                    {/* flyout version (only shows when collapsed & hovered) */}
                     {collapsed && (
                       <div
                         className="sidebar-flyout"
                         style={{ top: `${flyoutTop}px` }}
                       >
-                        <NavLink to="/Settings" className="nav-link">
-                          Settings
+                        <div className="sidebar-flyout-title">Expenses Reports</div>
+                        <NavLink className="nav-link" to="/ExpenseReport/ExpenseSummaryReport">
+                          Expenses Summary
+                        </NavLink>
+                        <NavLink className="nav-link" to="/ExpenseReport/ExpenseDetailsReport">
+                          Expenses Details
+                        </NavLink>
+                        <NavLink className="nav-link" to="/ExpenseReport/ExpenseByDay">
+                          Expenses By Day
+                        </NavLink>
+                        <NavLink className="nav-link" to="/ExpenseReport/ExpenseByMonth">
+                          Expenses By Month
+                        </NavLink>
+                        <NavLink className="nav-link" to="/ExpenseReport/ExpenseByYear">
+                          Expenses By Year
+                        </NavLink>
+                      </div>
+                    )}
+                  </div>
+                  {/* <!-- parent pages--> */}
+                  <div
+                    className="nav-item-wrapper"
+                    onMouseEnter={(e) => {
+                      const rect = e.currentTarget.getBoundingClientRect();
+                      setFlyoutTop(rect.top); // yahan se flyoutTop update hoga
+                    }}
+                  >
+                    <Link
+                      className="nav-link dropdown-indicator label-1"
+                      to=""
+                      role="button"
+                      data-bs-toggle={collapsed ? "" : "collapse"}
+                      aria-expanded="true"
+                      aria-controls="OtherReport"
+                      data-bs-target="#OtherReport"
+                    >
+                      <div className="d-flex align-items-center">
+                        {!collapsed && (
+                          <div className="dropdown-indicator-icon">
+                            <span className="fas fa-caret-right"></span>
+                          </div>
+                        )}
+                        <span className="nav-link-icon">
+                          <i className="fa-regular fa-credit-card"></i>
+                        </span>
+                        {!collapsed && (
+                          <span className="nav-link-text-wrapper">
+                            <span className="nav-link-text">Other Reports</span>
+                          </span>
+                        )}
+                      </div>
+                    </Link>
+
+                    {/* normal expanded submenu */}
+                    <div className="parent-wrapper label-1">
+                      <ul
+                        className="nav collapse parent"
+                        data-bs-parent="#navbarVerticalCollapse"
+                        id="OtherReport"
+                      >
+                        <li>
+                          <NavLink className="nav-link" to="/SalesReport/SummaryReport">
+                            Summary Report
+                          </NavLink>
+                        </li>
+                        <li>
+                          <NavLink className="nav-link" to="/SalesReport/AttendanceReport">
+                            Attandance Report
+                          </NavLink>
+                        </li>
+                        <li>
+                          <NavLink className="nav-link" to="/SalesReport/PrintBarcode">
+                            Print Barcode
+                          </NavLink>
+                        </li>
+                      </ul>
+                    </div>
+
+                    {/* flyout version (only shows when collapsed & hovered) */}
+                    {collapsed && (
+                      <div
+                        className="sidebar-flyout"
+                        style={{ top: `${flyoutTop}px` }}
+                      >
+                        <div className="sidebar-flyout-title">Other Reports</div>
+                        <NavLink className="nav-link" to="/SalesReport/SummaryReport">
+                          Summary Report
+                        </NavLink>
+                        <NavLink className="nav-link" to="/SalesReport/AttendanceReport">
+                          Attandance Report
+                        </NavLink>
+                        <NavLink className="nav-link" to="/SalesReport/PrintBarcode">
+                          Print Barcode
                         </NavLink>
                       </div>
                     )}
                   </div>
                 </li>
+
                 {isSuperAdmin && (
                   <li className="nav-item">
                     {/* <!-- label--> */}

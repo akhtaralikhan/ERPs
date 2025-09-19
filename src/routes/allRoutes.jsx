@@ -123,12 +123,14 @@ const basePrivateRoutes = [
   { path: "/PurchasesReport/PurchasesTransactionByDay", component: <DashboardHome /> },
   { path: "/PurchasesReport/PurchasesTransactionByMonth", component: <DashboardHome /> },
   { path: "/PurchasesReport/PurchasesTransactionByYear", component: <DashboardHome /> },
+
   // EXPENSE REPORTS
   { path: "/ExpenseReport/ExpenseSummaryReport", component: <DashboardHome /> },
   { path: "/ExpenseReport/ExpenseDetailsReport", component: <DashboardHome /> },
   { path: "/ExpenseReport/ExpenseByDay", component: <DashboardHome /> },
   { path: "/ExpenseReport/ExpenseByMonth", component: <DashboardHome /> },
   { path: "/ExpenseReport/ExpenseByYear", component: <DashboardHome /> },
+  
   // OTHER REPORTS
   { path: "/SalesReport/SummaryReport", component: <DashboardHome /> },
   { path: "/SalesReport/AttendanceReport", component: <DashboardHome /> },
