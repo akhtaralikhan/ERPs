@@ -75,3 +75,400 @@ button:focus-visible {
 .sidebar .nav-item-wrapper .nav-link-icon svg {
   width: 16px;
 }
+
+/* item cart css  */
+.ttop {
+  height: 217px;
+  width: auto !important;
+  background-position: center;
+  background-size: cover;
+  border-bottom: 1px solid #ccc !important;
+}
+
+.cardt {
+  font-size: 12px;
+}
+
+.item-counter {
+  position: absolute;
+  bottom: 145px;
+  right: 15px;
+  cursor: pointer;
+  background: #fff;
+  padding: 6px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+}
+
+.add {
+  position: absolute;
+  bottom: 145px;
+  right: 15px;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 35px;
+}
+
+.search {
+  padding-left: 45px;
+}
+
+.search-box-icon {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  color: #8a94ad;
+
+  font-size: 0.8rem;
+}
+
+.dot {
+  min-width: 8px;
+  min-height: 8px;
+  border-radius: 50%;
+  background-color: tomato;
+  position: absolute;
+  top: -4px;
+  right: -2px;
+}
+
+.card-info {
+  cursor: pointer;
+}
+
+@media(max-width:786px) {
+  .ttop {
+    height: 148px;
+  }
+}
+
+/* side invoice css */
+
+.invoice-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  height: 20rem;
+  flex-wrap: nowrap;
+}
+
+.invoice-items {
+  flex: 0 0 auto;
+  width: 250px;
+}
+
+.invoice-container::-webkit-scrollbar {
+  display: none;
+}
+
+.imgwidth {
+  height: 195px;
+}
+
+/* BusinessERP css  */
+.cardwidth {
+  flex-basis: 23%;
+  margin-bottom: 1.5rem;
+  margin-right: 1rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.card img {
+  overflow: hidden;
+}
+
+.img-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 15, 152, 0.3);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 70%;
+  opacity: 0;
+  transition: 0.3s;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.card:hover .img-overlay {
+  opacity: 1;
+  padding-top: 10%;
+}
+
+/* BILLEX COMPLETE CSS  */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body.light {
+  --background-color: #f5f7fa;
+  --text-color: #000;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+body.dark {
+  --background-color: #121212;
+  --text-color: #fff;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.NewColorChange {
+  background-color: var(--background-color);
+}
+
+.NewChangeColor {
+  color: var(--phoenix-body-color);
+}
+
+.sidebar .nav-item-wrapper .nav-link-icon svg {
+  width: 16px;
+}
+
+.NewTableChange thead tr th {
+  cursor: pointer;
+  font-size: 14.5px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.filterLinks {
+  /* color: #99a1b7; */
+  color: #3874ff;
+  font-weight: 700;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.Huzaifa_Date .react-datepicker-wrapper {
+  width: 100%;
+}
+
+.HuzaifaNav.navbar.navbar-top {
+  padding-right: 2.5rem;
+}
+
+.HuzaifaNav .theme-control-toggle .theme-control-toggle-label svg {
+  width: 16px;
+  height: 16px;
+}
+
+.HuzaifaNav.navbar-top .navbar-logo {
+  width: 15.875rem;
+}
+
+.HuzaifaNav.navbar-top .navbar-brand {
+  margin-left: .4rem;
+}
+
+.table td.description-cell,
+.table th.description-cell {
+  white-space: normal !important;
+}
+
+.custom-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.Toastify {
+  position: absolute;
+}
+
+.AssetsPageChangecss .AssetsSearch {
+  height: 100%;
+}
+
+.filterLinks .nav-link.active {
+  color: black !important;
+}
+
+.content.Content-Console-padding {
+  padding-left: 2.5rem !important;
+  padding-right: 2.5rem !important;
+}
+
+
+@media (max-width: 280px) {}
+
+@media (max-width: 540px) {
+  .HuzaifaNav.navbar-top .navbar-logo {
+    width: unset;
+  }
+
+  .navbar-expand .navbar-toggler {
+    display: unset;
+  }
+
+  .navbar-vertical .navbar-vertical-footer {
+    display: none !important;
+  }
+
+  .HuzaifaNav.navbar.navbar-top {
+    padding: 0 1.5rem;
+  }
+
+  .navbar-vertical.navbar-expand-lg .navbar-vertical-content .navbar-nav .nav-link {
+    margin-left: unset !important;
+    margin-right: unset !important;
+    padding-left: 1.5rem !important;
+  }
+
+  .navbar-vertical .navbar-vertical-content .navbar-nav .nav-link.dropdown-indicator {
+    padding-left: .75rem !important;
+  }
+
+  .navbar-vertical .navbar-vertical-content .navbar-nav .nav .nav-link {
+    padding: .25rem .5rem;
+    padding-left: 3.125rem !important;
+  }
+
+  .WidthForIpadpro .card-body,
+  .WidthForIpadpro .card-header {
+    padding: 24px 12px;
+  }
+
+  .ForSmallDevice .card-body,
+  .ForSmallDevice .card-header {
+    padding: 24px 12px;
+  }
+
+  .ForSmallDevice .card-header {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .support-chat+.btn-support-chat {
+    right: 1rem !important;
+  }
+
+  .support-chat {
+    right: 0 !important;
+  }
+
+  .ForSmallDeviceSettings .search-box {
+    width: 100%;
+  }
+
+  .PAGINATIONS ul li .page-link {
+    padding: 7px 9px;
+  }
+
+  /* .PAGINATIONS {
+      justify-content: center !important;
+  } */
+
+  .CHARTOFACCOUNTTAB {
+    display: block;
+  }
+
+  .Transations-card-header {
+    gap: 15px;
+  }
+
+}
+
+@media (max-width: 480px) {
+  .ForSmallDevice .card-header button {
+    padding: 10px;
+  }
+
+  .ForSmallDevice .card-header button i {
+    margin-right: 10px !important;
+  }
+
+  .Transactiontooltipbutton {
+    display: block;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+  .navbar-expand .navbar-toggler {
+    display: unset;
+  }
+
+  .navbar-vertical .navbar-vertical-footer {
+    display: none !important;
+  }
+
+  .HuzaifaNav.navbar.navbar-top {
+    padding: 0 1.5rem;
+  }
+
+  .navbar-vertical.navbar-expand-lg .navbar-vertical-content .navbar-nav .nav-link {
+    margin-left: unset !important;
+    margin-right: unset !important;
+    padding-left: 1.5rem !important;
+  }
+
+  .navbar-vertical .navbar-vertical-content .navbar-nav .nav-link.dropdown-indicator {
+    padding-left: .75rem !important;
+  }
+
+  .navbar-vertical .navbar-vertical-content .navbar-nav .nav .nav-link {
+    padding: .25rem .5rem;
+    padding-left: 3.125rem !important;
+  }
+
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .navbar-expand .navbar-toggler {
+    display: unset;
+  }
+
+  .navbar-vertical .navbar-vertical-footer {
+    display: none !important;
+  }
+
+  .HuzaifaNav.navbar.navbar-top {
+    padding: 0 1.5rem;
+  }
+
+  .navbar-vertical.navbar-expand-lg .navbar-vertical-content .navbar-nav .nav-link {
+    margin-left: unset !important;
+    margin-right: unset !important;
+    padding-left: 1.5rem !important;
+  }
+
+  .navbar-vertical .navbar-vertical-content .navbar-nav .nav-link.dropdown-indicator {
+    padding-left: .75rem !important;
+  }
+
+  .navbar-vertical .navbar-vertical-content .navbar-nav .nav .nav-link {
+    padding: .25rem .5rem;
+    padding-left: 3.125rem !important;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1919px) {
+  .BothWIdth .NewCssWidthChangeCol1 {
+    width: 20% !important;
+  }
+
+  .BothWIdth .NewCssWidthChangeCol2 {
+    width: 80% !important;
+  }
+}
+
+@media (min-width: 1022px) and (max-width: 1024px) {
+  .WidthForIpadpro {
+    width: 100%;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1919px) {}
+
+@media (min-width: 1920px) {}

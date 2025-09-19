@@ -1,7 +1,6 @@
 import React from 'react';
-import './BankAccount.css'
 
-export default function BankAccounts() {
+export default function BusinessERP() {
   return (
     <div className='content'>
       <div className="mb-5 ">
@@ -10,7 +9,7 @@ export default function BankAccounts() {
       <hr />
       <div className="d-flex flex-wrap   ">
         <div className="card cardwidth ">
-          <img src="src/assets/img/bg/sale.jpg" alt="" />
+          <img src="src\assets\img\bg\sale.jpg" alt="" />
           <div className="img-overlay">
             <p>New Sale</p>
           </div>
@@ -75,7 +74,7 @@ export default function BankAccounts() {
             <p>Summary Report</p>
           </div>
         </div>
-        
+
 
       </div>
     </div>

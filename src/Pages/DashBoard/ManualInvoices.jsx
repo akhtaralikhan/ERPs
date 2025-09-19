@@ -5,7 +5,7 @@
 // import AddPaymentModal from '../../Components/AddPaymentModal';
 
 // const ManualInvoices = () => {
-  
+
 //   const [showModal,setShowModal] = useState(false);
 //     useEffect(() => {
 //   const options = {
@@ -35,7 +35,7 @@
 //           {showModal && <AddPaymentModal showModal={showModal} setShowModal={setShowModal}/>}
 //           </div>
 //         </div>
-        
+
 //       <div className="search-bars  d-flex justify-content-between  p-4 pb-0 mb-2 ">
 //         <div className="start-end-data col-4 d-flex gap-3 ">
 //             <div className="start col-6">
@@ -164,12 +164,12 @@
 //       </div>
 //       </div>
 //    </div>
-    
+
 //   )
 // }
 
 // export default ManualInvoices;
- 
+
 
 import React, { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
@@ -206,7 +206,7 @@ const ManualInvoices = () => {
                   src={row.original.customerImg}
                   alt={row.original.customer}
                   className="rounded-circle"
-                  // style={{ width: "30px", height: "30px", objectFit: "cover" }}
+                // style={{ width: "30px", height: "30px", objectFit: "cover" }}
                 />
               ) : (
                 <div className="avatar-name rounded-circle avatar-m">
@@ -458,11 +458,11 @@ const ManualInvoices = () => {
                 <span className="fas fa-file-export fs-9 me-2"></span>
                 Export
               </button>
-              <button className="btn btn-primary" onClick={()=>setShowModal(true)}>
+              <button className="btn btn-primary" onClick={() => setShowModal(true)}>
                 <span className="fas fa-plus me-2"></span>
                 Add Payment
               </button>
-              {showModal && <AddPaymentModal showModal={showModal} setShowModal={setShowModal}/>}
+              {showModal && <AddPaymentModal showModal={showModal} setShowModal={setShowModal} />}
             </div>
           </div>
         </div>
@@ -542,11 +542,10 @@ const ManualInvoices = () => {
                           <td
                             key={cellKey}
                             {...cellProps}
-                            className={`py-3 align-middle ${
-                              cell.column.id === "id"
+                            className={`py-3 align-middle ${cell.column.id === "id"
                                 ? "text-primary id-hover"
                                 : ""
-                            }`}
+                              }`}
                           >
                             {cell.render("Cell")}
                           </td>
