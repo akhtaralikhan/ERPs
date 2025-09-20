@@ -1,21 +1,22 @@
+// ✅ Search Component
 function GlobalFilter({ globalFilter, setGlobalFilter }) {
   return (
-    <div className="search-box">
-      <div className="position-relative">
-        <form className="position-relative" onSubmit={(e)=>e.preventDefault()}>
+    <div className="search-bars d-flex p-4 pb-0 ps-0 mb-2">
+      <div className="search-box mb-3 position-lg-relative">
+        <div className="position-relative">
           <input
-            className="form-control search-input search form-control-sm py-2  "
+            className="form-control search-input search form-control-sm pt-2 pb-2"
             type="search"
-            placeholder="Search Orders"
+            placeholder="Search"
             aria-label="Search"
             value={globalFilter || ""}
-            onChange={(e)=>setGlobalFilter(e.target.value)}
-            setGlobalFilter={setGlobalFilter}
+            onChange={(e) => setGlobalFilter(e.target.value)}
           />
           <span className="fas fa-search search-box-icon"></span>
-        </form>
+        </div>
       </div>
     </div>
   );
 }
+
 export default GlobalFilter;

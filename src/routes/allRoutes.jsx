@@ -31,6 +31,7 @@ import DraftInvoice from '../Pages/DashBoard/DraftInvoice'
 import SalesReturn from "../Pages/DashBoard/SalesReturn.jsx";
 import PurchaseInvoice from "../Pages/DashBoard/PurchaseInvoice.jsx";
 import PurchaseReturn from "../Pages/DashBoard/PurchaseReturn.jsx";
+import ProductMainGroup from "../Pages/DashBoard/Assets.jsx";
 
 export const publicRoutes = [
   { path: "/Signin", component: <Signin /> },
@@ -45,7 +46,7 @@ const basePrivateRoutes = [
   { path: "/ItemCart/Index", component: <ItemCart /> },
   { path: "/ItemCart/ItemCartSideInvoice", component: <ItemCart /> },
   // manage sales
-  { path: "/Payment/Index", component: <DashboardHome /> },
+  { path: "/Payment/Index", component: <ProductMainGroup /> },
   { path: "/PaymentManual/Index", component: <DashboardHome /> },
   { path: "/PaymentDraft/Index", component: <DashboardHome /> },
   { path: "/PaymentQuote/Index", component: <DashboardHome /> },

@@ -26,9 +26,9 @@ const ProductMainGroup = () => {
         Cell: ({ row }) => (
           <a
             href="/"
-            className="d-flex align-items-center text-900 text-center"
+            className="d-flex align-items-center text-900 text-center p-0"
           >
-            <div className="avatar avatar-l">
+            <div className="avatar avatar-l me-2">
               {row.original.customerImg ? (
                 <img
                   src={row.original.customerImg}
@@ -43,9 +43,7 @@ const ProductMainGroup = () => {
               )}
             </div>
             <div>
-              <h6 className="mb-0 text-center ms-3 text-900">
                 {row.original.customer}
-              </h6>
             </div>
           </a>
         ),
@@ -140,9 +138,9 @@ const ProductMainGroup = () => {
 
 
   return (
-    <div className="content">
-      <div className="card rounded-0">
-        <div className="NewColorChange phoenix-toolbar d-flex align-items-center flex-wrap py-3 px-4 mb-0 border-bottom gap-3 ">
+    <div className="content AssetsPageChangecss AssetPaddingChange">
+      <div className="marginforsmalldevice RemoveBorder card rounded-0">
+        <div className="NewColorChange phoenix-toolbar d-flex align-items-center flex-wrap py-md-3 px-md-4 mb-md-0 border-bottom gap-3">
           {/* Title and tabs */}
           <div className=" p-3 row" style={{ minWidth: "170px" }}>
             <h2 className="fw-bolder mb-5" style={{ fontSize: "2rem" }}>
@@ -167,13 +165,13 @@ const ProductMainGroup = () => {
             </div>
 
             {/* Search bar */}
-            <div className=" d-flex flex-xl-row mt-5 flex-column ">
+            <div className="d-flex flex-xl-row flex-column">
               <GlobalFilter
                 globalFilter={globalFilter}
                 setGlobalFilter={setGlobalFilter}
               />
               {/* Filter dropdowns */}
-              <div className="d-flex flex-md-row mb-md-4 mb-4 flex-column ms-4">
+              <div className="d-flex flex-md-row mb-md-4 mb-4 flex-column mt-4">
                 <Dropdown className="">
                   <Dropdown.Toggle
                     variant="light"
@@ -193,12 +191,12 @@ const ProductMainGroup = () => {
                     <Dropdown.Item>Cancelled</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
-                <Dropdown className="">
+                <Dropdown>
                   <Dropdown.Toggle
                     variant="light"
                     className="btn btn-phoenix-secondary px-7 flex-shrink-0"
-                    style={{
-                      borderRadius: "0px",
+                     style={{
+                      borderRadius: "0 0px 0px 0",
                       fontWeight: 600,
                       fontSize: "14px",
                       width: "200px",
@@ -258,10 +256,12 @@ const ProductMainGroup = () => {
           <div className="table-responsive custom-scroll ">
             <table
               {...getTableProps()}
-              className="table align-middle fs-9 mb-0"
+              className="table  table-sm fs--1 mb-0 ConvertUpperCase
+              "
+              // table align-middle fs-9 mb-0
               style={{ fontSize: "13px" }}
             >
-              <thead className="table align-middle text-nowrap fs-9 mb-0">
+              <thead className="table align-middle text-nowrap fs-9 mb-0 text-uppercase">
                 {headerGroups.map((headerGroup, idx) => {
                   const { key: headerKey, ...headerRest } =
                     headerGroup.getHeaderGroupProps();
@@ -280,7 +280,7 @@ const ProductMainGroup = () => {
                               paddingTop: "16px",
                               paddingBottom: "16px",
                             }}
-                            className="border-top-0"
+                            className="border-top-0 pe-3 ps-1"
                           >
                             {column.render("Header")}
                             <span>
@@ -326,8 +326,9 @@ const ProductMainGroup = () => {
                         const { key: cellKey, ...cellRest } =
                           cell.getCellProps();
                         return (
-                          <td className="py-2" key={cellKey || cidx}
+                          <td key={cellKey || cidx}
                             {...cellRest}
+                            className="py-2 pe-3"
                           >
                             {cell.render("Cell")}
                           </td>
