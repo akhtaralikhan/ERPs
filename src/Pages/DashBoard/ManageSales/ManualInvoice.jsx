@@ -13,7 +13,7 @@ import AddPaymentModal from "../../../Components/AddPaymentModal";
 import Dropdown from "react-bootstrap/Dropdown";
 import { set } from "react-hook-form";
 
-const Invoice = () => {
+const ManualInvoice = () => {
     const [showModal, setShowModal] = useState(false);
     const [showAll, setShowAll] = useState(false);
 
@@ -499,4 +499,4 @@ const Invoice = () => {
         </div>
     );
 };
-export default Invoice;
+export default ManualInvoice;

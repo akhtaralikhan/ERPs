@@ -5,7 +5,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 
-
 const Signin = () => {
 
   const resolver = yupResolver(
@@ -44,7 +43,6 @@ const Signin = () => {
 
 
 
-
   return (
     <main className="main" id="top">
       <div className="container-fluid bg-300 dark__bg-1200">
@@ -64,13 +62,12 @@ const Signin = () => {
                         backgroundImage: "url(src/assets/img/bg/38.png)",
                       }}
                     ></div>
-                    <div className="position-relative px-4 px-lg-7 pt-7 pb-7 pb-sm-5 text-center text-md-start pb-lg-7 pb-md-7">
+                    <div className="position-relative px-4 px-lg-7 pt-7 pb-7 pb-sm-5 text-center text-md-start pb-lg-7 card-sign-up">
                       <h3 className="mb-3 text-black fs-1">
-                        Business ERP Solution
+                        Phoenix Authentication
                       </h3>
                       <p className="text-700">
-                        Give yourself some hassle-free development process with
-                        the uniqueness of Business ERP Solution!
+                        Say Goodbye to boring and lengthy paper work hit the signin button and get started with ERP system.
                       </p>
                       <ul className="list-unstyled mb-0 w-max-content w-md-auto mx-auto">
                         <li className="d-flex align-items-center">
@@ -79,12 +76,14 @@ const Signin = () => {
                         </li>
                         <li className="d-flex align-items-center">
                           <span className="uil uil-check-circle text-success me-2"></span>
-                          <span className="text-700 fw-semi-bold">Simple</span>
+                          <span className="text-700 fw-semi-bold">
+                            Simple
+                          </span>
                         </li>
                         <li className="d-flex align-items-center">
                           <span className="uil uil-check-circle text-success me-2"></span>
                           <span className="text-700 fw-semi-bold">
-                            Responsive
+                            Scalable
                           </span>
                         </li>
                       </ul>
@@ -115,7 +114,7 @@ const Signin = () => {
                           >
                             <div className="d-flex align-items-center fw-bolder fs-5 d-inline-block">
                               <img
-                                src="src/assets/img/icons/MainIcon.png"
+                                src="src/assets/img/icons/logo.png"
                                 alt="phoenix"
                                 width="58"
                               />

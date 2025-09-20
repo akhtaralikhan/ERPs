@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import React, { useState } from "react";
+import { Modal, ModalHeader, ModalBody } from "reactstrap";
 import { MainModal, NotMain, Other } from "./FormModals";
 import './AddPaymentModal.css'
 
@@ -63,11 +63,10 @@ function AddPaymentModal({ showModal, setShowModal }) {
               <label
                 htmlFor="form-label  "
                 onClick={() => setModal("Main")}
-                className={`${
-                  modal === "Main"
+                className={`${modal === "Main"
                     ? "border-bottom-0  text-none"
                     : " text-primary"
-                }  border-end p-2 fw-semi-bold px-6 cursor-pointer `}
+                  }  border-end p-2 fw-semi-bold px-6 cursor-pointer `}
               >
                 Main{" "}
               </label>
@@ -75,38 +74,36 @@ function AddPaymentModal({ showModal, setShowModal }) {
               <label
                 htmlFor="form-label"
                 onClick={() => setModal("others")}
-                className={` ${
-                  modal === "others"
+                className={` ${modal === "others"
                     ? "border-bottom-0 text-none"
                     : " text-primary"
-                } border-end p-2 fw-semi-bold  px-6 cursor-pointer`}
+                  } border-end p-2 fw-semi-bold  px-6 cursor-pointer`}
               >
                 Others
               </label>
               <label
                 htmlFor="form-label"
                 onClick={() => setModal("notMain")}
-                className={` ${
-                  modal === "notMain"
+                className={` ${modal === "notMain"
                     ? "border-bottom-0 text-none "
                     : " text-primary"
-                }  py-2 fw-semi-bold  px-5 white-space-nowrap cursor-pointer`}
+                  }  py-2 fw-semi-bold  px-5 white-space-nowrap cursor-pointer`}
               >
                 Add New Customer
               </label>
             </div>
-            
-            <div className={`fade-section ${modal==="Main"?"show" : ""}`} >
-             <MainModal  setModal={setModal} formData={formData} handleInputs={handleInputs} handleRemoveData={handleRemoveData} handleSubmit={handleSubmit} MainData={MainData}/> 
+
+            <div className={`fade-section ${modal === "Main" ? "show" : ""}`} >
+              <MainModal setModal={setModal} formData={formData} handleInputs={handleInputs} handleRemoveData={handleRemoveData} handleSubmit={handleSubmit} MainData={MainData} />
             </div>
-            <div  className={`fade-section ${modal==="notMain"?"show" : ""}`} >
-            <NotMain/>
+            <div className={`fade-section ${modal === "notMain" ? "show" : ""}`} >
+              <NotMain />
             </div>
-            <div  className={`fade-section ${modal==="others"?"show" : ""}`}>
-            <Other/>
+            <div className={`fade-section ${modal === "others" ? "show" : ""}`}>
+              <Other />
             </div>
-           
-            
+
+
           </div>
         </ModalBody>
       </Modal>

@@ -7,7 +7,7 @@ import DashboardHome from "../Pages/DashBoard/DashboardHome";
 import SideInvoice from "../Pages/DashBoard/SideInvoices.js/SideInvoice.jsx";
 // import Estimates from "../pages/Dashboard/Estimates";
 import BankAccounts from "../Pages/DashBoard/BusinessERP/BusinessERP.jsx";
-import Invoice from "../Pages/DashBoard/ManualInvoices.jsx";
+import Invoice from "../Pages/DashBoard/ManageSales/Invoice.jsx";
 import QuoteInvoice from "../pages/Dashboard/QuoteInvoice.jsx";
 import CustomerInfo from "../Pages/DashBoard/CustomerInfo.jsx";
 import ItemCart from "../Pages/DashBoard/POS/ItemCart.jsx";
@@ -26,7 +26,7 @@ import Signin from "../Pages/Auth/Signin";
 import { superAdmin } from "../constant/Config";
 import BusinessERP from "../Pages/DashBoard/BusinessERP/BusinessERP.jsx";
 import ManageSales from '../Pages/DashBoard/ManageSales/ManageSales.jsx'
-import ManualInvoices from "../Pages/DashBoard/ManualInvoices.jsx";
+// import ManualInvoices from "../Pages/DashBoard/ManualInvoices.jsx";
 import DraftInvoice from '../Pages/DashBoard/DraftInvoice'
 import SalesReturn from "../Pages/DashBoard/SalesReturn.jsx";
 import PurchaseInvoice from "../Pages/DashBoard/PurchaseInvoice.jsx";
@@ -54,6 +54,7 @@ import SubDepartment from "../Pages/DashBoard/HumanResource/SubDepartment.jsx";
 import Department from "../Pages/DashBoard/HumanResource/Department.jsx";
 import ManageUserRoles from "../Pages/DashBoard/ManageUserRoles/ManageUserRoles.jsx";
 import SystemRoles from "../Pages/DashBoard/ManageUserRoles/SystemRole.jsx";
+import ManualInvoice from "../Pages/DashBoard/ManageSales/ManualInvoice.jsx";
 
 export const publicRoutes = [
   { path: "/Signin", component: <Signin /> },
@@ -68,8 +69,8 @@ const basePrivateRoutes = [
   { path: "/ItemCart/Index", component: <ItemCart /> },
   { path: "/ItemCart/ItemCartSideInvoice", component: <ItemCart /> },
   // manage sales
-  { path: "/Payment/Index", component: <ProductMainGroup /> },
-  { path: "/PaymentManual/Index", component: <DashboardHome /> },
+  { path: "/Payment/Index", component: <Invoice /> },
+  { path: "/PaymentManual/Index", component: <ManualInvoice /> },
   { path: "/PaymentDraft/Index", component: <DashboardHome /> },
   { path: "/PaymentQuote/Index", component: <DashboardHome /> },
   { path: "/CustomerInfo/Index", component: <DashboardHome /> },
@@ -186,7 +187,7 @@ const basePrivateRoutes = [
   // { path: "/Settings", component: <Settings /> },
   // { path: "/ConnectBank", component: <ConnectBank /> },
   { path: "/ManageSales", component: <ManageSales /> },
-  { path: "/ManualInvoices", component: <ManualInvoices /> },
+  // { path: "/ManualInvoices", component: <ManualInvoices /> },
   { path: "/PurchaseInvoice", component: <PurchaseInvoice /> },
 ];
 

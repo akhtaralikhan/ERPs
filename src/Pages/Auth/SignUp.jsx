@@ -8,7 +8,6 @@ import FormInput from "../../Components/FormInput";
 
 const SignUp = () => {
 
-
   // yup form validation 
   const resolver = yupResolver(
     yup.object().shape({
@@ -37,7 +36,7 @@ const SignUp = () => {
     control,
     formState: { errors },
   } = methods;
-  // form submission api 
+ // form submission api 
   const navigate = useNavigate();
   const [isChecked, setIsChecked] = useState(true);
 
@@ -45,7 +44,6 @@ const SignUp = () => {
   const onSubmitForm = () => {
     navigate('/')
   };
-
 
 
   return (
@@ -73,8 +71,7 @@ const SignUp = () => {
                           Phoenix Authentication
                         </h3>
                         <p className="text-700">
-                          Give yourself some hassle-free development process
-                          with the uniqueness of Phoenix!
+                          Say Goodbye to boring and lengthy paper work hit the signin button and get started with ERP system.
                         </p>
                         <ul className="list-unstyled mb-0 w-max-content w-md-auto mx-auto">
                           <li className="d-flex align-items-center">
@@ -90,7 +87,7 @@ const SignUp = () => {
                           <li className="d-flex align-items-center">
                             <span className="uil uil-check-circle text-success me-2"></span>
                             <span className="text-700 fw-semi-bold">
-                              Responsive
+                              Scalable
                             </span>
                           </li>
                         </ul>
@@ -230,7 +227,7 @@ const SignUp = () => {
                             Sign up
                           </button>
                           <div className="text-center">
-                            <Link className="fs--1 fw-bold" to="/login">
+                            <Link className="fs--1 fw-bold" to="/signin">
                               Sign in to an existing account
                             </Link>
                           </div>

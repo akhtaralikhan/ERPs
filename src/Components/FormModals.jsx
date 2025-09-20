@@ -1,175 +1,156 @@
+import React from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { Modal } from "reactstrap";
 
-
-export const TableModal =({  MainData,
-  formData,
+export const TableModal = ({
+  MainData = [],
   handleRemoveData,
   handleSubmitted,
-  handleInputs,
   addInvoice,
   setAddInvoice,
-  })=>{
-    const toggle = () =>{
-      setAddInvoice(!addInvoice)
+}) => {
+  const toggle = () => setAddInvoice(!addInvoice);
+
+  const {
+    handleSubmit,
+    register,
+    reset,
+    formState: { errors }
+  } = useForm({
+    defaultValues: {
+      itemName: "",
+      quantity: "",
+      unitPrice: "",
+      vat: "",
+      discount: "",
+      total: "",
     }
+  });
 
-    const {handleSubmit,register,reset,watch,formState:{errors}} = useForm({
-      defaultValues:{
-        itemName:"",
-        quantity:"",
-        unitPrice:"",
-        vat:"",
-        discount:"",
-        total:"",
-        action:""
-      }
-    })
-    return(
-    <div className="card">
-      <Modal isOpen={addInvoice}  toggle={toggle} size="" centered>
-        <ModalHeader>
-                  Add Invoice{" "}
-                  <i
-                    style={{ margin: "0px 0px 0px 323px" }}
-                    className="fa fa-xmark fs--1 text-danger cursor-pointer"
-                    onClick={toggle}
-                  ></i>
-                  </ModalHeader>
-      <form onSubmit={handleSubmit(handleSubmitted)}>
-      <div className="table-responsive p-4">
-        <table
-          className="table table-sm table-bordered table-responsive fs-9 mb-0"
-          style={{ fontSize: "13px" }}
+  return (
+    <div className="">
+      <Modal isOpen={addInvoice} toggle={toggle} size="xl" centered>
+        <div className="modal-header modal-title d-flex justify-content-between w-100">
+          <h5>Add Invoice</h5>
+          <i
+            className="fa fa-xmark fs--1 text-danger cursor-pointer"
+            onClick={toggle}
+          ></i>
+        </div>
+        <form
+          onSubmit={handleSubmit((data) => {
+            handleSubmitted(data);
+            reset();
+          })}
         >
-          <thead>
-            <tr>
-              <th className="align-middle white-space-nowrap">Id</th>
-              <th className="align-middle white-space-nowrap">Item Name</th>
-              <th className="align-middle white-space-nowrap">Quantity</th>
-              <th className="align-middle white-space-nowrap">Unit Price</th>
-              <th className="align-middle white-space-nowrap">Vat %</th>
-              <th className="align-middle white-space-nowrap">Discount %</th>
-              <th className="align-middle white-space-nowrap">Total</th>
-              <th className="align-middle white-space-nowrap">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{MainData.id}</td>
-              <td>
-                <select
-                  style={{ width: "200px" }}
-                  className={`form-select ${errors.itemName ? "is-invalid":""}`}
-                  name="itemName"
-                  value={formData.itemName}
-                  onChange={handleInputs}
-                  {...register("itemName",{required:"item name is required"})}
-                >
-                  <option value="Dummy">--Select--</option>
-                  <option value="Dummy">Dummy Data</option>
-                  <option value="Data">Data</option>
-                </select>
-                <div className="invalid-feedback">{errors.itemName?.message}</div>
-              </td>
-              <td>
-                <input
-                  style={{ width: "50px" }}
-                  name="quantity"
-                  type="text"
-                  value={formData.quantity}
-                  className={`form-control ${errors.quantity ? "is-invalid":""}`}
-                  onChange={handleInputs}
-                  {...register("quantity",{required:"quantity is required"})}
-                />
-              </td>
-              <div className="invalid-feedback">{errors.quantity?.message}</div>
-              <td>
-                <select
-                  style={{ width: "70px" }}
-                  value={formData.unitPrice}
-                  onChange={handleInputs}
-                  name="unitPrice"
-                  className={`form-control ${errors.unitPrice ? "is-invalid":""}`}
-                  {...register("unitPrice",{required:"unitPrice is required"})}
-                >
-                  <option value="">1</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                </select>
-                <div className="invalid-feedback">{errors.unitPrice?.message}</div>
-              </td>
-              <td>
-                <input
-                  type="text"
-                  style={{ width: "50px" }}
-                  className={`form-control ${errors.vat ? "is-invalid":""}`}
-                  value={formData.vat}
-                  onChange={handleInputs}
-                  name="vat"
-                  {...register("vat",{required:"vat is required"})}
-                />
-                <div className="invalid-feedback">{errors?.vat?.message}</div>
-              </td>
-              <td>
-                <input
-                  type="text"
-                  style={{ width: "50px" }}
-                  className={`form-control ${errors.discount ? "is-invalid":""}`}
-                  value={formData.discount}
-                  onChange={handleInputs}
-                  name="discount"
-                  {...register('discount',{required:"discount is required"})}
-                />
-                <div className="invalid-feedback">{errors.discount?.message}</div>
-
-              </td>
-              <td>
-                <input
-                  type="number"
-                  name="total"
-                  value={formData.total}
-                  onChange={handleInputs}
-                  className={`form-control ${errors.total ? "is-invalid":""}`}
-                  style={{ width: "60px" }}
-                  {...register("total",{required:"total amount is requird"})}
-                />
-              <div className="invalid-feedback">{errors.total?.message}</div>
-              </td>
-              <td style={{ width: "150px" }} className="cursor-pointer">
-                <button type="submit" className="badge bg-primary border-0" >
-                  Add Item
-                </button>
-              </td>
-            </tr>
-            {MainData?.map((data, idx) => (
-              <tr key={idx}>
-                <td>{data?.id}</td>
-                <td>{data?.itemName}</td>
-                <td>{data?.quantity}</td>
-                <td>{data?.unitPrice}</td>
-                <td>{data?.vat}</td>
-                <td>{data?.discount}</td>
-                <td>{data?.total}</td>
-                <td>
-                  <span
-                    className="badge bg-danger ms-3 cursor-pointer"
-                    onClick={() => handleRemoveData(data.id)}
-                  >
-                    X
-                  </span>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      </form>
+          <div className="table-responsive p-4">
+            <table
+              className="table table-sm table-bordered table-responsive fs-9 mb-0"
+              style={{ fontSize: "13px" }}
+            >
+              <thead>
+                <tr>
+                  <th className="align-middle white-space-nowrap">Item Name</th>
+                  <th className="align-middle white-space-nowrap">Quantity</th>
+                  <th className="align-middle white-space-nowrap">Unit Price</th>
+                  <th className="align-middle white-space-nowrap">Vat %</th>
+                  <th className="align-middle white-space-nowrap">Discount %</th>
+                  <th className="align-middle white-space-nowrap">Total</th>
+                  <th className="align-middle white-space-nowrap">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {/* Form Row */}
+                <tr>
+                  <td>
+                    <select
+                      className={`form-select ${errors.itemName ? "is-invalid" : ""}`}
+                      {...register("itemName", { required: "Item name is required" })}
+                    >
+                      <option value="">--Select--</option>
+                      <option value="Dummy">Dummy Data</option>
+                      <option value="Data">Data</option>
+                    </select>
+                    <div className="invalid-feedback">{errors.itemName?.message}</div>
+                  </td>
+                  <td >
+                    <input
+                      type="number"
+                      className={`form-control ${errors.quantity ? "is-invalid" : ""}`}
+                      {...register("quantity", { required: "Quantity is required" })}
+                    />
+                    <div className="invalid-feedback">{errors.quantity?.message}</div>
+                  </td>
+                  <td>
+                    <select
+                      className={`form-control ${errors.unitPrice ? "is-invalid" : ""}`}
+                      {...register("unitPrice", { required: "Unit Price is required" })}
+                    >
+                      <option value="">Select</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                    </select>
+                    <div className="invalid-feedback">{errors.unitPrice?.message}</div>
+                  </td>
+                  <td>
+                    <input
+                      type="number"
+                      className={`form-control ${errors.vat ? "is-invalid" : ""}`}
+                      {...register("vat", { required: "Vat is required" })}
+                    />
+                    <div className="invalid-feedback">{errors.vat?.message}</div>
+                  </td>
+                  <td>
+                    <input
+                      type="number"
+                      className={`form-control ${errors.discount ? "is-invalid" : ""}`}
+                      {...register("discount", { required: "Discount is required" })}
+                    />
+                    <div className="invalid-feedback">{errors.discount?.message}</div>
+                  </td>
+                  <td>
+                    <input
+                      type="number"
+                      className={`form-control ${errors.total ? "is-invalid" : ""}`}
+                      {...register("total", { required: "Total amount is required" })}
+                    />
+                    <div className="invalid-feedback">{errors.total?.message}</div>
+                  </td>
+                  <td className="align-content-center justify-content-center ps-2">
+                    <button type="submit" className="badge bg-primary border-0 p-2">
+                      <i className="fa-solid fa-plus"></i>
+                    </button>
+                  </td>
+                </tr>
+                {/* Data Rows */}
+                {MainData.map((data, idx) => (
+                  <tr key={idx}>
+                    <td>{data?.itemName}</td>
+                    <td>{data?.quantity}</td>
+                    <td>{data?.unitPrice}</td>
+                    <td>{data?.vat}</td>
+                    <td>{data?.discount}</td>
+                    <td>{data?.total}</td>
+                    <td>
+                      <span
+                        className="badge bg-danger ms-3 cursor-pointer"
+                        onClick={() => handleRemoveData(data.id)}
+                      >
+                        X
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </form>
       </Modal>
     </div>
-  )
-}
+  );
+};
+
 
 export const MainModal = ({
   MainData,
@@ -181,7 +162,7 @@ export const MainModal = ({
   setShowModal
 }) => {
 
-  const [addInvoice,setAddInvoice] = useState(false);
+  const [addInvoice, setAddInvoice] = useState(false);
   return (
     <form className="p-4">
       <div class="mb-2">
@@ -200,7 +181,7 @@ export const MainModal = ({
         </select>
       </div>
       <button
-      type="button"
+        type="button"
         onClick={() => setModal("notMain")}
         className="btn btn-soft-primary"
       >
@@ -256,13 +237,14 @@ export const MainModal = ({
         </select>
       </div>
 
-  
+
       <div className="d-flex justify-content-center align-items-center p-4">
         {/* <div className="btn btn-primary me-3 ">Save</div> */}
-        <div className="btn btn-primary me-3" onClick={()=>{
-          
-          setAddInvoice(true)}}>Add Invoice</div>
-        {addInvoice && <TableModal setModal={setModal} setShowModal={setShowModal} addInvoice={addInvoice} setAddInvoice={setAddInvoice} handleInputs={handleInputs} MainData={MainData} formData={formData} handleRemoveData={handleRemoveData}  handleSubmitted={handleSubmit}/>}
+        <div className="btn btn-primary me-3" onClick={() => {
+
+          setAddInvoice(true)
+        }}>Add Invoice</div>
+        {addInvoice && <TableModal setModal={setModal} setShowModal={setShowModal} addInvoice={addInvoice} setAddInvoice={setAddInvoice} handleInputs={handleInputs} MainData={MainData} formData={formData} handleRemoveData={handleRemoveData} handleSubmitted={handleSubmit} />}
         {/* <div className="btn btn-primary ">Close</div> */}
       </div>
     </form>
@@ -280,19 +262,19 @@ export const NotMain = () => {
   } = useForm({
     defaultValues: {
       name: "",
-      type:"",
-      companyName:"",
-      phone:"",
-      email:"",
-      address:"",
-      postcode:""
+      type: "",
+      companyName: "",
+      phone: "",
+      email: "",
+      address: "",
+      postcode: ""
     },
   });
-  const submit =( ) =>{
+  const submit = () => {
     console.log("dfsadf");
   }
   return (
-    <form  onSubmit={handleSubmit(submit)}>
+    <form onSubmit={handleSubmit(submit)}>
       <div className="p-4 row g-4">
         <div className="col-md-6 col-lg-6">
           <div className="mb-2">
@@ -302,7 +284,7 @@ export const NotMain = () => {
             <select
               type="text"
               className={`form-select mb-2 ${errors.name ? "is-invalid" : ""}`}
-              {...register("name",{required:"Name is required"})}
+              {...register("name", { required: "Name is required" })}
             >
               <option value="1">Faizan</option>
               <option value="1">Arfat</option>
@@ -314,26 +296,26 @@ export const NotMain = () => {
             <label htmlFor="" className="form-label ">
               Company Name
             </label>
-            <input type="text" className={`form-control ${errors.companyName ? "is-invalid" :"" }`} {...register("companyName",{required:"Comapany name is required"})} />
+            <input type="text" className={`form-control ${errors.companyName ? "is-invalid" : ""}`} {...register("companyName", { required: "Comapany name is required" })} />
             {errors.companyName && <div className="invalid-feedback">{errors.companyName.message}</div>}
           </div>
           <div className="mb-2">
             <label htmlFor="" className="form-label">
               Type*
             </label>
-            <select type="text" className={`form-select ${errors.type ? "is-invalid" :""}`}  {...register("type",{required:"Company type is required"})}>
+            <select type="text" className={`form-select ${errors.type ? "is-invalid" : ""}`}  {...register("type", { required: "Company type is required" })}>
               <option value="-1">other</option>
               <option value="-1">Trader</option>
               <option value="-1">Normal</option>
             </select>
-            {errors.type &&  <div className="invalid-feedback">{errors.type.message}</div>}
+            {errors.type && <div className="invalid-feedback">{errors.type.message}</div>}
           </div>
           <div className="mb-2">
             <label htmlFor="" className="form-label ">
               Phone
             </label>
-            <input type="number" className={`form-control ${errors.phone ? "is-invalid" :""}`}  {...register("phone",{required:"Phone no is required"})}/>
-            {errors.phone &&  <div className="invalid-feedback">{errors.phone.message}</div>}
+            <input type="number" className={`form-control ${errors.phone ? "is-invalid" : ""}`}  {...register("phone", { required: "Phone no is required" })} />
+            {errors.phone && <div className="invalid-feedback">{errors.phone.message}</div>}
           </div>
           <div className="mb-2">
             <label htmlFor="" className="form-label">
@@ -341,11 +323,11 @@ export const NotMain = () => {
             </label>
             <input
               type="email"
-              className={`form-control ${errors.email ? "is-invalid" :""}`}
+              className={`form-control ${errors.email ? "is-invalid" : ""}`}
               placeholder="Reference"
-              {...register("email",{required:'email is required'})}
+              {...register("email", { required: 'email is required' })}
             />
-            {errors.email &&  <div className="invalid-feedback">{errors.email.message}</div>}
+            {errors.email && <div className="invalid-feedback">{errors.email.message}</div>}
           </div>
         </div>
         <div className="col-md-6 col-lg-6">
@@ -355,12 +337,12 @@ export const NotMain = () => {
             </label>
             <textarea
               type="text"
-              className={`form-control ${errors.address ? "is-invalid" :""}`}
+              className={`form-control ${errors.address ? "is-invalid" : ""}`}
               placeholder="Address"
-              {...register("address",{required:"address is requird"})}
+              {...register("address", { required: "address is requird" })}
             />
           </div>
-           {errors.address &&  <div className="invalid-feedback">{errors.address.message}</div>}
+          {errors.address && <div className="invalid-feedback">{errors.address.message}</div>}
 
           <div className="mb-2">
             <label htmlFor="" className="form-label">
@@ -370,9 +352,9 @@ export const NotMain = () => {
               type="text"
               className={`form-control ${errors.postcode ? "is-invalid" : ""}`}
               placeholder="Postcode"
-              {...register("postcode",{required:"Postcode is required"})}
+              {...register("postcode", { required: "Postcode is required" })}
             />
-            {errors.postcode &&  <div className="invalid-feedback">{errors.postcode.message}</div>}
+            {errors.postcode && <div className="invalid-feedback">{errors.postcode.message}</div>}
           </div>
           <div className="mb-2">
             <label htmlFor="" className="form-label">
