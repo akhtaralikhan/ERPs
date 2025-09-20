@@ -34406,8 +34406,9 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical.navbar-expand-xs .navbar-v
 }
 
 .avatar-l {
-    height: 2.5rem;
-    width: 2.5rem
+    margin: 2px 8px;
+    height: 2.2rem;
+    width: 2.2rem
 }
 
 .avatar-l .avatar-name {

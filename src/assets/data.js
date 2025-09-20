@@ -137,13 +137,13 @@ export const ManageinvoiceData = [
     "dueAmount": 906.61,
     "createdDate": "5/13/2022",
     "status": "UnPaid",
-    "customerImg":"src/assets/img/bg/girl.jpg"
+    // "customerImg":"src/assets/img/bg/girl.jpg"
   },
   {
     "id": "INV2",
     "customer": "Walk in Customer",
     "branch": "Main Branch",
-    "customerImg":"src/assets/img/bg/man.jpg",
+    // "customerImg":"src/assets/img/bg/man.jpg",
     "subTotal": 840,
     "discount": 0,
     "vat": 66.61,
@@ -163,7 +163,7 @@ export const ManageinvoiceData = [
     "grandTotal": 260.61,
     "paidAmount": 0,
     "dueAmount": 260.61,
-    "customerImg":"src/assets/img/bg/boy.jpg",
+    // "customerImg":"src/assets/img/bg/boy.jpg",
     "createdDate": "5/13/2022",
     "status": "UnPaid"
   },

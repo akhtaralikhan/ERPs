@@ -8,7 +8,6 @@ import {
   useGlobalFilter,
 } from "react-table";
 import { ManageinvoiceData } from "../../../assets/data";
-import "./ManageSales.css";
 import GlobalFilter from "../../../Components/GlobalFilter";
 import AddPaymentModal from "../../../Components/AddPaymentModal";
 

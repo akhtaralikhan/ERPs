@@ -4,7 +4,7 @@ import ForgetPassword from "../Pages/Auth/ForgetPassword";
 // Dashboard Pages
 import DashboardHome from "../Pages/DashBoard/DashboardHome";
 // import PosInvoice from "../pages/Dashboard/PosInvoice";
-// import SideInvoice from "../Pages/DashBoard/SideInvoices.js/SideInvoice.jsx";
+import SideInvoice from "../Pages/DashBoard/SideInvoices.js/SideInvoice.jsx";
 // import Estimates from "../pages/Dashboard/Estimates";
 import BankAccounts from "../Pages/DashBoard/BusinessERP/BusinessERP.jsx";
 import Invoice from "../Pages/DashBoard/ManualInvoices.jsx";
@@ -140,7 +140,7 @@ const basePrivateRoutes = [
 
   { path: "/", component: <DashboardHome /> },
   // { path: "/PosInvoice", component: <PosInvoice /> },
-  // { path: "/SideInvoice", component: <SideInvoice /> },
+  { path: "/SideInvoice", component: <SideInvoice /> },
   // { path: "/Estimates", component: <Estimates /> },
   { path: "/BankAccounts", component: <BankAccounts /> }, // UNSTYLED 
   { path: "/Invoice", component: <Invoice /> }, // UNSTYLED SAME
