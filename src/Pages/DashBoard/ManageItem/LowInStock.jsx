@@ -8,7 +8,7 @@ import {
   useRowSelect,
 } from "react-table";
 import { LowInStockData } from "../../../assets/data";
-import AddItemModal from "../../../Components/Model/AddItemModal";
+import AddItemModal from "../../../Components/Modals/AddItemModal";
 const IndeterminateCheckbox = React.forwardRef(
   ({ indeterminate, ...rest }, ref) => {
     const defaultRef = useRef();
@@ -23,7 +23,9 @@ const IndeterminateCheckbox = React.forwardRef(
     return <input type="checkbox" ref={resolvedRef} {...rest} />;
   }
 );
-const LowInStockPage = () => {
+
+
+const LowInStock = () => {
   const [items, setItems] = useState(LowInStockData);
   const [selectedItem, setSelectedItem] = useState(null);
   const [showModal, setShowModal] = useState(false);
@@ -383,6 +385,6 @@ const LowInStockPage = () => {
     </div>
   );
 };
-export default LowInStockPage;
+export default LowInStock;
 
 

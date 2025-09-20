@@ -8,9 +8,10 @@ import {
   useGlobalFilter,
 } from "react-table";
 import { PaymentData} from "../../../assets/data";
+import AddPaymentStatusModal from "../../../Components/Modals/AddPaymentStatusModal";
 
-import AddPaymentStatusModal from "../../../Components/Model/AddPaymentStatusModal";
-const PaymentPage = () => {
+
+const PaymentStatus = () => {
  const [activeTab, setActiveTab] = useState("All");
          const [showModal, setShowModal] = useState(false);
      
@@ -303,4 +304,4 @@ const PaymentPage = () => {
        );
      };
 
-export default PaymentPage;
+export default PaymentStatus;

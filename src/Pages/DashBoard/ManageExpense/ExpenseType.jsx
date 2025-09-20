@@ -8,7 +8,7 @@ import {
   useRowSelect,
 } from "react-table";
 import { ExpenseTypeData } from "../../../assets/data";
-import AddExpenseTypeModal from "../../../Components/Model/AddExpenseTypeModal";
+import AddExpenseTypeModal from "../../../Components/Modals/AddExpenseTypeModal";
 const IndeterminateCheckbox = React.forwardRef(
   ({ indeterminate, ...rest }, ref) => {
     const defaultRef = useRef();
@@ -23,7 +23,7 @@ const IndeterminateCheckbox = React.forwardRef(
     return <input type="checkbox" ref={resolvedRef} {...rest} />;
   }
 );
-const TypePage = () => {
+const ExpensesType = () => {
   const [activeTab, setActiveTab] = useState("All");
   const [showModal, setShowModal] = useState(false);
   const tabs = [
@@ -337,4 +337,4 @@ const TypePage = () => {
     </div>
   );
 };
-export default TypePage;
+export default ExpensesType;

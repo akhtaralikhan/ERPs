@@ -7,8 +7,11 @@ import {
   useSortBy,
 } from "react-table";
 import { DepartmentData } from "../../../assets/data";
-import AddDepartmentModal from "../../../Components/Model/AddDepartmentModal";
-const DepartmentPage = () => {
+import AddDepartmentModal from "../../../Components/Modals/AddDepartmentModal";
+
+
+
+const Department = () => {
   const [activeTab, setActiveTab] = useState("All");
   const [showModal, setShowModal] = useState(false);
   const tabs = [
@@ -290,4 +293,4 @@ const DepartmentPage = () => {
     </div>
   );
 };
-export default DepartmentPage;
+export default Department;

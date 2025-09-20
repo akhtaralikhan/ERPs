@@ -8,7 +8,7 @@ import {
   useRowSelect,
 } from "react-table";
 import { ManageWarehouseData } from "../../../assets/data";
-import AddWarehouseModal from "../../../Components/Model/AddWarehouseModal";
+import AddWarehouseModal from "../../../Components/Modals/AddWarehouseModal";
 const IndeterminateCheckbox = React.forwardRef(
   ({ indeterminate, ...rest }, ref) => {
     const defaultRef = useRef();
@@ -24,7 +24,7 @@ const IndeterminateCheckbox = React.forwardRef(
   }
 );
 
-const WareHousePage = () => {
+const ManageWareHouse = () => {
   const [activeTab, setActiveTab] = useState("All");
   const [showModal, setShowModal] = useState(false);
   const tabs = [
@@ -340,4 +340,4 @@ const WareHousePage = () => {
     </div>
   );
 };
-export default WareHousePage;
+export default ManageWareHouse;

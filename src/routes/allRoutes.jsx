@@ -31,7 +31,29 @@ import DraftInvoice from '../Pages/DashBoard/DraftInvoice'
 import SalesReturn from "../Pages/DashBoard/SalesReturn.jsx";
 import PurchaseInvoice from "../Pages/DashBoard/PurchaseInvoice.jsx";
 import PurchaseReturn from "../Pages/DashBoard/PurchaseReturn.jsx";
-import ProductMainGroup from "../Pages/DashBoard/Assets.jsx";
+import ExpenseSummary from "../Pages/DashBoard/ManageExpense/ExpenseSummary.jsx";
+import ExpensesType from "../Pages/DashBoard/ManageExpense/ExpenseType.jsx";
+import ManageBranch from "../Pages/DashBoard/ManageBranch/ManageBranch.jsx";
+import Item from "../Pages/DashBoard/ManageItem/Item.jsx";
+import LowInStock from "../Pages/DashBoard/ManageItem/LowInStock.jsx";
+import ItemHistory from "../Pages/DashBoard/ManageItem/ItemHistory.jsx";
+import ManageWareHouse from "../Pages/DashBoard/ManageItem/ManageWarehouse.jsx";
+import DamageItem from "../Pages/DashBoard/ManageItem/DamageItemDetail.jsx";
+import CompanyInfo from "../Pages/DashBoard/SystemSettings/CompanyInfo.jsx";
+import EmailConfig from "../Pages/DashBoard/SystemSettings/EmailConfig.jsx";
+import ManageCurrency from "../Pages/DashBoard/SystemSettings/ManageCurrency.jsx";
+import PaymentType from "../Pages/DashBoard/SystemSettings/PaymentType.jsx";
+import PaymentStatus from "../Pages/DashBoard/SystemSettings/PaymentStatus.jsx";
+import CustomerType from "../Pages/DashBoard/SystemSettings/CustomerType.jsx";
+import VatPercentage from "../Pages/DashBoard/SystemSettings/VatPercentage.jsx";
+import Categories from "../Pages/DashBoard/SystemSettings/Categories.jsx";
+import Attendence from "../Pages/DashBoard/HumanResource/Attendence.jsx";
+import ManageEmployee from "../Pages/DashBoard/HumanResource/ManageEmployee.jsx";
+import Designation from "../Pages/DashBoard/HumanResource/Designation.jsx";
+import SubDepartment from "../Pages/DashBoard/HumanResource/SubDepartment.jsx";
+import Department from "../Pages/DashBoard/HumanResource/Department.jsx";
+import ManageUserRoles from "../Pages/DashBoard/ManageUserRoles/ManageUserRoles.jsx";
+import SystemRoles from "../Pages/DashBoard/ManageUserRoles/SystemRole.jsx";
 
 export const publicRoutes = [
   { path: "/Signin", component: <Signin /> },
@@ -59,41 +81,44 @@ const basePrivateRoutes = [
   { path: "/PurchasesPaymentQuote/Index", component: <DashboardHome /> },
   { path: "/Supplier/Index", component: <DashboardHome /> },
   { path: "/ReturnLog/PurchaseReturnIndex", component: <DashboardHome /> },
+
   //manage expense 
-  { path: "/ExpenseSummary/Index", component: <DashboardHome /> },
-  { path: "/ExpenseType/Index", component: <DashboardHome /> },
+  { path: "/ExpenseSummary/Index", component: <ExpenseSummary /> },
+  { path: "/ExpenseType/Index", component: <ExpensesType /> },
 
   // manage branch
-  { path: "/Branch/Index", component: <DashboardHome /> },
+  { path: "/Branch/Index", component: <ManageBranch /> },
 
   // manage items
-  { path: "/Items/Index", component: <DashboardHome /> },
+  { path: "/Items/Index", component: <Item /> },
   // here will come out of stock item page which is denied access
-  { path: "/Items/LowInStockItem", component: <DashboardHome /> },
-  { path: "/DamageItemDetails/Index", component: <DashboardHome /> },
-  { path: "/ItemsHistory/Index", component: <DashboardHome /> },
-  { path: "/Warehouse/Index", component: <DashboardHome /> },
+  { path: "/Items/LowInStockItem", component: <LowInStock /> },
+  { path: "/DamageItemDetails/Index", component: <DamageItem /> },
+  { path: "/ItemsHistory/Index", component: <ItemHistory /> },
+  { path: "/Warehouse/Index", component: <ManageWareHouse /> },
+
   // system settings
-  { path: "/CompanyInfo/Index", component: <DashboardHome /> },
-  { path: "/EmailConfig/Index", component: <DashboardHome /> },
-  { path: "/Currency/Index", component: <DashboardHome /> },
-  { path: "/PaymentType/Index", component: <DashboardHome /> },
-  { path: "/PaymentStatus/Index", component: <DashboardHome /> },
-  { path: "/CustomerType/Index", component: <DashboardHome /> },
-  { path: "/VatPercentage/Index", component: <DashboardHome /> },
-  { path: "/Categories/Index", component: <DashboardHome /> },
+  { path: "/CompanyInfo/Index", component: <CompanyInfo /> },
+  { path: "/EmailConfig/Index", component: <EmailConfig /> },
+  { path: "/Currency/Index", component: <ManageCurrency /> },
+  { path: "/PaymentType/Index", component: <PaymentType /> },
+  { path: "/PaymentStatus/Index", component: <PaymentStatus /> },
+  { path: "/CustomerType/Index", component: <CustomerType /> },
+  { path: "/VatPercentage/Index", component: <VatPercentage /> },
+  { path: "/Categories/Index", component: <Categories /> },
   // here will come unit of measure page denied access
 
   //human resource
-  { path: "/Attendance/Index", component: <DashboardHome /> },
-  { path: "/Employee/Index", component: <DashboardHome /> },
-  { path: "/Designation/Index", component: <DashboardHome /> },
-  { path: "/Department/Index", component: <DashboardHome /> },
+  { path: "/Attendance/Index", component: <Attendence /> },
+  { path: "/Employee/Index", component: <ManageEmployee /> },
+  { path: "/Designation/Index", component: <Designation /> },
+  { path: "/Department/Index", component: <Department /> },
+  { path: "/SubDepartment/Index", component: <SubDepartment /> }, // access denied
   // sub department access denied
 
   // manage user roles
-  { path: "/ManageUserRoles/Index", component: <DashboardHome /> },
-  { path: "/SystemRole/Index", component: <DashboardHome /> },
+  { path: "/ManageUserRoles/Index", component: <ManageUserRoles /> },
+  { path: "/SystemRole/Index", component: <SystemRoles /> },
 
   // manage user 
   { path: "/UserManagement/Index", component: <DashboardHome /> },

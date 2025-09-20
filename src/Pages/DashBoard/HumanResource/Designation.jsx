@@ -7,8 +7,11 @@ import {
   useSortBy,
 } from "react-table";
 import { DesignationData } from "../../../assets/data";
-import AddDesignationModal from "../../../Components/Model/AddDesignationModal";
-const DesignationPage = () => {
+import AddDesignationModal from "../../../Components/Modals/AddDesignationModal";
+
+
+
+const Designation = () => {
   const [activeTab, setActiveTab] = useState("All");
   const [showModal, setShowModal] = useState(false);
   const tabs = [
@@ -288,4 +291,4 @@ const DesignationPage = () => {
     </div>
   );
 };
-export default DesignationPage;
+export default Designation;

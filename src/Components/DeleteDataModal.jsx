@@ -1,13 +1,8 @@
 import React from 'react'
-import { useRedux } from '../hooks/useRedux';
-import { DeleteDataAction, getBankAccountAction } from '../redux/bankAccounts/actions';
 
 function DeleteDataModal({ userId, endPoint, modalId }) {
-    const { dispatch, useAppSelector } = useRedux();
 
     const handleDeleteBankAccount = (e) => {
-        dispatch(DeleteDataAction(userId, endPoint));
-        dispatch(getBankAccountAction());
         const modalEl = document.querySelector(`#${modalId}`);
         if (modalEl) {
             const modalInstance = bootstrap.Modal.getInstance(modalEl);

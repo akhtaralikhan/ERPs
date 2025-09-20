@@ -7,9 +7,10 @@ import {
   useSortBy,
 } from "react-table";
 import { AttendenceData } from "../../../assets/data";
-
 import AddPaymentModal from "../../../Components/AddPaymentModal";
-const AttendencePage = () => {
+
+
+const Attendence = () => {
   const [activeTab, setActiveTab] = useState("All");
   const [showModal, setShowModal] = useState(false);
   const tabs = [
@@ -293,4 +294,4 @@ const AttendencePage = () => {
     </div>
   );
 };
-export default AttendencePage;
+export default Attendence;

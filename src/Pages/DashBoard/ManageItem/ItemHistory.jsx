@@ -22,7 +22,9 @@ const IndeterminateCheckbox = React.forwardRef(
     return <input type="checkbox" ref={resolvedRef} {...rest} />;
   }
 );
-const ItemHistoryPage = () => {
+
+
+const ItemHistory = () => {
   const [items, setItems] = useState(ItemHistoryData);
     const [selectedItem, setSelectedItem] = useState(null);
       const handleDeleteItem = (id) => {
@@ -346,4 +348,4 @@ const ItemHistoryPage = () => {
     </div>
   );
 };
-export default ItemHistoryPage;
+export default ItemHistory;

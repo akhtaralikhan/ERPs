@@ -8,7 +8,7 @@ import {
   useRowSelect,
 } from "react-table";
 import { ItemData } from "../../../assets/data";
-import AddItemModal from "../../../Components/Model/AddItemModal";
+import AddItemModal from "../../../Components/Modals/AddItemModal";
 const IndeterminateCheckbox = React.forwardRef(
   ({ indeterminate, ...rest }, ref) => {
     const defaultRef = useRef();
@@ -24,7 +24,7 @@ const IndeterminateCheckbox = React.forwardRef(
   }
 );
 
-const ItemPage = () => {
+const Item = () => {
   const [items, setItems] = useState(ItemData);
   const [selectedItem, setSelectedItem] = useState(null);
   const [showModal, setShowModal] = useState(false);
@@ -384,4 +384,4 @@ const ItemPage = () => {
     </div>
   );
 };
-export default ItemPage;
+export default Item;

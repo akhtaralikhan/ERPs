@@ -3,8 +3,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import FormInput from "../../Components/FormInput";
-import { useRedux } from "../../hooks/useRedux";
-import { recoverPassword } from "../../redux/auth/forgetpwd/actions";
 
 
 const ForgetPassword = () => {
@@ -15,8 +13,7 @@ const ForgetPassword = () => {
   );
 
   const defaultValues = {
-    // email: "company.mohseenpasha111@gmail.com"
-    email: "owner.mohseenpasha111@gmail.com",
+    email: "akhtarali123@gmail.com",
   };
 
   const methods = useForm({ defaultValues, resolver });
@@ -29,15 +26,10 @@ const ForgetPassword = () => {
     formState: { errors }, // on each form input errors={errors}
   } = methods;
 
-  const { dispatch, useAppSelector } = useRedux();
 
-  const onSubmitForm = (data) => {
-    const payload = {
-      email: data.email,
-    };
 
-    dispatch(recoverPassword(payload));
-    console.log("Form submitted with data:", payload);
+  const onSubmitForm = () => {
+    console.log("Form submitted with data:");
   };
 
 

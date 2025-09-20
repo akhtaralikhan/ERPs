@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import FormInput from "../../Components/FormInput";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
-import { useRedux } from "../../hooks/useRedux";
-import { loginUser } from "../../redux/auth/login/actions";
-import { createSelector } from "reselect";
+
 
 const Signin = () => {
 
@@ -18,67 +16,32 @@ const Signin = () => {
   );
 
   const defaultValues = {
-    // email: "company.mohseenpasha111@gmail.com"
-    // Password: "company123"
-    email: "owner.mohseenpasha111@gmail.com",
-    password: "admin123",
+
+    email: "akhtarali123@gmail.com",
+    password: "123456",
   };
 
   const methods = useForm({ defaultValues, resolver });
 
   const {
-    handleSubmit,
-    register,
-    control,
-    formState: { errors },
+    handleSubmit, // add this on form submission  <Form onSubmit={handleSubmit(onSubmitForm)} />
+    register, // on each input field use register to register the input and change input into formInput
+    // register={register}
+    control, // use control={control} on each form input field
+    formState: { errors }, // on each fotm input errors={errors}
   } = methods;
 
-  const { dispatch, useAppSelector } = useRedux();
-
-
-  const userData = createSelector(
-    (state) => state.Login,
-    (state) => ({
-      isUserLogin: state.isUserLogin,
-      error: state.error,
-      loginLoading: state.loading,
-      isUserLogout: state.isUserLogout,
-      user: state.user,
-    })
-  );
-
-  const { isUserLogin, error, loginLoading, isUserLogout, user } = useAppSelector(userData);
 
   const navigate = useNavigate();
-  const location = useLocation();
-  const [redirectUrl, setRedirectUrl] = useState("/");
-  useEffect(() => {
-    const url =
-      location.state && location.state.from
-        ? location.state.from.pathname
-        : "/";
-
-    setRedirectUrl(url);
-  }, [location]);
-
-  useEffect(() => {
-    if (isUserLogin) {
-      navigate("/");
-    }
-  }, [isUserLogin, user, navigate]);
 
   // login user action
   const [isChecked, setIsChecked] = useState(true);
 
-  const onSubmitForm = (data) => {
-    const payload = {
-      email: data.email,
-      password: data.password,
-      rememberMe: isChecked,
-    };
-
-    dispatch(loginUser(payload));
+  const onSubmitForm = () => {
+    console.log("Form submitted with data:");
+    navigate("/");
   };
+
 
 
 
@@ -103,7 +66,7 @@ const Signin = () => {
                     ></div>
                     <div className="position-relative px-4 px-lg-7 pt-7 pb-7 pb-sm-5 text-center text-md-start pb-lg-7 pb-md-7">
                       <h3 className="mb-3 text-black fs-1">
-                       Business ERP Solution
+                        Business ERP Solution
                       </h3>
                       <p className="text-700">
                         Give yourself some hassle-free development process with
