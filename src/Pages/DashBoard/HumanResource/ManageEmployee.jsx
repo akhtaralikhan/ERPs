@@ -7,8 +7,12 @@ import {
   useSortBy,
 } from "react-table";
 import { ManageEmployeeData } from "../../../assets/data";
-import AddEmployeeModal from "../../../Components/Model/AddEmployeeModal";
-const EmployeePage = () => {
+import AddEmployeeModal from "../../../Components/Modals/AddEmployeeModal";
+
+
+
+
+const ManageEmployee = () => {
   const [activeTab, setActiveTab] = useState("All");
   const [showModal, setShowModal] = useState(false);
   const tabs = [
@@ -291,4 +295,4 @@ const EmployeePage = () => {
     </div>
   );
 };
-export default EmployeePage;
+export default ManageEmployee;

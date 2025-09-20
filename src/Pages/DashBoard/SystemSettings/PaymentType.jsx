@@ -9,9 +9,9 @@ import {
 } from "react-table";
 import { PaymentTypeData} from "../../../assets/data";
 
-import AddPaymentTypeModal from "../../../Components/Model/AddPaymentTypeModal";
+import AddPaymentTypeModal from "../../../Components/Modals/AddPaymentTypeModal";
 
-const PaymentTypePage = () => {
+const PaymentType = () => {
  const [activeTab, setActiveTab] = useState("All");
          const [showModal, setShowModal] = useState(false);
      
@@ -306,4 +306,4 @@ const PaymentTypePage = () => {
      };
 
 
-export default PaymentTypePage;
+export default PaymentType;

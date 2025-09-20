@@ -8,12 +8,11 @@ import {
   useGlobalFilter,
 } from "react-table";
 import { CustomerTypeData} from "../../../assets/data";
-
-import AddCustomerModal from "../../../Components/Model/AddCustomerModal";
-
+import AddCustomerModal from "../../../Components/Modals/AddCustomerModal";
 
 
-const CustomerPage = () => {
+
+const CustomerType = () => {
    const [activeTab, setActiveTab] = useState("All");
          const [showModal, setShowModal] = useState(false);
      
@@ -307,4 +306,4 @@ const CustomerPage = () => {
      };
 
 
-export default CustomerPage;
+export default CustomerType;

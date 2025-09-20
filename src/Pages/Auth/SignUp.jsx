@@ -5,10 +5,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import FormInput from "../../Components/FormInput";
-import { useRedux } from "../../hooks/useRedux";
-import { registerUser } from "../../redux/auth/register/actions";
 
 const SignUp = () => {
+
 
   // yup form validation 
   const resolver = yupResolver(
@@ -24,12 +23,10 @@ const SignUp = () => {
   );
 
   const defaultValues = {
-    // email: "company.mohseenpasha111@gmail.com"
-    // Password: "company123"
-    name: "Mohseen Pasha",
-    email: "owner.mohseenpasha111@gmail.com",
-    password: "admin123",
-    confirmPassword: "admin123",
+    name: "Akhtar Ali",
+    email: "akhtarali123@gmail.com",
+    password: "123456",
+    confirmPassword: "123456",
   };
 
   const methods = useForm({ defaultValues, resolver });
@@ -40,38 +37,15 @@ const SignUp = () => {
     control,
     formState: { errors },
   } = methods;
- // form submission api 
-  const { dispatch, useAppSelector } = useRedux();
+  // form submission api 
   const navigate = useNavigate();
   const [isChecked, setIsChecked] = useState(true);
-  function getLocalISOTime() {
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const day = String(now.getDate()).padStart(2, '0');
-    const hour = String(now.getHours()).padStart(2, '0');
-    const minute = String(now.getMinutes()).padStart(2, '0');
-    const second = String(now.getSeconds()).padStart(2, '0');
-    return `${year}-${month}-${day}T${hour}:${minute}:${second}`;
-  }
 
-  const onSubmitForm = (data) => {
-    const payload = {
-      fullname: data.fullname,
-      email: data.email,
-      password: data.password,
-      agreeTerm: isChecked,
-      roleId: 2,
-      planId: 1,
-      updatedAt: getLocalISOTime(),
-      createdAt: getLocalISOTime(),
-      isActive: true,
-    };
 
-    dispatch(registerUser(payload));
+  const onSubmitForm = () => {
     navigate('/')
-    
   };
+
 
 
   return (

@@ -8,7 +8,7 @@ import {
   useRowSelect,
 } from "react-table";
 import { DamageItemData } from "../../../assets/data";
-import AddDamageModal from "../../../Components/Model/AddDamageModal";
+import AddDamageModal from "../../../Components/Modals/AddDamageModal";
 
 
 const IndeterminateCheckbox = React.forwardRef(
@@ -26,7 +26,8 @@ const IndeterminateCheckbox = React.forwardRef(
   }
 );
 
-const DamageItemPage = () => {
+
+const DamageItem = () => {
   const [items, setItems] = useState(DamageItemData);
   const [selectedItem, setSelectedItem] = useState(null);
   const [showModal, setShowModal] = useState(false);
@@ -364,5 +365,5 @@ const DamageItemPage = () => {
     </div>
   );
 };
-export default DamageItemPage;
+export default DamageItem;
 

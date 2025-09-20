@@ -7,8 +7,10 @@ import {
   useSortBy,
 } from "react-table";
 import { SubDepartmentData } from "../../../assets/data";
-import AddSubDepartmentModal from "../../../Components/Model/AddSubDepartmentModal";
-const DepartmentPage = () => {
+import AddSubDepartmentModal from "../../../Components/Modals/AddSubDepartmentModal";
+
+
+const SubDepartment = () => {
   const [activeTab, setActiveTab] = useState("All");
   const [showModal, setShowModal] = useState(false);
   const tabs = [
@@ -57,7 +59,7 @@ const DepartmentPage = () => {
   return (
     <div className="content">
       <div className="mb-9">
-        <h2 className="mb-4">Sub Department List </h2>
+        <h2 className="mb-4">Sub Department List access denied </h2>
         <div className="mb-2 nav nav-links mx-n2 nav">
           {tabs.map((tab) => (
             <div className="nav-item" key={tab.label}>
@@ -293,4 +295,4 @@ const DepartmentPage = () => {
     </div>
   );
 };
-export default DepartmentPage;
+export default SubDepartment;

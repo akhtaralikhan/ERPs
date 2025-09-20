@@ -8,10 +8,11 @@ import {
     useGlobalFilter,
 } from "react-table";
 import { CategoriesData } from "../../../assets/data";
+import AddCategoriesModal from "../../../Components/Modals/AddCategoriesModal";
 
-import AddCategoriesModal from "../../../Components/Model/AddCategoriesModal";
 
-const CategoryPage = () => {
+
+const Categories = () => {
     const [activeTab, setActiveTab] = useState("All");
         const [showModal, setShowModal] = useState(false);
     
@@ -305,4 +306,4 @@ const CategoryPage = () => {
      };
 
 
-export default CategoryPage;
+export default Categories;

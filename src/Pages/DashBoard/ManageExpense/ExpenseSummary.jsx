@@ -22,7 +22,7 @@ const IndeterminateCheckbox = React.forwardRef(
     return <input type="checkbox" ref={resolvedRef} {...rest} />;
   }
 );
-const ExpenseSummaryPage = () => {
+const ExpenseSummary = () => {
   const [activeTab, setActiveTab] = useState("All");
   const tabs = [
     { label: "All", count: 68 },
@@ -325,4 +325,4 @@ const ExpenseSummaryPage = () => {
     </div>
   );
 };
-export default ExpenseSummaryPage;
+export default ExpenseSummary;

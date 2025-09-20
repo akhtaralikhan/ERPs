@@ -8,8 +8,8 @@ import {
   useRowSelect,
 } from "react-table";
 import { SystemRoleData } from "../../../assets/data";
+import AddSystemRoleModel from "../../../Components/Modals/AddSystemRoleModel";
 
-import AddSystemRoleModel from "../../../Components/Model/AddSystemRoleModel";
 const IndeterminateCheckbox = React.forwardRef(
   ({ indeterminate, ...rest }, ref) => {
     const defaultRef = useRef();
@@ -24,7 +24,11 @@ const IndeterminateCheckbox = React.forwardRef(
     return <input type="checkbox" ref={resolvedRef} {...rest} />;
   }
 );
-const SystemPage = () => {
+
+
+
+
+const SystemRoles = () => {
   const [activeTab, setActiveTab] = useState("All");
   const [showModal, setShowModal] = useState(false);
   const tabs = [
@@ -336,4 +340,4 @@ const SystemPage = () => {
     </div>
   );
 };
-export default SystemPage;
+export default SystemRoles;
