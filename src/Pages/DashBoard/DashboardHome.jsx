@@ -404,7 +404,11 @@ const DashboardHome = () => {
                 </select>
               </div>
             </div>
-            <SalesChart chartLabel={monthlyTransactions?.chartLabel || []} linesData={monthlyTransactions?.linesData || []} />
+            <div className="container ">
+              <div className="" style={{ width: "96%" }}>
+                <SalesChart chartLabel={monthlyTransactions?.chartLabel || []} linesData={monthlyTransactions?.linesData || []} />
+              </div>
+            </div>
             <div className="d-flex ">
               {summary?.map((item, index) => (
                 <div className="col-lg-12 text-nowrap text-center col-sm-12" key={index}>
