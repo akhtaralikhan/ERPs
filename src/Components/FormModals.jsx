@@ -164,90 +164,94 @@ export const MainModal = ({
 
   const [addInvoice, setAddInvoice] = useState(false);
   return (
-    <form className="p-4">
-      <div class="mb-2">
-        <label class="form-label" for="basic-form-name">
-          Supplier
-        </label>
-        <select
-          class="form-select"
-          id="basic-form-name"
-          type="text"
-          placeholder="Name"
+    <>
+      <form className="p-4">
+        <div class="mb-2">
+          <label class="form-label" for="basic-form-name">
+            Supplier
+          </label>
+          <select
+            class="form-select"
+            id="basic-form-name"
+            type="text"
+            placeholder="Name"
+          >
+            <option value="Faizan">Faizan</option>
+            <option value="Arfat">Arfat</option>
+            <option value="Azim">Azim</option>
+          </select>
+        </div>
+        <button
+          type="button"
+          onClick={() => setModal("notMain")}
+          className="btn btn-soft-primary"
         >
-          <option value="">Faizan</option>
-          <option value="">Arfat</option>
-          <option value="">Azim</option>
-        </select>
-      </div>
-      <button
-        type="button"
-        onClick={() => setModal("notMain")}
-        className="btn btn-soft-primary"
-      >
-        <span className="fa fa-solid fa-plus me-2" /> Add Customer
-      </button>
-      <div class="mb-2">
-        <label class="form-label" for="basic-form-email">
-          Purchase Order Number
-        </label>
-        <input
-          class="form-control"
-          id="basic-form-email"
-          type="email"
-          placeholder="N/A"
-        />
-      </div>
-      <div class="mb-2">
-        <label class="form-label" for="basic-form-password">
-          Payment Status
-        </label>
-        <select
-          class="form-select"
-          id="basic-form-password"
-          placeholder="Password"
-        >
-          <option value="">Deposit</option>
-          <option value="">Paid</option>
-          <option value="">Unpaid</option>
-        </select>
-      </div>
-      <div class="mb-2">
-        <label class="form-label" for="basic-form-dob">
-          Invoice No
-        </label>
-        <input
-          class="form-control"
-          id="basic-form-dob"
-          type="text"
-          placeholder="PINV8"
-        />
-      </div>
-      <div class="mb-2">
-        <label class="form-label" for="basic-form-gender">
-          Document Type
-        </label>
-        <select
-          class="form-select"
-          id="basic-form-gender"
-          aria-label="Default select example"
-        >
-          <option value="">Invoice</option>
-          <option selected="">Quote</option>
-        </select>
-      </div>
+          <span className="fa fa-solid fa-plus me-2" /> Add Customer
+        </button>
+        <div className="row">
+          <div class="mb-2 col-md-6 col-12">
+            <label class="form-label" for="basic-form-email">
+              Purchase Order Number
+            </label>
+            <input
+              class="form-control"
+              id="basic-form-email"
+              type="email"
+              placeholder="N/A"
+            />
+          </div>
+          <div class="mb-2 col-md-6 col-12">
+            <label class="form-label" for="basic-form-password">
+              Payment Status
+            </label>
+            <select
+              class="form-select"
+              id="basic-form-password"
+              placeholder="Password"
+            >
+              <option value="">Deposit</option>
+              <option value="">Paid</option>
+              <option value="">Unpaid</option>
+            </select>
+          </div>
+          <div class="mb-2 col-md-6 col-12">
+            <label class="form-label" for="basic-form-dob">
+              Invoice No
+            </label>
+            <input
+              class="form-control"
+              id="basic-form-dob"
+              type="text"
+              placeholder="PINV8"
+            />
+          </div>
+          <div class="mb-2 col-md-6 col-12">
+            <label class="form-label" for="basic-form-gender">
+              Document Type
+            </label>
+            <select
+              class="form-select"
+              id="basic-form-gender"
+              aria-label="Default select example"
+            >
+              <option value="">Invoice</option>
+              <option selected="">Quote</option>
+            </select>
+          </div>
+        </div>
 
+      </form>
 
-      <div className="d-flex justify-content-center align-items-center p-4">
-        {/* <div className="btn btn-primary me-3 ">Save</div> */}
+      <div className="d-flex justify-content-end align-items-center pt-2 border-top pb-2 pe-3">
+        <div className="btn btn-primary me-3" >Save</div>
         <div className="btn btn-primary me-3" onClick={() => {
-
           setAddInvoice(true)
         }}>Add Invoice</div>
         {addInvoice && <TableModal setModal={setModal} setShowModal={setShowModal} addInvoice={addInvoice} setAddInvoice={setAddInvoice} handleInputs={handleInputs} MainData={MainData} formData={formData} handleRemoveData={handleRemoveData} handleSubmitted={handleSubmit} />}
-        {/* <div className="btn btn-primary ">Close</div> */}
+        <div className="btn btn-primary ">Close</div>
       </div>
-    </form>
+    </>
+
   );
 };
 

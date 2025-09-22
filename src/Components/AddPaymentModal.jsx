@@ -64,8 +64,8 @@ function AddPaymentModal({ showModal, setShowModal }) {
                 htmlFor="form-label  "
                 onClick={() => setModal("Main")}
                 className={`${modal === "Main"
-                    ? "border-bottom-0  text-none"
-                    : " text-primary"
+                  ? "border-bottom-0  text-none"
+                  : " text-primary"
                   }  border-end p-2 fw-semi-bold px-6 cursor-pointer `}
               >
                 Main{" "}
@@ -75,8 +75,8 @@ function AddPaymentModal({ showModal, setShowModal }) {
                 htmlFor="form-label"
                 onClick={() => setModal("others")}
                 className={` ${modal === "others"
-                    ? "border-bottom-0 text-none"
-                    : " text-primary"
+                  ? "border-bottom-0 text-none"
+                  : " text-primary"
                   } border-end p-2 fw-semi-bold  px-6 cursor-pointer`}
               >
                 Others
@@ -85,8 +85,8 @@ function AddPaymentModal({ showModal, setShowModal }) {
                 htmlFor="form-label"
                 onClick={() => setModal("notMain")}
                 className={` ${modal === "notMain"
-                    ? "border-bottom-0 text-none "
-                    : " text-primary"
+                  ? "border-bottom-0 text-none "
+                  : " text-primary"
                   }  py-2 fw-semi-bold  px-5 white-space-nowrap cursor-pointer`}
               >
                 Add New Customer
@@ -102,8 +102,6 @@ function AddPaymentModal({ showModal, setShowModal }) {
             <div className={`fade-section ${modal === "others" ? "show" : ""}`}>
               <Other />
             </div>
-
-
           </div>
         </ModalBody>
       </Modal>

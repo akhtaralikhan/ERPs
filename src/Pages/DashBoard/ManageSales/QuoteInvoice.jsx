@@ -12,7 +12,7 @@ import GlobalFilter from "../../../Components/GlobalFilter";
 import AddPaymentModal from "../../../Components/AddPaymentModal";
 import Dropdown from "react-bootstrap/Dropdown";
 
-const DraftInvoice = () => {
+const QuoteInvoice = () => {
     const [showModal, setShowModal] = useState(false);
     const [showAll, setShowAll] = useState(false);
 
@@ -147,7 +147,7 @@ const DraftInvoice = () => {
                     {/* Title and tabs */}
                     <div className=" p-3 row" style={{ minWidth: "170px" }}>
                         <h2 className="fw-bolder mb-5" style={{ fontSize: "2rem" }}>
-                            Draft Invoice
+                            Quote Invoice
                         </h2>
                         <div
                             className="d-flex flex-wrap align-items-center"
@@ -501,4 +501,4 @@ const DraftInvoice = () => {
         </div>
     );
 };
-export default DraftInvoice;
+export default QuoteInvoice;
