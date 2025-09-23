@@ -68,7 +68,7 @@ function AddPaymentModal({ showModal, setShowModal }) {
                   : " text-primary"
                   }  border-end p-2 fw-semi-bold px-6 cursor-pointer `}
               >
-                Main{" "}
+                Main
               </label>
               <hr />
               <label

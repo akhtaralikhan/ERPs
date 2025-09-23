@@ -7,12 +7,13 @@ import {
   useSortBy,
   useGlobalFilter,
 } from "react-table";
-import { customerInfo } from "../../../assets/data";
+import { salesReturnData } from "../../../assets/data";
 import GlobalFilter from "../../../Components/GlobalFilter";
 import AddCustomerModal from "../../../Components/Modals/AddCustomerModal";
 import { Dropdown } from "react-bootstrap";
 
-const CustomerInfo = () => {
+
+const PurchaseReturnLog = () => {
   const [showModal, setShowModal] = useState(false);
   const [showAll, setShowAll] = useState(false);
 
@@ -49,11 +50,11 @@ const CustomerInfo = () => {
           </a>
         ),
       },
-      { Header: "Company Name", accessor: "companyName" },
-      { Header: "Type", accessor: "type" },
-      { Header: "Phone", accessor: "phone" },
-      { Header: "Email", accessor: "email" },
-      { Header: "Billing Address", accessor: "billingAddress" },
+      { Header: "Ref Id", accessor: "refId" },
+      { Header: "Invoice No", accessor: "invoiceNo" },
+      { Header: "Note", accessor: "note" },
+      // { Header: "Sub Total", accessor: "subTotal" },
+      // { Header: "Created Date", accessor: "createdDate" },
       // { Header: "Paid Amount", accessor: "paidAmount" },
       // { Header: "Due Amount", accessor: "dueAmount" },
       {
@@ -70,6 +71,43 @@ const CustomerInfo = () => {
           });
         },
       },
+      // {
+      //   Header: "Status",
+      //   accessor: "status",
+      //   Cell: ({ value }) => {
+      //     const badgeClass =
+      //       value === "Paid" ? (
+      //         <span class="badge badge-phoenix fs-10 badge-phoenix-success">
+      //           <span class="badge-label">{value}</span>
+      //           <span
+      //             class="ms-1"
+      //             data-feather="check"
+      //             style={{ height: "12.8px", width: "12.8px" }}
+      //           ></span>
+      //         </span>
+      //       ) : value === "UnPaid" ? (
+      //         <span class="badge badge-phoenix fs-10 badge-phoenix-danger">
+      //           <span class="badge-label">{value}</span>
+      //           <span
+      //             class="ms-1"
+      //             data-feather="x"
+      //             style={{ height: "12.8px", width: "12.8px" }}
+      //           ></span>
+      //         </span>
+      //       ) : (
+      //         <span class="badge badge-phoenix fs-10 badge-phoenix-warning">
+      //           <span class="badge-label">{value}</span>
+      //           <span
+      //             class="ms-1"
+      //             data-feather="alert-octagon"
+      //             style={{ height: "12.8px", width: "12.8px" }}
+      //           ></span>
+      //         </span>
+      //       );
+
+      //     return <span>{badgeClass}</span>;
+      //   },
+      // },
     ],
     []
   );
@@ -93,13 +131,14 @@ const CustomerInfo = () => {
   } = useTable(
     {
       columns,
-      data: customerInfo,
+      data: salesReturnData,
       initialState: { pageIndex: 0, pageSize: 5 },
     },
     useGlobalFilter, // ✅ Search
     useSortBy, // ✅ Sorting
     usePagination // ✅ Pagination
   );
+
 
   return (
     <div className="content AssetsPageChangecss AssetPaddingChange">
@@ -108,7 +147,7 @@ const CustomerInfo = () => {
           {/* Title and tabs */}
           <div className=" p-3 row" style={{ minWidth: "170px" }}>
             <h2 className="fw-bolder mb-5" style={{ fontSize: "2rem" }}>
-              Customer Info List
+              Purchase Return Log
             </h2>
             <div
               className="d-flex flex-wrap align-items-center"
@@ -118,10 +157,10 @@ const CustomerInfo = () => {
                 All <span className="NewChangeColor">(68817)</span>
               </span>
               <span className="filterLinks ColorChangeFilterLink">
-                Customer Name <span className="NewChangeColor">(6)</span>
+                Suppleir Name <span className="NewChangeColor">(6)</span>
               </span>
               <span className="filterLinks ColorChangeFilterLink">
-                Type <span className="NewChangeColor">(17)</span>
+                Invoice Number <span className="NewChangeColor">(17)</span>
               </span>
               <span className="filterLinks ColorChangeFilterLink">
                 Approval Status <span className="NewChangeColor">(6,810)</span>
@@ -147,7 +186,7 @@ const CustomerInfo = () => {
                       width: "200px",
                     }}
                   >
-                    Customer Name
+                    Suppleir Name
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
                     <Dropdown.Item>Complete</Dropdown.Item>
@@ -166,7 +205,7 @@ const CustomerInfo = () => {
                       width: "200px",
                     }}
                   >
-                    Type
+                    Invoice Number
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
                     <Dropdown.Item>Ready to Pickup</Dropdown.Item>
@@ -463,5 +502,5 @@ const CustomerInfo = () => {
   );
 };
 
-export default CustomerInfo;
+export default PurchaseReturnLog;
 

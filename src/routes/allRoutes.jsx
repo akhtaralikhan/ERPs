@@ -5,28 +5,16 @@ import ForgetPassword from "../Pages/Auth/ForgetPassword";
 import DashboardHome from "../Pages/DashBoard/DashboardHome";
 // import PosInvoice from "../pages/Dashboard/PosInvoice";
 import SideInvoice from "../Pages/DashBoard/SideInvoices.js/SideInvoice.jsx";
-// import Estimates from "../pages/Dashboard/Estimates";
 import BankAccounts from "../Pages/DashBoard/BusinessERP/BusinessERP.jsx";
 import Invoice from "../Pages/DashBoard/ManageSales/Invoice.jsx";
 import ItemCart from "../Pages/DashBoard/POS/ItemCart.jsx";
 import PurchaseInvoiceDraft from "../Pages/DashBoard/PurchaseInvoiceDraft.jsx";
 import PurchaseInvoiceQuote from "../pages/Dashboard/PurchaseInvoiceQuote";
 import Assets from "../Pages/DashBoard/Assets.jsx";
-// import ManualJournals from "../pages/Dashboard/ManualJournals";
-// import Transations from "../pages/Dashboard/Transations";
-// import ChartsOfAccount from "../pages/Dashboard/ChartsOfAccount";
-// import Assets from "../pages/Dashboard/Assets";
-// import Report from "../pages/Dashboard/Report";
-// import Settings from "../pages/Dashboard/Settings";
-// import Console from "../pages/Dashboard/Console";
-// import ConnectBank from "../pages/Dashboard/ConnectBank";
 import Signin from "../Pages/Auth/Signin";
 import { superAdmin } from "../constant/Config";
 import BusinessERP from "../Pages/DashBoard/BusinessERP/BusinessERP.jsx";
 import ManageSales from '../Pages/DashBoard/ManageSales/ManageSales.jsx'
-// import ManualInvoices from "../Pages/DashBoard/ManualInvoices.jsx";
-// import DraftInvoice from '../Pages/DashBoard/DraftInvoice'
-import PurchaseInvoice from "../Pages/DashBoard/PurchaseInvoice.jsx";
 import PurchaseReturn from "../Pages/DashBoard/PurchaseReturn.jsx";
 import ExpenseSummary from "../Pages/DashBoard/ManageExpense/ExpenseSummary.jsx";
 import ExpensesType from "../Pages/DashBoard/ManageExpense/ExpenseType.jsx";
@@ -55,6 +43,11 @@ import ManualInvoice from "../Pages/DashBoard/ManageSales/ManualInvoice.jsx";
 import DraftInvoice from "../Pages/DashBoard/ManageSales/DraftInvoice.jsx";
 import QuoteInvoice from "../Pages/DashBoard/ManageSales/QuoteInvoice.jsx";
 import CustomerInfo from "../Pages/DashBoard/ManageSales/CustomerInfo.jsx";
+import PurchaseInvoice from "../Pages/DashBoard/ManagePurchases/PurchaseInvoice.jsx";
+import PurchaseDraftInvoice from "../Pages/DashBoard/ManagePurchases/PurchaseDraftInvoice.jsx";
+import PurchaseQuoteInvoice from "../Pages/DashBoard/ManagePurchases/PurchaseQuoteInvoice.jsx";
+import ManageSupplier from "../Pages/DashBoard/ManagePurchases/ManageSupplier.jsx";
+import PurchaseReturnLog from "../Pages/DashBoard/ManagePurchases/PurchaseReturnLog.jsx";
 import SalesReturnLog from "../Pages/DashBoard/ManageSales/SalesReturnLog.jsx";
 
 export const publicRoutes = [
@@ -78,11 +71,11 @@ const basePrivateRoutes = [
   { path: "/ReturnLog/SalesReturnIndex", component: <SalesReturnLog /> },
 
   // manage Purchases
-  { path: "/PurchasesPayment/Index", component: <DashboardHome /> },
-  { path: "/PurchasesPaymentDraft/Index", component: <DashboardHome /> },
-  { path: "/PurchasesPaymentQuote/Index", component: <DashboardHome /> },
-  { path: "/Supplier/Index", component: <DashboardHome /> },
-  { path: "/ReturnLog/PurchaseReturnIndex", component: <DashboardHome /> },
+  { path: "/PurchasesPayment/Index", component: <PurchaseInvoice /> },
+  { path: "/PurchasesPaymentDraft/Index", component: <PurchaseDraftInvoice /> },
+  { path: "/PurchasesPaymentQuote/Index", component: <PurchaseQuoteInvoice /> },
+  { path: "/Supplier/Index", component: <ManageSupplier /> },
+  { path: "/ReturnLog/PurchaseReturnIndex", component: <PurchaseReturnLog /> },
 
   //manage expense 
   { path: "/ExpenseSummary/Index", component: <ExpenseSummary /> },
@@ -173,8 +166,8 @@ const basePrivateRoutes = [
   { path: "/BankAccounts", component: <BankAccounts /> }, // UNSTYLED 
   { path: "/Invoice", component: <Invoice /> }, // UNSTYLED SAME
   { path: "/PurchaseReturn", component: <PurchaseReturn /> }, // UNSTYLED
-  { path: "/PurchaseInvoiceDraft", component: <PurchaseInvoiceDraft /> },// UNSTYLED
-  { path: "/PurchaseInvoiceQuote", component: <PurchaseInvoiceQuote /> }, // UNSTYLED
+  // { path: "/PurchaseInvoiceDraft", component: <PurchaseInvoiceDraft /> },// UNSTYLED
+  // { path: "/PurchaseInvoiceQuote", component: <PurchaseInvoiceQuote /> }, // UNSTYLED
   { path: "/Assets", component: <Assets /> }, // NOT THAT GOOD 
   // { path: "/ManualJournals", component: <ManualJournals /> },
   // { path: "/Transations", component: <Transations /> },
@@ -185,7 +178,7 @@ const basePrivateRoutes = [
   // { path: "/ConnectBank", component: <ConnectBank /> },
   { path: "/ManageSales", component: <ManageSales /> },
   // { path: "/ManualInvoices", component: <ManualInvoices /> },
-  { path: "/PurchaseInvoice", component: <PurchaseInvoice /> },
+  // { path: "/PurchaseInvoice", component: <PurchaseInvoice /> },
 ];
 
 // Conditionally add Console route

@@ -11,9 +11,8 @@ import { ManageinvoiceData } from "../../../assets/data";
 import GlobalFilter from "../../../Components/GlobalFilter";
 import AddPaymentModal from "../../../Components/AddPaymentModal";
 import Dropdown from "react-bootstrap/Dropdown";
-import { set } from "react-hook-form";
 
-const ManualInvoice = () => {
+const PurchaseInvoice = () => {
     const [showModal, setShowModal] = useState(false);
     const [showAll, setShowAll] = useState(false);
 
@@ -22,7 +21,7 @@ const ManualInvoice = () => {
         () => [
             { Header: "ID", accessor: "id", size: 400 },
             {
-                Header: "Customer",
+                Header: "Supplier",
                 accessor: "customer",
                 Cell: ({ row }) => (
                     <a
@@ -145,7 +144,7 @@ const ManualInvoice = () => {
                     {/* Title and tabs */}
                     <div className=" p-3 row" style={{ minWidth: "170px" }}>
                         <h2 className="fw-bolder mb-5" style={{ fontSize: "2rem" }}>
-                            Manual Invoice
+                            Purchase Invoice
                         </h2>
                         <div
                             className="d-flex flex-wrap align-items-center"
@@ -155,10 +154,10 @@ const ManualInvoice = () => {
                                 All <span className="NewChangeColor">(68817)</span>
                             </span>
                             <span className="filterLinks ColorChangeFilterLink">
-                                Vendor Name <span className="NewChangeColor">(6)</span>
+                                Supplier Name <span className="NewChangeColor">(6)</span>
                             </span>
                             <span className="filterLinks ColorChangeFilterLink">
-                                Return Type <span className="NewChangeColor">(17)</span>
+                                Created Date <span className="NewChangeColor">(17)</span>
                             </span>
                             <span className="filterLinks ColorChangeFilterLink">
                                 Approval Status <span className="NewChangeColor">(6,810)</span>
@@ -184,7 +183,7 @@ const ManualInvoice = () => {
                                             width: "200px",
                                         }}
                                     >
-                                        Vendor Name
+                                        Supplier Name
                                     </Dropdown.Toggle>
                                     <Dropdown.Menu>
                                         <Dropdown.Item>Complete</Dropdown.Item>
@@ -203,7 +202,7 @@ const ManualInvoice = () => {
                                             width: "200px",
                                         }}
                                     >
-                                        Return Type
+                                        Created Date
                                     </Dropdown.Toggle>
                                     <Dropdown.Menu>
                                         <Dropdown.Item>Ready to Pickup</Dropdown.Item>
@@ -241,7 +240,7 @@ const ManualInvoice = () => {
                             {/* Add order button */}
                             <button className="btn btn-primary" onClick={() => setShowModal(true)}>
                                 <span className="fas fa-plus me-2"></span>
-                                Add Payment
+                                Add Purchase Payment
                             </button>
                             {showModal && <AddPaymentModal showModal={showModal} setShowModal={setShowModal} />}
                         </div>
@@ -499,4 +498,4 @@ const ManualInvoice = () => {
         </div>
     );
 };
-export default ManualInvoice;
+export default PurchaseInvoice;

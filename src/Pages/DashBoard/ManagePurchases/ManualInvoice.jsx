@@ -145,7 +145,7 @@ const ManualInvoice = () => {
                     {/* Title and tabs */}
                     <div className=" p-3 row" style={{ minWidth: "170px" }}>
                         <h2 className="fw-bolder mb-5" style={{ fontSize: "2rem" }}>
-                            Manual Invoice
+                            Invoice
                         </h2>
                         <div
                             className="d-flex flex-wrap align-items-center"

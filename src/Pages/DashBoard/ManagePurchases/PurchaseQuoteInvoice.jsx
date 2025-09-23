@@ -11,25 +11,24 @@ import { ManageinvoiceData } from "../../../assets/data";
 import GlobalFilter from "../../../Components/GlobalFilter";
 import AddPaymentModal from "../../../Components/AddPaymentModal";
 import Dropdown from "react-bootstrap/Dropdown";
-import { set } from "react-hook-form";
 
-const ManualInvoice = () => {
+const PurchaseQuoteInvoice = () => {
     const [showModal, setShowModal] = useState(false);
     const [showAll, setShowAll] = useState(false);
 
-    // ✅ Table columns
+
     const columns = useMemo(
         () => [
             { Header: "ID", accessor: "id", size: 400 },
             {
-                Header: "Customer",
+                Header: "Supplier Name",
                 accessor: "customer",
                 Cell: ({ row }) => (
                     <a
                         href="/"
-                        className="d-flex align-items-center text-900 text-center p-0"
+                        className="d-flex align-items-center text-900 text-center"
                     >
-                        <div className="avatar avatar-l me-2">
+                        <div className="avatar avatar-l">
                             {row.original.customerImg ? (
                                 <img
                                     src={row.original.customerImg}
@@ -44,7 +43,9 @@ const ManualInvoice = () => {
                             )}
                         </div>
                         <div>
-                            {row.original.customer}
+                            <h6 className="mb-0 text-center ms-3 text-900">
+                                {row.original.customer}
+                            </h6>
                         </div>
                     </a>
                 ),
@@ -76,28 +77,28 @@ const ManualInvoice = () => {
                 Cell: ({ value }) => {
                     const badgeClass =
                         value === "Paid" ? (
-                            <span className="badge badge-phoenix fs-10 badge-phoenix-success">
-                                <span className="badge-label">{value}</span>
+                            <span class="badge badge-phoenix fs-10 badge-phoenix-success">
+                                <span class="badge-label">{value}</span>
                                 <span
-                                    className="ms-1"
+                                    class="ms-1"
                                     data-feather="check"
                                     style={{ height: "12.8px", width: "12.8px" }}
                                 ></span>
                             </span>
                         ) : value === "UnPaid" ? (
-                            <span className="badge badge-phoenix fs-10 badge-phoenix-danger">
-                                <span className="badge-label">{value}</span>
+                            <span class="badge badge-phoenix fs-10 badge-phoenix-danger">
+                                <span class="badge-label">{value}</span>
                                 <span
-                                    className="ms-1"
+                                    class="ms-1"
                                     data-feather="x"
                                     style={{ height: "12.8px", width: "12.8px" }}
                                 ></span>
                             </span>
                         ) : (
-                            <span className="badge badge-phoenix fs-10 badge-phoenix-warning">
-                                <span className="badge-label">{value}</span>
+                            <span class="badge badge-phoenix fs-10 badge-phoenix-warning">
+                                <span class="badge-label">{value}</span>
                                 <span
-                                    className="ms-1"
+                                    class="ms-1"
                                     data-feather="alert-octagon"
                                     style={{ height: "12.8px", width: "12.8px" }}
                                 ></span>
@@ -117,14 +118,15 @@ const ManualInvoice = () => {
         getTableBodyProps,
         headerGroups,
         prepareRow,
+        rows,
+        gotoPage,
         page,
         nextPage,
         previousPage,
         canNextPage,
         canPreviousPage,
-        pageOptions,
-        gotoPage, // <-- add this here
         state: { pageIndex, globalFilter },
+        pageOptions,
         setGlobalFilter,
     } = useTable(
         {
@@ -132,9 +134,9 @@ const ManualInvoice = () => {
             data: ManageinvoiceData,
             initialState: { pageIndex: 0, pageSize: 5 },
         },
-        useGlobalFilter,
-        useSortBy,
-        usePagination
+        useGlobalFilter, // ✅ Search
+        useSortBy, // ✅ Sorting
+        usePagination // ✅ Pagination
     );
 
 
@@ -145,7 +147,7 @@ const ManualInvoice = () => {
                     {/* Title and tabs */}
                     <div className=" p-3 row" style={{ minWidth: "170px" }}>
                         <h2 className="fw-bolder mb-5" style={{ fontSize: "2rem" }}>
-                            Manual Invoice
+                            Pruchase Quote Invoice
                         </h2>
                         <div
                             className="d-flex flex-wrap align-items-center"
@@ -155,7 +157,7 @@ const ManualInvoice = () => {
                                 All <span className="NewChangeColor">(68817)</span>
                             </span>
                             <span className="filterLinks ColorChangeFilterLink">
-                                Vendor Name <span className="NewChangeColor">(6)</span>
+                               Supplier <span className="NewChangeColor">(6)</span>
                             </span>
                             <span className="filterLinks ColorChangeFilterLink">
                                 Return Type <span className="NewChangeColor">(17)</span>
@@ -184,7 +186,7 @@ const ManualInvoice = () => {
                                             width: "200px",
                                         }}
                                     >
-                                        Vendor Name
+                                       Supplier
                                     </Dropdown.Toggle>
                                     <Dropdown.Menu>
                                         <Dropdown.Item>Complete</Dropdown.Item>
@@ -241,7 +243,7 @@ const ManualInvoice = () => {
                             {/* Add order button */}
                             <button className="btn btn-primary" onClick={() => setShowModal(true)}>
                                 <span className="fas fa-plus me-2"></span>
-                                Add Payment
+                                Add Purchase Quote
                             </button>
                             {showModal && <AddPaymentModal showModal={showModal} setShowModal={setShowModal} />}
                         </div>
@@ -499,4 +501,4 @@ const ManualInvoice = () => {
         </div>
     );
 };
-export default ManualInvoice;
+export default PurchaseQuoteInvoice;

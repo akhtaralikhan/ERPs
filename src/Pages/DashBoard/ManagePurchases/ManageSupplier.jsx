@@ -12,7 +12,7 @@ import GlobalFilter from "../../../Components/GlobalFilter";
 import AddCustomerModal from "../../../Components/Modals/AddCustomerModal";
 import { Dropdown } from "react-bootstrap";
 
-const CustomerInfo = () => {
+const ManageSupplier = () => {
   const [showModal, setShowModal] = useState(false);
   const [showAll, setShowAll] = useState(false);
 
@@ -20,7 +20,7 @@ const CustomerInfo = () => {
     () => [
       { Header: "ID", accessor: "id", size: 400 },
       {
-        Header: "Customer",
+        Header: "Supplier Name",
         accessor: "customer",
         Cell: ({ row }) => (
           <a
@@ -70,6 +70,7 @@ const CustomerInfo = () => {
           });
         },
       },
+
     ],
     []
   );
@@ -108,7 +109,7 @@ const CustomerInfo = () => {
           {/* Title and tabs */}
           <div className=" p-3 row" style={{ minWidth: "170px" }}>
             <h2 className="fw-bolder mb-5" style={{ fontSize: "2rem" }}>
-              Customer Info List
+              Supplier Info List
             </h2>
             <div
               className="d-flex flex-wrap align-items-center"
@@ -118,7 +119,7 @@ const CustomerInfo = () => {
                 All <span className="NewChangeColor">(68817)</span>
               </span>
               <span className="filterLinks ColorChangeFilterLink">
-                Customer Name <span className="NewChangeColor">(6)</span>
+                Supplier Name <span className="NewChangeColor">(6)</span>
               </span>
               <span className="filterLinks ColorChangeFilterLink">
                 Type <span className="NewChangeColor">(17)</span>
@@ -147,7 +148,7 @@ const CustomerInfo = () => {
                       width: "200px",
                     }}
                   >
-                    Customer Name
+                    Supplier Name
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
                     <Dropdown.Item>Complete</Dropdown.Item>
@@ -204,7 +205,7 @@ const CustomerInfo = () => {
               {/* Add order button */}
               <button className="btn btn-primary" onClick={() => setShowModal(true)}>
                 <span className="fas fa-plus me-2"></span>
-                Add Customer
+                Add Supplier
               </button>
               {showModal && <AddCustomerModal showModal={showModal} setShowModal={setShowModal} />}
             </div>
@@ -463,5 +464,5 @@ const CustomerInfo = () => {
   );
 };
 
-export default CustomerInfo;
+export default ManageSupplier;
 
