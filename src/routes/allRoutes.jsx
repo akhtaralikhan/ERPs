@@ -50,6 +50,7 @@ import PurchaseReturnLog from "../Pages/DashBoard/ManagePurchases/PurchaseReturn
 import SalesReturnLog from "../Pages/DashBoard/ManageSales/SalesReturnLog.jsx";
 import OutOfStock from "../Pages/DashBoard/ManageItem/OutOfStock.jsx";
 import DamageItemDetails from "../Pages/DashBoard/ManageItem/DamageItemDetails.jsx";
+import UnitOfMeasure from "../Pages/DashBoard/SystemSettings/UnitOfMeasure.jsx";
 
 export const publicRoutes = [
   { path: "/Signin", component: <Signin /> },
@@ -102,7 +103,7 @@ const basePrivateRoutes = [
   { path: "/CustomerType/Index", component: <CustomerType /> },
   { path: "/VatPercentage/Index", component: <VatPercentage /> },
   { path: "/Categories/Index", component: <Categories /> },
-  // here will come unit of measure page denied access
+  { path: "/UnitOfMeasure/Index", component: <UnitOfMeasure /> },// denied access
 
   //human resource
   { path: "/Attendance/Index", component: <Attendence /> },

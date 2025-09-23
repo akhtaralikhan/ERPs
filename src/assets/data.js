@@ -24,7 +24,6 @@ export const invoices = [
     action: "Print"
   }
 ];
-
 export const dashboardData = [
   {
     title: "Invoice Today",
@@ -106,8 +105,6 @@ export const dashboardData = [
     subtitle: "since last month",
   },
 ];
-
-// groceryData.js
 export const groceryData = [
   { id: 1, title: "Curd", description: "Fresh red apples from the farm.", image: "src/assets/img/bg/curd.jpg", price: 120 },
   { id: 2, title: "Olive", description: "health thing.", image: "src/assets/img/bg/olive.jpg", price: 60 },
@@ -122,8 +119,6 @@ export const groceryData = [
   { id: 12, title: "Cheese", description: "Tasty cheddar cheese.", image: "src/assets/img/bg/cheese.jpg", price: 250 },
   { id: 13, title: "Eggs", description: "Farm fresh eggs.", image: "src/assets/img/bg/eggs.jpg", price: 70 },
 ];
-
-
 export const ManageinvoiceData = [
   {
     "id": "INV1",
@@ -210,8 +205,6 @@ export const ManageinvoiceData = [
     "status": "UnPaid"
   }
 ]
-
-
 export const customerInfo = [
   {
     "id": 1,
@@ -284,7 +277,6 @@ export const customerInfo = [
     "createdDate": "2023-02-20"
   }
 ]
-
 export const salesReturnData = [
   {
     id: 1,
@@ -430,7 +422,7 @@ export const purchaseInvoiceData = [
     "createdDate": "10/7/2022",
     "status": "Paid"
   }
-]
+];
 export const manageSupplier = [
   {
     id: 1,
@@ -2535,6 +2527,80 @@ export const SystemRoleData = [
     "RoleName": "Outof Stock"
   }
 ]
+export const paymentStatusData = [
+  {
+    id: 8,
+    name: "Custom Date",
+    description: "Custom Date",
+    createdBy: "Admin",
+    modifiedBy: "Admin",
+    createdDate: "2023-02-20",
+    modifiedDate: "2023-02-20",
+  },
+  {
+    id: 7,
+    name: "Pay within 30 Days",
+    description: "Pay within 30 Days",
+    createdBy: "Admin",
+    modifiedBy: "Admin",
+    createdDate: "2023-02-20",
+    modifiedDate: "2023-02-20",
+  },
+  {
+    id: 6,
+    name: "Pay within 14 Days",
+    description: "Pay within 14 Days",
+    createdBy: "Admin",
+    modifiedBy: "Admin",
+    createdDate: "2023-02-20",
+    modifiedDate: "2023-02-20",
+  },
+  {
+    id: 5,
+    name: "Pay within 7 Days",
+    description: "Pay within 7 Days",
+    createdBy: "Admin",
+    modifiedBy: "Admin",
+    createdDate: "2023-02-20",
+    modifiedDate: "2023-02-20",
+  },
+  {
+    id: 4,
+    name: "Deposit",
+    description: "Deposit",
+    createdBy: "Admin",
+    modifiedBy: "Admin",
+    createdDate: "2023-02-20",
+    modifiedDate: "2023-02-20",
+  },
+  {
+    id: 3,
+    name: "Partially Paid",
+    description: "Partially Paid",
+    createdBy: "Admin",
+    modifiedBy: "Admin",
+    createdDate: "2023-02-20",
+    modifiedDate: "2023-02-20",
+  },
+  {
+    id: 2,
+    name: "UnPaid",
+    description: "UnPaid",
+    createdBy: "Admin",
+    modifiedBy: "Admin",
+    createdDate: "2023-02-20",
+    modifiedDate: "2023-02-20",
+  },
+  {
+    id: 1,
+    name: "Paid",
+    description: "Paid",
+    createdBy: "Admin",
+    modifiedBy: "Admin",
+    createdDate: "2023-02-20",
+    modifiedDate: "2023-02-20",
+  },
+];
 export const PaymentData = [
   {
     "Id": 8,
@@ -3288,5 +3354,222 @@ export const branches = [
     phoneNumber: "8001112222",
     address: "Berlin, Germany",
     createdDate: "2023-02-20",
+  },
+];
+export const emailConfigs = [
+  {
+    id: 5,
+    email: "support@company.com",
+    hostname: "smtp.company.com",
+    port: 465,
+    isDefault: false,
+    createdDate: "2025-02-10",
+    modifiedDate: "2025-02-10",
+  },
+  {
+    id: 4,
+    email: "exmapl3@gmail.com",
+    hostname: "smtp.gmail.com",
+    port: 587,
+    isDefault: false,
+    createdDate: "2023-02-20",
+    modifiedDate: "2023-02-20",
+  },
+  {
+    id: 3,
+    email: "exmapl2@gmail.com",
+    hostname: "smtp.gmail.com",
+    port: 587,
+    isDefault: false,
+    createdDate: "2023-02-20",
+    modifiedDate: "2023-02-20",
+  },
+  {
+    id: 2,
+    email: "admin@myinvoicemanager.co.uk",
+    hostname: "mail.myinvoicemanager.co.uk",
+    port: 587,
+    isDefault: false,
+    createdDate: "2023-02-20",
+    modifiedDate: "2023-02-20",
+  },
+  {
+    id: 1,
+    email: "devmlbd@gmail.com",
+    hostname: "smtp.gmail.com",
+    port: 587,
+    isDefault: true,
+    createdDate: "2023-02-20",
+    modifiedDate: "2023-02-20",
+  },
+];
+export const currencies = [
+  {
+    id: 6,
+    name: "Australia Dollars",
+    code: "AUD",
+    symbol: "A$",
+    country: "Australia",
+    description: "Australia Dollar (AUD)",
+    createdDate: "2023-02-20",
+  },
+  {
+    id: 5,
+    name: "Taka",
+    code: "BDT",
+    symbol: "৳",
+    country: "Bangladesh",
+    description: "Bangladeshi Taka",
+    createdDate: "2023-02-20",
+  },
+  {
+    id: 4,
+    name: "Yen",
+    code: "JPY",
+    symbol: "¥",
+    country: "Japan",
+    description: "Japanese Yen",
+    createdDate: "2023-02-20",
+  },
+  {
+    id: 3,
+    name: "Pounds Sterling",
+    code: "GBP",
+    symbol: "£",
+    country: "UK",
+    description: "British Pound Sterling",
+    createdDate: "2023-02-20",
+  },
+  {
+    id: 2,
+    name: "Euro",
+    code: "EUR",
+    symbol: "€",
+    country: "European Union",
+    description: "European Union Currency",
+    createdDate: "2023-02-20",
+  },
+  {
+    id: 1,
+    name: "US Dollar",
+    code: "USD",
+    symbol: "$",
+    country: "United States",
+    description: "United States Dollar",
+    createdDate: "2023-02-20",
+  },
+];
+export const vatRates = [
+  {
+    id: 16,
+    name: "VAT: 50%",
+    percentage: 50,
+    createdDate: "2023-02-20",
+    createdBy: "Admin",
+  },
+  {
+    id: 15,
+    name: "VAT: 40%",
+    percentage: 40,
+    createdDate: "2023-02-20",
+    createdBy: "Admin",
+  },
+  {
+    id: 14,
+    name: "VAT: 30%",
+    percentage: 30,
+    createdDate: "2023-02-20",
+    createdBy: "Admin",
+  },
+  {
+    id: 13,
+    name: "VAT: 20%",
+    percentage: 20,
+    createdDate: "2023-02-20",
+    createdBy: "Admin",
+  },
+  {
+    id: 12,
+    name: "VAT: 10%",
+    percentage: 10,
+    createdDate: "2023-02-20",
+    createdBy: "Admin",
+  },
+  {
+    id: 11,
+    name: "VAT: 10%",
+    percentage: 10,
+    createdDate: "2023-02-20",
+    createdBy: "Admin",
+  },
+  {
+    id: 10,
+    name: "VAT: 9%",
+    percentage: 9,
+    createdDate: "2023-02-20",
+    createdBy: "Admin",
+  },
+  {
+    id: 9,
+    name: "VAT: 8%",
+    percentage: 8,
+    createdDate: "2023-02-20",
+    createdBy: "Admin",
+  },
+  {
+    id: 8,
+    name: "VAT: 7%",
+    percentage: 7,
+    createdDate: "2023-02-20",
+    createdBy: "Admin",
+  },
+  {
+    id: 7,
+    name: "VAT: 6%",
+    percentage: 6,
+    createdDate: "2023-02-20",
+    createdBy: "Admin",
+  },
+  {
+    id: 6,
+    name: "VAT: 5%",
+    percentage: 5,
+    createdDate: "2023-02-20",
+    createdBy: "Admin",
+  },
+  {
+    id: 5,
+    name: "VAT: 4%",
+    percentage: 4,
+    createdDate: "2023-02-20",
+    createdBy: "Admin",
+  },
+  {
+    id: 4,
+    name: "VAT: 3%",
+    percentage: 3,
+    createdDate: "2023-02-20",
+    createdBy: "Admin",
+  },
+  {
+    id: 3,
+    name: "VAT: 2%",
+    percentage: 2,
+    createdDate: "2023-02-20",
+    createdBy: "Admin",
+  },
+  {
+    id: 2,
+    name: "VAT: 1%",
+    percentage: 1,
+    createdDate: "2023-02-20",
+    createdBy: "Admin",
+  },
+  {
+    id: 1,
+    name: "VAT: 0%",
+    percentage: 0,
+    createdDate: "2023-02-20",
+    createdBy: "Admin",
   },
 ];

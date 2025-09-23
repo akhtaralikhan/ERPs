@@ -949,7 +949,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                           </NavLink>
                         </li>
                         <li className="nav-item">
-                          <NavLink className="nav-link" to="/">
+                          <NavLink className="nav-link" to="/UnitOfMeasure/Index">
                             Unit Of Measures
                           </NavLink>
                         </li>
@@ -990,7 +990,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                         <NavLink className="nav-link" to="/Categories/Index">
                           Categories
                         </NavLink>
-                        <NavLink className="nav-link" to="/">
+                        <NavLink className="nav-link" to="/UnitOfMeasure/Index">
                           Unit Of Measures
                         </NavLink>
                         <NavLink className="nav-link" to="/VatPercentage/Index">
@@ -1061,7 +1061,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                           </NavLink>
                         </li>
                         <li className="nav-item">
-                          <NavLink className="nav-link" to="/">
+                          <NavLink className="nav-link" to="/SubDepartment/Index">
                             Sub Department
                           </NavLink>
                         </li>
@@ -1088,7 +1088,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                         <NavLink className="nav-link" to="/Department/Index">
                           Department
                         </NavLink>
-                        <NavLink className="nav-link" to="/">
+                        <NavLink className="nav-link" to="/SubDepartment/Index">
                           Sub Department
                         </NavLink>
                       </div>
