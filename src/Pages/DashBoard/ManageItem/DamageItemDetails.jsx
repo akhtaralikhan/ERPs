@@ -7,31 +7,26 @@ import {
   useSortBy,
   useGlobalFilter,
 } from "react-table";
-import { ItemHistoryData } from "../../../assets/data";
+import { DamageItemData } from "../../../assets/data";
 import GlobalFilter from "../../../Components/GlobalFilter";
-import AddItemModal from "../../../Components/Modals/AddItemModal";
+import AddDamageItemModal from "../../../Components/Modals/AddDamageItemModal";
 import Dropdown from "react-bootstrap/Dropdown";
 
 
 
-const ItemHistory = () => {
+const DamageItemDetails = () => {
   const [showModal, setShowModal] = useState(false);
   const [showAll, setShowAll] = useState(false);
 
   // ✅ Table columns
   const columns = useMemo(
     () => [
-      { Header: "ID", accessor: "Id" },
-      { Header: "Item Id", accessor: "ItemId" },
-      { Header: "Item Name", accessor: "ItemName" },
-      { Header: "Unit Price", accessor: "UnitPrice" },
-      { Header: "Sell Price", accessor: "SellPrice" },
-      { Header: "Old Unit Price", accessor: "OldUnitPrice" },
-      { Header: "Old Quantity", accessor: "OldQuantity" },
-      { Header: "New Quantity", accessor: "NewQuantity" },
-      { Header: "Tran Quantity", accessor: "TranQuantity" },
-      { Header: "Created Date", accessor: "CreatedDate" },
-      { Header: "Action", accessor: "Action" },
+
+      { Header: "ID", accessor: "id" },
+      { Header: "Item Id", accessor: "itemId" },
+      { Header: "Total Damage Item", accessor: "totalDamageItem" },
+      { Header: "Reason Of Damage", accessor: "reasonOfDamage" },
+      { Header: "Created Date", accessor: "createdDate" },
     ],
     []
   );
@@ -54,7 +49,7 @@ const ItemHistory = () => {
   } = useTable(
     {
       columns,
-      data: ItemHistoryData,
+      data: DamageItemData,
       initialState: { pageIndex: 0, pageSize: 5 },
     },
     useGlobalFilter,
@@ -70,7 +65,7 @@ const ItemHistory = () => {
           {/* Title and tabs */}
           <div className=" p-3 row" style={{ minWidth: "170px" }}>
             <h2 className="fw-bolder mb-5" style={{ fontSize: "2rem" }}>
-              Item History
+              Damage Item Details
             </h2>
             <div
               className="d-flex flex-wrap align-items-center"
@@ -168,7 +163,7 @@ const ItemHistory = () => {
                 <span className="fas fa-plus me-2"></span>
                 Add Item
               </button>
-              {showModal && <AddItemModal showModal={showModal} setShowModal={setShowModal} />}
+              {showModal && <AddDamageItemModal showModal={showModal} setShowModal={setShowModal} />}
             </div>
           </div>
 
@@ -424,4 +419,4 @@ const ItemHistory = () => {
     </div>
   );
 };
-export default ItemHistory;
+export default DamageItemDetails;

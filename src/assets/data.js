@@ -369,8 +369,6 @@ export const purchaseReturnData = [
     createdDate: "2023-02-24"
   }
 ];
-
-
 export const purchaseInvoiceData = [
   {
     "id": "PINV5",
@@ -433,7 +431,6 @@ export const purchaseInvoiceData = [
     "status": "Paid"
   }
 ]
-
 export const manageSupplier = [
   {
     id: 1,
@@ -791,7 +788,6 @@ export const AttendenceData = [
     "ModifiedDate": "2\/21\/2023"
   }
 ]
-
 export const BranchData = [
   {
     Id: 6,
@@ -842,7 +838,6 @@ export const BranchData = [
     CreatedDate: "2/20/2023",
   }
 ]
-
 export const ExpenseSummaryData = [
   {
     "Id": 5,
@@ -1309,7 +1304,6 @@ export const ItemData = [
     "CreatedDate": "2/20/2023"
   }
 ]
-
 export const LowInStockData = [
   {
     "Id": 22,
@@ -1638,6 +1632,41 @@ export const LowInStockData = [
   }
 ]
 export const DamageItemData = [
+  {
+    id: 5,
+    itemId: 105,
+    totalDamageItem: 3,
+    reasonOfDamage: "Water Leakage",
+    createdDate: "2025-09-10",
+  },
+  {
+    id: 4,
+    itemId: 104,
+    totalDamageItem: 2,
+    reasonOfDamage: "Fire Accident",
+    createdDate: "2025-09-15",
+  },
+  {
+    id: 3,
+    itemId: 103,
+    totalDamageItem: 5,
+    reasonOfDamage: "Handling Error",
+    createdDate: "2025-09-18",
+  },
+  {
+    id: 2,
+    itemId: 102,
+    totalDamageItem: 1,
+    reasonOfDamage: "Fall",
+    createdDate: "2025-09-23",
+  },
+  {
+    id: 1,
+    itemId: 101,
+    totalDamageItem: 4,
+    reasonOfDamage: "Transport Damage",
+    createdDate: "2025-09-25",
+  },
 
 ]
 export const ItemHistoryData = [
@@ -3211,4 +3240,53 @@ export const UnitOfMeasureData = [
     "ModifiedBy": "Admin"
   }
 ]
-
+export const branches = [
+  {
+    id: 6,
+    name: "Branch Five",
+    contactPerson: "Person 05",
+    phoneNumber: "9876543210",
+    address: "Paris, France",
+    createdDate: "2023-02-20",
+  },
+  {
+    id: 5,
+    name: "Branch Four",
+    contactPerson: "Person 04",
+    phoneNumber: "9123456780",
+    address: "Leipzig, Germany",
+    createdDate: "2023-02-20",
+  },
+  {
+    id: 4,
+    name: "Branch Three",
+    contactPerson: "Person 03",
+    phoneNumber: "9988776655",
+    address: "Frankfurt, Germany",
+    createdDate: "2023-02-20",
+  },
+  {
+    id: 3,
+    name: "Branch Two",
+    contactPerson: "Person 02",
+    phoneNumber: "9090909090",
+    address: "Munich, Germany",
+    createdDate: "2023-02-20",
+  },
+  {
+    id: 2,
+    name: "Branch One",
+    contactPerson: "Person 01",
+    phoneNumber: "9001234567",
+    address: "Hamburg, Germany",
+    createdDate: "2023-02-20",
+  },
+  {
+    id: 1,
+    name: "Main Branch",
+    contactPerson: "Admin",
+    phoneNumber: "8001112222",
+    address: "Berlin, Germany",
+    createdDate: "2023-02-20",
+  },
+];

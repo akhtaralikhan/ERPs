@@ -817,6 +817,11 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                           </NavLink>
                         </li>
                         <li className="nav-item">
+                          <NavLink className="nav-link" to="/Items/OutOfStockItem">
+                            Out Of Stock
+                          </NavLink>
+                        </li>
+                        <li className="nav-item">
                           <NavLink className="nav-link" to="/Items/LowInStockItem">
                             Low In Stock
                           </NavLink>
@@ -848,6 +853,9 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                         <div className="sidebar-flyout-title">Manage Items</div>
                         <NavLink className="nav-link" to="/Items/Index">
                           Item
+                        </NavLink>
+                        <NavLink className="nav-link" to="/Items/OutOfStockItem">
+                          Out Of Stock
                         </NavLink>
                         <NavLink className="nav-link" to="/Items/LowInStockItem">
                           Low In Stock

@@ -23,7 +23,6 @@ import Item from "../Pages/DashBoard/ManageItem/Item.jsx";
 import LowInStock from "../Pages/DashBoard/ManageItem/LowInStock.jsx";
 import ItemHistory from "../Pages/DashBoard/ManageItem/ItemHistory.jsx";
 import ManageWareHouse from "../Pages/DashBoard/ManageItem/ManageWarehouse.jsx";
-import DamageItem from "../Pages/DashBoard/ManageItem/DamageItemDetail.jsx";
 import CompanyInfo from "../Pages/DashBoard/SystemSettings/CompanyInfo.jsx";
 import EmailConfig from "../Pages/DashBoard/SystemSettings/EmailConfig.jsx";
 import ManageCurrency from "../Pages/DashBoard/SystemSettings/ManageCurrency.jsx";
@@ -49,6 +48,8 @@ import PurchaseQuoteInvoice from "../Pages/DashBoard/ManagePurchases/PurchaseQuo
 import ManageSupplier from "../Pages/DashBoard/ManagePurchases/ManageSupplier.jsx";
 import PurchaseReturnLog from "../Pages/DashBoard/ManagePurchases/PurchaseReturnLog.jsx";
 import SalesReturnLog from "../Pages/DashBoard/ManageSales/SalesReturnLog.jsx";
+import OutOfStock from "../Pages/DashBoard/ManageItem/OutOfStock.jsx";
+import DamageItemDetails from "../Pages/DashBoard/ManageItem/DamageItemDetails.jsx";
 
 export const publicRoutes = [
   { path: "/Signin", component: <Signin /> },
@@ -86,9 +87,9 @@ const basePrivateRoutes = [
 
   // manage items
   { path: "/Items/Index", component: <Item /> },
-  // here will come out of stock item page which is denied access
+  { path: "/Items/OutOfStockItem", component: <OutOfStock /> }, //  denied access
   { path: "/Items/LowInStockItem", component: <LowInStock /> },
-  { path: "/DamageItemDetails/Index", component: <DamageItem /> },
+  { path: "/DamageItemDetails/Index", component: <DamageItemDetails /> },
   { path: "/ItemsHistory/Index", component: <ItemHistory /> },
   { path: "/Warehouse/Index", component: <ManageWareHouse /> },
 
