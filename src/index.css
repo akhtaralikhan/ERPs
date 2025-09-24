@@ -298,3 +298,94 @@ th.sort.desc::after {
     opacity: 1;
     padding-top: 10%;
 }
+
+/* pos Css  */
+.ttop {
+    height: 217px;
+    width: auto !important;
+    background-position: center;
+    background-size: cover;
+    border-bottom: 1px solid #ccc !important;
+}
+
+.cardt {
+    font-size: 12px;
+}
+
+.item-counter {
+    position: absolute;
+    bottom: 145px;
+    right: 15px;
+    cursor: pointer;
+    background: #fff;
+    padding: 6px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+}
+
+.add {
+    position: absolute;
+    bottom: 145px;
+    right: 15px;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 35px;
+}
+
+.search {
+    padding-left: 45px;
+}
+
+.search-box-icon {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    color: #8a94ad;
+
+    font-size: 0.8rem;
+}
+
+.dot {
+    min-width: 8px;
+    min-height: 8px;
+    border-radius: 50%;
+    background-color: tomato;
+    position: absolute;
+    top: -4px;
+    right: -2px;
+}
+
+.card-info {
+    cursor: pointer;
+}
+
+@media(max-width:786px) {
+    .ttop {
+        height: 148px;
+    }
+}
+
+
+.invoice-container {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    height: 20rem;
+    flex-wrap: nowrap;
+}
+
+.invoice-items {
+    flex: 0 0 auto;
+    width: 250px;
+}
+
+.invoice-container::-webkit-scrollbar {
+    display: none;
+}
+
+.imgwidth {
+    height: 195px;
+}

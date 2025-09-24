@@ -1,8 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { groceryData } from '../../../assets/data';
-import './itemCart.css';
 import { storeContext } from '../../../context/storeContext';
-import { useNavigate } from 'react-router-dom';
 import Example from '../../../Components/itemCartModal';
 
 

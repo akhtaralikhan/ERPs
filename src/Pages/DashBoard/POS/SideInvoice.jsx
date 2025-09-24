@@ -1,7 +1,6 @@
 import React from 'react';
 import { groceryData } from '../../../assets/data';
 import { storeContext } from '../../../context/storeContext';
-import './SideInvoices.css'
 import { useState, useContext } from 'react';
 
 export default function SideInvoice() {
@@ -14,10 +13,10 @@ export default function SideInvoice() {
     data?.price.toString()?.includes(searchTerm)
   );
 
-  return (  
+  return (
     <div className='content AssetsPageChangecss AssetPaddingChange'>
-      <div className="search-container d-flex  align-items-center justify-content-end mb-5 gap-3">
-
+      <div className="search-container d-flex  align-items-center justify-content-between m-5 gap-3">
+        <h2>Side Invoice</h2>
         <form className="position-relative me-1 w-30">
           <input className="form-control search-input search form-control-sm w"
             type="search"
@@ -28,7 +27,7 @@ export default function SideInvoice() {
           <span className="fas fa-search search-box-icon"></span>
         </form>
       </div>
-      <div className="d-flex overflow-x-scroll mb-7 gap-3  invoice-container">
+      <div className="d-flex overflow-x-scroll mb-7 gap-3  invoice-container container px-5">
         {filteredData.map((data, index) => (
           cardItem[data.id] ? (
             <div key={index} className="card  invoice-items" style={{ boxShadow: "0 0 10px #00000015" }}>
@@ -37,9 +36,9 @@ export default function SideInvoice() {
                 <img src='src/assets/img/bg/add_icon_white.png' className='add' width="30" onClick={() => addToCart(data.id)} alt='add'></img>
               ) : (
                 <div className="item-counter">
-                  <img src="src/assets/img/bg/remove_icon_red.png" width="30" alt="-" onClick={() => removeFromCart(data.id)} />
+                  <img src="/src/assets/img/bg/remove_icon_red.png" width="30" alt="-" onClick={() => removeFromCart(data.id)} />
                   {cardItem[data.id]}
-                  <img src="src/assets/img/bg/add_icon_green.png" width="30" alt="+" onClick={() => addToCart(data.id)} />
+                  <img src="/src/assets/img/bg/add_icon_green.png" width="30" alt="+" onClick={() => addToCart(data.id)} />
                 </div>
               )}
               <div className="card-body ">
@@ -54,7 +53,7 @@ export default function SideInvoice() {
         ))}
       </div>
       <hr className='mb-7' style={{ height: "1px" }} />
-      <div className="side-invoice table-responsive">
+      <div className="side-invoice table-responsive container px-5">
         <table className='table table-hover mb-3 table-sm fs-9'>
           <thead>
             <tr className='p-4'>
@@ -83,6 +82,11 @@ export default function SideInvoice() {
             })}
           </tbody>
         </table>
+        <div className='d-flex  w-100 justify-content-between'>
+          <h4>Main Total</h4>
+          <h4 className='text-end me-15'>$ {getTotalAmount()}</h4>
+
+        </div>
       </div>
     </div>
   )

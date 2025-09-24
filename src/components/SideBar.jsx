@@ -1,7 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import feather from "feather-icons";
-
+import { BiCart, BiSolidPurchaseTag } from "react-icons/bi";
+import { FcSalesPerformance } from "react-icons/fc";
+import { GrResources } from "react-icons/gr";
+import { FaUsersRectangle } from "react-icons/fa6";
+import { TbReportAnalytics } from "react-icons/tb";
+import { FaUserEdit } from "react-icons/fa";
+import { MdPointOfSale } from "react-icons/md";
+import { GiExpense } from "react-icons/gi";
+import { MdOtherHouses } from "react-icons/md";
+import { TbActivityHeartbeat } from "react-icons/tb";
 const Sidebar = ({ collapsed, setCollapsed }) => {
   const [isSuperAdmin, setIsSuperAdmin] = useState(false);
   // const [collapsed, setCollapsed] = useState(false); // collapsed state
@@ -428,7 +437,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                           </div>
                         )}
                         <span className="nav-link-icon">
-                          <i className="fa-regular fa-credit-card"></i>
+                          <BiCart />
                         </span>
                         {!collapsed && (
                           <span className="nav-link-text-wrapper">
@@ -529,7 +538,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                           </div>
                         )}
                         <span className="nav-link-icon">
-                          <i className="fa-regular fa-credit-card"></i>
+                          <BiSolidPurchaseTag />
                         </span>
                         {!collapsed && (
                           <span className="nav-link-text-wrapper">
@@ -662,7 +671,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                           </div>
                         )}
                         <span className="nav-link-icon">
-                          <i className="fa-regular fa-credit-card"></i>
+                          <i class="fas fa-receipt"></i>
                         </span>
                         {!collapsed && (
                           <span className="nav-link-text-wrapper">
@@ -732,7 +741,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                           </div>
                         )}
                         <span className="nav-link-icon">
-                          <i className="fa-regular fa-credit-card"></i>
+                          <i class="fas fa-code-branch"></i>
                         </span>
                         {!collapsed && (
                           <span className="nav-link-text-wrapper">
@@ -794,7 +803,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                           </div>
                         )}
                         <span className="nav-link-icon">
-                          <i className="fa-regular fa-credit-card"></i>
+                          <i class="fa-solid fa-basket-shopping"></i>
                         </span>
                         {!collapsed && (
                           <span className="nav-link-text-wrapper">
@@ -896,7 +905,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                           </div>
                         )}
                         <span className="nav-link-icon">
-                          <i className="fa-regular fa-credit-card"></i>
+                          <i class="fa-solid fa-gear"></i>
                         </span>
                         {!collapsed && (
                           <span className="nav-link-text-wrapper">
@@ -1023,7 +1032,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                           </div>
                         )}
                         <span className="nav-link-icon">
-                          <i className="fa-regular fa-credit-card"></i>
+                          <GrResources />
                         </span>
                         {!collapsed && (
                           <span className="nav-link-text-wrapper">
@@ -1118,7 +1127,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                           </div>
                         )}
                         <span className="nav-link-icon">
-                          <i className="fa-regular fa-credit-card"></i>
+                          <FaUsersRectangle />
                         </span>
                         {!collapsed && (
                           <span className="nav-link-text-wrapper">
@@ -1190,7 +1199,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                           </div>
                         )}
                         <span className="nav-link-icon">
-                          <i className="fa-regular fa-credit-card"></i>
+                          <FaUserEdit />
                         </span>
                         {!collapsed && (
                           <span className="nav-link-text-wrapper">
@@ -1313,7 +1322,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                           </div>
                         )}
                         <span className="nav-link-icon">
-                          <i className="fa-regular fa-credit-card"></i>
+                          <TbReportAnalytics />
                         </span>
                         {!collapsed && (
                           <span className="nav-link-text-wrapper">
@@ -1399,7 +1408,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                           </div>
                         )}
                         <span className="nav-link-icon">
-                          <i className="fa-regular fa-credit-card"></i>
+                          <MdPointOfSale />
                         </span>
                         {!collapsed && (
                           <span className="nav-link-text-wrapper">
@@ -1501,7 +1510,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                           </div>
                         )}
                         <span className="nav-link-icon">
-                          <i className="fa-regular fa-credit-card"></i>
+                          <TbActivityHeartbeat />
                         </span>
                         {!collapsed && (
                           <span className="nav-link-text-wrapper">
@@ -1595,7 +1604,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                           </div>
                         )}
                         <span className="nav-link-icon">
-                          <i className="fa-regular fa-credit-card"></i>
+                          <GiExpense />
                         </span>
                         {!collapsed && (
                           <span className="nav-link-text-wrapper">
@@ -1689,7 +1698,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                           </div>
                         )}
                         <span className="nav-link-icon">
-                          <i className="fa-regular fa-credit-card"></i>
+                          <MdOtherHouses />
                         </span>
                         {!collapsed && (
                           <span className="nav-link-text-wrapper">
