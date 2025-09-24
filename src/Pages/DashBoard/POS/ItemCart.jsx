@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { groceryData } from '../../../assets/data';
+import './itemCart.css';
 import { storeContext } from '../../../context/storeContext';
 import { useNavigate } from 'react-router-dom';
 import Example from '../../../Components/itemCartModal';
@@ -18,36 +19,39 @@ export default function ItemCart() {
 
   return (
 
-    <div className='content'>
+    <div className='content AssetsPageChangecss AssetPaddingChange'>
 
-      <div className="search-container d-flex  align-items-center justify-content-end mb-5 gap-3">
-        <div className="card-info position-relative" onClick={() => setShowModal(true)}>
-          {showModal && <Example showModal={showModal} setShowModal={setShowModal} />}
-          <img src="src/assets/img/bg/basket_icon.png" className='basket' alt="" />
-          <div className={`${getTotalAmount() === 0 ? "" : "dot"}`}></div>
+      <div className="search-container d-flex  align-items-center justify-content-between mb-5 ps-5 mt-5 gap-3">
+        <h2>Item Cart</h2>
+        <div className='d-flex'>
+          <div className="card-info position-relative me-3" onClick={() => setShowModal(true)}>
+            {showModal && <Example showModal={showModal} setShowModal={setShowModal} />}
+            <i className="fa-solid fa-basket-shopping fs-2 text-secondary"></i>
+            <div className={`${getTotalAmount() === 0 ? "" : "dot"}`}></div>
+          </div>
+          <form className="position-relative me-7 w-100">
+            <input className="form-control search-input search form-control-sm w"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)} />
+            <span className="fas fa-search search-box-icon"></span>
+          </form>
         </div>
-        <form className="position-relative me-7 w-30">
-          <input className="form-control search-input search form-control-sm w"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)} />
-          <span className="fas fa-search search-box-icon"></span>
-        </form>
       </div>
 
-      <div className="d-flex flex-wrap">
+      <div className="d-flex flex-wrap ps-5">
         {filteredData.map((data, index) => (
           <div key={index} className="card shadow cardwidth">
             <img src={data.image} className='card-img-top ttop border-bottom-0 ' alt="" />
             {!cardItem[data.id] ? (
-              <img src='src/assets/img/bg/add_icon_white.png' className='add' width="30" onClick={() => addToCart(data.id)} alt='add'></img>
+              <img src='/src/assets/img/bg/add_icon_white.png' className='add' width="30" onClick={() => addToCart(data.id)} alt='add'></img>
             ) : (
               <div className="item-counter">
-                <img src="src/assets/img/bg/remove_icon_red.png" width="30" alt="-" onClick={() => removeFromCart(data.id)} />
+                <img src="/src/assets/img/bg/remove_icon_red.png" width="30" alt="-" onClick={() => removeFromCart(data.id)} />
                 {cardItem[data.id]}
-                <img src="src/assets/img/bg/add_icon_green.png" width="30" alt="+" onClick={() => addToCart(data.id)} />
+                <img src="/src/assets/img/bg/add_icon_green.png" width="30" alt="+" onClick={() => addToCart(data.id)} />
               </div>
             )}
 

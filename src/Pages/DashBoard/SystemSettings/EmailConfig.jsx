@@ -50,7 +50,6 @@ const EmailConfig = () => {
       },
       { Header: "Hostname", accessor: "hostname" },
       { Header: "Port", accessor: "port" },
-      { Header: "Is Default", accessor: "isDefault" },
       {
         Header: "Created Date",
         accessor: "createdDate",
@@ -289,7 +288,7 @@ const EmailConfig = () => {
                         return (
                           <td key={cellKey || cidx}
                             {...cellRest}
-                            className="py-2 pe-3"
+                            className=" pe-3"
                           >
                             {cell.render("Cell")}
                           </td>

@@ -14,8 +14,8 @@ export default function SideInvoice() {
     data?.price.toString()?.includes(searchTerm)
   );
 
-  return (
-    <div className='content'>
+  return (  
+    <div className='content AssetsPageChangecss AssetPaddingChange'>
       <div className="search-container d-flex  align-items-center justify-content-end mb-5 gap-3">
 
         <form className="position-relative me-1 w-30">

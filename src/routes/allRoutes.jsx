@@ -4,7 +4,6 @@ import ForgetPassword from "../Pages/Auth/ForgetPassword";
 // Dashboard Pages
 import DashboardHome from "../Pages/DashBoard/DashboardHome";
 // import PosInvoice from "../pages/Dashboard/PosInvoice";
-import SideInvoice from "../Pages/DashBoard/SideInvoices.js/SideInvoice.jsx";
 import BankAccounts from "../Pages/DashBoard/BusinessERP/BusinessERP.jsx";
 import Invoice from "../Pages/DashBoard/ManageSales/Invoice.jsx";
 import ItemCart from "../Pages/DashBoard/POS/ItemCart.jsx";
@@ -51,6 +50,7 @@ import SalesReturnLog from "../Pages/DashBoard/ManageSales/SalesReturnLog.jsx";
 import OutOfStock from "../Pages/DashBoard/ManageItem/OutOfStock.jsx";
 import DamageItemDetails from "../Pages/DashBoard/ManageItem/DamageItemDetails.jsx";
 import UnitOfMeasure from "../Pages/DashBoard/SystemSettings/UnitOfMeasure.jsx";
+import SideInvoice from "../Pages/DashBoard/POS/SideInvoice.jsx";
 
 export const publicRoutes = [
   { path: "/Signin", component: <Signin /> },
@@ -60,10 +60,10 @@ export const publicRoutes = [
 
 const basePrivateRoutes = [
   { path: "/", component: <DashboardHome /> },
-  // { path: "/BusinessERP/Index", component: <BusinessERP /> },
+  { path: "/BusinessERP/Index", component: <BusinessERP /> },
   // POS
   { path: "/ItemCart/Index", component: <ItemCart /> },
-  { path: "/ItemCart/ItemCartSideInvoice", component: <ItemCart /> },
+  { path: "/ItemCart/ItemCartSideInvoice", component: <SideInvoice /> },
   // manage sales
   { path: "/Payment/Index", component: <Invoice /> },
   { path: "/PaymentManual/Index", component: <ManualInvoice /> },
@@ -163,7 +163,7 @@ const basePrivateRoutes = [
 
   { path: "/", component: <DashboardHome /> },
   // { path: "/PosInvoice", component: <PosInvoice /> },
-  { path: "/SideInvoice", component: <SideInvoice /> },
+  // { path: "/SideInvoice", component: <SideInvoice /> },
   // { path: "/Estimates", component: <Estimates /> },
   { path: "/BankAccounts", component: <BankAccounts /> }, // UNSTYLED 
   { path: "/Invoice", component: <Invoice /> }, // UNSTYLED SAME

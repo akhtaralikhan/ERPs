@@ -106,18 +106,18 @@ export const dashboardData = [
   },
 ];
 export const groceryData = [
-  { id: 1, title: "Curd", description: "Fresh red apples from the farm.", image: "src/assets/img/bg/curd.jpg", price: 120 },
-  { id: 2, title: "Olive", description: "health thing.", image: "src/assets/img/bg/olive.jpg", price: 60 },
-  { id: 3, title: "Apple", description: "Juicy oranges full of vitamin C.", image: "src/assets/img/bg/applee.png", price: 90 },
-  { id: 5, title: "Honey", description: "Fresh farm Honey.", image: "src/assets/img/bg/honey.jpg", price: 40 },
-  { id: 4, title: "Bananas", description: "Organic red tomatoes.", image: "src/assets/img/bg/banana.jpg", price: 50 },
-  { id: 6, title: "Onions", description: "Healthy and fresh onions.", image: "src/assets/img/bg/onions.jpg", price: 45 },
-  { id: 7, title: "Carrots", description: "Crunchy and sweet carrots.", image: "src/assets/img/bg/carrot.jpg", price: 70 },
-  { id: 8, title: "Spinach", description: "Fresh green spinach leaves.", image: "src/assets/img/bg/spinach.jpg", price: 30 },
-  { id: 9, title: "Broccoli", description: "Healthy broccoli florets.", image: "src/assets/img/bg/broccoli.jpg", price: 110 },
-  { id: 11, title: "Milk", description: "Fresh cow milk.", image: "src/assets/img/bg/milk.jpg", price: 60 },
-  { id: 12, title: "Cheese", description: "Tasty cheddar cheese.", image: "src/assets/img/bg/cheese.jpg", price: 250 },
-  { id: 13, title: "Eggs", description: "Farm fresh eggs.", image: "src/assets/img/bg/eggs.jpg", price: 70 },
+  { id: 1, title: "Curd", description: "Fresh red apples from the farm.", image: "/src/assets/img/bg/curd.jpg", price: 120 },
+  { id: 2, title: "Olive", description: "health thing.", image: "/src/assets/img/bg/olive.jpg", price: 60 },
+  { id: 3, title: "Apple", description: "Juicy oranges full of vitamin C.", image: "/src/assets/img/bg/applee.png", price: 90 },
+  { id: 5, title: "Honey", description: "Fresh farm Honey.", image: "/src/assets/img/bg/honey.jpg", price: 40 },
+  { id: 4, title: "Bananas", description: "Organic red tomatoes.", image: "/src/assets/img/bg/banana.jpg", price: 50 },
+  { id: 6, title: "Onions", description: "Healthy and fresh onions.", image: "/src/assets/img/bg/onions.jpg", price: 45 },
+  { id: 7, title: "Carrots", description: "Crunchy and sweet carrots.", image: "/src/assets/img/bg/carrot.jpg", price: 70 },
+  { id: 8, title: "Spinach", description: "Fresh green spinach leaves.", image: "/src/assets/img/bg/spinach.jpg", price: 30 },
+  { id: 9, title: "Broccoli", description: "Healthy broccoli florets.", image: "/src/assets/img/bg/broccoli.jpg", price: 110 },
+  { id: 11, title: "Milk", description: "Fresh cow milk.", image: "/src/assets/img/bg/milk.jpg", price: 60 },
+  { id: 12, title: "Cheese", description: "Tasty cheddar cheese.", image: "/src/assets/img/bg/cheese.jpg", price: 250 },
+  { id: 13, title: "Eggs", description: "Farm fresh eggs.", image: "/src/assets/img/bg/eggs.jpg", price: 70 },
 ];
 export const ManageinvoiceData = [
   {
@@ -132,13 +132,13 @@ export const ManageinvoiceData = [
     "dueAmount": 906.61,
     "createdDate": "5/13/2022",
     "status": "UnPaid",
-    // "customerImg":"src/assets/img/bg/girl.jpg"
+    // "customerImg":"/src/assets/img/bg/girl.jpg"
   },
   {
     "id": "INV2",
     "customer": "Walk in Customer",
     "branch": "Main Branch",
-    // "customerImg":"src/assets/img/bg/man.jpg",
+    // "customerImg":"/src/assets/img/bg/man.jpg",
     "subTotal": 840,
     "discount": 0,
     "vat": 66.61,
@@ -158,7 +158,7 @@ export const ManageinvoiceData = [
     "grandTotal": 260.61,
     "paidAmount": 0,
     "dueAmount": 260.61,
-    // "customerImg":"src/assets/img/bg/boy.jpg",
+    // "customerImg":"/src/assets/img/bg/boy.jpg",
     "createdDate": "5/13/2022",
     "status": "UnPaid"
   },
@@ -166,7 +166,7 @@ export const ManageinvoiceData = [
     "id": "INV3",
     "customer": "John Doe",
     "branch": "Main Branch",
-    // "customerImg":"src/assets/img/bg/banana.jpg",
+    // "customerImg":"/src/assets/img/bg/banana.jpg",
     "subTotal": 1200,
     "discount": 50,
     "vat": 115,
@@ -186,13 +186,13 @@ export const ManageinvoiceData = [
     "grandTotal": 525,
     "paidAmount": 525,
     "dueAmount": 0,
-    // "customerImg":"src/assets/img/bg/banana.jpg",
+    // "customerImg":"/src/assets/img/bg/banana.jpg",
     "createdDate": "5/15/2022",
     "status": "Paid"
   },
   {
     "id": "INV5",
-    // "customerImg":"src/assets/img/bg/banana.jpg",
+    // "customerImg":"/src/assets/img/bg/banana.jpg",
     "customer": "Michael Johnson",
     "branch": "Branch B",
     "subTotal": 300,

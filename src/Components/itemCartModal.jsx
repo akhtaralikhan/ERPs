@@ -11,7 +11,10 @@ function Example({ showModal, setShowModal }) {
     <div>
 
       <Modal isOpen={showModal} backdrop={true} toggle={toggle}>
-        <ModalHeader className='text-uppercase' >Item Card Detail</ModalHeader>
+        <div className='text-uppercase modal-header'>
+          <p className='mb-0 fw-bold'>Item Card Detail</p>
+          <i className='fa-solid fa-xmark text-danger pointer' onClick={() => toggle()}></i>
+        </div>
         <ModalBody className='p-4'>
           <table className='table table-hover mb-3'>
             <thead>
