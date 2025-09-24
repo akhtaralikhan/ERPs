@@ -1,5 +1,4 @@
 import React, { useState, useMemo } from "react";
-import { Link } from "react-router-dom";
 import {
   useTable,
   usePagination,
@@ -8,20 +7,49 @@ import {
 } from "react-table";
 import Dropdown from "react-bootstrap/Dropdown";
 import GlobalFilter from "../../../Components/GlobalFilter";
-import DeleteModal from "../../../Components/DeleteModal";
-import { SystemRoleData } from "../../../assets/data";
-import SystemRoleModal from "../../../Components/SystemRoleModal";
+import { PurchasesSummaryData } from "../../../assets/data";
 
-const SystemRole = () => {
+const PurchasesSummary = () => {
   const [showAll, setShowAll] = useState(false);
-  const [editData, setEditData] = useState(null);
-  const [mode, setMode] = useState("new");
 
-  // ✅ Table columns
+  // ✅ Table columns (only display)
   const columns = useMemo(
     () => [
-      { Header: "SL", accessor: "sl", size: 400 },
-      { Header: "Role Name", accessor: "RoleName" },
+      { Header: "Id", accessor: "Id", size: 400 },
+      { Header: "Customer Name", accessor: "CustomerName" },
+      { Header: "Discount", accessor: "Discount" },
+      { Header: "VAT", accessor: "VAT" },
+      { Header: "Sub Total", accessor: "SubTotal" },
+      { Header: "Grand Total", accessor: "GrandTotal" },
+      { Header: "Paid Amount", accessor: "PaidAmount" },
+      { Header: "Due Amount", accessor: "DueAmount" },
+      {
+        Header: "Status",
+        accessor: "Status",
+        Cell: ({ value }) => (
+          <span
+            className={`badge ${
+              value ? "bg-success text-white" : "bg-secondary text-white"
+            }`}
+          >
+            {value ? "Paid" : "UnPaid"}
+          </span>
+        ),
+      },
+      {
+        Header: "Created Date",
+        accessor: "createdDate",
+        Cell: ({ value }) => {
+          return new Date(value).toLocaleString("en-US", {
+            month: "short",
+            day: "numeric",
+            // year:"numeric",
+            hour: "numeric",
+            minute: "numeric",
+            hour12: true,
+          });
+        },
+      },
     ],
     []
   );
@@ -38,13 +66,13 @@ const SystemRole = () => {
     canNextPage,
     canPreviousPage,
     pageOptions,
-    gotoPage, // <-- add this here
+    gotoPage,
     state: { pageIndex, globalFilter },
     setGlobalFilter,
   } = useTable(
     {
       columns,
-      data: SystemRoleData,
+      data: PurchasesSummaryData,
       initialState: { pageIndex: 0, pageSize: 5 },
     },
     useGlobalFilter,
@@ -56,38 +84,19 @@ const SystemRole = () => {
     <div className="content AssetsPageChangecss AssetPaddingChange">
       <div className="marginforsmalldevice RemoveBorder card rounded-0">
         <div className="NewColorChange phoenix-toolbar d-flex align-items-center flex-wrap py-md-3 px-md-4 mb-md-0 border-bottom gap-3">
-          {/* Title and tabs */}
-          <div className=" p-3 row" style={{ minWidth: "170px" }}>
+          <div className="p-3 row" style={{ minWidth: "170px" }}>
             <h2 className="fw-bolder mb-5" style={{ fontSize: "2rem" }}>
-              System Role
+              Payment Summary Report
             </h2>
-            <div
-              className="d-flex flex-wrap align-items-center"
-              style={{ gap: "35px" }}
-            >
-              <span className="filterLinks text-dark">
-                All <span className="NewChangeColor">(68817)</span>
-              </span>
-              <span className="filterLinks ColorChangeFilterLink">
-                Vendor Name <span className="NewChangeColor">(6)</span>
-              </span>
-              <span className="filterLinks ColorChangeFilterLink">
-                Return Type <span className="NewChangeColor">(17)</span>
-              </span>
-              <span className="filterLinks ColorChangeFilterLink">
-                Approval Status <span className="NewChangeColor">(6,810)</span>
-              </span>
-            </div>
 
-            {/* Search bar */}
+            {/* Search + Filters */}
             <div className="d-flex flex-xl-row flex-column">
               <GlobalFilter
                 globalFilter={globalFilter}
                 setGlobalFilter={setGlobalFilter}
               />
-              {/* Filter dropdowns */}
               <div className="d-flex flex-md-row mb-md-4 mb-4 flex-column mt-4">
-                <Dropdown className="">
+                <Dropdown>
                   <Dropdown.Toggle
                     variant="light"
                     className="btn btn-phoenix-secondary px-7 flex-shrink-0"
@@ -152,43 +161,16 @@ const SystemRole = () => {
                 <i className="fa-solid fa-file-export me-2"></i>
                 Export
               </div>
-              {/* Add order button */}
-              <button
-                className="btn btn-primary"
-                type="button"
-                data-bs-toggle="modal"
-                data-bs-target="#systemRoleModal"
-                onClick={() => {
-                  setMode("new");
-                  setEditData(null);
-                }}
-              >
-                <span className="fas fa-plus me-2"></span>
-                Add Role
-              </button>
             </div>
           </div>
-
-          {/* Export button */}
         </div>
 
+        {/* ✅ Table */}
         <div className="table-responsive p-4 px-5 pt-0">
-          {/* ✅ Search */}
-          <SystemRoleModal
-            mode={mode}
-            initialData={editData}
-            onSave={(data) => {
-              console.log("Saved data:", data);
-              // update your state or call API here
-            }}
-          />
-
-          <div className="table-responsive custom-scroll ">
+          <div className="table-responsive custom-scroll">
             <table
               {...getTableProps()}
-              className="table  table-sm fs--1 mb-0 ConvertUpperCase
-              "
-              // table align-middle fs-9 mb-0
+              className="table  table-sm fs--1 mb-0 ConvertUpperCase"
               style={{ fontSize: "13px" }}
             >
               <thead className="table align-middle text-nowrap fs-9 mb-0 text-uppercase">
@@ -236,7 +218,6 @@ const SystemRole = () => {
                           </th>
                         );
                       })}
-                      <th>Actions</th>
                     </tr>
                   );
                 })}
@@ -249,7 +230,6 @@ const SystemRole = () => {
                 {page.map((row, idx) => {
                   prepareRow(row);
                   const { key: rowKey, ...rowRest } = row.getRowProps();
-
                   return (
                     <tr key={rowKey || idx} {...rowRest}>
                       {row.cells.map((cell, cidx) => {
@@ -265,46 +245,6 @@ const SystemRole = () => {
                           </td>
                         );
                       })}
-
-                      <td className="align-middle white-space-nowrap pe-0">
-                        <div className="font-sans-serif btn-reveal-trigger position-static p-0">
-                          <button
-                            className="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
-                            type="button"
-                            data-bs-toggle="dropdown"
-                            data-boundary="window"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                            data-bs-reference="parent"
-                          >
-                            <i className="fa fa-ellipsis fs--2"></i>
-                          </button>
-                          <div className="dropdown-menu dropdown-menu-end py-2">
-                            <Link
-                              className="dropdown-item"
-                              to="#!"
-                              type="button"
-                              data-bs-toggle="modal"
-                              data-bs-target="#systemRoleModal" // 🔹 use the correct modal ID
-                              onClick={() => {
-                                setMode("edit");
-                                setEditData(row.original); // send row data to modal
-                              }}
-                            >
-                              Edit
-                            </Link>
-                            <div className="dropdown-divider"></div>
-                            <Link
-                              className="dropdown-item text-danger"
-                              to="#!"
-                              data-bs-toggle="modal"
-                              data-bs-target="#verticallyCentered"
-                            >
-                              Delete
-                            </Link>
-                          </div>
-                        </div>
-                      </td>
                     </tr>
                   );
                 })}
@@ -312,7 +252,7 @@ const SystemRole = () => {
             </table>
           </div>
 
-          {/* ✅ Ellipsis-based Pagination (compact version) */}
+          {/* ✅ Pagination */}
           <div className="d-flex justify-content-between align-items-center py-2">
             <p className="mb-0 text-body fs-9" style={{ fontSize: "14px" }}>
               Page {pageIndex + 1} of {pageOptions.length}
@@ -327,7 +267,6 @@ const SystemRole = () => {
             </p>
 
             <ul className="pagination mb-0 mt-2">
-              {/* Prev Button */}
               <li className={`page-item ${!canPreviousPage ? "disabled" : ""}`}>
                 <button className="page-link" onClick={() => previousPage()}>
                   <span className="fas fa-chevron-left"></span>
@@ -337,19 +276,17 @@ const SystemRole = () => {
               {(() => {
                 const pageNumbers = [];
                 const totalPages = pageOptions.length;
-                const currentPage = pageIndex + 1; // react-table is 0-based
+                const currentPage = pageIndex + 1;
 
                 let startPage = Math.max(1, currentPage - 1);
                 let endPage = Math.min(totalPages, currentPage + 1);
 
-                // Adjust if near start or end
                 if (currentPage === 1) {
                   endPage = Math.min(3, totalPages);
                 } else if (currentPage === totalPages) {
                   startPage = Math.max(totalPages - 2, 1);
                 }
 
-                // Always show first page
                 if (startPage > 1) {
                   pageNumbers.push(
                     <li
@@ -372,7 +309,6 @@ const SystemRole = () => {
                   }
                 }
 
-                // Main visible range (only 3 numbers max)
                 for (let i = startPage; i <= endPage; i++) {
                   pageNumbers.push(
                     <li
@@ -391,7 +327,6 @@ const SystemRole = () => {
                   );
                 }
 
-                // Always show last page
                 if (endPage < totalPages) {
                   if (endPage < totalPages - 1) {
                     pageNumbers.push(
@@ -420,7 +355,6 @@ const SystemRole = () => {
                 return pageNumbers;
               })()}
 
-              {/* Next Button */}
               <li className={`page-item ${!canNextPage ? "disabled" : ""}`}>
                 <button className="page-link" onClick={() => nextPage()}>
                   <span className="fas fa-chevron-right"></span>
@@ -428,11 +362,10 @@ const SystemRole = () => {
               </li>
             </ul>
           </div>
-
-          <DeleteModal modalId="verticallyCentered" resource="invoices" />
         </div>
       </div>
     </div>
   );
 };
-export default SystemRole;
+
+export default PurchasesSummary;

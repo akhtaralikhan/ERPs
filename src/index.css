@@ -33,6 +33,77 @@
     margin-left: .4rem;
 }
 
+.DecreseMargin p {
+    margin-bottom: 0px;
+}
+
+.IConColorchange button i {
+    font-size: 16px;
+    color: #8a94ad;
+}
+
+.ImageSize svg {
+    width: 100%;
+}
+
+@media print {
+
+    @page {
+        size: A4 portrait;
+        margin: 1cm;
+    }
+
+    /* Reset background and padding for the printout */
+    body,
+    .card,
+    .content {
+        background: none;
+        padding: 0;
+        margin: 0;
+        box-shadow: none;
+    }
+
+    .NewColorChange {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+
+    .PrintSize {
+        padding: 0px !important;
+    }
+
+    .PrintSizeH2 {
+        margin-bottom: 5px !important;
+        font-size: 26px !important;
+    }
+
+    .PrintSearchPadding {
+        padding-left: 5px !important;
+    }
+
+    .PrintWidthDropdown {
+        margin-top: 5px !important;
+        margin-bottom: 5px !important;
+        width: 50% !important;
+    }
+
+    .PrintIconDisplay {
+        display: none;
+    }
+
+    .PrintDnone {
+        display: none !important;
+    }
+
+    .footer {
+        display: none;
+    }
+
+    .HuzaifaNav {
+        display: none;
+    }
+}
+
 @media (max-width: 280px) {}
 
 @media (max-width: 540px) {

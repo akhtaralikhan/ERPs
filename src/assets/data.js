@@ -2179,352 +2179,2870 @@ export const DesignationData = [
     "CreatedDate": "2023-02-20"
   }
 ]
+
 export const ManageUserData = [
   {
-    ID: 1,
-    Name: "Genral",
-    Description: "User Role:Genral",
-    CreatedDate: "2/20/2023",
+    id: 1,
+    name: "General",
+    description: "User Role: General",
+    createdDate: "2023-02-20T10:00:00",
   },
   {
-    ID: 2,
-    Name: "Admin",
-    Description: "User Role:New",
-    CreatedDate: "2/20/2023",
-  }
-]
+    id: 2,
+    name: "Admin",
+    description: "User Role: Admin",
+    createdDate: "2023-02-20T12:00:00",
+  },
+];
+
+export const SendEmailHistoryData = [
+  {
+    id: 1,
+    InvoiceId: "INV-1001",
+    SenderEmail: "admin@example.com",
+    ReceiverEmail: "user1@example.com",
+    Result: "Sent",
+    createdDate: "2023-02-20T10:00:00",
+    CreatedBy: "System",
+  },
+  {
+    id: 2,
+    InvoiceId: "INV-1002",
+    SenderEmail: "support@example.com",
+    ReceiverEmail: "user2@example.com",
+    Result: "Failed",
+    createdDate: "2023-02-21T14:30:00",
+    CreatedBy: "Admin",
+  },
+  {
+    id: 3,
+    InvoiceId: "INV-1003",
+    SenderEmail: "noreply@example.com",
+    ReceiverEmail: "user3@example.com",
+    Result: "Sent",
+    createdDate: "2023-02-22T09:15:00",
+    CreatedBy: "System",
+  },
+  {
+    id: 4,
+    InvoiceId: "INV-1004",
+    SenderEmail: "hr@example.com",
+    ReceiverEmail: "user4@example.com",
+    Result: "Sent",
+    createdDate: "2023-02-23T16:45:00",
+    CreatedBy: "HR Manager",
+  },
+  {
+    id: 5,
+    InvoiceId: "INV-1005",
+    SenderEmail: "alerts@example.com",
+    ReceiverEmail: "user5@example.com",
+    Result: "Pending",
+    createdDate: "2023-02-24T11:20:00",
+    CreatedBy: "System",
+  },
+  {
+    id: 6,
+    InvoiceId: "INV-1006",
+    SenderEmail: "info@example.com",
+    ReceiverEmail: "user6@example.com",
+    Result: "Sent",
+    createdDate: "2023-02-25T08:50:00",
+    CreatedBy: "Support Team",
+  },
+];
+
+
+export const LoginHistoryData = [
+  {
+    id: 1,
+    UserName: "john_doe",
+    LoginTime: "2023-02-20T09:00:00",
+    LogoutTime: "2023-02-20T10:30:00",
+    DurationMin: 90,
+    PublicIP: "192.168.1.10",
+    Latitude: "40.7128",
+    Longitude: "-74.0060",
+    Browser: "Chrome",
+    OS: "Windows 10",
+    Device: "Desktop",
+    Action: "Login",
+    ActionStatus: "Success",
+    createdDate: "2023-02-20T09:00:00",
+  },
+  {
+    id: 2,
+    UserName: "jane_smith",
+    LoginTime: "2023-02-21T14:15:00",
+    LogoutTime: "2023-02-21T15:00:00",
+    DurationMin: 45,
+    PublicIP: "192.168.1.20",
+    Latitude: "34.0522",
+    Longitude: "-118.2437",
+    Browser: "Firefox",
+    OS: "macOS Ventura",
+    Device: "Laptop",
+    Action: "Login",
+    ActionStatus: "Success",
+    createdDate: "2023-02-21T14:15:00",
+  },
+  {
+    id: 3,
+    UserName: "michael89",
+    LoginTime: "2023-02-22T08:45:00",
+    LogoutTime: "2023-02-22T09:10:00",
+    DurationMin: 25,
+    PublicIP: "192.168.1.30",
+    Latitude: "51.5074",
+    Longitude: "-0.1278",
+    Browser: "Edge",
+    OS: "Windows 11",
+    Device: "Tablet",
+    Action: "Login",
+    ActionStatus: "Failed",
+    createdDate: "2023-02-22T08:45:00",
+  },
+  {
+    id: 4,
+    UserName: "sarah_w",
+    LoginTime: "2023-02-23T11:20:00",
+    LogoutTime: "2023-02-23T13:00:00",
+    DurationMin: 100,
+    PublicIP: "192.168.1.40",
+    Latitude: "48.8566",
+    Longitude: "2.3522",
+    Browser: "Safari",
+    OS: "iOS 16",
+    Device: "iPhone",
+    Action: "Login",
+    ActionStatus: "Success",
+    createdDate: "2023-02-23T11:20:00",
+  },
+  {
+    id: 5,
+    UserName: "alex_k",
+    LoginTime: "2023-02-24T16:00:00",
+    LogoutTime: "2023-02-24T16:30:00",
+    DurationMin: 30,
+    PublicIP: "192.168.1.50",
+    Latitude: "35.6895",
+    Longitude: "139.6917",
+    Browser: "Opera",
+    OS: "Linux Ubuntu",
+    Device: "Desktop",
+    Action: "Login",
+    ActionStatus: "Timeout",
+    createdDate: "2023-02-24T16:00:00",
+  },
+  {
+    id: 6,
+    UserName: "emma_r",
+    LoginTime: "2023-02-25T07:40:00",
+    LogoutTime: "2023-02-25T09:00:00",
+    DurationMin: 80,
+    PublicIP: "192.168.1.60",
+    Latitude: "55.7558",
+    Longitude: "37.6173",
+    Browser: "Chrome",
+    OS: "Android 13",
+    Device: "Mobile",
+    Action: "Login",
+    ActionStatus: "Success",
+    createdDate: "2023-02-25T07:40:00",
+  },
+];
+
+export const AuditLogsData = [
+  {
+    id: 1003,
+    UserId: "admin@gmail.com",
+    Type: "Create",
+    TableName: "ManageUserRolesDetails",
+    PrimaryKey: '{"Id":-9223372036854774798}',
+    DateTime: "2025-09-19T00:00:00",
+  },
+  {
+    id: 1002,
+    UserId: "admin@gmail.com",
+    Type: "Create",
+    TableName: "ManageUserRolesDetails",
+    PrimaryKey: '{"Id":-9223372036854774799}',
+    DateTime: "2025-09-19T00:00:00",
+  },
+  {
+    id: 1001,
+    UserId: "admin@gmail.com",
+    Type: "Create",
+    TableName: "ManageUserRolesDetails",
+    PrimaryKey: '{"Id":-9223372036854774800}',
+    DateTime: "2025-09-19T00:00:00",
+  },
+  {
+    id: 1000,
+    UserId: "admin@gmail.com",
+    Type: "Create",
+    TableName: "ManageUserRolesDetails",
+    PrimaryKey: '{"Id":-9223372036854774801}',
+    DateTime: "2025-09-19T00:00:00",
+  },
+  {
+    id: 999,
+    UserId: "admin@gmail.com",
+    Type: "Create",
+    TableName: "ManageUserRolesDetails",
+    PrimaryKey: '{"Id":-9223372036854774802}',
+    DateTime: "2025-09-19T00:00:00",
+  },
+  {
+    id: 998,
+    UserId: "admin@gmail.com",
+    Type: "Create",
+    TableName: "ManageUserRolesDetails",
+    PrimaryKey: '{"Id":-9223372036854774803}',
+    DateTime: "2025-09-19T00:00:00",
+  },
+  {
+    id: 997,
+    UserId: "admin@gmail.com",
+    Type: "Create",
+    TableName: "ManageUserRolesDetails",
+    PrimaryKey: '{"Id":-9223372036854774804}',
+    DateTime: "2025-09-19T00:00:00",
+  },
+  {
+    id: 996,
+    UserId: "admin@gmail.com",
+    Type: "Create",
+    TableName: "ManageUserRolesDetails",
+    PrimaryKey: '{"Id":-9223372036854774805}',
+    DateTime: "2025-09-19T00:00:00",
+  },
+  {
+    id: 995,
+    UserId: "admin@gmail.com",
+    Type: "Create",
+    TableName: "ManageUserRolesDetails",
+    PrimaryKey: '{"Id":-9223372036854774806}',
+    DateTime: "2025-09-19T00:00:00",
+  },
+  {
+    id: 994,
+    UserId: "admin@gmail.com",
+    Type: "Create",
+    TableName: "ManageUserRolesDetails",
+    PrimaryKey: '{"Id":-9223372036854774807}',
+    DateTime: "2025-09-19T00:00:00",
+  },
+  {
+    id: 993,
+    UserId: "admin@gmail.com",
+    Type: "Create",
+    TableName: "ManageUserRoles",
+    PrimaryKey: '{"Id":-9223372036854774807}',
+    DateTime: "2025-09-19T00:00:00",
+  },
+  {
+    id: 992,
+    UserId: "admin@gmail.com",
+    Type: "Create",
+    TableName: "ExpenseSummary",
+    PrimaryKey: '{"Id":-9223372036854774806}',
+    DateTime: "2025-09-19T00:00:00",
+  },
+  {
+    id: 991,
+    UserId: "admin@gmail.com",
+    Type: "Create",
+    TableName: "UserInfoFromBrowser",
+    PrimaryKey: '{"Id":-9223372036854774807}',
+    DateTime: "2025-09-19T00:00:00",
+  },
+  {
+    id: 990,
+    UserId: "admin@gmail.com",
+    Type: "Create",
+    TableName: "LoginHistory",
+    PrimaryKey: '{"Id":-9223372036854774807}',
+    DateTime: "2025-09-19T00:00:00",
+  },
+  {
+    id: 989,
+    UserId: "admin@gmail.com",
+    Type: "Update",
+    TableName: "ExpenseSummary",
+    PrimaryKey: '{"Id":15}',
+    DateTime: "2025-09-19T00:00:00",
+  },
+  {
+    id: 988,
+    UserId: "admin@gmail.com",
+    Type: "Create",
+    TableName: "ExpenseDetails",
+    PrimaryKey: '{"Id":-9223372036854774807}',
+    DateTime: "2025-09-19T00:00:00",
+  },
+  {
+    id: 987,
+    UserId: "admin@gmail.com",
+    Type: "Create",
+    TableName: "ExpenseSummary",
+    PrimaryKey: '{"Id":-9223372036854774807}',
+    DateTime: "2025-09-19T00:00:00",
+  },
+  {
+    id: 986,
+    UserId: "admin@gmail.com",
+    Type: "Create",
+    TableName: "UserInfoFromBrowser",
+    PrimaryKey: '{"Id":-9223372036854774807}',
+    DateTime: "2025-09-19T00:00:00",
+  },
+  {
+    id: 985,
+    UserId: "admin@gmail.com",
+    Type: "Create",
+    TableName: "LoginHistory",
+    PrimaryKey: '{"Id":-9223372036854774807}',
+    DateTime: "2025-09-19T00:00:00",
+  },
+  {
+    id: 984,
+    UserId: "admin@gmail.com",
+    Type: "Create",
+    TableName: "Payment",
+    PrimaryKey: '{"Id":-9223372036854774807}',
+    DateTime: "2025-09-18T00:00:00",
+  },
+];
+
+export const UserInfoFromBrowserData = [
+  {
+    id: 1,
+    BrowserUniqueID: "BRW-001-XYZ",
+    Lat: "19.0760",
+    Long: "72.8777",
+    TimeZone: "Asia/Kolkata",
+    BrowserMajor: "119",
+    BrowserName: "Chrome",
+    createdDate: "2025-09-19T10:15:00",
+  },
+  {
+    id: 2,
+    BrowserUniqueID: "BRW-002-ABC",
+    Lat: "28.7041",
+    Long: "77.1025",
+    TimeZone: "Asia/Kolkata",
+    BrowserMajor: "118",
+    BrowserName: "Edge",
+    createdDate: "2025-09-19T11:25:00",
+  },
+  {
+    id: 3,
+    BrowserUniqueID: "BRW-003-PQR",
+    Lat: "40.7128",
+    Long: "-74.0060",
+    TimeZone: "America/New_York",
+    BrowserMajor: "117",
+    BrowserName: "Firefox",
+    createdDate: "2025-09-19T22:05:00",
+  },
+  {
+    id: 4,
+    BrowserUniqueID: "BRW-004-MNO",
+    Lat: "51.5074",
+    Long: "-0.1278",
+    TimeZone: "Europe/London",
+    BrowserMajor: "120",
+    BrowserName: "Safari",
+    createdDate: "2025-09-18T08:30:00",
+  },
+  {
+    id: 5,
+    BrowserUniqueID: "BRW-005-DEF",
+    Lat: "35.6895",
+    Long: "139.6917",
+    TimeZone: "Asia/Tokyo",
+    BrowserMajor: "121",
+    BrowserName: "Opera",
+    createdDate: "2025-09-18T14:10:00",
+  },
+];
+
+// ✅ New mock data for RefreshToken table
+export const RefreshTokenData = [
+  {
+    id: 1,
+    UserEmail: "john.doe@example.com",
+    Token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9-001",
+    JwtId: "JWT-001-XYZ",
+    IsUsed: false,
+    IsRevorked: false,
+    AddedDate: "2025-09-18T10:20:00",
+    ExpiryDate: "2025-09-25T10:20:00",
+  },
+  {
+    id: 2,
+    UserEmail: "alice.smith@example.com",
+    Token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9-002",
+    JwtId: "JWT-002-ABC",
+    IsUsed: true,
+    IsRevorked: false,
+    AddedDate: "2025-09-17T14:45:00",
+    ExpiryDate: "2025-09-24T14:45:00",
+  },
+  {
+    id: 3,
+    UserEmail: "mark.jones@example.com",
+    Token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9-003",
+    JwtId: "JWT-003-PQR",
+    IsUsed: false,
+    IsRevorked: true,
+    AddedDate: "2025-09-16T09:10:00",
+    ExpiryDate: "2025-09-23T09:10:00",
+  },
+  {
+    id: 4,
+    UserEmail: "emma.brown@example.com",
+    Token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9-004",
+    JwtId: "JWT-004-MNO",
+    IsUsed: true,
+    IsRevorked: true,
+    AddedDate: "2025-09-15T18:30:00",
+    ExpiryDate: "2025-09-22T18:30:00",
+  },
+  {
+    id: 5,
+    UserEmail: "david.wilson@example.com",
+    Token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9-005",
+    JwtId: "JWT-005-DEF",
+    IsUsed: false,
+    IsRevorked: false,
+    AddedDate: "2025-09-14T12:05:00",
+    ExpiryDate: "2025-09-21T12:05:00",
+  },
+];
+
+
+export const HighInDemandData = [
+  {
+    SL: 1,
+    ItemName: "Ballpoint Pen (Blue)",
+    Total: 120,
+  },
+  {
+    SL: 2,
+    ItemName: "A4 Notebook (200 pages)",
+    Total: 95,
+  },
+  {
+    SL: 3,
+    ItemName: "Marker Set (Pack of 6)",
+    Total: 80,
+  },
+  {
+    SL: 4,
+    ItemName: "Stapler Machine",
+    Total: 65,
+  },
+  {
+    SL: 5,
+    ItemName: "Highlighter (Pack of 5)",
+    Total: 50,
+  },
+  {
+    SL: 6,
+    ItemName: "Gel Pen (Black)",
+    Total: 140,
+  },
+  {
+    SL: 7,
+    ItemName: "Sticky Notes (Pack of 3)",
+    Total: 110,
+  },
+  {
+    SL: 8,
+    ItemName: "Drawing Book (A3 Size)",
+    Total: 70,
+  },
+  {
+    SL: 9,
+    ItemName: "Calculator (Scientific)",
+    Total: 45,
+  },
+  {
+    SL: 10,
+    ItemName: "Eraser (Non-Dust)",
+    Total: 130,
+  },
+];
+
+export const LowInDemandData = [
+  {
+    SL: 1,
+    ItemName: "Glue Stick",
+    Total: 5,
+  },
+  {
+    SL: 2,
+    ItemName: "Sketch Pen (Pack of 12)",
+    Total: 8,
+  },
+  {
+    SL: 3,
+    ItemName: "Ring Binder",
+    Total: 12,
+  },
+  {
+    SL: 4,
+    ItemName: "Correction Fluid",
+    Total: 15,
+  },
+  {
+    SL: 5,
+    ItemName: "Punching Machine",
+    Total: 10,
+  },
+  {
+    SL: 6,
+    ItemName: "Compass Set",
+    Total: 7,
+  },
+  {
+    SL: 7,
+    ItemName: "Clipboard",
+    Total: 6,
+  },
+  {
+    SL: 8,
+    ItemName: "Drawing Board (A2 Size)",
+    Total: 9,
+  },
+  {
+    SL: 9,
+    ItemName: "Staple Pins (Pack of 1000)",
+    Total: 11,
+  },
+  {
+    SL: 10,
+    ItemName: "Colored Paper Sheets",
+    Total: 13,
+  },
+];
+
+export const HighestEarningData = [
+  {
+    SL: 1,
+    ItemName: "Premium Office Chair",
+    Total: 1200,
+  },
+  {
+    SL: 2,
+    ItemName: "Executive Desk",
+    Total: 950,
+  },
+  {
+    SL: 3,
+    ItemName: "Laser Printer",
+    Total: 870,
+  },
+  {
+    SL: 4,
+    ItemName: "Laptop Stand",
+    Total: 760,
+  },
+  {
+    SL: 5,
+    ItemName: "Ergonomic Keyboard",
+    Total: 720,
+  },
+  {
+    SL: 6,
+    ItemName: "Noise-Cancelling Headphones",
+    Total: 680,
+  },
+  {
+    SL: 7,
+    ItemName: "Projector",
+    Total: 640,
+  },
+  {
+    SL: 8,
+    ItemName: "Filing Cabinet",
+    Total: 600,
+  },
+  {
+    SL: 9,
+    ItemName: "High-Resolution Monitor",
+    Total: 580,
+  },
+  {
+    SL: 10,
+    ItemName: "Whiteboard (Magnetic)",
+    Total: 550,
+  },
+];
+
+
+export const LowestEarningData = [
+  {
+    SL: 1,
+    ItemName: "Stapler",
+    Total: 50,
+  },
+  {
+    SL: 2,
+    ItemName: "Paper Clips (Box)",
+    Total: 65,
+  },
+  {
+    SL: 3,
+    ItemName: "Sticky Notes",
+    Total: 80,
+  },
+  {
+    SL: 4,
+    ItemName: "Correction Pen",
+    Total: 95,
+  },
+  {
+    SL: 5,
+    ItemName: "Ballpoint Pens (Pack of 10)",
+    Total: 110,
+  },
+  {
+    SL: 6,
+    ItemName: "Desk Calendar",
+    Total: 130,
+  },
+  {
+    SL: 7,
+    ItemName: "Highlighter",
+    Total: 145,
+  },
+  {
+    SL: 8,
+    ItemName: "Eraser",
+    Total: 160,
+  },
+  {
+    SL: 9,
+    ItemName: "Sharpener",
+    Total: 175,
+  },
+  {
+    SL: 10,
+    ItemName: "Ruler (Plastic)",
+    Total: 190,
+  },
+];
+
+export const PaymentSummaryData = [
+  {
+    Id: 1,
+    CustomerName: "John Doe",
+    Discount: 10,
+    VAT: 5,
+    SubTotal: 100,
+    GrandTotal: 95,
+    PaidAmount: 50,
+    DueAmount: 45,
+    Status: false,
+    createdDate: "2025-09-21T09:30:00",
+  },
+  {
+    Id: 2,
+    CustomerName: "Jane Smith",
+    Discount: 5,
+    VAT: 8,
+    SubTotal: 120,
+    GrandTotal: 123,
+    PaidAmount: 100,
+    DueAmount: 23,
+    Status: false,
+    createdDate: "2025-09-20T15:45:00",
+  },
+  {
+    Id: 3,
+    CustomerName: "Michael Johnson",
+    Discount: 0,
+    VAT: 12,
+    SubTotal: 80,
+    GrandTotal: 92,
+    PaidAmount: 92,
+    DueAmount: 0,
+    Status: true,
+    createdDate: "2025-09-19T11:20:00",
+  },
+  {
+    Id: 4,
+    CustomerName: "Emily Davis",
+    Discount: 15,
+    VAT: 10,
+    SubTotal: 150,
+    GrandTotal: 145,
+    PaidAmount: 100,
+    DueAmount: 45,
+    Status: false,
+    createdDate: "2025-09-18T13:10:00",
+  },
+  {
+    Id: 5,
+    CustomerName: "William Brown",
+    Discount: 8,
+    VAT: 6,
+    SubTotal: 200,
+    GrandTotal: 198,
+    PaidAmount: 198,
+    DueAmount: 0,
+    Status: true,
+    createdDate: "2025-09-17T10:00:00",
+  },
+  {
+    Id: 6,
+    CustomerName: "Sophia Wilson",
+    Discount: 12,
+    VAT: 5,
+    SubTotal: 130,
+    GrandTotal: 123,
+    PaidAmount: 100,
+    DueAmount: 23,
+    Status: false,
+    createdDate: "2025-09-16T14:50:00",
+  },
+  {
+    Id: 7,
+    CustomerName: "James Taylor",
+    Discount: 0,
+    VAT: 7,
+    SubTotal: 90,
+    GrandTotal: 97,
+    PaidAmount: 97,
+    DueAmount: 0,
+    Status: true,
+    createdDate: "2025-09-15T09:15:00",
+  },
+  {
+    Id: 8,
+    CustomerName: "Olivia Martinez",
+    Discount: 5,
+    VAT: 8,
+    SubTotal: 110,
+    GrandTotal: 113,
+    PaidAmount: 50,
+    DueAmount: 63,
+    Status: false,
+    createdDate: "2025-09-14T16:30:00",
+  },
+  {
+    Id: 9,
+    CustomerName: "Benjamin Anderson",
+    Discount: 10,
+    VAT: 10,
+    SubTotal: 140,
+    GrandTotal: 140,
+    PaidAmount: 140,
+    DueAmount: 0,
+    Status: true,
+    createdDate: "2025-09-13T12:40:00",
+  },
+  {
+    Id: 10,
+    CustomerName: "Emma Thomas",
+    Discount: 8,
+    VAT: 5,
+    SubTotal: 125,
+    GrandTotal: 122,
+    PaidAmount: 60,
+    DueAmount: 62,
+    Status: false,
+    createdDate: "2025-09-12T11:25:00",
+  },
+];
+
+export const PurchasesSummaryData = [
+  {
+    Id: 1,
+    CustomerName: "ABC Suppliers",
+    Discount: 12,
+    VAT: 5,
+    SubTotal: 500,
+    GrandTotal: 490,
+    PaidAmount: 300,
+    DueAmount: 190,
+    Status: false, // ❌ UnPaid
+    createdDate: "2025-09-21T10:30:00",
+  },
+  {
+    Id: 2,
+    CustomerName: "XYZ Wholesalers",
+    Discount: 5,
+    VAT: 10,
+    SubTotal: 800,
+    GrandTotal: 810,
+    PaidAmount: 810,
+    DueAmount: 0,
+    Status: true, // ✅ Paid
+    createdDate: "2025-09-20T14:15:00",
+  },
+  {
+    Id: 3,
+    CustomerName: "FreshMart Traders",
+    Discount: 8,
+    VAT: 6,
+    SubTotal: 350,
+    GrandTotal: 348,
+    PaidAmount: 200,
+    DueAmount: 148,
+    Status: false,
+    createdDate: "2025-09-19T09:00:00",
+  },
+  {
+    Id: 4,
+    CustomerName: "Global Stationery",
+    Discount: 10,
+    VAT: 7,
+    SubTotal: 600,
+    GrandTotal: 597,
+    PaidAmount: 597,
+    DueAmount: 0,
+    Status: true,
+    createdDate: "2025-09-18T16:45:00",
+  },
+  {
+    Id: 5,
+    CustomerName: "Sunrise Distributors",
+    Discount: 15,
+    VAT: 8,
+    SubTotal: 1000,
+    GrandTotal: 993,
+    PaidAmount: 500,
+    DueAmount: 493,
+    Status: false,
+    createdDate: "2025-09-17T11:20:00",
+  },
+  {
+    Id: 6,
+    CustomerName: "Mega Supplies Co.",
+    Discount: 0,
+    VAT: 12,
+    SubTotal: 450,
+    GrandTotal: 504,
+    PaidAmount: 504,
+    DueAmount: 0,
+    Status: true,
+    createdDate: "2025-09-16T15:10:00",
+  },
+  {
+    Id: 7,
+    CustomerName: "Prime Office Supplies",
+    Discount: 7,
+    VAT: 9,
+    SubTotal: 700,
+    GrandTotal: 728,
+    PaidAmount: 400,
+    DueAmount: 328,
+    Status: false,
+    createdDate: "2025-09-15T12:50:00",
+  },
+  {
+    Id: 8,
+    CustomerName: "NextGen Traders",
+    Discount: 6,
+    VAT: 5,
+    SubTotal: 300,
+    GrandTotal: 299,
+    PaidAmount: 299,
+    DueAmount: 0,
+    Status: true,
+    createdDate: "2025-09-14T13:25:00",
+  },
+  {
+    Id: 9,
+    CustomerName: "BrightMart Enterprises",
+    Discount: 10,
+    VAT: 10,
+    SubTotal: 950,
+    GrandTotal: 950,
+    PaidAmount: 600,
+    DueAmount: 350,
+    Status: false,
+    createdDate: "2025-09-13T17:40:00",
+  },
+  {
+    Id: 10,
+    CustomerName: "Alpha Distributors",
+    Discount: 4,
+    VAT: 8,
+    SubTotal: 400,
+    GrandTotal: 408,
+    PaidAmount: 408,
+    DueAmount: 0,
+    Status: true,
+    createdDate: "2025-09-12T10:05:00",
+  },
+];
+
+export const ExpenseSummaryReportData = [
+  {
+    Id: 1,
+    Title: "Office Rent",
+    GrandTotal: 2500,
+    PaidAmount: 2500,
+    DueAmount: 0,
+    Currency: "USD",
+    createdDate: "2025-09-21T09:30:00",
+  },
+  {
+    Id: 2,
+    Title: "Electricity Bill",
+    GrandTotal: 450,
+    PaidAmount: 300,
+    DueAmount: 150,
+    Currency: "USD",
+    createdDate: "2025-09-20T11:15:00",
+  },
+  {
+    Id: 3,
+    Title: "Internet Services",
+    GrandTotal: 120,
+    PaidAmount: 120,
+    DueAmount: 0,
+    Currency: "USD",
+    createdDate: "2025-09-19T14:45:00",
+  },
+  {
+    Id: 4,
+    Title: "Stationery Supplies",
+    GrandTotal: 600,
+    PaidAmount: 400,
+    DueAmount: 200,
+    Currency: "USD",
+    createdDate: "2025-09-18T10:20:00",
+  },
+  {
+    Id: 5,
+    Title: "Employee Travel",
+    GrandTotal: 950,
+    PaidAmount: 500,
+    DueAmount: 450,
+    Currency: "USD",
+    createdDate: "2025-09-17T16:40:00",
+  },
+  {
+    Id: 6,
+    Title: "Software Subscriptions",
+    GrandTotal: 300,
+    PaidAmount: 300,
+    DueAmount: 0,
+    Currency: "USD",
+    createdDate: "2025-09-16T12:10:00",
+  },
+  {
+    Id: 7,
+    Title: "Cleaning Services",
+    GrandTotal: 200,
+    PaidAmount: 100,
+    DueAmount: 100,
+    Currency: "USD",
+    createdDate: "2025-09-15T15:30:00",
+  },
+  {
+    Id: 8,
+    Title: "Marketing & Ads",
+    GrandTotal: 1200,
+    PaidAmount: 700,
+    DueAmount: 500,
+    Currency: "USD",
+    createdDate: "2025-09-14T18:25:00",
+  },
+  {
+    Id: 9,
+    Title: "Insurance Premium",
+    GrandTotal: 800,
+    PaidAmount: 800,
+    DueAmount: 0,
+    Currency: "USD",
+    createdDate: "2025-09-13T09:50:00",
+  },
+  {
+    Id: 10,
+    Title: "Miscellaneous",
+    GrandTotal: 400,
+    PaidAmount: 200,
+    DueAmount: 200,
+    Currency: "USD",
+    createdDate: "2025-09-12T11:05:00",
+  },
+];
+
+export const ExpenseDetailsReportData = [
+  {
+    Id: 1,
+    ExpenseType: "Office Rent",
+    Description: "Monthly office rental payment",
+    Quantity: 1,
+    UnitPrice: 2500,
+    TotalPrice: 2500,
+    createdDate: "2025-09-21T09:30:00",
+  },
+  {
+    Id: 2,
+    ExpenseType: "Electricity Bill",
+    Description: "Monthly electricity usage",
+    Quantity: 1,
+    UnitPrice: 450,
+    TotalPrice: 450,
+    createdDate: "2025-09-20T11:15:00",
+  },
+  {
+    Id: 3,
+    ExpenseType: "Internet Services",
+    Description: "Fiber internet subscription",
+    Quantity: 1,
+    UnitPrice: 120,
+    TotalPrice: 120,
+    createdDate: "2025-09-19T14:45:00",
+  },
+  {
+    Id: 4,
+    ExpenseType: "Stationery Supplies",
+    Description: "Pens, paper, markers, notebooks",
+    Quantity: 10,
+    UnitPrice: 60,
+    TotalPrice: 600,
+    createdDate: "2025-09-18T10:20:00",
+  },
+  {
+    Id: 5,
+    ExpenseType: "Employee Travel",
+    Description: "Taxi, train & flight reimbursements",
+    Quantity: 5,
+    UnitPrice: 190,
+    TotalPrice: 950,
+    createdDate: "2025-09-17T16:40:00",
+  },
+  {
+    Id: 6,
+    ExpenseType: "Software Subscriptions",
+    Description: "Monthly SaaS tools",
+    Quantity: 3,
+    UnitPrice: 100,
+    TotalPrice: 300,
+    createdDate: "2025-09-16T12:10:00",
+  },
+  {
+    Id: 7,
+    ExpenseType: "Cleaning Services",
+    Description: "Office cleaning and sanitation",
+    Quantity: 4,
+    UnitPrice: 50,
+    TotalPrice: 200,
+    createdDate: "2025-09-15T15:30:00",
+  },
+  {
+    Id: 8,
+    ExpenseType: "Marketing & Ads",
+    Description: "Online campaigns and promotions",
+    Quantity: 6,
+    UnitPrice: 200,
+    TotalPrice: 1200,
+    createdDate: "2025-09-14T18:25:00",
+  },
+  {
+    Id: 9,
+    ExpenseType: "Insurance Premium",
+    Description: "Annual office insurance fee",
+    Quantity: 1,
+    UnitPrice: 800,
+    TotalPrice: 800,
+    createdDate: "2025-09-13T09:50:00",
+  },
+  {
+    Id: 10,
+    ExpenseType: "Miscellaneous",
+    Description: "Unplanned small expenses",
+    Quantity: 4,
+    UnitPrice: 100,
+    TotalPrice: 400,
+    createdDate: "2025-09-12T11:05:00",
+  },
+];
+
+
+
+export const ProductWiseSaleData = [
+  {
+    Id: 1,
+    SalesDate: "2025-09-21T09:30:00",
+    Item: "Premium Office Chair",
+    InvoiceNo: "INV-1001",
+    CustomerName: "John Doe",
+    UnitPrice: 300,
+    Quantity: 2,
+    Discount: 10,
+    VAT: 5,
+    Total: 570,
+  },
+  {
+    Id: 2,
+    SalesDate: "2025-09-20T15:45:00",
+    Item: "Executive Desk",
+    InvoiceNo: "INV-1002",
+    CustomerName: "Jane Smith",
+    UnitPrice: 450,
+    Quantity: 1,
+    Discount: 5,
+    VAT: 8,
+    Total: 463,
+  },
+  {
+    Id: 3,
+    SalesDate: "2025-09-19T11:20:00",
+    Item: "Laser Printer",
+    InvoiceNo: "INV-1003",
+    CustomerName: "Michael Johnson",
+    UnitPrice: 400,
+    Quantity: 1,
+    Discount: 0,
+    VAT: 12,
+    Total: 448,
+  },
+  {
+    Id: 4,
+    SalesDate: "2025-09-18T13:10:00",
+    Item: "Laptop Stand",
+    InvoiceNo: "INV-1004",
+    CustomerName: "Emily Davis",
+    UnitPrice: 120,
+    Quantity: 2,
+    Discount: 15,
+    VAT: 10,
+    Total: 228,
+  },
+  {
+    Id: 5,
+    SalesDate: "2025-09-17T10:00:00",
+    Item: "Ergonomic Keyboard",
+    InvoiceNo: "INV-1005",
+    CustomerName: "William Brown",
+    UnitPrice: 90,
+    Quantity: 3,
+    Discount: 8,
+    VAT: 6,
+    Total: 280,
+  },
+  {
+    Id: 6,
+    SalesDate: "2025-09-16T14:50:00",
+    Item: "Noise-Cancelling Headphones",
+    InvoiceNo: "INV-1006",
+    CustomerName: "Sophia Wilson",
+    UnitPrice: 150,
+    Quantity: 2,
+    Discount: 12,
+    VAT: 5,
+    Total: 264,
+  },
+  {
+    Id: 7,
+    SalesDate: "2025-09-15T09:15:00",
+    Item: "Projector",
+    InvoiceNo: "INV-1007",
+    CustomerName: "James Taylor",
+    UnitPrice: 500,
+    Quantity: 1,
+    Discount: 0,
+    VAT: 7,
+    Total: 535,
+  },
+  {
+    Id: 8,
+    SalesDate: "2025-09-14T16:30:00",
+    Item: "Filing Cabinet",
+    InvoiceNo: "INV-1008",
+    CustomerName: "Olivia Martinez",
+    UnitPrice: 200,
+    Quantity: 1,
+    Discount: 5,
+    VAT: 8,
+    Total: 206,
+  },
+  {
+    Id: 9,
+    SalesDate: "2025-09-13T12:40:00",
+    Item: "High-Resolution Monitor",
+    InvoiceNo: "INV-1009",
+    CustomerName: "Benjamin Anderson",
+    UnitPrice: 320,
+    Quantity: 1,
+    Discount: 10,
+    VAT: 10,
+    Total: 320,
+  },
+  {
+    Id: 10,
+    SalesDate: "2025-09-12T11:25:00",
+    Item: "Whiteboard (Magnetic)",
+    InvoiceNo: "INV-1010",
+    CustomerName: "Emma Thomas",
+    UnitPrice: 100,
+    Quantity: 2,
+    Discount: 8,
+    VAT: 5,
+    Total: 194,
+  },
+];
+
+export const AttendanceReportData = [
+  {
+    Id: 25,
+    Employee: "Ms Merry",
+    CheckIn: "2023-02-25T09:00:00",
+    CheckOut: "2023-02-25T18:00:00",
+    StayTime: "09:00:00",
+    CreatedDate: "2023-02-25",
+  },
+  {
+    Id: 24,
+    Employee: "Ms Merry",
+    CheckIn: "2023-02-24T09:00:00",
+    CheckOut: "2023-02-24T18:00:00",
+    StayTime: "09:00:00",
+    CreatedDate: "2023-02-24",
+  },
+  {
+    Id: 23,
+    Employee: "Ms Merry",
+    CheckIn: "2023-02-23T09:00:00",
+    CheckOut: "2023-02-23T18:00:00",
+    StayTime: "09:00:00",
+    CreatedDate: "2023-02-23",
+  },
+  {
+    Id: 22,
+    Employee: "Ms Merry",
+    CheckIn: "2023-02-22T09:00:00",
+    CheckOut: "2023-02-22T18:00:00",
+    StayTime: "09:00:00",
+    CreatedDate: "2023-02-22",
+  },
+  {
+    Id: 21,
+    Employee: "Ms Merry",
+    CheckIn: "2023-02-21T09:00:00",
+    CheckOut: "2023-02-21T18:00:00",
+    StayTime: "09:00:00",
+    CreatedDate: "2023-02-21",
+  },
+  {
+    Id: 20,
+    Employee: "Mr Alex",
+    CheckIn: "2023-02-25T09:00:00",
+    CheckOut: "2023-02-25T18:00:00",
+    StayTime: "09:00:00",
+    CreatedDate: "2023-02-25",
+  },
+  {
+    Id: 19,
+    Employee: "Mr Alex",
+    CheckIn: "2023-02-24T09:00:00",
+    CheckOut: "2023-02-24T18:00:00",
+    StayTime: "09:00:00",
+    CreatedDate: "2023-02-24",
+  },
+  {
+    Id: 18,
+    Employee: "Mr Alex",
+    CheckIn: "2023-02-23T09:00:00",
+    CheckOut: "2023-02-23T18:00:00",
+    StayTime: "09:00:00",
+    CreatedDate: "2023-02-23",
+  },
+  {
+    Id: 17,
+    Employee: "Mr Alex",
+    CheckIn: "2023-02-22T09:00:00",
+    CheckOut: "2023-02-22T18:00:00",
+    StayTime: "09:00:00",
+    CreatedDate: "2023-02-22",
+  },
+  {
+    Id: 16,
+    Employee: "Mr Alex",
+    CheckIn: "2023-02-21T09:00:00",
+    CheckOut: "2023-02-21T18:00:00",
+    StayTime: "09:00:00",
+    CreatedDate: "2023-02-21",
+  },
+  {
+    Id: 15,
+    Employee: "Mr Hasan",
+    CheckIn: "2023-02-25T09:00:00",
+    CheckOut: "2023-02-25T18:00:00",
+    StayTime: "09:00:00",
+    CreatedDate: "2023-02-25",
+  },
+  {
+    Id: 14,
+    Employee: "Mr Hasan",
+    CheckIn: "2023-02-24T09:00:00",
+    CheckOut: "2023-02-24T18:00:00",
+    StayTime: "09:00:00",
+    CreatedDate: "2023-02-24",
+  },
+  {
+    Id: 13,
+    Employee: "Mr Hasan",
+    CheckIn: "2023-02-23T09:00:00",
+    CheckOut: "2023-02-23T18:00:00",
+    StayTime: "09:00:00",
+    CreatedDate: "2023-02-23",
+  },
+  {
+    Id: 12,
+    Employee: "Mr Hasan",
+    CheckIn: "2023-02-22T09:00:00",
+    CheckOut: "2023-02-22T18:00:00",
+    StayTime: "09:00:00",
+    CreatedDate: "2023-02-22",
+  },
+  {
+    Id: 11,
+    Employee: "Mr Hasan",
+    CheckIn: "2023-02-21T09:00:00",
+    CheckOut: "2023-02-21T18:00:00",
+    StayTime: "09:00:00",
+    CreatedDate: "2023-02-21",
+  },
+  {
+    Id: 10,
+    Employee: "Mr Bond",
+    CheckIn: "2023-02-25T09:00:00",
+    CheckOut: "2023-02-25T18:00:00",
+    StayTime: "09:00:00",
+    CreatedDate: "2023-02-25",
+  },
+  {
+    Id: 9,
+    Employee: "Mr Bond",
+    CheckIn: "2023-02-24T09:00:00",
+    CheckOut: "2023-02-24T18:00:00",
+    StayTime: "09:00:00",
+    CreatedDate: "2023-02-24",
+  },
+  {
+    Id: 8,
+    Employee: "Mr Bond",
+    CheckIn: "2023-02-23T09:00:00",
+    CheckOut: "2023-02-23T18:00:00",
+    StayTime: "09:00:00",
+    CreatedDate: "2023-02-23",
+  },
+  {
+    Id: 7,
+    Employee: "Mr Bond",
+    CheckIn: "2023-02-22T09:00:00",
+    CheckOut: "2023-02-22T18:00:00",
+    StayTime: "09:00:00",
+    CreatedDate: "2023-02-22",
+  },
+  {
+    Id: 6,
+    Employee: "Mr Bond",
+    CheckIn: "2023-02-21T09:00:00",
+    CheckOut: "2023-02-21T18:00:00",
+    StayTime: "09:00:00",
+    CreatedDate: "2023-02-21",
+  },
+];
+
+
+export const PaymentDetailReportData = [
+  {
+    Id: 1,
+    PaymentId: "PAY-2001",
+    ItemId: "ITM-101",
+    ItemName: "Premium Office Chair",
+    Quantity: 2,
+    UnitPrice: 300,
+    TotalAmount: 600,
+    Date: "2025-09-21T09:30:00",
+  },
+  {
+    Id: 2,
+    PaymentId: "PAY-2002",
+    ItemId: "ITM-102",
+    ItemName: "Executive Desk",
+    Quantity: 1,
+    UnitPrice: 450,
+    TotalAmount: 450,
+    Date: "2025-09-20T15:45:00",
+  },
+  {
+    Id: 3,
+    PaymentId: "PAY-2003",
+    ItemId: "ITM-103",
+    ItemName: "Laser Printer",
+    Quantity: 1,
+    UnitPrice: 400,
+    TotalAmount: 400,
+    Date: "2025-09-19T11:20:00",
+  },
+  {
+    Id: 4,
+    PaymentId: "PAY-2004",
+    ItemId: "ITM-104",
+    ItemName: "Laptop Stand",
+    Quantity: 2,
+    UnitPrice: 120,
+    TotalAmount: 240,
+    Date: "2025-09-18T13:10:00",
+  },
+  {
+    Id: 5,
+    PaymentId: "PAY-2005",
+    ItemId: "ITM-105",
+    ItemName: "Ergonomic Keyboard",
+    Quantity: 3,
+    UnitPrice: 90,
+    TotalAmount: 270,
+    Date: "2025-09-17T10:00:00",
+  },
+  {
+    Id: 6,
+    PaymentId: "PAY-2006",
+    ItemId: "ITM-106",
+    ItemName: "Noise-Cancelling Headphones",
+    Quantity: 2,
+    UnitPrice: 150,
+    TotalAmount: 300,
+    Date: "2025-09-16T14:50:00",
+  },
+  {
+    Id: 7,
+    PaymentId: "PAY-2007",
+    ItemId: "ITM-107",
+    ItemName: "Projector",
+    Quantity: 1,
+    UnitPrice: 500,
+    TotalAmount: 500,
+    Date: "2025-09-15T09:15:00",
+  },
+  {
+    Id: 8,
+    PaymentId: "PAY-2008",
+    ItemId: "ITM-108",
+    ItemName: "Filing Cabinet",
+    Quantity: 1,
+    UnitPrice: 200,
+    TotalAmount: 200,
+    Date: "2025-09-14T16:30:00",
+  },
+  {
+    Id: 9,
+    PaymentId: "PAY-2009",
+    ItemId: "ITM-109",
+    ItemName: "High-Resolution Monitor",
+    Quantity: 1,
+    UnitPrice: 320,
+    TotalAmount: 320,
+    Date: "2025-09-13T12:40:00",
+  },
+  {
+    Id: 10,
+    PaymentId: "PAY-2010",
+    ItemId: "ITM-110",
+    ItemName: "Whiteboard (Magnetic)",
+    Quantity: 2,
+    UnitPrice: 100,
+    TotalAmount: 200,
+    Date: "2025-09-12T11:25:00",
+  },
+];
+
+export const TransactionByDayData = [
+  {
+    SL: 1,
+    Date: "2025-09-21",
+    QuantitySold: 5,
+    TotalTrans: 2,
+    TotalEarned: 75.25,
+    TotalDue: 0,
+  },
+  {
+    SL: 2,
+    Date: "2025-09-20",
+    QuantitySold: 3,
+    TotalTrans: 1,
+    TotalEarned: 50.0,
+    TotalDue: 0,
+  },
+  {
+    SL: 3,
+    Date: "2025-09-19",
+    QuantitySold: 6,
+    TotalTrans: 2,
+    TotalEarned: 120.5,
+    TotalDue: 10,
+  },
+  {
+    SL: 4,
+    Date: "2025-09-18",
+    QuantitySold: 0,
+    TotalTrans: 0,
+    TotalEarned: 0,
+    TotalDue: 0,
+  },
+  {
+    SL: 5,
+    Date: "2025-09-17",
+    QuantitySold: 4,
+    TotalTrans: 1,
+    TotalEarned: 60,
+    TotalDue: 0,
+  },
+  {
+    SL: 6,
+    Date: "2025-09-16",
+    QuantitySold: 2,
+    TotalTrans: 1,
+    TotalEarned: 30,
+    TotalDue: 0,
+  },
+  {
+    SL: 7,
+    Date: "2025-09-15",
+    QuantitySold: 7,
+    TotalTrans: 3,
+    TotalEarned: 140.75,
+    TotalDue: 20,
+  },
+  // ✅ Totals Row (Σ)
+  {
+    SL: "",
+    Date: "",
+    QuantitySold: "Σ: 27",
+    TotalTrans: "Σ: 10",
+    TotalEarned: "Σ: 476.5",
+    TotalDue: "Σ: 30",
+  },
+];
+
+
+export const PurchasesDetailReportData = [
+  {
+    Id: 1,
+    PaymentId: "PUR-3001",
+    ItemId: "ITM-201",
+    ItemName: "Bulk A4 Paper Pack",
+    Quantity: 50,
+    UnitPrice: 5,
+    TotalAmount: 250,
+    Date: "2025-09-21T09:30:00",
+  },
+  {
+    Id: 2,
+    PaymentId: "PUR-3002",
+    ItemId: "ITM-202",
+    ItemName: "Ink Cartridge (Black)",
+    Quantity: 20,
+    UnitPrice: 15,
+    TotalAmount: 300,
+    Date: "2025-09-20T15:45:00",
+  },
+  {
+    Id: 3,
+    PaymentId: "PUR-3003",
+    ItemId: "ITM-203",
+    ItemName: "Stapler Machine",
+    Quantity: 10,
+    UnitPrice: 25,
+    TotalAmount: 250,
+    Date: "2025-09-19T11:20:00",
+  },
+  {
+    Id: 4,
+    PaymentId: "PUR-3004",
+    ItemId: "ITM-204",
+    ItemName: "Printer Toner",
+    Quantity: 5,
+    UnitPrice: 80,
+    TotalAmount: 400,
+    Date: "2025-09-18T13:10:00",
+  },
+  {
+    Id: 5,
+    PaymentId: "PUR-3005",
+    ItemId: "ITM-205",
+    ItemName: "Office Chairs (Bulk)",
+    Quantity: 8,
+    UnitPrice: 120,
+    TotalAmount: 960,
+    Date: "2025-09-17T10:00:00",
+  },
+  {
+    Id: 6,
+    PaymentId: "PUR-3006",
+    ItemId: "ITM-206",
+    ItemName: "Desk Organizers",
+    Quantity: 15,
+    UnitPrice: 18,
+    TotalAmount: 270,
+    Date: "2025-09-16T14:50:00",
+  },
+  {
+    Id: 7,
+    PaymentId: "PUR-3007",
+    ItemId: "ITM-207",
+    ItemName: "Filing Cabinets",
+    Quantity: 4,
+    UnitPrice: 200,
+    TotalAmount: 800,
+    Date: "2025-09-15T09:15:00",
+  },
+  {
+    Id: 8,
+    PaymentId: "PUR-3008",
+    ItemId: "ITM-208",
+    ItemName: "LED Tube Lights",
+    Quantity: 30,
+    UnitPrice: 12,
+    TotalAmount: 360,
+    Date: "2025-09-14T16:30:00",
+  },
+  {
+    Id: 9,
+    PaymentId: "PUR-3009",
+    ItemId: "ITM-209",
+    ItemName: "Conference Table",
+    Quantity: 1,
+    UnitPrice: 500,
+    TotalAmount: 500,
+    Date: "2025-09-13T12:40:00",
+  },
+  {
+    Id: 10,
+    PaymentId: "PUR-3010",
+    ItemId: "ITM-210",
+    ItemName: "Whiteboards",
+    Quantity: 5,
+    UnitPrice: 60,
+    TotalAmount: 300,
+    Date: "2025-09-12T11:25:00",
+  },
+];
+
+export const PurchasesTransactionByDayData = [
+  {
+    SL: 1,
+    Date: "2025-09-21",
+    QuantitySold: 10,
+    TotalTrans: 3,
+    TotalEarned: 950.0,
+    TotalDue: 100,
+  },
+  {
+    SL: 2,
+    Date: "2025-09-20",
+    QuantitySold: 7,
+    TotalTrans: 2,
+    TotalEarned: 720.5,
+    TotalDue: 0,
+  },
+  {
+    SL: 3,
+    Date: "2025-09-19",
+    QuantitySold: 5,
+    TotalTrans: 2,
+    TotalEarned: 560.75,
+    TotalDue: 50,
+  },
+  {
+    SL: 4,
+    Date: "2025-09-18",
+    QuantitySold: 8,
+    TotalTrans: 3,
+    TotalEarned: 880.0,
+    TotalDue: 0,
+  },
+  {
+    SL: 5,
+    Date: "2025-09-17",
+    QuantitySold: 6,
+    TotalTrans: 1,
+    TotalEarned: 450.25,
+    TotalDue: 0,
+  },
+  {
+    SL: 6,
+    Date: "2025-09-16",
+    QuantitySold: 9,
+    TotalTrans: 2,
+    TotalEarned: 1020.0,
+    TotalDue: 150,
+  },
+  {
+    SL: 7,
+    Date: "2025-09-15",
+    QuantitySold: 4,
+    TotalTrans: 1,
+    TotalEarned: 300.0,
+    TotalDue: 0,
+  },
+  // ✅ Totals Row (Σ)
+  {
+    SL: "",
+    Date: "",
+    QuantitySold: "Σ: 49",
+    TotalTrans: "Σ: 14",
+    TotalEarned: "Σ: 4881.5",
+    TotalDue: "Σ: 300",
+  },
+];
+
+export const ExpenseByDayData = [
+  {
+    SL: 1,
+    Date: "2025-09-21",
+    TotalTran: 4,
+    TotalQuantity: 15,
+    TotalExpense: 1800.0,
+    TotalPaid: 1500.0,
+    TotalDue: 300.0,
+  },
+  {
+    SL: 2,
+    Date: "2025-09-20",
+    TotalTran: 3,
+    TotalQuantity: 10,
+    TotalExpense: 950.0,
+    TotalPaid: 950.0,
+    TotalDue: 0.0,
+  },
+  {
+    SL: 3,
+    Date: "2025-09-19",
+    TotalTran: 2,
+    TotalQuantity: 6,
+    TotalExpense: 720.0,
+    TotalPaid: 600.0,
+    TotalDue: 120.0,
+  },
+  {
+    SL: 4,
+    Date: "2025-09-18",
+    TotalTran: 5,
+    TotalQuantity: 12,
+    TotalExpense: 1120.0,
+    TotalPaid: 1000.0,
+    TotalDue: 120.0,
+  },
+  {
+    SL: 5,
+    Date: "2025-09-17",
+    TotalTran: 2,
+    TotalQuantity: 8,
+    TotalExpense: 750.0,
+    TotalPaid: 750.0,
+    TotalDue: 0.0,
+  },
+  {
+    SL: 6,
+    Date: "2025-09-16",
+    TotalTran: 3,
+    TotalQuantity: 11,
+    TotalExpense: 980.0,
+    TotalPaid: 800.0,
+    TotalDue: 180.0,
+  },
+  {
+    SL: 7,
+    Date: "2025-09-15",
+    TotalTran: 1,
+    TotalQuantity: 4,
+    TotalExpense: 300.0,
+    TotalPaid: 300.0,
+    TotalDue: 0.0,
+  },
+  // ✅ Totals Row (Σ)
+  {
+    SL: "",
+    Date: "",
+    TotalTran: "Σ: 20",
+    TotalQuantity: "Σ: 66",
+    TotalExpense: "Σ: 6620.0",
+    TotalPaid: "Σ: 5900.0",
+    TotalDue: "Σ: 720.0",
+  },
+];
+
+
+
+export const TransactionByMonthData = [
+  {
+    SL: 1,
+    Date: "September-2025",
+    QuantitySold: 14,
+    TotalTrans: 4,
+    TotalEarned: 181.44,
+    TotalDue: 0,
+  },
+  {
+    SL: 2,
+    Date: "August-2025",
+    QuantitySold: 11,
+    TotalTrans: 1,
+    TotalEarned: 0,
+    TotalDue: 0,
+  },
+  {
+    SL: 3,
+    Date: "July-2025",
+    QuantitySold: 0,
+    TotalTrans: 0,
+    TotalEarned: 0,
+    TotalDue: 0,
+  },
+  {
+    SL: 4,
+    Date: "June-2025",
+    QuantitySold: 0,
+    TotalTrans: 0,
+    TotalEarned: 0,
+    TotalDue: 0,
+  },
+  {
+    SL: 5,
+    Date: "May-2025",
+    QuantitySold: 0,
+    TotalTrans: 0,
+    TotalEarned: 0,
+    TotalDue: 0,
+  },
+  {
+    SL: 6,
+    Date: "April-2025",
+    QuantitySold: 0,
+    TotalTrans: 0,
+    TotalEarned: 0,
+    TotalDue: 0,
+  },
+  {
+    SL: 7,
+    Date: "March-2025",
+    QuantitySold: 0,
+    TotalTrans: 0,
+    TotalEarned: 0,
+    TotalDue: 0,
+  },
+  {
+    SL: 8,
+    Date: "February-2025",
+    QuantitySold: 0,
+    TotalTrans: 0,
+    TotalEarned: 0,
+    TotalDue: 0,
+  },
+  {
+    SL: 9,
+    Date: "January-2025",
+    QuantitySold: 0,
+    TotalTrans: 0,
+    TotalEarned: 0,
+    TotalDue: 0,
+  },
+  {
+    SL: 10,
+    Date: "December-2024",
+    QuantitySold: 0,
+    TotalTrans: 0,
+    TotalEarned: 0,
+    TotalDue: 0,
+  },
+  {
+    SL: 11,
+    Date: "November-2024",
+    QuantitySold: 0,
+    TotalTrans: 0,
+    TotalEarned: 0,
+    TotalDue: 0,
+  },
+  {
+    SL: 12,
+    Date: "October-2024",
+    QuantitySold: 0,
+    TotalTrans: 0,
+    TotalEarned: 0,
+    TotalDue: 0,
+  },
+  // ✅ Totals Row (Σ)
+  {
+    SL: "",
+    Date: "",
+    QuantitySold: "Σ: 25",
+    TotalTrans: "Σ: 5",
+    TotalEarned: "Σ: 181.44",
+    TotalDue: "Σ: 0",
+  },
+];
+
+export const PurchasesTransactionByMonthData = [
+  {
+    SL: 1,
+    Date: "September-2025",
+    QuantitySold: 22,
+    TotalTrans: 6,
+    TotalEarned: 520.75,
+    TotalDue: 120.5,
+  },
+  {
+    SL: 2,
+    Date: "August-2025",
+    QuantitySold: 15,
+    TotalTrans: 4,
+    TotalEarned: 345.6,
+    TotalDue: 50,
+  },
+  {
+    SL: 3,
+    Date: "July-2025",
+    QuantitySold: 8,
+    TotalTrans: 2,
+    TotalEarned: 200.0,
+    TotalDue: 0,
+  },
+  {
+    SL: 4,
+    Date: "June-2025",
+    QuantitySold: 5,
+    TotalTrans: 1,
+    TotalEarned: 80.0,
+    TotalDue: 0,
+  },
+  {
+    SL: 5,
+    Date: "May-2025",
+    QuantitySold: 0,
+    TotalTrans: 0,
+    TotalEarned: 0,
+    TotalDue: 0,
+  },
+  {
+    SL: 6,
+    Date: "April-2025",
+    QuantitySold: 0,
+    TotalTrans: 0,
+    TotalEarned: 0,
+    TotalDue: 0,
+  },
+  {
+    SL: 7,
+    Date: "March-2025",
+    QuantitySold: 0,
+    TotalTrans: 0,
+    TotalEarned: 0,
+    TotalDue: 0,
+  },
+  {
+    SL: 8,
+    Date: "February-2025",
+    QuantitySold: 0,
+    TotalTrans: 0,
+    TotalEarned: 0,
+    TotalDue: 0,
+  },
+  {
+    SL: 9,
+    Date: "January-2025",
+    QuantitySold: 0,
+    TotalTrans: 0,
+    TotalEarned: 0,
+    TotalDue: 0,
+  },
+  {
+    SL: 10,
+    Date: "December-2024",
+    QuantitySold: 0,
+    TotalTrans: 0,
+    TotalEarned: 0,
+    TotalDue: 0,
+  },
+  {
+    SL: 11,
+    Date: "November-2024",
+    QuantitySold: 0,
+    TotalTrans: 0,
+    TotalEarned: 0,
+    TotalDue: 0,
+  },
+  {
+    SL: 12,
+    Date: "October-2024",
+    QuantitySold: 0,
+    TotalTrans: 0,
+    TotalEarned: 0,
+    TotalDue: 0,
+  },
+  // ✅ Totals Row (Σ)
+  {
+    SL: "",
+    Date: "",
+    QuantitySold: "Σ: 50",
+    TotalTrans: "Σ: 13",
+    TotalEarned: "Σ: 1146.35",
+    TotalDue: "Σ: 170.5",
+  },
+];
+
+
+export const ExpenseByMonthData = [
+  {
+    SL: 1,
+    Date: "September-2025",
+    TotalTran: 12,
+    TotalQuantity: 65,
+    TotalExpense: 7250.0,
+    TotalPaid: 6800.0,
+    TotalDue: 450.0,
+  },
+  {
+    SL: 2,
+    Date: "August-2025",
+    TotalTran: 8,
+    TotalQuantity: 40,
+    TotalExpense: 4800.0,
+    TotalPaid: 4500.0,
+    TotalDue: 300.0,
+  },
+  {
+    SL: 3,
+    Date: "July-2025",
+    TotalTran: 6,
+    TotalQuantity: 28,
+    TotalExpense: 3100.0,
+    TotalPaid: 3100.0,
+    TotalDue: 0.0,
+  },
+  {
+    SL: 4,
+    Date: "June-2025",
+    TotalTran: 4,
+    TotalQuantity: 20,
+    TotalExpense: 2150.0,
+    TotalPaid: 2000.0,
+    TotalDue: 150.0,
+  },
+  {
+    SL: 5,
+    Date: "May-2025",
+    TotalTran: 5,
+    TotalQuantity: 18,
+    TotalExpense: 1900.0,
+    TotalPaid: 1800.0,
+    TotalDue: 100.0,
+  },
+  {
+    SL: 6,
+    Date: "April-2025",
+    TotalTran: 2,
+    TotalQuantity: 9,
+    TotalExpense: 850.0,
+    TotalPaid: 850.0,
+    TotalDue: 0.0,
+  },
+  {
+    SL: 7,
+    Date: "March-2025",
+    TotalTran: 3,
+    TotalQuantity: 11,
+    TotalExpense: 950.0,
+    TotalPaid: 900.0,
+    TotalDue: 50.0,
+  },
+  {
+    SL: 8,
+    Date: "February-2025",
+    TotalTran: 1,
+    TotalQuantity: 6,
+    TotalExpense: 500.0,
+    TotalPaid: 500.0,
+    TotalDue: 0.0,
+  },
+  {
+    SL: 9,
+    Date: "January-2025",
+    TotalTran: 0,
+    TotalQuantity: 0,
+    TotalExpense: 0.0,
+    TotalPaid: 0.0,
+    TotalDue: 0.0,
+  },
+  {
+    SL: 10,
+    Date: "December-2024",
+    TotalTran: 0,
+    TotalQuantity: 0,
+    TotalExpense: 0.0,
+    TotalPaid: 0.0,
+    TotalDue: 0.0,
+  },
+  {
+    SL: 11,
+    Date: "November-2024",
+    TotalTran: 0,
+    TotalQuantity: 0,
+    TotalExpense: 0.0,
+    TotalPaid: 0.0,
+    TotalDue: 0.0,
+  },
+  {
+    SL: 12,
+    Date: "October-2024",
+    TotalTran: 0,
+    TotalQuantity: 0,
+    TotalExpense: 0.0,
+    TotalPaid: 0.0,
+    TotalDue: 0.0,
+  },
+  // ✅ Totals Row (Σ)
+  {
+    SL: "",
+    Date: "",
+    TotalTran: "Σ: 41",
+    TotalQuantity: "Σ: 197",
+    TotalExpense: "Σ: 20,500.0",
+    TotalPaid: "Σ: 19,450.0",
+    TotalDue: "Σ: 1,050.0",
+  },
+];
+
+export const SummaryReportData = [
+  {
+    SL: 1,
+    Date: "September-2025",
+    SalesTotal: 12500.0,
+    SalesPaidTotal: 12000.0,
+    SalesDueTotal: 500.0,
+    PurchasesTotal: 8500.0,
+    PurchasesPaidTotal: 8000.0,
+    PurchasesDueTotal: 500.0,
+    ExpenseTotal: 7250.0,
+    ExpensePaidTotal: 6800.0,
+    ExpenseDueTotal: 450.0,
+  },
+  {
+    SL: 2,
+    Date: "August-2025",
+    SalesTotal: 11800.0,
+    SalesPaidTotal: 11500.0,
+    SalesDueTotal: 300.0,
+    PurchasesTotal: 6000.0,
+    PurchasesPaidTotal: 5700.0,
+    PurchasesDueTotal: 300.0,
+    ExpenseTotal: 4800.0,
+    ExpensePaidTotal: 4500.0,
+    ExpenseDueTotal: 300.0,
+  },
+  {
+    SL: 3,
+    Date: "July-2025",
+    SalesTotal: 10500.0,
+    SalesPaidTotal: 10500.0,
+    SalesDueTotal: 0.0,
+    PurchasesTotal: 5200.0,
+    PurchasesPaidTotal: 5200.0,
+    PurchasesDueTotal: 0.0,
+    ExpenseTotal: 3100.0,
+    ExpensePaidTotal: 3100.0,
+    ExpenseDueTotal: 0.0,
+  },
+  {
+    SL: 4,
+    Date: "June-2025",
+    SalesTotal: 9400.0,
+    SalesPaidTotal: 9200.0,
+    SalesDueTotal: 200.0,
+    PurchasesTotal: 4600.0,
+    PurchasesPaidTotal: 4500.0,
+    PurchasesDueTotal: 100.0,
+    ExpenseTotal: 2150.0,
+    ExpensePaidTotal: 2000.0,
+    ExpenseDueTotal: 150.0,
+  },
+  {
+    SL: 5,
+    Date: "May-2025",
+    SalesTotal: 8700.0,
+    SalesPaidTotal: 8600.0,
+    SalesDueTotal: 100.0,
+    PurchasesTotal: 4200.0,
+    PurchasesPaidTotal: 4100.0,
+    PurchasesDueTotal: 100.0,
+    ExpenseTotal: 1900.0,
+    ExpensePaidTotal: 1800.0,
+    ExpenseDueTotal: 100.0,
+  },
+  {
+    SL: 6,
+    Date: "April-2025",
+    SalesTotal: 6200.0,
+    SalesPaidTotal: 6200.0,
+    SalesDueTotal: 0.0,
+    PurchasesTotal: 3000.0,
+    PurchasesPaidTotal: 3000.0,
+    PurchasesDueTotal: 0.0,
+    ExpenseTotal: 850.0,
+    ExpensePaidTotal: 850.0,
+    ExpenseDueTotal: 0.0,
+  },
+  {
+    SL: 7,
+    Date: "March-2025",
+    SalesTotal: 5400.0,
+    SalesPaidTotal: 5300.0,
+    SalesDueTotal: 100.0,
+    PurchasesTotal: 2500.0,
+    PurchasesPaidTotal: 2450.0,
+    PurchasesDueTotal: 50.0,
+    ExpenseTotal: 950.0,
+    ExpensePaidTotal: 900.0,
+    ExpenseDueTotal: 50.0,
+  },
+  {
+    SL: 8,
+    Date: "February-2025",
+    SalesTotal: 4800.0,
+    SalesPaidTotal: 4800.0,
+    SalesDueTotal: 0.0,
+    PurchasesTotal: 2100.0,
+    PurchasesPaidTotal: 2100.0,
+    PurchasesDueTotal: 0.0,
+    ExpenseTotal: 500.0,
+    ExpensePaidTotal: 500.0,
+    ExpenseDueTotal: 0.0,
+  },
+  {
+    SL: 9,
+    Date: "January-2025",
+    SalesTotal: 0.0,
+    SalesPaidTotal: 0.0,
+    SalesDueTotal: 0.0,
+    PurchasesTotal: 0.0,
+    PurchasesPaidTotal: 0.0,
+    PurchasesDueTotal: 0.0,
+    ExpenseTotal: 0.0,
+    ExpensePaidTotal: 0.0,
+    ExpenseDueTotal: 0.0,
+  },
+  {
+    SL: 10,
+    Date: "December-2024",
+    SalesTotal: 0.0,
+    SalesPaidTotal: 0.0,
+    SalesDueTotal: 0.0,
+    PurchasesTotal: 0.0,
+    PurchasesPaidTotal: 0.0,
+    PurchasesDueTotal: 0.0,
+    ExpenseTotal: 0.0,
+    ExpensePaidTotal: 0.0,
+    ExpenseDueTotal: 0.0,
+  },
+  {
+    SL: 11,
+    Date: "November-2024",
+    SalesTotal: 0.0,
+    SalesPaidTotal: 0.0,
+    SalesDueTotal: 0.0,
+    PurchasesTotal: 0.0,
+    PurchasesPaidTotal: 0.0,
+    PurchasesDueTotal: 0.0,
+    ExpenseTotal: 0.0,
+    ExpensePaidTotal: 0.0,
+    ExpenseDueTotal: 0.0,
+  },
+  {
+    SL: 12,
+    Date: "October-2024",
+    SalesTotal: 0.0,
+    SalesPaidTotal: 0.0,
+    SalesDueTotal: 0.0,
+    PurchasesTotal: 0.0,
+    PurchasesPaidTotal: 0.0,
+    PurchasesDueTotal: 0.0,
+    ExpenseTotal: 0.0,
+    ExpensePaidTotal: 0.0,
+    ExpenseDueTotal: 0.0,
+  },
+  // ✅ Totals Row (Σ)
+  {
+    SL: "",
+    Date: "",
+    SalesTotal: "Σ: 59,900.0",
+    SalesPaidTotal: "Σ: 56,600.0",
+    SalesDueTotal: "Σ: 1,200.0",
+    PurchasesTotal: "Σ: 34,100.0",
+    PurchasesPaidTotal: "Σ: 33,350.0",
+    PurchasesDueTotal: "Σ: 750.0",
+    ExpenseTotal: "Σ: 20,500.0",
+    ExpensePaidTotal: "Σ: 19,450.0",
+    ExpenseDueTotal: "Σ: 1,050.0",
+  },
+];
+
+
+
+export const TransactionByYearData = [
+  {
+    SL: 1,
+    Date: "2025",
+    QuantitySold: 25,
+    TotalTrans: 5,
+    TotalEarned: 181.44,
+    TotalDue: 0,
+  },
+  {
+    SL: 2,
+    Date: "2024",
+    QuantitySold: 0,
+    TotalTrans: 0,
+    TotalEarned: 0,
+    TotalDue: 0,
+  },
+  {
+    SL: 3,
+    Date: "2023",
+    QuantitySold: 0,
+    TotalTrans: 0,
+    TotalEarned: 0,
+    TotalDue: 0,
+  },
+  {
+    SL: 4,
+    Date: "2022",
+    QuantitySold: 0,
+    TotalTrans: 0,
+    TotalEarned: 0,
+    TotalDue: 0,
+  },
+  {
+    SL: 5,
+    Date: "2021",
+    QuantitySold: 0,
+    TotalTrans: 0,
+    TotalEarned: 0,
+    TotalDue: 0,
+  },
+  // ✅ Totals Row (Σ)
+  {
+    SL: "",
+    Date: "",
+    QuantitySold: "Σ: 25",
+    TotalTrans: "Σ: 5",
+    TotalEarned: "Σ: 181.44",
+    TotalDue: "Σ: 0",
+  },
+];
+
+export const PurchasesTransactionByYearData = [
+  {
+    SL: 1,
+    Date: "2025",
+    QuantitySold: 50,
+    TotalTrans: 13,
+    TotalEarned: 1146.35,
+    TotalDue: 170.5,
+  },
+  {
+    SL: 2,
+    Date: "2024",
+    QuantitySold: 18,
+    TotalTrans: 5,
+    TotalEarned: 420.75,
+    TotalDue: 60.0,
+  },
+  {
+    SL: 3,
+    Date: "2023",
+    QuantitySold: 0,
+    TotalTrans: 0,
+    TotalEarned: 0,
+    TotalDue: 0,
+  },
+  {
+    SL: 4,
+    Date: "2022",
+    QuantitySold: 0,
+    TotalTrans: 0,
+    TotalEarned: 0,
+    TotalDue: 0,
+  },
+  {
+    SL: 5,
+    Date: "2021",
+    QuantitySold: 0,
+    TotalTrans: 0,
+    TotalEarned: 0,
+    TotalDue: 0,
+  },
+  // ✅ Totals Row (Σ)
+  {
+    SL: "",
+    Date: "",
+    QuantitySold: "Σ: 68",
+    TotalTrans: "Σ: 18",
+    TotalEarned: "Σ: 1567.10",
+    TotalDue: "Σ: 230.5",
+  },
+];
+
+export const ExpenseByYearData = [
+  {
+    SL: 1,
+    Date: "2025",
+    TotalTran: 22,
+    TotalQuantity: 180,
+    TotalExpense: 18250.0,
+    TotalPaid: 17500.0,
+    TotalDue: 750.0,
+  },
+  {
+    SL: 2,
+    Date: "2024",
+    TotalTran: 15,
+    TotalQuantity: 120,
+    TotalExpense: 12500.0,
+    TotalPaid: 11800.0,
+    TotalDue: 700.0,
+  },
+  {
+    SL: 3,
+    Date: "2023",
+    TotalTran: 9,
+    TotalQuantity: 70,
+    TotalExpense: 7400.0,
+    TotalPaid: 7200.0,
+    TotalDue: 200.0,
+  },
+  {
+    SL: 4,
+    Date: "2022",
+    TotalTran: 6,
+    TotalQuantity: 55,
+    TotalExpense: 5100.0,
+    TotalPaid: 5000.0,
+    TotalDue: 100.0,
+  },
+  {
+    SL: 5,
+    Date: "2021",
+    TotalTran: 4,
+    TotalQuantity: 30,
+    TotalExpense: 2800.0,
+    TotalPaid: 2800.0,
+    TotalDue: 0.0,
+  },
+  // ✅ Totals Row (Σ)
+  {
+    SL: "",
+    Date: "",
+    TotalTran: "Σ: 56",
+    TotalQuantity: "Σ: 455",
+    TotalExpense: "Σ: 46,050.0",
+    TotalPaid: "Σ: 44,300.0",
+    TotalDue: "Σ: 1,750.0",
+  },
+];
+
+
+
+
+export const UserManagementData = [
+  {
+    id: 1,
+    image: "John Doe",
+    imageImg: "https://randomuser.me/api/portraits/men/1.jpg",
+    firstname: "John",
+    lastname: "Doe",
+    Phonenumber: "+91 9876543210",
+    email: "john.doe@example.com",
+    createdDate: "2023-09-20T10:00:00",
+  },
+  {
+    id: 2,
+    image: "Jane Smith",
+    imageImg: "https://randomuser.me/api/portraits/women/2.jpg",
+    firstname: "Jane",
+    lastname: "Smith",
+    Phonenumber: "+91 8765432109",
+    email: "jane.smith@example.com",
+    createdDate: "2023-09-18T14:30:00",
+  },
+  {
+    id: 3,
+    image: "Michael Johnson",
+    imageImg: "https://randomuser.me/api/portraits/men/3.jpg",
+    firstname: "Michael",
+    lastname: "Johnson",
+    Phonenumber: "+91 7654321098",
+    email: "michael.johnson@example.com",
+    createdDate: "2023-09-15T09:15:00",
+  },
+  {
+    id: 4,
+    image: "Emily Davis",
+    imageImg: "https://randomuser.me/api/portraits/women/4.jpg",
+    firstname: "Emily",
+    lastname: "Davis",
+    Phonenumber: "+91 6543210987",
+    email: "emily.davis@example.com",
+    createdDate: "2023-09-10T11:45:00",
+  },
+  {
+    id: 5,
+    image: "Robert Brown",
+    imageImg: "https://randomuser.me/api/portraits/men/5.jpg",
+    firstname: "Robert",
+    lastname: "Brown",
+    Phonenumber: "+91 9123456780",
+    email: "robert.brown@example.com",
+    createdDate: "2023-09-05T16:20:00",
+  },
+];
+
+
+
 export const SystemRoleData = [
   {
-    "SL": "fec1d08e-5191-48fe-96b4-195d11247fff",
-    "RoleName": "Warehouse"
+    sl: "fec1d08e-5191-48fe-96b4-195d11247fff",
+    RoleName: "Warehouse"
   },
   {
-    "SL": "fdefd559-c462-4c73-9f1d-9f9d4747b4a7",
-    "RoleName": "Purchases Transaction By Year"
+    sl: "fdefd559-c462-4c73-9f1d-9f9d4747b4a7",
+    RoleName: "Purchases Transaction By Year"
   },
   {
-    "SL": "f5ef4001-b590-430b-9df5-b3d3938a3303",
-    "RoleName": "Department"
+    sl: "f5ef4001-b590-430b-9df5-b3d3938a3303",
+    RoleName: "Department"
   },
   {
-    "SL": "f59c9e71-bb0a-4440-b633-a662d4435b98",
-    "RoleName": "Expense Report By Year"
+    sl: "f59c9e71-bb0a-4440-b633-a662d4435b98",
+    RoleName: "Expense Report By Year"
   },
   {
-    "SL": "f0915212-8687-49db-8983-acbb086d7b61",
-    "RoleName": "Purchases Report"
+    sl: "f0915212-8687-49db-8983-acbb086d7b61",
+    RoleName: "Purchases Report"
   },
   {
-    "SL": "efda1696-e1e2-412d-ab96-92118cd4ad0c",
-    "RoleName": "Payment Detail Report"
+    sl: "efda1696-e1e2-412d-ab96-92118cd4ad0c",
+    RoleName: "Payment Detail Report"
   },
   {
-    "SL": "eb99c7c4-dbe9-45ad-aa9c-e0b1f9c6a45d",
-    "RoleName": "Audit Logs"
+    sl: "eb99c7c4-dbe9-45ad-aa9c-e0b1f9c6a45d",
+    RoleName: "Audit Logs"
   },
   {
-    "SL": "eadfd8e6-1cb3-422e-bd44-31bb5fe26d97",
-    "RoleName": "Invoice"
+    sl: "eadfd8e6-1cb3-422e-bd44-31bb5fe26d97",
+    RoleName: "Invoice"
   },
   {
-    "SL": "df099d61-caff-4602-ac50-262045a13bbc",
-    "RoleName": "Expense Summary Report"
+    sl: "df099d61-caff-4602-ac50-262045a13bbc",
+    RoleName: "Expense Summary Report"
   },
   {
-    "SL": "da0b3b3f-a367-4b0f-b4a1-a72d4752fa55",
-    "RoleName": "Print Barcode"
+    sl: "da0b3b3f-a367-4b0f-b4a1-a72d4752fa55",
+    RoleName: "Print Barcode"
   },
   {
-    "SL": "d9563269-0efc-4aa6-b51a-c7fac35fb6bf",
-    "RoleName": "Other Report"
+    sl: "d9563269-0efc-4aa6-b51a-c7fac35fb6bf",
+    RoleName: "Other Report"
   },
   {
-    "SL": "d7cac639-7d00-4a35-abfd-1227679ff1e1",
-    "RoleName": "Transaction By Day"
+    sl: "d7cac639-7d00-4a35-abfd-1227679ff1e1",
+    RoleName: "Transaction By Day"
   },
   {
-    "SL": "d6a5dd7c-0d8f-4c40-a5b4-07760eb2c1e9",
-    "RoleName": "Email Config"
+    sl: "d6a5dd7c-0d8f-4c40-a5b4-07760eb2c1e9",
+    RoleName: "Email Config"
   },
   {
-    "SL": "d1326be7-3504-4ec8-9a96-c4923cdb5943",
-    "RoleName": "Purchases Payment Quote"
+    sl: "d1326be7-3504-4ec8-9a96-c4923cdb5943",
+    RoleName: "Purchases Payment Quote"
   },
   {
-    "SL": "cfb0fe10-50a8-43eb-bceb-d213e6027dfa",
-    "RoleName": "Payment Summary Report"
+    sl: "cfb0fe10-50a8-43eb-bceb-d213e6027dfa",
+    RoleName: "Payment Summary Report"
   },
   {
-    "SL": "ce68b694-dee0-492b-ae87-a71765ccb83d",
-    "RoleName": "Quote Invoice"
+    sl: "ce68b694-dee0-492b-ae87-a71765ccb83d",
+    RoleName: "Quote Invoice"
   },
   {
-    "SL": "cb3ff940-6fbd-4083-aa88-dc0a7a4ed0c5",
-    "RoleName": "Expense Type"
+    sl: "cb3ff940-6fbd-4083-aa88-dc0a7a4ed0c5",
+    RoleName: "Expense Type"
   },
   {
-    "SL": "cab1f644-91cf-47f8-90ef-5291914238df",
-    "RoleName": "Item Cart SSLe Invoice"
+    sl: "cab1f644-91cf-47f8-90ef-5291914238df",
+    RoleName: "Item Cart SSLe Invoice"
   },
   {
-    "SL": "c89f8f18-520c-4b48-a1e5-857c194be7cf",
-    "RoleName": "Purchases Transaction By Month"
+    sl: "c89f8f18-520c-4b48-a1e5-857c194be7cf",
+    RoleName: "Purchases Transaction By Month"
   },
   {
-    "SL": "c85cea1a-48e9-4e41-b876-4a8cccf69746",
-    "RoleName": "Summary Report"
+    sl: "c85cea1a-48e9-4e41-b876-4a8cccf69746",
+    RoleName: "Summary Report"
   },
   {
-    "SL": "c2c746db-6854-4791-ad1e-d961ce2abb82",
-    "RoleName": "Sales Report"
+    sl: "c2c746db-6854-4791-ad1e-d961ce2abb82",
+    RoleName: "Sales Report"
   },
   {
-    "SL": "c2129b9c-e2fc-402d-80bf-b42957edfa37",
-    "RoleName": "Company Info"
+    sl: "c2129b9c-e2fc-402d-80bf-b42957edfa37",
+    RoleName: "Company Info"
   },
   {
-    "SL": "c090d712-2b83-4dcf-ab9d-a7e2544d5c1f",
-    "RoleName": "User Management"
+    sl: "c090d712-2b83-4dcf-ab9d-a7e2544d5c1f",
+    RoleName: "User Management"
   },
   {
-    "SL": "c03115ec-e579-463d-b9d9-0b15786f5537",
-    "RoleName": "Currency"
+    sl: "c03115ec-e579-463d-b9d9-0b15786f5537",
+    RoleName: "Currency"
   },
   {
-    "SL": "bbe9aca6-e4c6-4cb3-8973-42653c8b547c",
-    "RoleName": "Manage Page Access"
+    sl: "bbe9aca6-e4c6-4cb3-8973-42653c8b547c",
+    RoleName: "Manage Page Access"
   },
   {
-    "SL": "b4768ea0-302a-4499-8679-2f7c07dc6770",
-    "RoleName": "System Role"
+    sl: "b4768ea0-302a-4499-8679-2f7c07dc6770",
+    RoleName: "System Role"
   },
   {
-    "SL": "af9530b2-6e11-4444-9ec9-338409846c13",
-    "RoleName": "Admin"
+    sl: "af9530b2-6e11-4444-9ec9-338409846c13",
+    RoleName: "Admin"
   },
   {
-    "SL": "ac30f459-5f2f-40d6-993b-90d71b632f4b",
-    "RoleName": "Expense Report"
+    sl: "ac30f459-5f2f-40d6-993b-90d71b632f4b",
+    RoleName: "Expense Report"
   },
   {
-    "SL": "a8646137-edbb-4647-87c5-72610904da99",
-    "RoleName": "Employee"
+    sl: "a8646137-edbb-4647-87c5-72610904da99",
+    RoleName: "Employee"
   },
   {
-    "SL": "a5b8ae2e-1b95-4de8-a7ab-f63247880401",
-    "RoleName": "Sub Department"
+    sl: "a5b8ae2e-1b95-4de8-a7ab-f63247880401",
+    RoleName: "Sub Department"
   },
   {
-    "SL": "a34d5768-5f19-460e-804e-cfc0ba7f5a7b",
-    "RoleName": "Payment Type"
+    sl: "a34d5768-5f19-460e-804e-cfc0ba7f5a7b",
+    RoleName: "Payment Type"
   },
   {
-    "SL": "9fea3ca4-9a5c-4eea-96d6-ce0630dbfca6",
-    "RoleName": "User Profile"
+    sl: "9fea3ca4-9a5c-4eea-96d6-ce0630dbfca6",
+    RoleName: "User Profile"
   },
   {
-    "SL": "9ec61fb9-9908-4ba3-ab71-848a6688c561",
-    "RoleName": "High In Demand"
+    sl: "9ec61fb9-9908-4ba3-ab71-848a6688c561",
+    RoleName: "High In Demand"
   },
   {
-    "SL": "9bc3291e-2429-45a0-9ec4-3c162b868b66",
-    "RoleName": "Expense"
+    sl: "9bc3291e-2429-45a0-9ec4-3c162b868b66",
+    RoleName: "Expense"
   },
   {
-    "SL": "973e0073-2a7e-447c-9ba4-e3154624105e",
-    "RoleName": "Items"
+    sl: "973e0073-2a7e-447c-9ba4-e3154624105e",
+    RoleName: "Items"
   },
   {
-    "SL": "9578e2b7-a248-4d8b-af00-83aff47be269",
-    "RoleName": "Item Cart"
+    sl: "9578e2b7-a248-4d8b-af00-83aff47be269",
+    RoleName: "Item Cart"
   },
   {
-    "SL": "9575445c-94ab-4127-a79b-8ebcd58dc0b1",
-    "RoleName": "Attendance"
+    sl: "9575445c-94ab-4127-a79b-8ebcd58dc0b1",
+    RoleName: "Attendance"
   },
   {
-    "SL": "93885c76-369d-4dd5-962e-0d37953ef940",
-    "RoleName": "Damage Item Details"
+    sl: "93885c76-369d-4dd5-962e-0d37953ef940",
+    RoleName: "Damage Item Details"
   },
   {
-    "SL": "9325e538-f7ad-4859-aa2d-defd81dfd3f8",
-    "RoleName": "Dashboard"
+    sl: "9325e538-f7ad-4859-aa2d-defd81dfd3f8",
+    RoleName: "Dashboard"
   },
   {
-    "SL": "91ee776c-1c3d-4978-84d3-192bd41ef365",
-    "RoleName": "Customer Info"
+    sl: "91ee776c-1c3d-4978-84d3-192bd41ef365",
+    RoleName: "Customer Info"
   },
   {
-    "SL": "908f9eb5-95c5-4e2b-96b4-450a93819d73",
-    "RoleName": "Payment Status"
+    sl: "908f9eb5-95c5-4e2b-96b4-450a93819d73",
+    RoleName: "Payment Status"
   },
   {
-    "SL": "8f79654c-814e-4081-bdeb-f366b97e0ccb",
-    "RoleName": "Expense Summary"
+    sl: "8f79654c-814e-4081-bdeb-f366b97e0ccb",
+    RoleName: "Expense Summary"
   },
   {
-    "SL": "8efdacac-e7bd-4cbc-a271-941efa4d4534",
-    "RoleName": "Items History"
+    sl: "8efdacac-e7bd-4cbc-a271-941efa4d4534",
+    RoleName: "Items History"
   },
   {
-    "SL": "844620fe-d9e5-4015-988a-bcf36c204fe5",
-    "RoleName": "Designation"
+    sl: "844620fe-d9e5-4015-988a-bcf36c204fe5",
+    RoleName: "Designation"
   },
   {
-    "SL": "8025f4c4-7e02-4d9e-9e52-53cfae33ac04",
-    "RoleName": "Categories"
+    sl: "8025f4c4-7e02-4d9e-9e52-53cfae33ac04",
+    RoleName: "Categories"
   },
   {
-    "SL": "75cf90ac-4e84-4c57-839e-98a244549309",
-    "RoleName": "Highest Earning"
+    sl: "75cf90ac-4e84-4c57-839e-98a244549309",
+    RoleName: "Highest Earning"
   },
   {
-    "SL": "72f9648b-af0b-4b0f-be62-21969ee3b914",
-    "RoleName": "Item Report"
+    sl: "72f9648b-af0b-4b0f-be62-21969ee3b914",
+    RoleName: "Item Report"
   },
   {
-    "SL": "6c720157-d0e0-46c0-8353-1bb291525d90",
-    "RoleName": "Expense Report By Month"
+    sl: "6c720157-d0e0-46c0-8353-1bb291525d90",
+    RoleName: "Expense Report By Month"
   },
   {
-    "SL": "6465bccb-44d8-41eb-a1c3-61dd51ab58d2",
-    "RoleName": "Low In Stock"
+    sl: "6465bccb-44d8-41eb-a1c3-61dd51ab58d2",
+    RoleName: "Low In Stock"
   },
   {
-    "SL": "62c8f5fb-c104-41c4-99e3-e0fc0eacd3ae",
-    "RoleName": "Super Admin"
+    sl: "62c8f5fb-c104-41c4-99e3-e0fc0eacd3ae",
+    RoleName: "Super Admin"
   },
   {
-    "SL": "604c3db7-217c-4d3f-a5fe-60e08f864d24",
-    "RoleName": "Manual Invoice"
+    sl: "604c3db7-217c-4d3f-a5fe-60e08f864d24",
+    RoleName: "Manual Invoice"
   },
   {
-    "SL": "5c02d101-e227-4af3-b3c8-0dd52812d53f",
-    "RoleName": "Branch"
+    sl: "5c02d101-e227-4af3-b3c8-0dd52812d53f",
+    RoleName: "Branch"
   },
   {
-    "SL": "58ee70df-1291-4ab1-8bab-956815bb7261",
-    "RoleName": "Expense Report By Day"
+    sl: "58ee70df-1291-4ab1-8bab-956815bb7261",
+    RoleName: "Expense Report By Day"
   },
   {
-    "SL": "558f6eb9-69a3-4786-8045-f38ca2ed59ab",
-    "RoleName": "SLentity Setting"
+    sl: "558f6eb9-69a3-4786-8045-f38ca2ed59ab",
+    RoleName: "SLentity Setting"
   },
   {
-    "SL": "542aac86-e929-47bd-a2c8-e55de38f597e",
-    "RoleName": "Transaction By Year"
+    sl: "542aac86-e929-47bd-a2c8-e55de38f597e",
+    RoleName: "Transaction By Year"
   },
   {
-    "SL": "541e5c5d-930b-44ae-a189-557ac20618de",
-    "RoleName": "Attendance Report"
+    sl: "541e5c5d-930b-44ae-a189-557ac20618de",
+    RoleName: "Attendance Report"
   },
   {
-    "SL": "52f6cd36-72ca-4a78-93cf-0e377afd12b0",
-    "RoleName": "Manage User Roles"
+    sl: "52f6cd36-72ca-4a78-93cf-0e377afd12b0",
+    RoleName: "Manage User Roles"
   },
   {
-    "SL": "4f04badd-3983-4bfd-be1f-48ff552c09b2",
-    "RoleName": "Manage Invoice"
+    sl: "4f04badd-3983-4bfd-be1f-48ff552c09b2",
+    RoleName: "Manage Invoice"
   },
   {
-    "SL": "4d65d5b9-134c-4b0e-a426-ec9b81e52a69",
-    "RoleName": "Vat Percentage"
+    sl: "4d65d5b9-134c-4b0e-a426-ec9b81e52a69",
+    RoleName: "Vat Percentage"
   },
   {
-    "SL": "4a3e8051-8e23-4934-a275-a619349ca541",
-    "RoleName": "Expense Details Report"
+    sl: "4a3e8051-8e23-4934-a275-a619349ca541",
+    RoleName: "Expense Details Report"
   },
   {
-    "SL": "48701e42-9244-4d96-ae5d-786dd09bb019",
-    "RoleName": "Refresh Token"
+    sl: "48701e42-9244-4d96-ae5d-786dd09bb019",
+    RoleName: "Refresh Token"
   },
   {
-    "SL": "45f5b5a0-94dc-46b2-9227-ce2e0e6e1c02",
-    "RoleName": "Purchases Payment"
+    sl: "45f5b5a0-94dc-46b2-9227-ce2e0e6e1c02",
+    RoleName: "Purchases Payment"
   },
   {
-    "SL": "4085a5f1-0018-4aa3-87d9-2a159e5fcf94",
-    "RoleName": "Product Wise Sale"
+    sl: "4085a5f1-0018-4aa3-87d9-2a159e5fcf94",
+    RoleName: "Product Wise Sale"
   },
   {
-    "SL": "3ffb8d8d-2f27-432a-a7a5-c47c99603fb1",
-    "RoleName": "Customer Type"
+    sl: "3ffb8d8d-2f27-432a-a7a5-c47c99603fb1",
+    RoleName: "Customer Type"
   },
   {
-    "SL": "3f00ce82-27e8-4387-9783-1e108158bcba",
-    "RoleName": "Low In Demand"
+    sl: "3f00ce82-27e8-4387-9783-1e108158bcba",
+    RoleName: "Low In Demand"
   },
   {
-    "SL": "3abb456d-a955-47f8-ab54-8d202c65b565",
-    "RoleName": "Draft Invoice"
+    sl: "3abb456d-a955-47f8-ab54-8d202c65b565",
+    RoleName: "Draft Invoice"
   },
   {
-    "SL": "37ad06d6-c542-4170-aad4-6998a43f7e2d",
-    "RoleName": "Email Setting"
+    sl: "37ad06d6-c542-4170-aad4-6998a43f7e2d",
+    RoleName: "Email Setting"
   },
   {
-    "SL": "33333a81-5b11-4614-848c-4a8c84774f4b",
-    "RoleName": "Sales Return Log"
+    sl: "33333a81-5b11-4614-848c-4a8c84774f4b",
+    RoleName: "Sales Return Log"
   },
   {
-    "SL": "2aa38b96-1d30-48fa-a74f-19e9887a18d4",
-    "RoleName": "Send Email History"
+    sl: "2aa38b96-1d30-48fa-a74f-19e9887a18d4",
+    RoleName: "Send Email History"
   },
   {
-    "SL": "27b6d238-7b98-4dc5-801a-bf1bc4a48f29",
-    "RoleName": "Lowest Earning"
+    sl: "27b6d238-7b98-4dc5-801a-bf1bc4a48f29",
+    RoleName: "Lowest Earning"
   },
   {
-    "SL": "20fc9e6b-9918-47fe-ad52-78d9b63597c0",
-    "RoleName": "Purchases Transaction By Day"
+    sl: "20fc9e6b-9918-47fe-ad52-78d9b63597c0",
+    RoleName: "Purchases Transaction By Day"
   },
   {
-    "SL": "1c13f365-fa3a-4313-9a97-72005efb0da5",
-    "RoleName": "Transaction By Month"
+    sl: "1c13f365-fa3a-4313-9a97-72005efb0da5",
+    RoleName: "Transaction By Month"
   },
   {
-    "SL": "1a094a70-3403-41c9-b5c7-34556fd26d6c",
-    "RoleName": "Purchases Detail"
+    sl: "1a094a70-3403-41c9-b5c7-34556fd26d6c",
+    RoleName: "Purchases Detail"
   },
   {
-    "SL": "1956901a-32e7-407e-90c7-7df560e69929",
-    "RoleName": "Unitsof Measure"
+    sl: "1956901a-32e7-407e-90c7-7df560e69929",
+    RoleName: "Unitsof Measure"
   },
   {
-    "SL": "19173462-a1ab-4108-adb1-0daebac3b82d",
-    "RoleName": "Purchases Summary"
+    sl: "19173462-a1ab-4108-adb1-0daebac3b82d",
+    RoleName: "Purchases Summary"
   },
   {
-    "SL": "18faeba3-7ff3-411d-9cc3-bef872240255",
-    "RoleName": "Purchase Return Log"
+    sl: "18faeba3-7ff3-411d-9cc3-bef872240255",
+    RoleName: "Purchase Return Log"
   },
   {
-    "SL": "18ef6374-55be-4077-93af-7d65d440fb88",
-    "RoleName": "Business ERP"
+    sl: "18ef6374-55be-4077-93af-7d65d440fb88",
+    RoleName: "Business ERP"
   },
   {
-    "SL": "11d940b4-df0d-4a53-aee3-1d2ee0f8c34e",
-    "RoleName": "Purchases Payment Draft"
+    sl: "11d940b4-df0d-4a53-aee3-1d2ee0f8c34e",
+    RoleName: "Purchases Payment Draft"
   },
   {
-    "SL": "11a7891e-52cd-47f2-b873-0a382f5c3e73",
-    "RoleName": "Supplier"
+    sl: "11a7891e-52cd-47f2-b873-0a382f5c3e73",
+    RoleName: "Supplier"
   },
   {
-    "SL": "09dc261e-2b7f-4c6e-a6d7-1533a9abb4a2",
-    "RoleName": "Settings"
+    sl: "09dc261e-2b7f-4c6e-a6d7-1533a9abb4a2",
+    RoleName: "Settings"
   },
   {
-    "SL": "02b6633c-e697-4226-a8a4-7504c639f13e",
-    "RoleName": "User Info From Browser"
+    sl: "02b6633c-e697-4226-a8a4-7504c639f13e",
+    RoleName: "User Info From Browser"
   },
   {
-    "SL": "02529543-bf9c-4b90-8ece-25d016c220a6",
-    "RoleName": "Login History"
+    sl: "02529543-bf9c-4b90-8ece-25d016c220a6",
+    RoleName: "Login History"
   },
   {
-    "SL": "0165b200-fac2-4d36-9de4-a38beeca0e63",
-    "RoleName": "Outof Stock"
+    sl: "0165b200-fac2-4d36-9de4-a38beeca0e63",
+    RoleName: "Outof Stock"
   }
 ]
 export const paymentStatusData = [
@@ -3306,270 +5824,4 @@ export const UnitOfMeasureData = [
     "ModifiedBy": "Admin"
   }
 ]
-export const branches = [
-  {
-    id: 6,
-    name: "Branch Five",
-    contactPerson: "Person 05",
-    phoneNumber: "9876543210",
-    address: "Paris, France",
-    createdDate: "2023-02-20",
-  },
-  {
-    id: 5,
-    name: "Branch Four",
-    contactPerson: "Person 04",
-    phoneNumber: "9123456780",
-    address: "Leipzig, Germany",
-    createdDate: "2023-02-20",
-  },
-  {
-    id: 4,
-    name: "Branch Three",
-    contactPerson: "Person 03",
-    phoneNumber: "9988776655",
-    address: "Frankfurt, Germany",
-    createdDate: "2023-02-20",
-  },
-  {
-    id: 3,
-    name: "Branch Two",
-    contactPerson: "Person 02",
-    phoneNumber: "9090909090",
-    address: "Munich, Germany",
-    createdDate: "2023-02-20",
-  },
-  {
-    id: 2,
-    name: "Branch One",
-    contactPerson: "Person 01",
-    phoneNumber: "9001234567",
-    address: "Hamburg, Germany",
-    createdDate: "2023-02-20",
-  },
-  {
-    id: 1,
-    name: "Main Branch",
-    contactPerson: "Admin",
-    phoneNumber: "8001112222",
-    address: "Berlin, Germany",
-    createdDate: "2023-02-20",
-  },
-];
-export const emailConfigs = [
-  {
-    id: 5,
-    email: "support@company.com",
-    hostname: "smtp.company.com",
-    port: 465,
-    isDefault: false,
-    createdDate: "2025-02-10",
-    modifiedDate: "2025-02-10",
-  },
-  {
-    id: 4,
-    email: "exmapl3@gmail.com",
-    hostname: "smtp.gmail.com",
-    port: 587,
-    isDefault: false,
-    createdDate: "2023-02-20",
-    modifiedDate: "2023-02-20",
-  },
-  {
-    id: 3,
-    email: "exmapl2@gmail.com",
-    hostname: "smtp.gmail.com",
-    port: 587,
-    isDefault: false,
-    createdDate: "2023-02-20",
-    modifiedDate: "2023-02-20",
-  },
-  {
-    id: 2,
-    email: "admin@myinvoicemanager.co.uk",
-    hostname: "mail.myinvoicemanager.co.uk",
-    port: 587,
-    isDefault: false,
-    createdDate: "2023-02-20",
-    modifiedDate: "2023-02-20",
-  },
-  {
-    id: 1,
-    email: "devmlbd@gmail.com",
-    hostname: "smtp.gmail.com",
-    port: 587,
-    isDefault: true,
-    createdDate: "2023-02-20",
-    modifiedDate: "2023-02-20",
-  },
-];
-export const currencies = [
-  {
-    id: 6,
-    name: "Australia Dollars",
-    code: "AUD",
-    symbol: "A$",
-    country: "Australia",
-    description: "Australia Dollar (AUD)",
-    createdDate: "2023-02-20",
-  },
-  {
-    id: 5,
-    name: "Taka",
-    code: "BDT",
-    symbol: "৳",
-    country: "Bangladesh",
-    description: "Bangladeshi Taka",
-    createdDate: "2023-02-20",
-  },
-  {
-    id: 4,
-    name: "Yen",
-    code: "JPY",
-    symbol: "¥",
-    country: "Japan",
-    description: "Japanese Yen",
-    createdDate: "2023-02-20",
-  },
-  {
-    id: 3,
-    name: "Pounds Sterling",
-    code: "GBP",
-    symbol: "£",
-    country: "UK",
-    description: "British Pound Sterling",
-    createdDate: "2023-02-20",
-  },
-  {
-    id: 2,
-    name: "Euro",
-    code: "EUR",
-    symbol: "€",
-    country: "European Union",
-    description: "European Union Currency",
-    createdDate: "2023-02-20",
-  },
-  {
-    id: 1,
-    name: "US Dollar",
-    code: "USD",
-    symbol: "$",
-    country: "United States",
-    description: "United States Dollar",
-    createdDate: "2023-02-20",
-  },
-];
-export const vatRates = [
-  {
-    id: 16,
-    name: "VAT: 50%",
-    percentage: 50,
-    createdDate: "2023-02-20",
-    createdBy: "Admin",
-  },
-  {
-    id: 15,
-    name: "VAT: 40%",
-    percentage: 40,
-    createdDate: "2023-02-20",
-    createdBy: "Admin",
-  },
-  {
-    id: 14,
-    name: "VAT: 30%",
-    percentage: 30,
-    createdDate: "2023-02-20",
-    createdBy: "Admin",
-  },
-  {
-    id: 13,
-    name: "VAT: 20%",
-    percentage: 20,
-    createdDate: "2023-02-20",
-    createdBy: "Admin",
-  },
-  {
-    id: 12,
-    name: "VAT: 10%",
-    percentage: 10,
-    createdDate: "2023-02-20",
-    createdBy: "Admin",
-  },
-  {
-    id: 11,
-    name: "VAT: 10%",
-    percentage: 10,
-    createdDate: "2023-02-20",
-    createdBy: "Admin",
-  },
-  {
-    id: 10,
-    name: "VAT: 9%",
-    percentage: 9,
-    createdDate: "2023-02-20",
-    createdBy: "Admin",
-  },
-  {
-    id: 9,
-    name: "VAT: 8%",
-    percentage: 8,
-    createdDate: "2023-02-20",
-    createdBy: "Admin",
-  },
-  {
-    id: 8,
-    name: "VAT: 7%",
-    percentage: 7,
-    createdDate: "2023-02-20",
-    createdBy: "Admin",
-  },
-  {
-    id: 7,
-    name: "VAT: 6%",
-    percentage: 6,
-    createdDate: "2023-02-20",
-    createdBy: "Admin",
-  },
-  {
-    id: 6,
-    name: "VAT: 5%",
-    percentage: 5,
-    createdDate: "2023-02-20",
-    createdBy: "Admin",
-  },
-  {
-    id: 5,
-    name: "VAT: 4%",
-    percentage: 4,
-    createdDate: "2023-02-20",
-    createdBy: "Admin",
-  },
-  {
-    id: 4,
-    name: "VAT: 3%",
-    percentage: 3,
-    createdDate: "2023-02-20",
-    createdBy: "Admin",
-  },
-  {
-    id: 3,
-    name: "VAT: 2%",
-    percentage: 2,
-    createdDate: "2023-02-20",
-    createdBy: "Admin",
-  },
-  {
-    id: 2,
-    name: "VAT: 1%",
-    percentage: 1,
-    createdDate: "2023-02-20",
-    createdBy: "Admin",
-  },
-  {
-    id: 1,
-    name: "VAT: 0%",
-    percentage: 0,
-    createdDate: "2023-02-20",
-    createdBy: "Admin",
-  },
-];
+
