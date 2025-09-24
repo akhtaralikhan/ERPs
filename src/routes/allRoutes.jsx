@@ -53,7 +53,39 @@ import Designation from "../Pages/DashBoard/HumanResource/Designation.jsx";
 import SubDepartment from "../Pages/DashBoard/HumanResource/SubDepartment.jsx";
 import Department from "../Pages/DashBoard/HumanResource/Department.jsx";
 import ManageUserRoles from "../Pages/DashBoard/ManageUserRoles/ManageUserRoles.jsx";
-import SystemRoles from "../Pages/DashBoard/ManageUserRoles/SystemRole.jsx";
+import SystemRole from "../Pages/DashBoard/ManageUserRoles/SystemRole.jsx";
+import ProductMainGroup from "../Pages/DashBoard/Assets.jsx";
+import UserManagement from "../Pages/DashBoard/ManageUser/UserManagement.jsx";
+import SendEmailHistory from "../Pages/DashBoard/ManageUser/SendEmailHistory.jsx";
+import LoginHistory from "../Pages/DashBoard/ManageUser/LoginHistory.jsx";
+import AuditLogs from "../Pages/DashBoard/ManageUser/AuditLogs.jsx";
+import UserInfoFromBrowser from "../Pages/DashBoard/ManageUser/UserInfoFromBrowser.jsx";
+import RefreshToken from "../Pages/DashBoard/ManageUser/RefreshToken.jsx";
+import HighInDemand from "../Pages/DashBoard/ItemReports/HighInDemand.jsx";
+import LowInDemand from "../Pages/DashBoard/ItemReports/LowInDemand.jsx";
+import HighestEarning from "../Pages/DashBoard/ItemReports/HighestEarning.jsx";
+import LowestEarning from "../Pages/DashBoard/ItemReports/LowestEarning.jsx";
+import PaymentSummaryReport from "../Pages/DashBoard/SalesReport/PaymentSummaryReport.jsx";
+import ProductWiseSale from "../Pages/DashBoard/SalesReport/ProductWiseSale.jsx";
+import PaymentDetailReport from "../Pages/DashBoard/SalesReport/PaymentDetailReport.jsx";
+import TransactionByDay from "../Pages/DashBoard/SalesReport/TransactionByDay.jsx";
+import TransactionByMonth from "../Pages/DashBoard/SalesReport/TransactionByMonth.jsx";
+import TransactionByYear from "../Pages/DashBoard/SalesReport/TransactionByYear.jsx";
+import PurchasesSummary from "../Pages/DashBoard/PurchasesReport/PurchasesSummary.jsx";
+import PurchasesDetail from "../Pages/DashBoard/PurchasesReport/PurchasesDetail.jsx";
+import PurchasesTransactionByDay from "../Pages/DashBoard/PurchasesReport/PurchasesTransactionByDay.jsx";
+import PurchasesTransactionByMonth from "../Pages/DashBoard/PurchasesReport/PurchasesTransactionByMonth.jsx";
+import PurchasesTransactionByYear from "../Pages/DashBoard/PurchasesReport/PurchasesTransactionByYear.jsx";
+import ExpenseSummaryReport from "../Pages/DashBoard/ExpenseReport/ExpenseSummaryReport.jsx";
+import ExpenseDetailsReport from "../Pages/DashBoard/ExpenseReport/ExpenseDetailsReport.jsx";
+import ExpenseByDay from "../Pages/DashBoard/ExpenseReport/ExpenseByDay.jsx";
+import ExpenseByMonth from "../Pages/DashBoard/ExpenseReport/ExpenseByMonth.jsx";
+import ExpenseByYear from "../Pages/DashBoard/ExpenseReport/ExpenseByYear.jsx";
+import SummaryReport from "../Pages/DashBoard/OtherReports/SummaryReport.jsx";
+import AttendanceReport from "../Pages/DashBoard/OtherReports/AttendanceReport.jsx";
+import EmailSetting from "../Pages/DashBoard/ManageUser/EmailSetting.jsx";
+import IdentitySetting from "../Pages/DashBoard/ManageUser/IdentitySetting.jsx";
+import PrintBarcode from "../Pages/DashBoard/OtherReports/PrintBarcode.jsx";
 
 export const publicRoutes = [
   { path: "/Signin", component: <Signin /> },
@@ -118,50 +150,50 @@ const basePrivateRoutes = [
 
   // manage user roles
   { path: "/ManageUserRoles/Index", component: <ManageUserRoles /> },
-  { path: "/SystemRole/Index", component: <SystemRoles /> },
+  { path: "/SystemRole/Index", component: <SystemRole /> },
 
   // manage user 
-  { path: "/UserManagement/Index", component: <DashboardHome /> },
-  { path: "/IdentitySetting/Index", component: <DashboardHome /> },
-  { path: "/EmailSetting/Index", component: <DashboardHome /> },
-  { path: "/SendEmailHistory/Index", component: <DashboardHome /> },
-  { path: "/LoginHistory/Index", component: <DashboardHome /> },
-  { path: "/AuditLogs/Index", component: <DashboardHome /> },
-  { path: "/UserInfoFromBrowser/Index", component: <DashboardHome /> },
-  { path: "/RefreshToken/Index", component: <DashboardHome /> },
+  { path: "/UserManagement/Index", component: <UserManagement /> },
+  { path: "/IdentitySetting/Index", component: <IdentitySetting /> },
+  { path: "/EmailSetting/Index", component: <EmailSetting /> },
+  { path: "/SendEmailHistory/Index", component: <SendEmailHistory /> },
+  { path: "/LoginHistory/Index", component: <LoginHistory /> },
+  { path: "/AuditLogs/Index", component: <AuditLogs /> },
+  { path: "/UserInfoFromBrowser/Index", component: <UserInfoFromBrowser /> },
+  { path: "/RefreshToken/Index", component: <RefreshToken /> },
 
   // item reports
-  { path: "/SalesReport/HighInDemand", component: <DashboardHome /> },
-  { path: "/SalesReport/LowInDemand", component: <DashboardHome /> },
-  { path: "/SalesReport/HighestEarning", component: <DashboardHome /> },
-  { path: "/SalesReport/LowestEarning", component: <DashboardHome /> },
+  { path: "/SalesReport/HighInDemand", component: <HighInDemand /> },
+  { path: "/SalesReport/LowInDemand", component: <LowInDemand /> },
+  { path: "/SalesReport/HighestEarning", component: <HighestEarning /> },
+  { path: "/SalesReport/LowestEarning", component: <LowestEarning /> },
 
   // SALE REPORTS
-  { path: "/SalesReport/PaymentSummaryReport", component: <DashboardHome /> },
-  { path: "/SalesReport/ProductWiseSale", component: <DashboardHome /> },
-  { path: "/SalesReport/PaymentDetailReport", component: <DashboardHome /> },
-  { path: "/SalesReport/TransactionByDay", component: <DashboardHome /> },
-  { path: "/SalesReport/TransactionByMonth", component: <DashboardHome /> },
-  { path: "/SalesReport/TransactionByYear", component: <DashboardHome /> },
+  { path: "/SalesReport/PaymentSummaryReport", component: <PaymentSummaryReport /> },
+  { path: "/SalesReport/ProductWiseSale", component: <ProductWiseSale /> },
+  { path: "/SalesReport/PaymentDetailReport", component: <PaymentDetailReport /> },
+  { path: "/SalesReport/TransactionByDay", component: <TransactionByDay /> },
+  { path: "/SalesReport/TransactionByMonth", component: <TransactionByMonth /> },
+  { path: "/SalesReport/TransactionByYear", component: <TransactionByYear /> },
 
   // PURCHASE REPORTS
-  { path: "/PurchasesReport/PurchasesSummary", component: <DashboardHome /> },
-  { path: "/PurchasesReport/PurchasesDetail", component: <DashboardHome /> },
-  { path: "/PurchasesReport/PurchasesTransactionByDay", component: <DashboardHome /> },
-  { path: "/PurchasesReport/PurchasesTransactionByMonth", component: <DashboardHome /> },
-  { path: "/PurchasesReport/PurchasesTransactionByYear", component: <DashboardHome /> },
+  { path: "/PurchasesReport/PurchasesSummary", component: <PurchasesSummary /> },
+  { path: "/PurchasesReport/PurchasesDetail", component: <PurchasesDetail /> },
+  { path: "/PurchasesReport/PurchasesTransactionByDay", component: <PurchasesTransactionByDay /> },
+  { path: "/PurchasesReport/PurchasesTransactionByMonth", component: <PurchasesTransactionByMonth /> },
+  { path: "/PurchasesReport/PurchasesTransactionByYear", component: <PurchasesTransactionByYear /> },
 
   // EXPENSE REPORTS
-  { path: "/ExpenseReport/ExpenseSummaryReport", component: <DashboardHome /> },
-  { path: "/ExpenseReport/ExpenseDetailsReport", component: <DashboardHome /> },
-  { path: "/ExpenseReport/ExpenseByDay", component: <DashboardHome /> },
-  { path: "/ExpenseReport/ExpenseByMonth", component: <DashboardHome /> },
-  { path: "/ExpenseReport/ExpenseByYear", component: <DashboardHome /> },
+  { path: "/ExpenseReport/ExpenseSummaryReport", component: <ExpenseSummaryReport /> },
+  { path: "/ExpenseReport/ExpenseDetailsReport", component: <ExpenseDetailsReport /> },
+  { path: "/ExpenseReport/ExpenseByDay", component: <ExpenseByDay /> },
+  { path: "/ExpenseReport/ExpenseByMonth", component: <ExpenseByMonth /> },
+  { path: "/ExpenseReport/ExpenseByYear", component: <ExpenseByYear /> },
 
   // OTHER REPORTS
-  { path: "/SalesReport/SummaryReport", component: <DashboardHome /> },
-  { path: "/SalesReport/AttendanceReport", component: <DashboardHome /> },
-  { path: "/SalesReport/PrintBarcode", component: <DashboardHome /> },
+  { path: "/SalesReport/SummaryReport", component: <SummaryReport /> },
+  { path: "/SalesReport/AttendanceReport", component: <AttendanceReport /> },
+  { path: "/SalesReport/PrintBarcode", component: <PrintBarcode /> },
   // DONE
 
   { path: "/", component: <DashboardHome /> },

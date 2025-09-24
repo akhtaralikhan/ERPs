@@ -9,19 +9,66 @@ import {
 import Dropdown from "react-bootstrap/Dropdown";
 import GlobalFilter from "../../../Components/GlobalFilter";
 import DeleteModal from "../../../Components/DeleteModal";
-import { SystemRoleData } from "../../../assets/data";
-import SystemRoleModal from "../../../Components/SystemRoleModal";
+import { UserManagementData } from "../../../assets/data";
+import UserManagementModal from "../../../Components/UserManagementModal";
+import UserManagementViewModal from "../../../Components/UserManagementViewModal";
+import UserResetPasswordModal from "../../../Components/UserResetPasswordModal";
+import ManagePageAccessModal from "../../../Components/ManagePageAccessModal";
 
-const SystemRole = () => {
+const UserManagement = () => {
   const [showAll, setShowAll] = useState(false);
+  const [selectedData, setSelectedData] = useState(null);
   const [editData, setEditData] = useState(null);
   const [mode, setMode] = useState("new");
+  const [resetUser, setResetUser] = useState(null);
 
   // ✅ Table columns
   const columns = useMemo(
     () => [
-      { Header: "SL", accessor: "sl", size: 400 },
-      { Header: "Role Name", accessor: "RoleName" },
+      { Header: "ID", accessor: "id", size: 400 },
+      {
+        Header: "Image",
+        accessor: "image",
+        Cell: ({ row }) => (
+          <a
+            href="/"
+            className="d-flex align-items-center text-900 text-center p-0"
+          >
+            <div className="avatar avatar-l me-2">
+              {row.original.imageImg ? (
+                <img
+                  src={row.original.imageImg}
+                  alt={row.original.image}
+                  className="rounded-circle"
+                  // style={{ width: "30px", height: "30px", objectFit: "cover" }}
+                />
+              ) : (
+                <div className="avatar-name rounded-circle avatar-m">
+                  <span>{row.original.image?.[0]}</span>
+                </div>
+              )}
+            </div>
+          </a>
+        ),
+      },
+      { Header: "First Name", accessor: "firstname" },
+      { Header: "Last Name", accessor: "lastname" },
+      { Header: "Phone Number", accessor: "Phonenumber" },
+      { Header: "Email", accessor: "email" },
+      {
+        Header: "Created Date",
+        accessor: "createdDate",
+        Cell: ({ value }) => {
+          return new Date(value).toLocaleString("en-US", {
+            month: "short",
+            day: "numeric",
+            // year:"numeric",
+            hour: "numeric",
+            minute: "numeric",
+            hour12: true,
+          });
+        },
+      },
     ],
     []
   );
@@ -44,7 +91,7 @@ const SystemRole = () => {
   } = useTable(
     {
       columns,
-      data: SystemRoleData,
+      data: UserManagementData,
       initialState: { pageIndex: 0, pageSize: 5 },
     },
     useGlobalFilter,
@@ -59,7 +106,7 @@ const SystemRole = () => {
           {/* Title and tabs */}
           <div className=" p-3 row" style={{ minWidth: "170px" }}>
             <h2 className="fw-bolder mb-5" style={{ fontSize: "2rem" }}>
-              System Role
+              User List
             </h2>
             <div
               className="d-flex flex-wrap align-items-center"
@@ -157,14 +204,14 @@ const SystemRole = () => {
                 className="btn btn-primary"
                 type="button"
                 data-bs-toggle="modal"
-                data-bs-target="#systemRoleModal"
+                data-bs-target="#userManagementModal"
                 onClick={() => {
                   setMode("new");
                   setEditData(null);
                 }}
               >
                 <span className="fas fa-plus me-2"></span>
-                Add Role
+                Add User
               </button>
             </div>
           </div>
@@ -173,8 +220,20 @@ const SystemRole = () => {
         </div>
 
         <div className="table-responsive p-4 px-5 pt-0">
+          <UserResetPasswordModal
+            user={resetUser}
+            onReset={(data) => {
+              console.log("Password reset for:", data);
+              // TODO: Call API to reset password
+            }}
+          />
+
+          <UserManagementViewModal
+            data={selectedData}
+            onClose={() => setSelectedData(null)}
+          />
           {/* ✅ Search */}
-          <SystemRoleModal
+          <UserManagementModal
             mode={mode}
             initialData={editData}
             onSave={(data) => {
@@ -183,11 +242,17 @@ const SystemRole = () => {
             }}
           />
 
+          <ManagePageAccessModal
+            onSave={(pages) => {
+              console.log("Selected/filtered pages:", pages);
+              // 🔹 TODO: call API or update state with selected pages
+            }}
+          />
+
           <div className="table-responsive custom-scroll ">
             <table
               {...getTableProps()}
-              className="table  table-sm fs--1 mb-0 ConvertUpperCase
-              "
+              className="table  table-sm fs--1 mb-0 ConvertUpperCase"
               // table align-middle fs-9 mb-0
               style={{ fontSize: "13px" }}
             >
@@ -283,9 +348,18 @@ const SystemRole = () => {
                             <Link
                               className="dropdown-item"
                               to="#!"
+                              data-bs-toggle="modal"
+                              data-bs-target="#UserManagementViewModal"
+                              onClick={() => setSelectedData(row.original)}
+                            >
+                              View
+                            </Link>
+                            <Link
+                              className="dropdown-item"
+                              to="#!"
                               type="button"
                               data-bs-toggle="modal"
-                              data-bs-target="#systemRoleModal" // 🔹 use the correct modal ID
+                              data-bs-target="#userManagementModal" // 🔹 use the correct modal ID
                               onClick={() => {
                                 setMode("edit");
                                 setEditData(row.original); // send row data to modal
@@ -293,6 +367,26 @@ const SystemRole = () => {
                             >
                               Edit
                             </Link>
+                            <Link
+                              className="dropdown-item"
+                              to="#!"
+                              type="button"
+                              data-bs-toggle="modal"
+                              data-bs-target="#userResetPasswordModal"
+                              onClick={() => setResetUser(row.original)}
+                            >
+                              Reset Password
+                            </Link>
+                            <Link
+                              className="dropdown-item"
+                              to="#!"
+                              type="button"
+                              data-bs-toggle="modal"
+                              data-bs-target="#managePageAccessModal"
+                            >
+                              Manage Page Access
+                            </Link>
+
                             <div className="dropdown-divider"></div>
                             <Link
                               className="dropdown-item text-danger"
@@ -435,4 +529,4 @@ const SystemRole = () => {
     </div>
   );
 };
-export default SystemRole;
+export default UserManagement;
