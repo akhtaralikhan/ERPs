@@ -61,6 +61,23 @@ const LowestEarning = () => {
             <h2 className="fw-bolder mb-5 PrintSizeH2" style={{ fontSize: "2rem" }}>
               Item: Lowest Earning
             </h2>
+              <div
+              className="d-flex flex-wrap align-items-center"
+              style={{ gap: "35px" }}
+            >
+              <span className="filterLinks text-dark">
+                All <span className="NewChangeColor">(68817)</span>
+              </span>
+              <span className="filterLinks ColorChangeFilterLink">
+                Glue Stick <span className="NewChangeColor">(6)</span>
+              </span>
+              <span className="filterLinks ColorChangeFilterLink">
+                Sketch Pen <span className="NewChangeColor">(17)</span>
+              </span>
+              <span className="filterLinks ColorChangeFilterLink">
+                Ring Binder <span className="NewChangeColor">(6,810)</span>
+              </span>
+            </div>
 
             {/* Search + Filters */}
             <div className="d-flex flex-xl-row flex-column">

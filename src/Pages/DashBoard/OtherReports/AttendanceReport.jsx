@@ -93,6 +93,23 @@ const AttendanceReport = () => {
             <h2 className="fw-bolder mb-5" style={{ fontSize: "2rem" }}>
               Attendance Report
             </h2>
+             <div
+              className="d-flex flex-wrap align-items-center"
+              style={{ gap: "35px" }}
+            >
+              <span className="filterLinks text-dark">
+                All <span className="NewChangeColor">(68817)</span>
+              </span>
+              <span className="filterLinks ColorChangeFilterLink">
+                Executive Desk <span className="NewChangeColor">(6)</span>
+              </span>
+              <span className="filterLinks ColorChangeFilterLink">
+                Laser Printer <span className="NewChangeColor">(17)</span>
+              </span>
+              <span className="filterLinks ColorChangeFilterLink">
+                Laptop Stand <span className="NewChangeColor">(6,810)</span>
+              </span>
+            </div>
 
             {/* Search + Filters */}
             <div className="d-flex flex-xl-row flex-column">

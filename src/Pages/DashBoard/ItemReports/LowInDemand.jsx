@@ -12,7 +12,7 @@ import { LowInDemandData } from "../../../assets/data";
 const LowInDemand = () => {
   const [showAll, setShowAll] = useState(false);
 
-   // Function to handle the print action
+  // Function to handle the print action
   const handlePrint = () => {
     window.print();
   };
@@ -58,9 +58,29 @@ const LowInDemand = () => {
       <div className="marginforsmalldevice RemoveBorder card rounded-0">
         <div className="NewColorChange phoenix-toolbar d-flex align-items-center flex-wrap py-md-3 px-md-4 mb-md-0 border-bottom gap-3">
           <div className="p-3 row PrintSize" style={{ minWidth: "170px" }}>
-            <h2 className="fw-bolder mb-5 PrintSizeH2" style={{ fontSize: "2rem" }}>
+            <h2
+              className="fw-bolder mb-5 PrintSizeH2"
+              style={{ fontSize: "2rem" }}
+            >
               Item: Low In Demand
             </h2>
+            <div
+              className="d-flex flex-wrap align-items-center"
+              style={{ gap: "35px" }}
+            >
+              <span className="filterLinks text-dark">
+                All <span className="NewChangeColor">(68817)</span>
+              </span>
+              <span className="filterLinks ColorChangeFilterLink">
+                Glue Stick <span className="NewChangeColor">(6)</span>
+              </span>
+              <span className="filterLinks ColorChangeFilterLink">
+                Sketch Pen <span className="NewChangeColor">(17)</span>
+              </span>
+              <span className="filterLinks ColorChangeFilterLink">
+                Ring Binder <span className="NewChangeColor">(6,810)</span>
+              </span>
+            </div>
 
             {/* Search + Filters */}
             <div className="d-flex flex-xl-row flex-column">
@@ -130,7 +150,7 @@ const LowInDemand = () => {
               </div>
             </div>
             <div className="PrintIconDisplay">
-              <div className="btn btn-light ps-0 fw-bold"  onClick={handlePrint}>
+              <div className="btn btn-light ps-0 fw-bold" onClick={handlePrint}>
                 <i class="fa-solid fa-print me-2"></i>
                 Print
               </div>

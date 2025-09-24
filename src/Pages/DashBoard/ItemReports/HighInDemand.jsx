@@ -58,9 +58,29 @@ const HighInDemand = () => {
       <div className="marginforsmalldevice RemoveBorder card rounded-0">
         <div className="NewColorChange phoenix-toolbar d-flex align-items-center flex-wrap py-md-3 px-md-4 mb-md-0 border-bottom gap-3">
           <div className="p-3 row PrintSize" style={{ minWidth: "170px" }}>
-            <h2 className="fw-bolder mb-5 PrintSizeH2" style={{ fontSize: "2rem" }}>
+            <h2
+              className="fw-bolder mb-5 PrintSizeH2"
+              style={{ fontSize: "2rem" }}
+            >
               Item: High In Demand
             </h2>
+            <div
+              className="d-flex flex-wrap align-items-center"
+              style={{ gap: "35px" }}
+            >
+              <span className="filterLinks text-dark">
+                All <span className="NewChangeColor">(68817)</span>
+              </span>
+              <span className="filterLinks ColorChangeFilterLink">
+                Ballpoint Pen <span className="NewChangeColor">(6)</span>
+              </span>
+              <span className="filterLinks ColorChangeFilterLink">
+                A4 Notebook <span className="NewChangeColor">(17)</span>
+              </span>
+              <span className="filterLinks ColorChangeFilterLink">
+                Marker Set <span className="NewChangeColor">(6,810)</span>
+              </span>
+            </div>
 
             {/* Search + Filters */}
             <div className="d-flex flex-xl-row flex-column">
