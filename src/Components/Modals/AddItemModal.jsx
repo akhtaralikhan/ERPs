@@ -51,12 +51,13 @@ function AddItemModal({ showModal, setShowModal, onAdd, onUpdate, editingItem, c
     }
     handleClose();
   };
-
+  
   return (
     <Modal show={showModal} onHide={handleClose} size="xl" centered>
-      <Modal.Header closeButton>
+      <div className="modal-header">
         <Modal.Title>{editingItem ? "Edit Item" : "Add Item"}</Modal.Title>
-      </Modal.Header>
+        <i className="fa-solid fa-xmark text-danger pointer" onClick={handleClose}></i>
+      </div>
       <Modal.Body>
         <Form>
           <Row>
@@ -299,10 +300,10 @@ function AddItemModal({ showModal, setShowModal, onAdd, onUpdate, editingItem, c
       </Modal.Body>
       <Modal.Footer>
         <Button variant="primary" onClick={handleSave}>
-          {editingItem ? "Update" : "Save"}
+          <small>{editingItem ? "Update" : "Save"}</small>
         </Button>
         <Button variant="secondary" onClick={handleClose}>
-          Close
+          <small>Close</small>
         </Button>
       </Modal.Footer>
     </Modal>

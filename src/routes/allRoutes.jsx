@@ -1,20 +1,13 @@
 // Auth Pages
+import Signin from "../Pages/Auth/Signin";
 import SignUp from "../Pages/Auth/SignUp";
 import ForgetPassword from "../Pages/Auth/ForgetPassword";
 // Dashboard Pages
 import DashboardHome from "../Pages/DashBoard/DashboardHome";
-// import PosInvoice from "../pages/Dashboard/PosInvoice";
-import BankAccounts from "../Pages/DashBoard/BusinessERP/BusinessERP.jsx";
 import Invoice from "../Pages/DashBoard/ManageSales/Invoice.jsx";
 import ItemCart from "../Pages/DashBoard/POS/ItemCart.jsx";
-import PurchaseInvoiceDraft from "../Pages/DashBoard/PurchaseInvoiceDraft.jsx";
-import PurchaseInvoiceQuote from "../pages/Dashboard/PurchaseInvoiceQuote";
-import Assets from "../Pages/DashBoard/Assets.jsx";
-import Signin from "../Pages/Auth/Signin";
 import { superAdmin } from "../constant/Config";
 import BusinessERP from "../Pages/DashBoard/BusinessERP/BusinessERP.jsx";
-import ManageSales from '../Pages/DashBoard/ManageSales/ManageSales.jsx'
-import PurchaseReturn from "../Pages/DashBoard/PurchaseReturn.jsx";
 import ExpenseSummary from "../Pages/DashBoard/ManageExpense/ExpenseSummary.jsx";
 import ExpensesType from "../Pages/DashBoard/ManageExpense/ExpenseType.jsx";
 import ManageBranch from "../Pages/DashBoard/ManageBranch/ManageBranch.jsx";
@@ -36,7 +29,6 @@ import Designation from "../Pages/DashBoard/HumanResource/Designation.jsx";
 import SubDepartment from "../Pages/DashBoard/HumanResource/SubDepartment.jsx";
 import Department from "../Pages/DashBoard/HumanResource/Department.jsx";
 import ManageUserRoles from "../Pages/DashBoard/ManageUserRoles/ManageUserRoles.jsx";
-import SystemRoles from "../Pages/DashBoard/ManageUserRoles/SystemRole.jsx";
 import ManualInvoice from "../Pages/DashBoard/ManageSales/ManualInvoice.jsx";
 import DraftInvoice from "../Pages/DashBoard/ManageSales/DraftInvoice.jsx";
 import QuoteInvoice from "../Pages/DashBoard/ManageSales/QuoteInvoice.jsx";
@@ -52,7 +44,6 @@ import DamageItemDetails from "../Pages/DashBoard/ManageItem/DamageItemDetails.j
 import UnitOfMeasure from "../Pages/DashBoard/SystemSettings/UnitOfMeasure.jsx";
 import SideInvoice from "../Pages/DashBoard/POS/SideInvoice.jsx";
 import SystemRole from "../Pages/DashBoard/ManageUserRoles/SystemRole.jsx";
-import ProductMainGroup from "../Pages/DashBoard/Assets.jsx";
 import UserManagement from "../Pages/DashBoard/ManageUser/UserManagement.jsx";
 import SendEmailHistory from "../Pages/DashBoard/ManageUser/SendEmailHistory.jsx";
 import LoginHistory from "../Pages/DashBoard/ManageUser/LoginHistory.jsx";
@@ -194,26 +185,6 @@ const basePrivateRoutes = [
   { path: "/SalesReport/PrintBarcode", component: <PrintBarcode /> },
   // DONE
 
-  { path: "/", component: <DashboardHome /> },
-  // { path: "/PosInvoice", component: <PosInvoice /> },
-  // { path: "/SideInvoice", component: <SideInvoice /> },
-  // { path: "/Estimates", component: <Estimates /> },
-  { path: "/BankAccounts", component: <BankAccounts /> }, // UNSTYLED 
-  { path: "/Invoice", component: <Invoice /> }, // UNSTYLED SAME
-  { path: "/PurchaseReturn", component: <PurchaseReturn /> }, // UNSTYLED
-  // { path: "/PurchaseInvoiceDraft", component: <PurchaseInvoiceDraft /> },// UNSTYLED
-  // { path: "/PurchaseInvoiceQuote", component: <PurchaseInvoiceQuote /> }, // UNSTYLED
-  { path: "/Assets", component: <Assets /> }, // NOT THAT GOOD 
-  // { path: "/ManualJournals", component: <ManualJournals /> },
-  // { path: "/Transations", component: <Transations /> },
-  // { path: "/ChartsOfAccount", component: <ChartsOfAccount /> },
-  // { path: "/Assets", component: <Assets /> },
-  // { path: "/Report", component: <Report /> },
-  // { path: "/Settings", component: <Settings /> },
-  // { path: "/ConnectBank", component: <ConnectBank /> },
-  { path: "/ManageSales", component: <ManageSales /> },
-  // { path: "/ManualInvoices", component: <ManualInvoices /> },
-  // { path: "/PurchaseInvoice", component: <PurchaseInvoice /> },
 ];
 
 // Conditionally add Console route

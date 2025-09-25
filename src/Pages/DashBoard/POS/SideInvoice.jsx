@@ -13,6 +13,9 @@ export default function SideInvoice() {
     data?.price.toString()?.includes(searchTerm)
   );
 
+  const itemsInCart = filteredData.filter(item => cardItem[item.id]);
+
+
   return (
     <div className='content AssetsPageChangecss AssetPaddingChange'>
       <div className="search-container d-flex  align-items-center justify-content-between m-5 gap-3">
@@ -27,30 +30,58 @@ export default function SideInvoice() {
           <span className="fas fa-search search-box-icon"></span>
         </form>
       </div>
-      <div className="d-flex overflow-x-scroll mb-7 gap-3  invoice-container container px-5">
-        {filteredData.map((data, index) => (
-          cardItem[data.id] ? (
-            <div key={index} className="card  invoice-items" style={{ boxShadow: "0 0 10px #00000015" }}>
-              <img src={data.image} className='card-img-top  imgwidth  border-bottom-0 ' alt="" />
+      <div className="d-flex overflow-x-scroll mb-7 gap-3 invoice-container container px-5">
+        {itemsInCart.length > 0 ? (
+          itemsInCart.map((data, index) => (
+            <div
+              key={index}
+              className="card invoice-items"
+              style={{ boxShadow: "0 0 10px #00000015" }}
+            >
+              <img
+                src={data.image}
+                className="card-img-top imgwidth border-bottom-0"
+                alt=""
+              />
+
               {!cardItem[data.id] ? (
-                <img src='src/assets/img/bg/add_icon_white.png' className='add' width="30" onClick={() => addToCart(data.id)} alt='add'></img>
+                <img
+                  src="src/assets/img/bg/add_icon_white-min.png"
+                  className="add"
+                  width="30"
+                  onClick={() => addToCart(data.id)}
+                  alt="add"
+                />
               ) : (
                 <div className="item-counter">
-                  <img src="/src/assets/img/bg/remove_icon_red.png" width="30" alt="-" onClick={() => removeFromCart(data.id)} />
+                  <img
+                    src="/src/assets/img/bg/remove_icon_red-min.png"
+                    width="30"
+                    alt="-"
+                    onClick={() => removeFromCart(data.id)}
+                  />
                   {cardItem[data.id]}
-                  <img src="/src/assets/img/bg/add_icon_green.png" width="30" alt="+" onClick={() => addToCart(data.id)} />
+                  <img
+                    src="/src/assets/img/bg/add_icon_green-min.png"
+                    width="30"
+                    alt="+"
+                    onClick={() => addToCart(data.id)}
+                  />
                 </div>
               )}
-              <div className="card-body ">
+
+              <div className="card-body">
                 <div className="card-title">
                   <h5>{data.title}</h5>
                 </div>
-                <div className="card-text cardt mb-3">{data.description}</div>
-                <div className="card-text fw-bold">${data.price}</div>
+                <p className="card-text cardt mb-3 small">{data.description}</p>
+                <p className="card-text fw-bold">${data.price}</p>
               </div>
             </div>
-          ) : null
-        ))}
+          ))
+        ) : (
+          <h5 className="text-center w-100 ">No items in the cart</h5>
+        )}
       </div>
       <hr className='mb-7' style={{ height: "1px" }} />
       <div className="side-invoice table-responsive container px-5">

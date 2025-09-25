@@ -58,7 +58,7 @@ export const TableModal = ({ addInvoice, setAddInvoice, onSave }) => {
             <table className="table table-sm table-bordered table-striped table-hover align-middle text-center mb-0"
               style={{ fontSize: "13px", borderCollapse: "collapse" }}
             >
-              <thead className="table-light">
+              <thead className="">
                 <tr>
                   <th style={{ width: "20%" }}>Item Name</th>
                   <th style={{ width: "10%" }}>Quantity</th>
@@ -92,14 +92,11 @@ export const TableModal = ({ addInvoice, setAddInvoice, onSave }) => {
                     <small className="invalid-feedback">{errors.quantity?.message}</small>
                   </td>
                   <td>
-                    <select
-                      className={`form-select form-select-sm ${errors.unitPrice ? "is-invalid" : ""}`}
-                      {...register("unitPrice", { required: "Unit Price is required" })}
-                    >
-                      <option value="">Select</option>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                    </select>
+                    <input
+                      type="number"
+                      className={`form-control form-control-sm ${errors.unitPrice ? "is-invalid" : ""}`}
+                      {...register("unitPrice", { required: "unitPrice is required" })}
+                    />
                     <small className="invalid-feedback">{errors.unitPrice?.message}</small>
                   </td>
                   <td>
@@ -191,9 +188,23 @@ export const MainModal = ({
   setShowModal
 }) => {
 
+
   const [addInvoice, setAddInvoice] = useState(false);
   const [Data, setData] = useState([]);
-  console.log("Add invoice", Data);
+  const grandTotal = Data.reduce((acc, curr) => acc + Number(curr.total || 0), 0);
+
+  // Save handler
+  const onSave = (e) => {
+    e.preventDefault();
+    handleSubmit();         // Save the data (runs parent handler)
+    setShowModal(false);    // Close the modal after saving
+  };
+
+  // Close handler
+  const onClose = () => {
+    setShowModal(false);    // Closes the modal
+    // Or: setModal(null);   // If your modal logic prefers this
+  };
 
 
   return (
@@ -272,32 +283,58 @@ export const MainModal = ({
               <option selected>Quote</option>
             </select>
           </div>
+          <div class="mb-2 col-md-6 col-12">
+            <label class="form-label" for="basic-form-gender">
+              Payment
+            </label>
+            <select
+              class="form-select"
+              id="basic-form-gender"
+              aria-label="Default select example"
+            >
+              <option selected>Select Payment Status</option>
+              <option value="Paid">Paid</option>
+              <option value="Unpaid">Unpaid</option>
+            </select>
+          </div>
         </div>
-        <div className="row">
+        <div className="row my-2">
           <div className="col-3 d-flex justify-content-between">
-            <div>Total</div>
-            <div className="">{Data?.[0]?.total}</div>
+            <p>Total Amount </p>
+            <p className="">$ {grandTotal}</p>
           </div>
         </div>
 
-        <div className="d-flex justify-content-end align-items-center pt-2 border-top pb-2 pe-3">
+        <div className="d-flex justify-content-end align-items-center pt-3 border-top pb-0 ">
           <button
-            type="button"
-            className="btn btn-primary me-3"
-            onClick={handleSubmit}
+            type="submit"
+            className="btn btn-primary me-3 small"
           >
-            Save
+            <small>Save</small>
           </button>
-
-          <div className="btn btn-primary me-3" onClick={() => {
-            setAddInvoice(true)
-          }}>Add Invoice</div>
-          {addInvoice && <TableModal onSave={setData} setModal={setModal} setShowModal={setShowModal} addInvoice={addInvoice} setAddInvoice={setAddInvoice} handleInputs={handleInputs} MainData={MainData} formData={formData} handleRemoveData={handleRemoveData} handleSubmitted={handleSubmit} />}
-          <div className="btn btn-primary">Close</div>
+          <div className="btn btn-primary me-3 small" onClick={() => setAddInvoice(true)}>
+            <small>Add Invoice</small>
+          </div>
+          {addInvoice && (
+            <TableModal
+              onSave={setData}
+              setModal={setModal}
+              setShowModal={setShowModal}
+              addInvoice={addInvoice}
+              setAddInvoice={setAddInvoice}
+              handleInputs={handleInputs}
+              MainData={MainData}
+              formData={formData}
+              handleRemoveData={handleRemoveData}
+              handleSubmitted={handleSubmit}
+            />
+          )}
+          <div className="btn btn-primary small" onClick={onClose}>
+            <small>Close</small>
+          </div>
         </div>
       </form>
     </>
-
   );
 };
 

@@ -11,7 +11,6 @@ import { ManageinvoiceData } from "../../../assets/data";
 import GlobalFilter from "../../../Components/GlobalFilter";
 import AddPaymentModal from "../../../Components/AddPaymentModal";
 import Dropdown from "react-bootstrap/Dropdown";
-import { set } from "react-hook-form";
 
 const Invoice = () => {
     const [showModal, setShowModal] = useState(false);

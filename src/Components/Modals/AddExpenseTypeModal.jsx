@@ -16,7 +16,10 @@ function AddExpenseTypeModal({ showModal, setShowModal }) {
   return (
     <div>
       <Modal isOpen={showModal} toggle={toggle}>
-        <ModalHeader toggle={toggle}>Add Expense Type</ModalHeader>
+        <div className="modal-header d-flex" toggle={toggle}>
+          <p className="mb-0">Add Expense Type</p>
+          <i className="fa-solid fa-xmark text-danger pointer" onClick={toggle}></i>
+        </div>
         <ModalBody>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-3">
@@ -39,10 +42,10 @@ function AddExpenseTypeModal({ showModal, setShowModal }) {
               />
               {errors.description && <small className="text-danger">{errors.description.message}</small>}
             </div>
-            <ModalFooter>
-              <Button color="primary" type="submit">Save</Button>
-              <Button color="secondary" onClick={toggle}>Cancel</Button>
-            </ModalFooter>
+            <div className="modal-footer p-0 pt-2">
+              <Button color="primary" type="submit"><small>Save</small></Button>
+              <Button color="secondary" onClick={toggle}><small>Cancel</small></Button>
+            </div>
           </form>
         </ModalBody>
       </Modal>

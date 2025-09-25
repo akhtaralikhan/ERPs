@@ -123,8 +123,8 @@ const PrintBarcode = () => {
                   <div className="card h-100 shadow-sm text-center p-3">
                     <div className="d-flex justify-content-between align-items-center mb-2">
                       <div>
-                        <strong>{product.id}</strong>
-                        <div>{product.name}</div>
+                        <p>{product.id}</p>
+                        <p>{product.name}</p>
                       </div>
                       <button
                         className="btn btn-success btn-sm"

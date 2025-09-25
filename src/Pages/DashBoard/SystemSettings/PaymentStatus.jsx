@@ -162,7 +162,7 @@ const PaymentStatus = () => {
               {/* Add order button */}
               <button className="btn btn-primary" onClick={() => setShowModal(true)}>
                 <span className="fas fa-plus me-2"></span>
-                Add Payment
+                Add Payment Status
               </button>
               {showModal && <AddPaymentStatusModal showModal={showModal} setShowModal={setShowModal} />}
             </div>

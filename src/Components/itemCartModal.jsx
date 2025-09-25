@@ -37,7 +37,7 @@ function Example({ showModal, setShowModal }) {
                       <td className='align-middle' >${data.price}</td>
                       <td className='align-middle' >{cardItem[data.id]}</td>
                       <td className='align-middle' >${cardItem[data.id] * data.price}</td>
-                      <td className='align-middle ps-5 cursor-pointer text-danger' onClick={() => removeFromCart(data.id)}>X</td>
+                      <td className='align-middle ps-5 cursor-pointer text-danger' onClick={() => removeFromCart(data.id)}><i className='fa-solid fa-xmark text-danger pointer'></i></td>
                     </tr>
                   )
                 }

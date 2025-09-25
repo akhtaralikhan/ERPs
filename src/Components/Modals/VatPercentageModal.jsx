@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { Button, Modal, ModalBody } from "reactstrap";
 
 function VatPercentageModal({ showModal, setShowModal }) {
   const toggle = () => setShowModal(!showModal);
@@ -18,14 +18,17 @@ function VatPercentageModal({ showModal, setShowModal }) {
 
   return (
     <Modal isOpen={showModal} toggle={toggle}>
-      <ModalHeader toggle={toggle}>Add Vat Percentage</ModalHeader>
+      <div className="modal-header d-flex justify-content-between">
+        <h5 className="mb-0">Add Vat Percentage</h5>
+        <i className="fa-solid fa-xmark text-danger pointer" onClick={toggle}></i>
+      </div>
       <ModalBody>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form id="vat-percentage-form" onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-3">
             <label className="form-label">Name</label>
             <input
               type="text"
-              className="form-control"
+              className={`form-control ${errors.name ? "is-invalid" : ""}`}
               placeholder="Reference"
               {...register("name", { required: "Name is required" })}
             />
@@ -36,7 +39,7 @@ function VatPercentageModal({ showModal, setShowModal }) {
             <label className="form-label">Vat Percentage</label>
             <input
               type="text"
-              className="form-control"
+              className={`form-control ${errors.vatPercentage ? "is-invalid" : ""}`}
               placeholder="Vat Percentage"
               {...register("vatPercentage", {
                 required: "Vat Percentage is required",
@@ -56,10 +59,14 @@ function VatPercentageModal({ showModal, setShowModal }) {
             <label className="form-check-label" htmlFor="switchCheckDefault">Is Default</label>
           </div>
 
-          <ModalFooter>
-            <Button color="primary" type="submit">Save</Button>
-            <Button color="secondary" onClick={toggle}>Cancel</Button>
-          </ModalFooter>
+          <div className="modal-footer p-0 pt-2">
+            <Button color="primary" type="submit" form="vat-percentage-form">
+              <small>Save</small>
+            </Button>
+            <Button color="secondary" onClick={toggle}>
+              <small>Cancel</small>
+            </Button>
+          </div>
         </form>
       </ModalBody>
     </Modal>

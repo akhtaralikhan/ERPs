@@ -297,6 +297,22 @@ body.dark {
     --text-color: #fff;
     background-color: var(--background-color);
     color: var(--text-color);
+
+    .text-body {
+        color: var(--text-color) !important;
+    }
+    span{
+        color: var(--text-color);
+    }
+    small {
+        color: var(--text-color);
+    }
+
+    th,
+    td {
+        --text-color: #fff;
+        color: var(--text-color);
+    }
 }
 
 .NewColorChange {

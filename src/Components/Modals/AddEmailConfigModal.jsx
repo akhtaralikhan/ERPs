@@ -18,7 +18,10 @@ function AddEmailConfigModal({ showModal, setShowModal }) {
 
   return (
     <Modal isOpen={showModal} toggle={toggle} size="lg">
-      <ModalHeader toggle={toggle}>Add Email Config</ModalHeader>
+      <div className="modal-header d-flex justify-content-between">
+        <h5 className="mb-0">Add Email Config</h5>
+        <i className="fa-solid fa-xmark text-danger pointer" onClick={toggle}></i>
+      </div>
       <ModalBody>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-3">
@@ -96,10 +99,10 @@ function AddEmailConfigModal({ showModal, setShowModal }) {
             />
             <label className="form-check-label ms-2">IsDefault</label>
           </div>
-          <ModalFooter>
-            <Button color="primary" type="submit">Save</Button>
-            <Button color="danger" onClick={toggle}>Close</Button>
-          </ModalFooter>
+          <div className="modal-footer p-0 pt-2">
+            <Button color="primary" type="submit"><small>Save</small></Button>
+            <Button color="secondary" onClick={toggle}><small>Cancel</small></Button>
+          </div>
         </form>
       </ModalBody>
     </Modal>

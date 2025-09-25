@@ -10,6 +10,9 @@ import DeleteModal from "../../../Components/DeleteModal";
 import { ExpenseSummaryData } from "../../../assets/data";
 import { Dropdown } from "react-bootstrap";
 import GlobalFilter from "../../../Components/GlobalFilter";
+import AddExpenseTypeModal from "../../../Components/Modals/AddExpenseTypeModal";
+
+
 const IndeterminateCheckbox = React.forwardRef(
   ({ indeterminate, ...rest }, ref) => {
     const defaultRef = useRef();
@@ -185,8 +188,7 @@ const ExpenseSummary = () => {
                 <span className="fas fa-plus me-2"></span>
                 Add Expenses
               </button>
-              {showModal && <AddCustomerModal showModal={showModal} setShowModal={setShowModal} />}
-            </div>
+              {showModal && <AddExpenseTypeModal showModal={showModal} setShowModal={setShowModal} />}            </div>
           </div>
 
           {/* Export button */}

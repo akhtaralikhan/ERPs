@@ -129,7 +129,7 @@ export const PayingVsNonPaying = () => (
     <Col>
         <Card className="px-2 border-0" style={{ minHeight: 310, maxWidth: 500 }}>
             <div className="text-start">
-                <div className="fw-semibold" style={{ fontSize: 15.5 }}>Paying vs non paying</div>
+                <p className="fw-semibold fs--1">Paying vs non paying</p>
                 <div style={{ color: "#5a5a5a", fontSize: 14 }}>Last 7 days</div>
             </div>
             <div className="d-flex justify-content-center align-items-center" style={{ minHeight: 295 }}>

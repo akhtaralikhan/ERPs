@@ -19,7 +19,10 @@ function AddBranchModal({ showModal, setShowModal }) {
 
   return (
     <Modal isOpen={showModal} toggle={toggle} size="lg">
-      <ModalHeader toggle={toggle}>Add Branch</ModalHeader>
+        <div className="modal-header d-flex justify-content-between">
+          <h5 className="mb-0">Add Branch</h5>
+          <i className="fa-solid fa-xmark text-danger pointer" onClick={toggle}></i>
+        </div>
       <ModalBody>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-3">
@@ -78,10 +81,10 @@ function AddBranchModal({ showModal, setShowModal }) {
             />
             {errors.shortDescription && <small className="text-danger">{errors.shortDescription.message}</small>}
           </div>
-          <ModalFooter>
-            <Button color="primary" type="submit">Save</Button>
-            <Button color="secondary" onClick={toggle}>Close</Button>
-          </ModalFooter>
+          <div className="modal-footer p-0 pt-2">
+              <Button color="primary" type="submit"><small>Save</small></Button>
+              <Button color="secondary" onClick={toggle}><small>Cancel</small></Button>
+            </div>
         </form>
       </ModalBody>
     </Modal>

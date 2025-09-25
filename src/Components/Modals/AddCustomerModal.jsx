@@ -115,10 +115,10 @@ function AddPaymentModal({ showModal, setShowModal }) {
                 {...register("notes")}
               />
             </div>
-            <ModalFooter>
+            <div className="modal-footer p-0 pt-2">
               <Button color="primary" type="submit"><small>Save</small></Button>
               <Button color="secondary" onClick={toggle}><small>Cancel</small></Button>
-            </ModalFooter>
+            </div>
           </form>
         </ModalBody>
       </Modal>
