@@ -53,52 +53,55 @@ export default function ItemCart() {
           </form>
         </div>
       </div>
+      <div className='container p-4 px-6'>
+        <div className="row">
+          {pagedData.map((data, index) => (
+            <div className="p-2 col-lg-3 col-md-6 col-12">
+              <div key={index} className="card shadow h-100">
+                <img src={data.image} className='card-img-top ttop border-bottom-0 img-fluid' alt="" />
+                {!cardItem[data.id] ? (
+                  <img src='/src/assets/img/bg/add_icon_white-min.png' className='add' width="30" onClick={() => addToCart(data.id)} alt='add'></img>
+                ) : (
+                  <div className="item-counter">
+                    <img src="/src/assets/img/bg/remove_icon_red-min.png" width="30" alt="-" onClick={() => removeFromCart(data.id)} />
+                    {cardItem[data.id]}
+                    <img src="/src/assets/img/bg/add_icon_green-min.png" width="30" alt="+" onClick={() => addToCart(data.id)} />
+                  </div>
+                )}
 
-      <div className="d-flex flex-wrap ps-5">
-        {pagedData.map((data, index) => (
-          <div key={index} className="card shadow cardwidth">
-            <img src={data.image} className='card-img-top ttop border-bottom-0 ' alt="" />
-            {!cardItem[data.id] ? (
-              <img src='/src/assets/img/bg/add_icon_white-min.png' className='add' width="30" onClick={() => addToCart(data.id)} alt='add'></img>
-            ) : (
-              <div className="item-counter">
-                <img src="/src/assets/img/bg/remove_icon_red-min.png" width="30" alt="-" onClick={() => removeFromCart(data.id)} />
-                {cardItem[data.id]}
-                <img src="/src/assets/img/bg/add_icon_green-min.png" width="30" alt="+" onClick={() => addToCart(data.id)} />
+                <div className="card-body p-3">
+                  <div className="card-title">
+                    <h5>{data.title}</h5>
+                  </div>
+                  <p className="card-text cardt mb-2 small">{data.description}</p>
+                  <p className="card-text fw-bold">${data.price}</p>
+                </div>
               </div>
-            )}
-
-            <div className="card-body ">
-              <div className="card-title">
-                <h5>{data.title}</h5>
-              </div>
-              <p className="card-text cardt mb-3 small">{data.description}</p>
-              <p className="card-text fw-bold">${data.price}</p>
             </div>
-          </div>
-        ))}
-        {pagedData.length === 0 && (
-          <h5 className="text-center w-100">No items found</h5>
-        )}
-      </div>
+          ))}
+          {pagedData.length === 0 && (
+            <h5 className="text-center w-100">No items found</h5>
+          )}
+        </div>
 
-      {/* PAGINATION */}
-      <div className="d-flex justify-content-between mt-3">
-        <span className="d-none d-sm-inline-block" data-list-info="data-list-info"></span>
-        <div className="d-flex">
-          <button className="page-link" disabled={currentPage === 1} onClick={handlePrevPage}>
-            <span className="fas fa-chevron-left"></span>
-          </button>
-          <ul className="mb-0 pagination">
-            {[...Array(totalPages)].map((_, i) => (
-              <li key={i} className={`page-item${currentPage === i + 1 ? ' active' : ''}`}>
-                <a className="page-link" href="#" onClick={e => { e.preventDefault(); goToPage(i + 1); }}>{i + 1}</a>
-              </li>
-            ))}
-          </ul>
-          <button className="page-link pe-0" disabled={currentPage === totalPages} onClick={handleNextPage}>
-            <span className="fas fa-chevron-right"></span>
-          </button>
+        {/* PAGINATION */}
+        <div className="d-flex justify-content-between mt-3 pe-5">
+          <span className="d-none d-sm-inline-block" data-list-info="data-list-info"></span>
+          <div className="d-flex">
+            <button className="page-link" disabled={currentPage === 1} onClick={handlePrevPage}>
+              <span className="fas fa-chevron-left"></span>
+            </button>
+            <ul className="mb-0 pagination">
+              {[...Array(totalPages)].map((_, i) => (
+                <li key={i} className={`page-item${currentPage === i + 1 ? ' active' : ''}`}>
+                  <a className="page-link" href="#" onClick={e => { e.preventDefault(); goToPage(i + 1); }}>{i + 1}</a>
+                </li>
+              ))}
+            </ul>
+            <button className="page-link pe-0" disabled={currentPage === totalPages} onClick={handleNextPage}>
+              <span className="fas fa-chevron-right"></span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
