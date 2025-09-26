@@ -21,9 +21,9 @@ function CompanyInfo() {
             </div>
           </div>
         </div>
-        <div className='container AssetsPageChangecss p-4 pt-0 pb-0 mb-0 '>
-          <p className=' mb-0 '>
-            <span className=' fs-1 mb-4 clearfix fw-bold'>About Company :</span>
+        <div className='container p-4 pt-0 pb-5 pb-md-0 mb-0 '>
+          <p className='text-body-secondary mb-0 '>
+            <span className='text-secondary fs-1 mb-4 clearfix fw-bold'>About Company :</span>
             XYZ Company is a dynamic and growing organization dedicated to delivering innovative solutions across multiple industries. With a strong focus on quality, customer satisfaction, and continuous improvement, XYZ Company strives to create value for its clients through reliable products, professional services, and cutting-edge technology.</p>
         </div>
       </div>

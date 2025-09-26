@@ -1,82 +1,75 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { useForm } from "react-hook-form";
 
-const IdentitySettingsEditModal = ({ mode, onSave, initialData }) => {
-  const [formData, setFormData] = useState({
-    PasswordRequireDigit: false,
-    PasswordRequiredLength: "",
-    PasswordRequireNonAlphanumeric: false,
-    PasswordRequireUppercase: false,
-    PasswordRequireLowercase: false,
-    PasswordRequiredUniqueChars: "",
-    LockoutDefaultLockoutTimeSpanInMinutes: "",
-    LockoutMaxFailedAccessAttempts: "",
-    LockoutAllowedForNewUsers: false,
-    UserRequireUniqueEmail: false,
-    SignInRequireConfirmedEmail: false,
-    SlidingExpiration: false,
-    CookieHttpOnly: false,
-    CookieExpiration: "",
-    CookieExpireTimeSpan: "",
-    LoginPath: "",
-    LogoutPath: "",
-    AccessDeniedPath: "",
+const IdentitySettingsEditModal = ({ mode, onSave, initialData, modalId }) => {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    watch,
+    formState: { errors, touchedFields },
+  } = useForm({
+    mode: "onChange",
+    defaultValues: {
+      PasswordRequireDigit: false,
+      PasswordRequiredLength: "",
+      PasswordRequireNonAlphanumeric: false,
+      PasswordRequireUppercase: false,
+      PasswordRequireLowercase: false,
+      PasswordRequiredUniqueChars: "",
+      LockoutDefaultLockoutTimeSpanInMinutes: "",
+      LockoutMaxFailedAccessAttempts: "",
+      LockoutAllowedForNewUsers: false,
+      UserRequireUniqueEmail: false,
+      SignInRequireConfirmedEmail: false,
+      SlidingExpiration: false,
+      CookieHttpOnly: false,
+      CookieExpiration: "",
+      CookieExpireTimeSpan: "",
+      LoginPath: "",
+      LogoutPath: "",
+      AccessDeniedPath: "",
+    },
   });
 
-  // ✅ Load initial data when editing
+  const values = watch();
+
   useEffect(() => {
     if (mode === "edit" && initialData) {
-      setFormData((prev) => ({
-        ...prev,
-        ...initialData,
-      }));
+      reset(initialData);
+    } else {
+      reset({});
     }
-  }, [mode, initialData]);
+  }, [mode, initialData, reset]);
 
-  const [validated, setValidated] = useState(false);
-
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === "checkbox" ? checked : value,
-    });
-  };
-
-  const submitHandler = (e) => {
-    e.preventDefault();
-    const form = e.currentTarget;
-
-    if (form.checkValidity() === false) {
-      e.stopPropagation();
-      setValidated(true);
-      return;
-    }
-
-    onSave(formData);
-
-    // ✅ Hide Bootstrap modal after save
-    const modalEl = document.getElementById("identitySettingModal");
+  const onSubmit = (data) => {
+    onSave(data);
+    const modalEl = document.getElementById(modalId);
     if (modalEl) {
       const modalInstance = window.bootstrap.Modal.getInstance(modalEl);
       modalInstance?.hide();
     }
+  };
 
-    setValidated(false);
+  const getValidationClass = (name) => {
+    if (errors[name]) return "is-invalid";
+    if (touchedFields[name] && !errors[name]) return "is-valid";
+    return "";
   };
 
   return (
     <div
       className="modal fade"
-      id="identitySettingModal"
+      id={modalId}
       tabIndex="-1"
-      aria-labelledby="identitySettingModalLabel"
+      aria-labelledby={`${modalId}Label`}
       aria-hidden="true"
     >
       <div className="modal-dialog modal-dialog-centered modal-lg">
         <div className="modal-content">
           {/* Header */}
           <div className="modal-header">
-            <h5 className="modal-title" id="identitySettingModalLabel">
+            <h5 className="modal-title" id={`${modalId}Label`}>
               {mode === "edit"
                 ? "Edit Default Identity Option"
                 : "Add Identity Setting"}
@@ -92,11 +85,7 @@ const IdentitySettingsEditModal = ({ mode, onSave, initialData }) => {
           </div>
 
           {/* Body */}
-          <form
-            onSubmit={submitHandler}
-            className={validated ? "was-validated" : ""}
-            noValidate
-          >
+          <form onSubmit={handleSubmit(onSubmit)} noValidate>
             <div className="modal-body">
               <div className="row g-3">
                 {/* Password Settings */}
@@ -105,9 +94,7 @@ const IdentitySettingsEditModal = ({ mode, onSave, initialData }) => {
                     <input
                       type="checkbox"
                       className="form-check-input"
-                      name="PasswordRequireDigit"
-                      checked={formData.PasswordRequireDigit}
-                      onChange={handleChange}
+                      {...register("PasswordRequireDigit")}
                     />
                     <label className="form-check-label">
                       Password Require Digit
@@ -121,12 +108,18 @@ const IdentitySettingsEditModal = ({ mode, onSave, initialData }) => {
                   </label>
                   <input
                     type="number"
-                    className="form-control"
-                    name="PasswordRequiredLength"
-                    value={formData.PasswordRequiredLength}
-                    onChange={handleChange}
-                    required
+                    className={`form-control ${getValidationClass(
+                      "PasswordRequiredLength"
+                    )}`}
+                    {...register("PasswordRequiredLength", {
+                      required: "Required",
+                    })}
                   />
+                  {errors.PasswordRequiredLength && (
+                    <div className="invalid-feedback">
+                      {errors.PasswordRequiredLength.message}
+                    </div>
+                  )}
                 </div>
 
                 <div className="col-md-6">
@@ -134,9 +127,7 @@ const IdentitySettingsEditModal = ({ mode, onSave, initialData }) => {
                     <input
                       type="checkbox"
                       className="form-check-input"
-                      name="PasswordRequireNonAlphanumeric"
-                      checked={formData.PasswordRequireNonAlphanumeric}
-                      onChange={handleChange}
+                      {...register("PasswordRequireNonAlphanumeric")}
                     />
                     <label className="form-check-label">
                       Password Require Non Alphanumeric
@@ -149,9 +140,7 @@ const IdentitySettingsEditModal = ({ mode, onSave, initialData }) => {
                     <input
                       type="checkbox"
                       className="form-check-input"
-                      name="PasswordRequireUppercase"
-                      checked={formData.PasswordRequireUppercase}
-                      onChange={handleChange}
+                      {...register("PasswordRequireUppercase")}
                     />
                     <label className="form-check-label">
                       Password Require Uppercase
@@ -164,9 +153,7 @@ const IdentitySettingsEditModal = ({ mode, onSave, initialData }) => {
                     <input
                       type="checkbox"
                       className="form-check-input"
-                      name="PasswordRequireLowercase"
-                      checked={formData.PasswordRequireLowercase}
-                      onChange={handleChange}
+                      {...register("PasswordRequireLowercase")}
                     />
                     <label className="form-check-label">
                       Password Require Lowercase
@@ -180,12 +167,18 @@ const IdentitySettingsEditModal = ({ mode, onSave, initialData }) => {
                   </label>
                   <input
                     type="number"
-                    className="form-control"
-                    name="PasswordRequiredUniqueChars"
-                    value={formData.PasswordRequiredUniqueChars}
-                    onChange={handleChange}
-                    required
+                    className={`form-control ${getValidationClass(
+                      "PasswordRequiredUniqueChars"
+                    )}`}
+                    {...register("PasswordRequiredUniqueChars", {
+                      required: "Required",
+                    })}
                   />
+                  {errors.PasswordRequiredUniqueChars && (
+                    <div className="invalid-feedback">
+                      {errors.PasswordRequiredUniqueChars.message}
+                    </div>
+                  )}
                 </div>
 
                 {/* Lockout Settings */}
@@ -195,12 +188,18 @@ const IdentitySettingsEditModal = ({ mode, onSave, initialData }) => {
                   </label>
                   <input
                     type="number"
-                    className="form-control"
-                    name="LockoutDefaultLockoutTimeSpanInMinutes"
-                    value={formData.LockoutDefaultLockoutTimeSpanInMinutes}
-                    onChange={handleChange}
-                    required
+                    className={`form-control ${getValidationClass(
+                      "LockoutDefaultLockoutTimeSpanInMinutes"
+                    )}`}
+                    {...register("LockoutDefaultLockoutTimeSpanInMinutes", {
+                      required: "Required",
+                    })}
                   />
+                  {errors.LockoutDefaultLockoutTimeSpanInMinutes && (
+                    <div className="invalid-feedback">
+                      {errors.LockoutDefaultLockoutTimeSpanInMinutes.message}
+                    </div>
+                  )}
                 </div>
 
                 <div className="col-md-6">
@@ -209,12 +208,18 @@ const IdentitySettingsEditModal = ({ mode, onSave, initialData }) => {
                   </label>
                   <input
                     type="number"
-                    className="form-control"
-                    name="LockoutMaxFailedAccessAttempts"
-                    value={formData.LockoutMaxFailedAccessAttempts}
-                    onChange={handleChange}
-                    required
+                    className={`form-control ${getValidationClass(
+                      "LockoutMaxFailedAccessAttempts"
+                    )}`}
+                    {...register("LockoutMaxFailedAccessAttempts", {
+                      required: "Required",
+                    })}
                   />
+                  {errors.LockoutMaxFailedAccessAttempts && (
+                    <div className="invalid-feedback">
+                      {errors.LockoutMaxFailedAccessAttempts.message}
+                    </div>
+                  )}
                 </div>
 
                 <div className="col-md-6">
@@ -222,9 +227,7 @@ const IdentitySettingsEditModal = ({ mode, onSave, initialData }) => {
                     <input
                       type="checkbox"
                       className="form-check-input"
-                      name="LockoutAllowedForNewUsers"
-                      checked={formData.LockoutAllowedForNewUsers}
-                      onChange={handleChange}
+                      {...register("LockoutAllowedForNewUsers")}
                     />
                     <label className="form-check-label">
                       Lockout Allowed For New Users
@@ -238,9 +241,7 @@ const IdentitySettingsEditModal = ({ mode, onSave, initialData }) => {
                     <input
                       type="checkbox"
                       className="form-check-input"
-                      name="UserRequireUniqueEmail"
-                      checked={formData.UserRequireUniqueEmail}
-                      onChange={handleChange}
+                      {...register("UserRequireUniqueEmail")}
                     />
                     <label className="form-check-label">
                       User Require Unique Email
@@ -253,9 +254,7 @@ const IdentitySettingsEditModal = ({ mode, onSave, initialData }) => {
                     <input
                       type="checkbox"
                       className="form-check-input"
-                      name="SignInRequireConfirmedEmail"
-                      checked={formData.SignInRequireConfirmedEmail}
-                      onChange={handleChange}
+                      {...register("SignInRequireConfirmedEmail")}
                     />
                     <label className="form-check-label">
                       Sign In Require Confirmed Email
@@ -269,9 +268,7 @@ const IdentitySettingsEditModal = ({ mode, onSave, initialData }) => {
                     <input
                       type="checkbox"
                       className="form-check-input"
-                      name="SlidingExpiration"
-                      checked={formData.SlidingExpiration}
-                      onChange={handleChange}
+                      {...register("SlidingExpiration")}
                     />
                     <label className="form-check-label">
                       Sliding Expiration
@@ -284,9 +281,7 @@ const IdentitySettingsEditModal = ({ mode, onSave, initialData }) => {
                     <input
                       type="checkbox"
                       className="form-check-input"
-                      name="CookieHttpOnly"
-                      checked={formData.CookieHttpOnly}
-                      onChange={handleChange}
+                      {...register("CookieHttpOnly")}
                     />
                     <label className="form-check-label">Cookie Http Only</label>
                   </div>
@@ -296,12 +291,16 @@ const IdentitySettingsEditModal = ({ mode, onSave, initialData }) => {
                   <label className="form-label">Cookie Expiration *</label>
                   <input
                     type="text"
-                    className="form-control"
-                    name="CookieExpiration"
-                    value={formData.CookieExpiration}
-                    onChange={handleChange}
-                    required
+                    className={`form-control ${getValidationClass(
+                      "CookieExpiration"
+                    )}`}
+                    {...register("CookieExpiration", { required: "Required" })}
                   />
+                  {errors.CookieExpiration && (
+                    <div className="invalid-feedback">
+                      {errors.CookieExpiration.message}
+                    </div>
+                  )}
                 </div>
 
                 <div className="col-md-6">
@@ -310,12 +309,18 @@ const IdentitySettingsEditModal = ({ mode, onSave, initialData }) => {
                   </label>
                   <input
                     type="text"
-                    className="form-control"
-                    name="CookieExpireTimeSpan"
-                    value={formData.CookieExpireTimeSpan}
-                    onChange={handleChange}
-                    required
+                    className={`form-control ${getValidationClass(
+                      "CookieExpireTimeSpan"
+                    )}`}
+                    {...register("CookieExpireTimeSpan", {
+                      required: "Required",
+                    })}
                   />
+                  {errors.CookieExpireTimeSpan && (
+                    <div className="invalid-feedback">
+                      {errors.CookieExpireTimeSpan.message}
+                    </div>
+                  )}
                 </div>
 
                 {/* Path Settings */}
@@ -323,36 +328,48 @@ const IdentitySettingsEditModal = ({ mode, onSave, initialData }) => {
                   <label className="form-label">Login Path *</label>
                   <input
                     type="text"
-                    className="form-control"
-                    name="LoginPath"
-                    value={formData.LoginPath}
-                    onChange={handleChange}
-                    required
+                    className={`form-control ${getValidationClass(
+                      "LoginPath"
+                    )}`}
+                    {...register("LoginPath", { required: "Required" })}
                   />
+                  {errors.LoginPath && (
+                    <div className="invalid-feedback">
+                      {errors.LoginPath.message}
+                    </div>
+                  )}
                 </div>
 
                 <div className="col-md-6">
                   <label className="form-label">Logout Path *</label>
                   <input
                     type="text"
-                    className="form-control"
-                    name="LogoutPath"
-                    value={formData.LogoutPath}
-                    onChange={handleChange}
-                    required
+                    className={`form-control ${getValidationClass(
+                      "LogoutPath"
+                    )}`}
+                    {...register("LogoutPath", { required: "Required" })}
                   />
+                  {errors.LogoutPath && (
+                    <div className="invalid-feedback">
+                      {errors.LogoutPath.message}
+                    </div>
+                  )}
                 </div>
 
                 <div className="col-md-6">
                   <label className="form-label">Access Denied Path *</label>
                   <input
                     type="text"
-                    className="form-control"
-                    name="AccessDeniedPath"
-                    value={formData.AccessDeniedPath}
-                    onChange={handleChange}
-                    required
+                    className={`form-control ${getValidationClass(
+                      "AccessDeniedPath"
+                    )}`}
+                    {...register("AccessDeniedPath", { required: "Required" })}
                   />
+                  {errors.AccessDeniedPath && (
+                    <div className="invalid-feedback">
+                      {errors.AccessDeniedPath.message}
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

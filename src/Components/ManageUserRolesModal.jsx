@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 
 const ManageUserRolesModal = ({ mode, onSave, initialData }) => {
   const roleList = [
@@ -70,83 +71,85 @@ const ManageUserRolesModal = ({ mode, onSave, initialData }) => {
     "Other Role4",
   ];
 
-  const [formData, setFormData] = useState({
-    name: "",
-    description: "",
-    selectedRoles: [],
+  const {
+    register,
+    handleSubmit,
+    reset,
+    watch,
+    setValue,
+    formState: { errors, touchedFields, isSubmitted },
+  } = useForm({
+    mode: "onChange",
+    defaultValues: {
+      name: "",
+      description: "",
+      selectedRoles: [],
+    },
   });
+
+  const selectedRoles = watch("selectedRoles");
   const [search, setSearch] = useState("");
-  const [validated, setValidated] = useState(false);
 
-  // 🔹 Load form data
-useEffect(() => {
-  if (mode === "edit" && initialData) {
-    setFormData({
-      name: initialData.name || "",
-      description: initialData.description || "",
-      selectedRoles: initialData.selectedRoles || [],   // ✅ fallback
-    });
-  } else {
-    setFormData({ name: "", description: "", selectedRoles: [] });
-  }
-}, [mode, initialData]);
+  useEffect(() => {
+    if (mode === "edit" && initialData) {
+      reset({
+        name: initialData.name || "",
+        description: initialData.description || "",
+        selectedRoles: initialData.selectedRoles || [],
+      });
+    } else {
+      reset({ name: "", description: "", selectedRoles: [] });
+    }
+  }, [mode, initialData, reset]);
 
-
-  // 🔹 Filter roles by search
   const filteredRoles = roleList.filter((role) =>
     role.toLowerCase().includes(search.toLowerCase())
   );
-
-  // 🔹 Group roles in pairs (2 columns)
   const chunkedRoles = [];
   for (let i = 0; i < filteredRoles.length; i += 2) {
     chunkedRoles.push(filteredRoles.slice(i, i + 2));
   }
 
-  // 🔹 Input handlers
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+  const getValidationClass = (name) => {
+    if (errors[name]) return "is-invalid";
+    if ((touchedFields[name] || isSubmitted) && !errors[name])
+      return "is-valid";
+    return "";
   };
 
-  const handleCheckbox = (role) => {
-    setFormData((prev) => ({
-      ...prev,
-      selectedRoles: prev.selectedRoles.includes(role)
-        ? prev.selectedRoles.filter((r) => r !== role)
-        : [...prev.selectedRoles, role],
-    }));
+  const getCheckboxClass = () => {
+    if (
+      (touchedFields.selectedRoles || isSubmitted) &&
+      selectedRoles.length > 0
+    )
+      return "is-valid";
+    if (
+      (touchedFields.selectedRoles || isSubmitted) &&
+      selectedRoles.length === 0
+    )
+      return "is-invalid";
+    return "";
   };
 
-  const handleCheckAll = () => {
-    if (formData.selectedRoles.length === filteredRoles.length) {
-      setFormData((prev) => ({ ...prev, selectedRoles: [] }));
-    } else {
-      setFormData((prev) => ({ ...prev, selectedRoles: filteredRoles }));
-    }
-  };
+  const onSubmit = (data) => {
+    onSave(data);
 
-  // 🔹 Submit handler
-  const submitHandler = (e) => {
-    e.preventDefault();
-    const form = e.currentTarget;
-
-    if (form.checkValidity() === false) {
-      e.stopPropagation();
-      setValidated(true);
-      return;
-    }
-
-    onSave(formData);
-
-    // ✅ Hide modal after save
     const modalEl = document.getElementById("manageUserRolesModal");
     if (modalEl) {
       const modalInstance = window.bootstrap.Modal.getInstance(modalEl);
       modalInstance?.hide();
     }
 
-    setValidated(false);
+    reset();
+  };
+
+  const handleCheckAll = () => {
+    const currentRoles = chunkedRoles.flat();
+    if (currentRoles.every((r) => selectedRoles.includes(r))) {
+      setValue("selectedRoles", []);
+    } else {
+      setValue("selectedRoles", currentRoles);
+    }
   };
 
   return (
@@ -159,7 +162,6 @@ useEffect(() => {
     >
       <div className="modal-dialog modal-lg modal-dialog-centered">
         <div className="modal-content">
-          {/* Header */}
           <div className="modal-header">
             <h5 className="modal-title" id="manageUserRolesModalLabel">
               {mode === "edit" ? "Edit User Role" : "Add New User Role"}
@@ -174,42 +176,46 @@ useEffect(() => {
             </button>
           </div>
 
-          {/* Body */}
-          <form
-            className={`needs-validation ${validated ? "was-validated" : ""}`}
-            noValidate
-            onSubmit={submitHandler}
-          >
+          <form onSubmit={handleSubmit(onSubmit)} noValidate>
             <div className="modal-body">
-              {/* Name */}
               <div className="mb-3">
                 <label className="form-label">Name *</label>
                 <input
                   type="text"
-                  name="name"
-                  className="form-control"
+                  className={`form-control ${getValidationClass("name")}`}
                   placeholder="Enter Role Name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
+                  {...register("name", {
+                    required: "Role Name is required",
+                    minLength: { value: 2, message: "At least 2 characters" },
+                    maxLength: { value: 50, message: "Max 50 characters" },
+                  })}
                 />
-                <div className="invalid-feedback">Please enter Role Name.</div>
+                {errors.name && (
+                  <div className="invalid-feedback">{errors.name.message}</div>
+                )}
               </div>
 
-              {/* Description */}
               <div className="mb-3">
-                <label className="form-label">Description</label>
+                <label className="form-label">Description *</label>
                 <textarea
-                  name="description"
-                  className="form-control"
+                  className={`form-control ${getValidationClass(
+                    "description"
+                  )}`}
                   placeholder="Enter Description"
-                  value={formData.description}
-                  onChange={handleChange}
+                  {...register("description", {
+                    required: "Description is required",
+                    minLength: { value: 5, message: "At least 5 characters" },
+                    maxLength: { value: 200, message: "Max 200 characters" },
+                  })}
                 />
+                {errors.description && (
+                  <div className="invalid-feedback">
+                    {errors.description.message}
+                  </div>
+                )}
               </div>
 
-              {/* Select Roles */}
-              <h6 className="mb-2">Select Roles</h6>
+              <h6 className="mb-2">Select Roles *</h6>
               <div className="mb-3">
                 <input
                   type="text"
@@ -220,15 +226,14 @@ useEffect(() => {
                 />
               </div>
 
-              {/* Check All */}
               <div className="form-check mb-2">
                 <input
                   type="checkbox"
-                  className="form-check-input"
+                  className={`form-check-input ${getCheckboxClass()}`}
                   id="checkAllRoles"
                   checked={
                     filteredRoles.length > 0 &&
-                    formData.selectedRoles.length === filteredRoles.length
+                    filteredRoles.every((r) => selectedRoles.includes(r))
                   }
                   onChange={handleCheckAll}
                 />
@@ -236,8 +241,12 @@ useEffect(() => {
                   Check All
                 </label>
               </div>
+              {errors.selectedRoles && (
+                <div className="text-danger mb-2">
+                  {errors.selectedRoles.message}
+                </div>
+              )}
 
-              {/* Roles Table */}
               <div
                 className="table-responsive"
                 style={{ maxHeight: "300px", overflowY: "auto" }}
@@ -255,18 +264,23 @@ useEffect(() => {
                     {chunkedRoles.length > 0 ? (
                       chunkedRoles.map((pair, rowIndex) => (
                         <tr key={rowIndex}>
-                          {/* Left column */}
                           <td className="text-center">{rowIndex * 2 + 1}</td>
                           <td>
                             <div className="form-check">
                               <input
                                 type="checkbox"
-                                className="form-check-input"
+                                className={`form-check-input ${
+                                  selectedRoles.includes(pair[0])
+                                    ? "is-valid"
+                                    : ""
+                                }`}
                                 id={`chk-${pair[0]}`}
-                                checked={formData.selectedRoles.includes(
-                                  pair[0]
-                                )}
-                                onChange={() => handleCheckbox(pair[0])}
+                                {...register("selectedRoles", {
+                                  validate: (value) =>
+                                    value.length > 0 ||
+                                    "At least one role must be selected",
+                                })}
+                                value={pair[0]}
                               />
                               <label
                                 className="form-check-label"
@@ -277,8 +291,7 @@ useEffect(() => {
                             </div>
                           </td>
 
-                          {/* Right column */}
-                          {pair[1] ? (
+                          {pair[1] && (
                             <>
                               <td className="text-center">
                                 {rowIndex * 2 + 2}
@@ -287,12 +300,14 @@ useEffect(() => {
                                 <div className="form-check">
                                   <input
                                     type="checkbox"
-                                    className="form-check-input"
+                                    className={`form-check-input ${
+                                      selectedRoles.includes(pair[1])
+                                        ? "is-valid"
+                                        : ""
+                                    }`}
                                     id={`chk-${pair[1]}`}
-                                    checked={formData.selectedRoles.includes(
-                                      pair[1]
-                                    )}
-                                    onChange={() => handleCheckbox(pair[1])}
+                                    {...register("selectedRoles")}
+                                    value={pair[1]}
                                   />
                                   <label
                                     className="form-check-label"
@@ -302,11 +317,6 @@ useEffect(() => {
                                   </label>
                                 </div>
                               </td>
-                            </>
-                          ) : (
-                            <>
-                              <td></td>
-                              <td></td>
                             </>
                           )}
                         </tr>
@@ -323,7 +333,6 @@ useEffect(() => {
               </div>
             </div>
 
-            {/* Footer */}
             <div className="modal-footer">
               <button type="submit" className="btn btn-primary">
                 <small>Save</small>

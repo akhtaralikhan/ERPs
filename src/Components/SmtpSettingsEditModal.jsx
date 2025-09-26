@@ -1,42 +1,64 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { useForm } from "react-hook-form";
 
 const SmtpSettingsEditModal = ({ mode, onSave, initialData }) => {
-  const [formData, setFormData] = useState({
-    username: "",
-    password: "",
-    host: "",
-    port: "",
-    fromEmail: "",
-    fromFullName: "",
-    sslEnabled: false,
-    isDefault: false,
+  const {
+    register,
+    handleSubmit,
+    reset,
+    watch,
+    formState: { errors, touchedFields },
+  } = useForm({
+    mode: "onChange",
+    defaultValues: {
+      username: "",
+      password: "",
+      host: "",
+      port: "",
+      fromEmail: "",
+      fromFullName: "",
+      sslEnabled: false,
+      isDefault: false,
+    },
   });
 
-  // ✅ Load initial values if edit mode
+  const values = watch();
+
   useEffect(() => {
     if (mode === "edit" && initialData) {
-      setFormData(initialData);
+      reset(initialData);
+    } else {
+      reset({
+        username: "",
+        password: "",
+        host: "",
+        port: "",
+        fromEmail: "",
+        fromFullName: "",
+        sslEnabled: false,
+        isDefault: false,
+      });
     }
-  }, [mode, initialData]);
+  }, [mode, initialData, reset]);
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: type === "checkbox" ? checked : value,
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSave(formData);
-
-    // ✅ Hide Bootstrap modal
+  const onSubmit = (data) => {
+    onSave(data);
     const modalEl = document.getElementById("emailSMPTSettingModal");
     if (modalEl) {
       const modalInstance = window.bootstrap.Modal.getInstance(modalEl);
       modalInstance?.hide();
     }
+  };
+
+  const getValidationClass = (name) => {
+    // For checkboxes, skip validation styling
+    if (name === "sslEnabled" || name === "isDefault") return "";
+
+    if (errors[name]) return "is-invalid";
+    // ✅ Only mark as valid if the user has touched/changed the field
+    if (touchedFields[name] && !errors[name]) return "is-valid";
+
+    return "";
   };
 
   return (
@@ -65,96 +87,139 @@ const SmtpSettingsEditModal = ({ mode, onSave, initialData }) => {
           </div>
 
           {/* Body */}
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit(onSubmit)} noValidate>
             <div className="modal-body">
               <div className="row g-3">
+                {/* Username */}
                 <div className="col-md-6">
                   <label className="form-label">User Name *</label>
                   <input
-                    type="text"
-                    className="form-control"
-                    name="username"
-                    value={formData.username}
-                    onChange={handleChange}
+                    type="email"
+                    className={`form-control ${getValidationClass("username")}`}
                     placeholder="user@example.com"
-                    required
+                    {...register("username", {
+                      required: "User Name is required",
+                      pattern: {
+                        value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                        message: "Enter a valid email",
+                      },
+                    })}
                   />
+                  {errors.username && (
+                    <div className="invalid-feedback">
+                      {errors.username.message}
+                    </div>
+                  )}
                 </div>
 
+                {/* Password */}
                 <div className="col-md-6">
                   <label className="form-label">Password *</label>
                   <input
                     type="password"
-                    className="form-control"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
+                    className={`form-control ${getValidationClass("password")}`}
                     placeholder="Enter password"
-                    required
+                    {...register("password", {
+                      required: "Password is required",
+                      minLength: { value: 6, message: "Minimum 6 characters" },
+                    })}
                   />
+                  {errors.password && (
+                    <div className="invalid-feedback">
+                      {errors.password.message}
+                    </div>
+                  )}
                 </div>
 
+                {/* Host */}
                 <div className="col-md-6">
                   <label className="form-label">Host (SMTP) *</label>
                   <input
                     type="text"
-                    className="form-control"
-                    name="host"
-                    value={formData.host}
-                    onChange={handleChange}
+                    className={`form-control ${getValidationClass("host")}`}
                     placeholder="smtp.example.com"
-                    required
+                    {...register("host", { required: "Host is required" })}
                   />
+                  {errors.host && (
+                    <div className="invalid-feedback">
+                      {errors.host.message}
+                    </div>
+                  )}
                 </div>
 
+                {/* Port */}
                 <div className="col-md-6">
                   <label className="form-label">Port (SMTP) *</label>
                   <input
                     type="number"
-                    className="form-control"
-                    name="port"
-                    value={formData.port}
-                    onChange={handleChange}
+                    className={`form-control ${getValidationClass("port")}`}
                     placeholder="587"
-                    required
+                    {...register("port", {
+                      required: "Port is required",
+                      min: { value: 1, message: "Port must be >= 1" },
+                      max: { value: 65535, message: "Port must be <= 65535" },
+                    })}
                   />
+                  {errors.port && (
+                    <div className="invalid-feedback">
+                      {errors.port.message}
+                    </div>
+                  )}
                 </div>
 
+                {/* From Email */}
                 <div className="col-md-6">
                   <label className="form-label">From Email *</label>
                   <input
                     type="email"
-                    className="form-control"
-                    name="fromEmail"
-                    value={formData.fromEmail}
-                    onChange={handleChange}
+                    className={`form-control ${getValidationClass(
+                      "fromEmail"
+                    )}`}
                     placeholder="noreply@example.com"
-                    required
+                    {...register("fromEmail", {
+                      required: "From Email is required",
+                      pattern: {
+                        value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                        message: "Enter a valid email",
+                      },
+                    })}
                   />
+                  {errors.fromEmail && (
+                    <div className="invalid-feedback">
+                      {errors.fromEmail.message}
+                    </div>
+                  )}
                 </div>
 
+                {/* From Full Name */}
                 <div className="col-md-6">
                   <label className="form-label">From Full Name *</label>
                   <input
                     type="text"
-                    className="form-control"
-                    name="fromFullName"
-                    value={formData.fromFullName}
-                    onChange={handleChange}
+                    className={`form-control ${getValidationClass(
+                      "fromFullName"
+                    )}`}
                     placeholder="Company Notifications"
-                    required
+                    {...register("fromFullName", {
+                      required: "From Full Name is required",
+                      minLength: { value: 2, message: "Too short" },
+                    })}
                   />
+                  {errors.fromFullName && (
+                    <div className="invalid-feedback">
+                      {errors.fromFullName.message}
+                    </div>
+                  )}
                 </div>
 
+                {/* SSL Enabled */}
                 <div className="col-md-6 d-flex align-items-center">
                   <div className="form-check">
                     <input
                       type="checkbox"
                       className="form-check-input"
-                      name="sslEnabled"
-                      checked={formData.sslEnabled}
-                      onChange={handleChange}
                       id="sslEnabled"
+                      {...register("sslEnabled")} // no required
                     />
                     <label className="form-check-label" htmlFor="sslEnabled">
                       SSL Enabled
@@ -162,15 +227,14 @@ const SmtpSettingsEditModal = ({ mode, onSave, initialData }) => {
                   </div>
                 </div>
 
+                {/* Is Default */}
                 <div className="col-md-6 d-flex align-items-center">
                   <div className="form-check">
                     <input
                       type="checkbox"
                       className="form-check-input"
-                      name="isDefault"
-                      checked={formData.isDefault}
-                      onChange={handleChange}
                       id="isDefault"
+                      {...register("isDefault")} // no required
                     />
                     <label className="form-check-label" htmlFor="isDefault">
                       Is Default

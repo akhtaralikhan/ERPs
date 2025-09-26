@@ -98,7 +98,7 @@ const PrintBarcode = () => {
     <div className="content AssetsPageChangecss AssetPaddingChange">
       <div className="marginforsmalldevice RemoveBorder card rounded-0">
         <div className="NewColorChange phoenix-toolbar d-flex align-items-center flex-wrap py-md-3 px-md-4 border-bottom gap-3">
-          <div className="p-3 row" style={{ minWidth: "170px" }}>
+          <div className="p-3 row MainRemovePaddingwidth" style={{ minWidth: "170px" }}>
             <h2 className="fw-bolder mb-5" style={{ fontSize: "2rem" }}>
               Print Barcode
             </h2>

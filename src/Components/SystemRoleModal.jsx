@@ -1,48 +1,47 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { useForm } from "react-hook-form";
 
 const SystemRoleModal = ({ mode, onSave, initialData }) => {
-  const [formData, setFormData] = useState({
-    sl: "",
-    RoleName: "",
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, touchedFields },
+  } = useForm({
+    mode: "onChange",
+    defaultValues: {
+      RoleName: "",
+    },
   });
 
-  // 🔹 Load initial data when editing
+  // Load initial data when editing
   useEffect(() => {
     if (mode === "edit" && initialData) {
-      setFormData(initialData);
+      reset({
+        RoleName: initialData.RoleName || "",
+      });
+    } else {
+      reset({ RoleName: "" });
     }
-  }, [mode, initialData]);
+  }, [mode, initialData, reset]);
 
-  const [validated, setValidated] = useState(false);
+  const onSubmit = (data) => {
+    onSave(data);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  const submitHandler = (e) => {
-    e.preventDefault();
-    const form = e.currentTarget;
-
-    if (form.checkValidity() === false) {
-      e.stopPropagation();
-      setValidated(true);
-      return;
-    }
-
-    onSave(formData);
-
-    // ✅ Hide bootstrap modal after save
+    // Hide bootstrap modal after save
     const modalEl = document.getElementById("systemRoleModal");
     if (modalEl) {
       const modalInstance = window.bootstrap.Modal.getInstance(modalEl);
       modalInstance?.hide();
     }
 
-    setValidated(false);
+    reset();
+  };
+
+  const getValidationClass = (name) => {
+    if (errors[name]) return "is-invalid";
+    if (touchedFields[name] && !errors[name]) return "is-valid";
+    return "";
   };
 
   return (
@@ -71,19 +70,31 @@ const SystemRoleModal = ({ mode, onSave, initialData }) => {
           </div>
 
           {/* Body */}
-          <form onSubmit={submitHandler}>
+          <form onSubmit={handleSubmit(onSubmit)} noValidate>
             <div className="modal-body">
               <div className="mb-3">
                 <label className="form-label">Role Name *</label>
                 <input
                   type="text"
-                  name="RoleName"
-                  className="form-control"
+                  className={`form-control ${getValidationClass("RoleName")}`}
                   placeholder="Enter Role Name"
-                  value={formData.RoleName}
-                  onChange={handleChange}
-                  required
+                  {...register("RoleName", {
+                    required: "Role Name is required",
+                    minLength: {
+                      value: 2,
+                      message: "At least 2 characters",
+                    },
+                    maxLength: {
+                      value: 50,
+                      message: "Max 50 characters",
+                    },
+                  })}
                 />
+                {errors.RoleName && (
+                  <div className="invalid-feedback">
+                    {errors.RoleName.message}
+                  </div>
+                )}
               </div>
             </div>
 

@@ -33,7 +33,7 @@ const CustomerInfo = () => {
                   src={row.original.customerImg}
                   alt={row.original.customer}
                   className="rounded-circle"
-                // style={{ width: "30px", height: "30px", objectFit: "cover" }}
+                  // style={{ width: "30px", height: "30px", objectFit: "cover" }}
                 />
               ) : (
                 <div className="avatar-name rounded-circle avatar-m">
@@ -106,14 +106,14 @@ const CustomerInfo = () => {
       <div className="marginforsmalldevice RemoveBorder card rounded-0">
         <div className="NewColorChange phoenix-toolbar d-flex align-items-center flex-wrap py-md-3 px-md-4 mb-md-0 border-bottom gap-3">
           {/* Title and tabs */}
-          <div className=" p-3 row" style={{ minWidth: "170px" }}>
+          <div
+            className="p-3 row MainRemovePaddingwidth"
+            style={{ minWidth: "170px" }}
+          >
             <h2 className="fw-bolder mb-5" style={{ fontSize: "2rem" }}>
               Customer Info List
             </h2>
-            <div
-              className="d-flex flex-wrap align-items-center"
-              style={{ gap: "35px" }}
-            >
+            <div className="AllabsAssets">
               <span className="filterLinks text-dark">
                 All <span className="NewChangeColor">(68817)</span>
               </span>
@@ -135,8 +135,8 @@ const CustomerInfo = () => {
                 setGlobalFilter={setGlobalFilter}
               />
               {/* Filter dropdowns */}
-              <div className="d-flex flex-md-row mb-md-4 mb-4 flex-column mt-4">
-                <Dropdown className="">
+              <div className="d-flex flex-md-row mb-md-4 mb-4 mt-4 DropDownForMobileDevice">
+                <Dropdown>
                   <Dropdown.Toggle
                     variant="light"
                     className="btn btn-phoenix-secondary px-7 flex-shrink-0"
@@ -147,34 +147,40 @@ const CustomerInfo = () => {
                       width: "200px",
                     }}
                   >
-                    Customer Name
+                    Status
                   </Dropdown.Toggle>
-                  <Dropdown.Menu>
-                    <Dropdown.Item>Complete</Dropdown.Item>
-                    <Dropdown.Item>Pending</Dropdown.Item>
-                    <Dropdown.Item>Cancelled</Dropdown.Item>
+                  <Dropdown.Menu
+                    renderOnMount
+                    popperConfig={{ strategy: "fixed" }} // important
+                  >
+                    <Dropdown.Item>Active</Dropdown.Item>
+                    <Dropdown.Item>InActive</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
+
                 <Dropdown>
                   <Dropdown.Toggle
                     variant="light"
                     className="btn btn-phoenix-secondary px-7 flex-shrink-0"
                     style={{
-                      borderRadius: "0 0px 0px 0",
+                      borderRadius: "0",
                       fontWeight: 600,
                       fontSize: "14px",
                       width: "200px",
                     }}
                   >
-                    Type
+                    ModifiedByUser
                   </Dropdown.Toggle>
-                  <Dropdown.Menu>
-                    <Dropdown.Item>Ready to Pickup</Dropdown.Item>
-                    <Dropdown.Item>Completed</Dropdown.Item>
-                    <Dropdown.Item>Partially Fulfilled</Dropdown.Item>
-                    <Dropdown.Item>Cancelled</Dropdown.Item>
+                  <Dropdown.Menu
+                    renderOnMount
+                    popperConfig={{ strategy: "fixed" }} // important
+                  >
+                    <Dropdown.Item>Super Admin</Dropdown.Item>
+                    <Dropdown.Item>Admin</Dropdown.Item>
+                    <Dropdown.Item>Users</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
+
                 <Dropdown>
                   <Dropdown.Toggle
                     variant="light"
@@ -188,7 +194,10 @@ const CustomerInfo = () => {
                   >
                     More filters
                   </Dropdown.Toggle>
-                  <Dropdown.Menu>
+                  <Dropdown.Menu
+                    renderOnMount
+                    popperConfig={{ strategy: "fixed" }} // important
+                  >
                     <Dropdown.Item>Date</Dropdown.Item>
                     <Dropdown.Item>Delivery Type</Dropdown.Item>
                     <Dropdown.Item>Exported</Dropdown.Item>
@@ -202,22 +211,33 @@ const CustomerInfo = () => {
                 Export
               </div>
               {/* Add order button */}
-              <button className="btn btn-primary" onClick={() => setShowModal(true)}>
+              <button
+                className="btn btn-primary"
+                onClick={() => setShowModal(true)}
+              >
                 <span className="fas fa-plus me-2"></span>
                 Add Customer
               </button>
-              {showModal && <AddCustomerModal showModal={showModal} setShowModal={setShowModal} />}
+              {showModal && (
+                <AddCustomerModal
+                  showModal={showModal}
+                  setShowModal={setShowModal}
+                />
+              )}
             </div>
           </div>
 
           {/* Export button */}
         </div>
 
-        <div className="table-responsive p-4 px-5 pt-0">
+        <div className="table-responsive p-4 px-5 pt-0 NewTableChange">
           {/* ✅ Search */}
           {/* <PurchaseReturnModal /> */}
 
-          <div className="table-responsive custom-scroll ">
+          <div className="table-responsive custom-scroll "   style={{
+              overflowX: "auto",
+              whiteSpace: "nowrap",
+            }}>
             <table
               {...getTableProps()}
               className="table  table-sm fs--1 mb-0 ConvertUpperCase
@@ -290,7 +310,8 @@ const CustomerInfo = () => {
                         const { key: cellKey, ...cellRest } =
                           cell.getCellProps();
                         return (
-                          <td key={cellKey || cidx}
+                          <td
+                            key={cellKey || cidx}
                             {...cellRest}
                             className="py-2 pe-3"
                           >
@@ -344,8 +365,8 @@ const CustomerInfo = () => {
 
           {/* ✅ Pagination controls */}
           {/* ✅ Ellipsis-based Pagination (compact version) */}
-          <div className="d-flex justify-content-between align-items-center py-2">
-            <p className="mb-0 text-body fs-9" style={{ fontSize: "14px" }}>
+          <div className="d-flex justify-content-between align-items-center py-2 PAGINATIONS">
+            <p className="mb-0 text-body fs-9 d-md-block d-none" style={{ fontSize: "14px" }}>
               Page {pageIndex + 1} of {pageOptions.length}
               <a
                 href="#!"
@@ -385,8 +406,9 @@ const CustomerInfo = () => {
                   pageNumbers.push(
                     <li
                       key={1}
-                      className={`page-item ${currentPage === 1 ? "active" : ""
-                        }`}
+                      className={`page-item ${
+                        currentPage === 1 ? "active" : ""
+                      }`}
                     >
                       <button className="page-link" onClick={() => gotoPage(0)}>
                         1
@@ -407,8 +429,9 @@ const CustomerInfo = () => {
                   pageNumbers.push(
                     <li
                       key={i}
-                      className={`page-item ${currentPage === i ? "active" : ""
-                        }`}
+                      className={`page-item ${
+                        currentPage === i ? "active" : ""
+                      }`}
                     >
                       <button
                         className="page-link"
@@ -432,8 +455,9 @@ const CustomerInfo = () => {
                   pageNumbers.push(
                     <li
                       key={totalPages}
-                      className={`page-item ${currentPage === totalPages ? "active" : ""
-                        }`}
+                      className={`page-item ${
+                        currentPage === totalPages ? "active" : ""
+                      }`}
                     >
                       <button
                         className="page-link"
@@ -464,4 +488,3 @@ const CustomerInfo = () => {
 };
 
 export default CustomerInfo;
-

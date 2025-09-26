@@ -46,182 +46,42 @@
     width: 100%;
 }
 
-@media print {
 
-    @page {
-        size: A4 portrait;
-        margin: 1cm;
-    }
-
-    /* Reset background and padding for the printout */
-    body,
-    .card,
-    .content {
-        background: none;
-        padding: 0;
-        margin: 0;
-        box-shadow: none;
-    }
-
-    .NewColorChange {
-        padding-left: 10px !important;
-        padding-right: 10px !important;
-    }
-
-    .PrintSize {
-        padding: 0px !important;
-    }
-
-    .PrintSizeH2 {
-        margin-bottom: 5px !important;
-        font-size: 26px !important;
-    }
-
-    .PrintSearchPadding {
-        padding-left: 5px !important;
-    }
-
-    .PrintWidthDropdown {
-        margin-top: 5px !important;
-        margin-bottom: 5px !important;
-        width: 50% !important;
-    }
-
-    .PrintIconDisplay {
-        display: none;
-    }
-
-    .PrintDnone {
-        display: none !important;
-    }
-
-    .footer {
-        display: none;
-    }
-
-    .HuzaifaNav {
-        display: none;
-    }
+.AllabsAssets {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 35px;
 }
 
-@media (max-width: 280px) {}
-
-@media (max-width: 540px) {
-    .HuzaifaNav.navbar-top .navbar-logo {
-        width: unset;
-    }
-
-    .navbar-expand .navbar-toggler {
-        display: unset;
-    }
-
-    .navbar-vertical .navbar-vertical-footer {
-        display: none !important;
-    }
-
-    .HuzaifaNav.navbar.navbar-top {
-        padding: 0 1.5rem;
-    }
-
-    .navbar-vertical.navbar-expand-lg .navbar-vertical-content .navbar-nav .nav-link {
-        margin-left: unset !important;
-        margin-right: unset !important;
-        padding-left: 1.5rem !important;
-    }
-
-    .navbar-vertical .navbar-vertical-content .navbar-nav .nav-link.dropdown-indicator {
-        padding-left: .75rem !important;
-    }
-
-    .navbar-vertical .navbar-vertical-content .navbar-nav .nav .nav-link {
-        padding: .25rem .5rem;
-        padding-left: 3.125rem !important;
-    }
-
-}
-
-@media (max-width: 480px) {}
-
-@media (min-width: 481px) and (max-width: 767px) {
-    .navbar-expand .navbar-toggler {
-        display: unset;
-    }
-
-    .navbar-vertical .navbar-vertical-footer {
-        display: none !important;
-    }
-
-    .HuzaifaNav.navbar.navbar-top {
-        padding: 0 1.5rem;
-    }
-
-    .navbar-vertical.navbar-expand-lg .navbar-vertical-content .navbar-nav .nav-link {
-        margin-left: unset !important;
-        margin-right: unset !important;
-        padding-left: 1.5rem !important;
-    }
-
-    .navbar-vertical .navbar-vertical-content .navbar-nav .nav-link.dropdown-indicator {
-        padding-left: .75rem !important;
-    }
-
-    .navbar-vertical .navbar-vertical-content .navbar-nav .nav .nav-link {
-        padding: .25rem .5rem;
-        padding-left: 3.125rem !important;
-    }
-
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-    .navbar-expand .navbar-toggler {
-        display: unset;
-    }
-
-    .navbar-vertical .navbar-vertical-footer {
-        display: none !important;
-    }
-
-    .HuzaifaNav.navbar.navbar-top {
-        padding: 0 1.5rem;
-    }
-
-    .navbar-vertical.navbar-expand-lg .navbar-vertical-content .navbar-nav .nav-link {
-        margin-left: unset !important;
-        margin-right: unset !important;
-        padding-left: 1.5rem !important;
-    }
-
-    .navbar-vertical .navbar-vertical-content .navbar-nav .nav-link.dropdown-indicator {
-        padding-left: .75rem !important;
-    }
-
-    .navbar-vertical .navbar-vertical-content .navbar-nav .nav .nav-link {
-        padding: .25rem .5rem;
-        padding-left: 3.125rem !important;
-    }
-}
-
-@media (min-width: 992px) and (max-width: 1199px) {}
-
-@media (min-width: 1200px) and (max-width: 1919px) {}
-
-@media (min-width: 1920px) {}
-
-/* scrollbar  */
-/* Hide scrollbar but keep scroll functionality */
 .custom-scroll {
-    overflow-y: auto;
-    /* still scrollable */
-    scrollbar-width: none;
-    /* Firefox */
-    -ms-overflow-style: none;
-    /* IE and Edge */
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
+/* Chrome, Edge, Safari */
 .custom-scroll::-webkit-scrollbar {
-    display: none;
-    /* Chrome, Safari */
+    width: 6px;
+    height: 6px;
 }
+
+.custom-scroll::-webkit-scrollbar-track {
+    background: transparent;
+    /* hide track background */
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    /* only thumb visible */
+    border-radius: 10px;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+    /* hover effect */
+}
+
 
 .filterLinks {
     /* color: #99a1b7; */
@@ -433,12 +293,6 @@ th.sort.desc::after {
     cursor: pointer;
 }
 
-@media(max-width:786px) {
-    .ttop {
-        height: 148px;
-    }
-}
-
 
 .invoice-container {
     display: flex;
@@ -459,4 +313,212 @@ th.sort.desc::after {
 
 .imgwidth {
     height: 195px;
+}
+
+@media print {
+
+    @page {
+        size: A4 portrait;
+        margin: 1cm;
+    }
+
+    /* Reset background and padding for the printout */
+    body,
+    .card,
+    .content {
+        background: none;
+        padding: 0;
+        margin: 0;
+        box-shadow: none;
+    }
+
+    .NewColorChange {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+
+    .PrintSize {
+        padding: 0px !important;
+    }
+
+    .PrintSizeH2 {
+        margin-bottom: 5px !important;
+        font-size: 26px !important;
+    }
+
+    .PrintSearchPadding {
+        padding-left: 5px !important;
+    }
+
+    .PrintWidthDropdown {
+        margin-top: 5px !important;
+        margin-bottom: 5px !important;
+        width: 50% !important;
+    }
+
+    .PrintIconDisplay {
+        display: none;
+    }
+
+    .PrintDnone {
+        display: none !important;
+    }
+
+    .footer {
+        display: none;
+    }
+
+    .HuzaifaNav {
+        display: none;
+    }
+}
+
+@media (max-width: 280px) {}
+
+@media (max-width: 540px) {
+    .HuzaifaNav.navbar-top .navbar-logo {
+        width: unset;
+    }
+
+    .navbar-expand .navbar-toggler {
+        display: unset;
+    }
+
+    .navbar-vertical .navbar-vertical-footer {
+        display: none !important;
+    }
+
+    .HuzaifaNav.navbar.navbar-top {
+        padding: 0 1.5rem;
+    }
+
+    .navbar-vertical.navbar-expand-lg .navbar-vertical-content .navbar-nav .nav-link {
+        margin-left: unset !important;
+        margin-right: unset !important;
+        padding-left: 1.5rem !important;
+    }
+
+    .navbar-vertical .navbar-vertical-content .navbar-nav .nav-link.dropdown-indicator {
+        padding-left: .75rem !important;
+    }
+
+    .navbar-vertical .navbar-vertical-content .navbar-nav .nav .nav-link {
+        padding: .25rem .5rem;
+        padding-left: 3.125rem !important;
+    }
+
+    .AllabsAssets {
+        padding-top: 20px;
+    }
+
+    .DropDownForMobileDevice {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        gap: 0px;
+    }
+
+    .marginforsmalldevice {
+        margin-bottom: 70px;
+    }
+
+    .PAGINATIONS ul li .page-link {
+        padding: 7px 9px;
+    }
+
+    .MainRemovePaddingwidth {
+        width: 100%;
+    }
+
+    .NewColorChange.phoenix-toolbar {
+        justify-content: center;
+    }
+
+}
+
+@media (max-width: 480px) {
+    .AllabsAssets {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding-top: 20px;
+    }
+
+    .Huzaifasearch-box {
+        width: 100%;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+    .navbar-expand .navbar-toggler {
+        display: unset;
+    }
+
+    .navbar-vertical .navbar-vertical-footer {
+        display: none !important;
+    }
+
+    .HuzaifaNav.navbar.navbar-top {
+        padding: 0 1.5rem;
+    }
+
+    .navbar-vertical.navbar-expand-lg .navbar-vertical-content .navbar-nav .nav-link {
+        margin-left: unset !important;
+        margin-right: unset !important;
+        padding-left: 1.5rem !important;
+    }
+
+    .navbar-vertical .navbar-vertical-content .navbar-nav .nav-link.dropdown-indicator {
+        padding-left: .75rem !important;
+    }
+
+    .navbar-vertical .navbar-vertical-content .navbar-nav .nav .nav-link {
+        padding: .25rem .5rem;
+        padding-left: 3.125rem !important;
+    }
+
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .navbar-expand .navbar-toggler {
+        display: unset;
+    }
+
+    .navbar-vertical .navbar-vertical-footer {
+        display: none !important;
+    }
+
+    .HuzaifaNav.navbar.navbar-top {
+        padding: 0 1.5rem;
+    }
+
+    .navbar-vertical.navbar-expand-lg .navbar-vertical-content .navbar-nav .nav-link {
+        margin-left: unset !important;
+        margin-right: unset !important;
+        padding-left: 1.5rem !important;
+    }
+
+    .navbar-vertical .navbar-vertical-content .navbar-nav .nav-link.dropdown-indicator {
+        padding-left: .75rem !important;
+    }
+
+    .navbar-vertical .navbar-vertical-content .navbar-nav .nav .nav-link {
+        padding: .25rem .5rem;
+        padding-left: 3.125rem !important;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {}
+
+@media (min-width: 1200px) and (max-width: 1919px) {}
+
+@media (min-width: 1920px) {}
+
+
+@media(max-width:786px) {
+    .ttop {
+        height: 148px;
+    }
 }
