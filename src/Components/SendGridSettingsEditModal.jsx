@@ -1,40 +1,62 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { useForm } from "react-hook-form";
 
 const SendGridSettingsEditModal = ({ mode, onSave, initialData, modalId }) => {
-  const [formData, setFormData] = useState({
-    username: "",
-    apiKey: "",
-    fromEmail: "",
-    fromFullName: "",
-    isDefault: false,
+  const {
+    register,
+    handleSubmit,
+    reset,
+    watch,
+    formState: { errors, touchedFields },
+  } = useForm({
+    mode: "onChange",
+    defaultValues: {
+      username: "",
+      apiKey: "",
+      fromEmail: "",
+      fromFullName: "",
+      isDefault: false,
+    },
   });
 
-  // ✅ Load initial values if edit mode
+  const values = watch();
+
   useEffect(() => {
     if (mode === "edit" && initialData) {
-      setFormData(initialData);
+      reset(initialData);
+    } else {
+      reset({
+        username: "",
+        apiKey: "",
+        fromEmail: "",
+        fromFullName: "",
+        isDefault: false,
+      });
     }
-  }, [mode, initialData]);
+  }, [mode, initialData, reset]);
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: type === "checkbox" ? checked : value,
-    }));
-  };
+  const onSubmit = (data) => {
+    onSave(data);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSave(formData);
-
-    // ✅ Hide Bootstrap modal
     const modalEl = document.getElementById(modalId);
     if (modalEl) {
       const modalInstance = window.bootstrap.Modal.getInstance(modalEl);
       modalInstance?.hide();
     }
   };
+
+const getValidationClass = (name) => {
+  // Skip checkboxes
+  if (name === "isDefault") return "";
+
+  if (errors[name]) return "is-invalid";
+
+  // ✅ Only mark as valid if the user has touched/changed the field
+  if (touchedFields[name] && !errors[name]) return "is-valid";
+
+  return "";
+};
+
 
   return (
     <div
@@ -64,70 +86,99 @@ const SendGridSettingsEditModal = ({ mode, onSave, initialData, modalId }) => {
           </div>
 
           {/* Body */}
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit(onSubmit)} noValidate>
             <div className="modal-body">
               <div className="row g-3">
+                {/* Username */}
                 <div className="col-md-6">
                   <label className="form-label">SendGrid User *</label>
                   <input
                     type="text"
-                    className="form-control"
-                    name="username"
-                    value={formData.username}
-                    onChange={handleChange}
+                    className={`form-control ${getValidationClass("username")}`}
                     placeholder="sendgrid-user"
-                    required
+                    {...register("username", {
+                      required: "SendGrid User is required",
+                    })}
                   />
+                  {errors.username && (
+                    <div className="invalid-feedback">
+                      {errors.username.message}
+                    </div>
+                  )}
                 </div>
 
+                {/* API Key */}
                 <div className="col-md-6">
                   <label className="form-label">SendGrid API Key *</label>
                   <input
                     type="password"
-                    className="form-control"
-                    name="apiKey"
-                    value={formData.apiKey}
-                    onChange={handleChange}
+                    className={`form-control ${getValidationClass("apiKey")}`}
                     placeholder="Enter API Key"
-                    required
+                    {...register("apiKey", {
+                      required: "API Key is required",
+                      minLength: { value: 6, message: "Minimum 6 characters" },
+                    })}
                   />
+                  {errors.apiKey && (
+                    <div className="invalid-feedback">
+                      {errors.apiKey.message}
+                    </div>
+                  )}
                 </div>
 
+                {/* From Email */}
                 <div className="col-md-6">
                   <label className="form-label">From Email *</label>
                   <input
                     type="email"
-                    className="form-control"
-                    name="fromEmail"
-                    value={formData.fromEmail}
-                    onChange={handleChange}
+                    className={`form-control ${getValidationClass(
+                      "fromEmail"
+                    )}`}
                     placeholder="noreply@example.com"
-                    required
+                    {...register("fromEmail", {
+                      required: "From Email is required",
+                      pattern: {
+                        value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                        message: "Enter a valid email",
+                      },
+                    })}
                   />
+                  {errors.fromEmail && (
+                    <div className="invalid-feedback">
+                      {errors.fromEmail.message}
+                    </div>
+                  )}
                 </div>
 
+                {/* From Full Name */}
                 <div className="col-md-6">
                   <label className="form-label">From Full Name *</label>
                   <input
                     type="text"
-                    className="form-control"
-                    name="fromFullName"
-                    value={formData.fromFullName}
-                    onChange={handleChange}
+                    className={`form-control ${getValidationClass(
+                      "fromFullName"
+                    )}`}
                     placeholder="Company Notifications"
-                    required
+                    {...register("fromFullName", {
+                      required: "From Full Name is required",
+                      minLength: { value: 2, message: "Too short" },
+                    })}
                   />
+                  {errors.fromFullName && (
+                    <div className="invalid-feedback">
+                      {errors.fromFullName.message}
+                    </div>
+                  )}
                 </div>
 
+                {/* Is Default */}
                 <div className="col-md-6 d-flex align-items-center">
                   <div className="form-check">
                     <input
                       type="checkbox"
                       className="form-check-input"
-                      name="isDefault"
-                      checked={formData.isDefault}
-                      onChange={handleChange}
                       id="sendgridIsDefault"
+                      {...register("isDefault")}
                     />
                     <label
                       className="form-check-label"

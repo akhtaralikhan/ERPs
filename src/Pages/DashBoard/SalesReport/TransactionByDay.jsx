@@ -5,8 +5,7 @@ import GlobalFilter from "../../../Components/GlobalFilter";
 import { TransactionByDayData } from "../../../assets/data";
 
 const TransactionByDay = () => {
-
-    // Function to handle the print action
+  // Function to handle the print action
   const handlePrint = () => {
     window.print();
   };
@@ -58,14 +57,17 @@ const TransactionByDay = () => {
     <div className="content AssetsPageChangecss AssetPaddingChange">
       <div className="marginforsmalldevice RemoveBorder card rounded-0">
         <div className="NewColorChange phoenix-toolbar d-flex align-items-center flex-wrap py-md-3 px-md-4 mb-md-0 border-bottom gap-3">
-          <div className="p-3 row PrintSize" style={{ minWidth: "170px" }}>
-            <h2 className="fw-bolder mb-5 PrintSizeH2" style={{ fontSize: "2rem" }}>
+          <div
+            className="p-3 row MainRemovePaddingwidth PrintSize"
+            style={{ minWidth: "170px" }}
+          >
+            <h2
+              className="fw-bolder mb-5 PrintSizeH2"
+              style={{ fontSize: "2rem" }}
+            >
               Transaction By Day
             </h2>
-             <div
-              className="d-flex flex-wrap align-items-center PrintDnone"
-              style={{ gap: "35px" }}
-            >
+            <div className="AllabsAssets PrintDnone">
               <span className="filterLinks text-dark">
                 All <span className="NewChangeColor">(68817)</span>
               </span>
@@ -80,14 +82,13 @@ const TransactionByDay = () => {
               </span>
             </div>
 
-
             {/* Search + Filters */}
             <div className="d-flex flex-xl-row flex-column PrintDnone">
               <GlobalFilter
                 globalFilter={globalFilter}
                 setGlobalFilter={setGlobalFilter}
               />
-              <div className="d-flex flex-md-row mb-md-4 mb-4 flex-column mt-4 PrintWidthDropdown">
+              <div className="d-flex flex-md-row mb-md-4 mb-4 mt-4 PrintWidthDropdown PrintDnone DropDownForMobileDevice">
                 <Dropdown>
                   <Dropdown.Toggle
                     variant="light"
@@ -99,34 +100,40 @@ const TransactionByDay = () => {
                       width: "200px",
                     }}
                   >
-                    Vendor Name
+                    Status
                   </Dropdown.Toggle>
-                  <Dropdown.Menu>
-                    <Dropdown.Item>Complete</Dropdown.Item>
-                    <Dropdown.Item>Pending</Dropdown.Item>
-                    <Dropdown.Item>Cancelled</Dropdown.Item>
+                  <Dropdown.Menu
+                    renderOnMount
+                    popperConfig={{ strategy: "fixed" }} // important
+                  >
+                    <Dropdown.Item>Active</Dropdown.Item>
+                    <Dropdown.Item>InActive</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
+
                 <Dropdown>
                   <Dropdown.Toggle
                     variant="light"
                     className="btn btn-phoenix-secondary px-7 flex-shrink-0"
                     style={{
-                      borderRadius: "0 0px 0px 0",
+                      borderRadius: "0",
                       fontWeight: 600,
                       fontSize: "14px",
                       width: "200px",
                     }}
                   >
-                    Return Type
+                    ModifiedByUser
                   </Dropdown.Toggle>
-                  <Dropdown.Menu>
-                    <Dropdown.Item>Ready to Pickup</Dropdown.Item>
-                    <Dropdown.Item>Completed</Dropdown.Item>
-                    <Dropdown.Item>Partially Fulfilled</Dropdown.Item>
-                    <Dropdown.Item>Cancelled</Dropdown.Item>
+                  <Dropdown.Menu
+                    renderOnMount
+                    popperConfig={{ strategy: "fixed" }} // important
+                  >
+                    <Dropdown.Item>Super Admin</Dropdown.Item>
+                    <Dropdown.Item>Admin</Dropdown.Item>
+                    <Dropdown.Item>Users</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
+
                 <Dropdown>
                   <Dropdown.Toggle
                     variant="light"
@@ -140,7 +147,10 @@ const TransactionByDay = () => {
                   >
                     More filters
                   </Dropdown.Toggle>
-                  <Dropdown.Menu>
+                  <Dropdown.Menu
+                    renderOnMount
+                    popperConfig={{ strategy: "fixed" }} // important
+                  >
                     <Dropdown.Item>Date</Dropdown.Item>
                     <Dropdown.Item>Delivery Type</Dropdown.Item>
                     <Dropdown.Item>Exported</Dropdown.Item>
@@ -158,8 +168,14 @@ const TransactionByDay = () => {
         </div>
 
         {/* ✅ Table (without pagination) */}
-        <div className="table-responsive p-4 px-5 pt-0">
-          <div className="table-responsive custom-scroll">
+        <div className="table-responsive p-4 px-5 pt-0 NewTableChange">
+          <div
+            className="table-responsive custom-scroll"
+            style={{
+              overflowX: "auto",
+              whiteSpace: "nowrap",
+            }}
+          >
             <table
               {...getTableProps()}
               className="table table-sm fs--1 mb-0 ConvertUpperCase"

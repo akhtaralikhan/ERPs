@@ -30,8 +30,11 @@ const IdentitySetting = () => {
       <div className="marginforsmalldevice RemoveBorder card rounded-0">
         {/* Page Header */}
         <div className="NewColorChange phoenix-toolbar d-flex align-items-center flex-wrap py-md-3 px-md-4 mb-md-0 border-bottom gap-3">
-          <div className="p-3 row" style={{ minWidth: "170px" }}>
-            <h2 className="fw-bolder mb-1" style={{ fontSize: "2rem" }}>
+          <div
+            className="p-3 row MainRemovePaddingwidth"
+            style={{ minWidth: "170px" }}
+          >
+            <h2 className="fw-bolder mb-5" style={{ fontSize: "2rem" }}>
               Identity Setting
             </h2>
           </div>
@@ -64,10 +67,12 @@ const IdentitySetting = () => {
                   key={index}
                   className="row py-2 border-bottom-0 DecreseMargin"
                 >
-                  <div className="col-md-4">
-                    <p>{setting.label}</p>
+                  <div className="col-md-5">
+                    <p>
+                      {setting.label} <span className="ms-1">:</span>
+                    </p>
                   </div>
-                  <div className="col-md-8">
+                  <div className="col-md-7">
                     <p>
                       {typeof setting.value === "boolean"
                         ? setting.value

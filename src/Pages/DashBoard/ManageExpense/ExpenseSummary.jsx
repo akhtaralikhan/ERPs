@@ -85,13 +85,13 @@ const ExpenseSummary = () => {
       <div className="marginforsmalldevice RemoveBorder card rounded-0">
         <div className="NewColorChange phoenix-toolbar d-flex align-items-center flex-wrap py-md-3 px-md-4 mb-md-0 border-bottom gap-3">
           {/* Title and tabs */}
-          <div className=" p-3 row" style={{ minWidth: "170px" }}>
+          <div className="p-3 row MainRemovePaddingwidth" style={{ minWidth: "170px" }}>
             <h2 className="fw-bolder mb-5" style={{ fontSize: "2rem" }}>
               Summary Expenses
             </h2>
             <div
-              className="d-flex flex-wrap align-items-center"
-              style={{ gap: "35px" }}
+              className="AllabsAssets"
+              
             >
               <span className="filterLinks text-dark">
                 All <span className="NewChangeColor">(68817)</span>
@@ -114,66 +114,75 @@ const ExpenseSummary = () => {
                 setGlobalFilter={setGlobalFilter}
               />
               {/* Filter dropdowns */}
-              <div className="d-flex flex-md-row mb-md-4 mb-4 flex-column mt-4">
-                <Dropdown className="">
-                  <Dropdown.Toggle
-                    variant="light"
-                    className="btn btn-phoenix-secondary px-7 flex-shrink-0"
-                    style={{
-                      borderRadius: "8px 0 0 8px",
-                      fontWeight: 600,
-                      fontSize: "14px",
-                      width: "200px",
-                    }}
-                  >
-                    Supplier Name
-                  </Dropdown.Toggle>
-                  <Dropdown.Menu>
-                    <Dropdown.Item>Complete</Dropdown.Item>
-                    <Dropdown.Item>Pending</Dropdown.Item>
-                    <Dropdown.Item>Cancelled</Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
-                <Dropdown>
-                  <Dropdown.Toggle
-                    variant="light"
-                    className="btn btn-phoenix-secondary px-7 flex-shrink-0"
-                    style={{
-                      borderRadius: "0 0px 0px 0",
-                      fontWeight: 600,
-                      fontSize: "14px",
-                      width: "200px",
-                    }}
-                  >
-                    Type
-                  </Dropdown.Toggle>
-                  <Dropdown.Menu>
-                    <Dropdown.Item>Ready to Pickup</Dropdown.Item>
-                    <Dropdown.Item>Completed</Dropdown.Item>
-                    <Dropdown.Item>Partially Fulfilled</Dropdown.Item>
-                    <Dropdown.Item>Cancelled</Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
-                <Dropdown>
-                  <Dropdown.Toggle
-                    variant="light"
-                    className="btn btn-phoenix-secondary px-7 flex-shrink-0"
-                    style={{
-                      borderRadius: "0 8px 8px 0",
-                      fontWeight: 600,
-                      fontSize: "14px",
-                      width: "200px",
-                    }}
-                  >
-                    More filters
-                  </Dropdown.Toggle>
-                  <Dropdown.Menu>
-                    <Dropdown.Item>Date</Dropdown.Item>
-                    <Dropdown.Item>Delivery Type</Dropdown.Item>
-                    <Dropdown.Item>Exported</Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
-              </div>
+               <div className="d-flex flex-md-row mb-md-4 mb-4 mt-4 DropDownForMobileDevice">
+                             <Dropdown>
+                               <Dropdown.Toggle
+                                 variant="light"
+                                 className="btn btn-phoenix-secondary px-7 flex-shrink-0"
+                                 style={{
+                                   borderRadius: "8px 0 0 8px",
+                                   fontWeight: 600,
+                                   fontSize: "14px",
+                                   width: "200px",
+                                 }}
+                               >
+                                 Status
+                               </Dropdown.Toggle>
+                               <Dropdown.Menu
+                                 renderOnMount
+                                 popperConfig={{ strategy: "fixed" }} // important
+                               >
+                                 <Dropdown.Item>Active</Dropdown.Item>
+                                 <Dropdown.Item>InActive</Dropdown.Item>
+                               </Dropdown.Menu>
+                             </Dropdown>
+             
+                             <Dropdown>
+                               <Dropdown.Toggle
+                                 variant="light"
+                                 className="btn btn-phoenix-secondary px-7 flex-shrink-0"
+                                 style={{
+                                   borderRadius: "0",
+                                   fontWeight: 600,
+                                   fontSize: "14px",
+                                   width: "200px",
+                                 }}
+                               >
+                                 ModifiedByUser
+                               </Dropdown.Toggle>
+                               <Dropdown.Menu
+                                 renderOnMount
+                                 popperConfig={{ strategy: "fixed" }} // important
+                               >
+                                 <Dropdown.Item>Super Admin</Dropdown.Item>
+                                 <Dropdown.Item>Admin</Dropdown.Item>
+                                 <Dropdown.Item>Users</Dropdown.Item>
+                               </Dropdown.Menu>
+                             </Dropdown>
+             
+                             <Dropdown>
+                               <Dropdown.Toggle
+                                 variant="light"
+                                 className="btn btn-phoenix-secondary px-7 flex-shrink-0"
+                                 style={{
+                                   borderRadius: "0 8px 8px 0",
+                                   fontWeight: 600,
+                                   fontSize: "14px",
+                                   width: "200px",
+                                 }}
+                               >
+                                 More filters
+                               </Dropdown.Toggle>
+                               <Dropdown.Menu
+                                 renderOnMount
+                                 popperConfig={{ strategy: "fixed" }} // important
+                               >
+                                 <Dropdown.Item>Date</Dropdown.Item>
+                                 <Dropdown.Item>Delivery Type</Dropdown.Item>
+                                 <Dropdown.Item>Exported</Dropdown.Item>
+                               </Dropdown.Menu>
+                             </Dropdown>
+                           </div>
             </div>
             <div className="">
               <div className="btn btn-light ps-0 fw-bold">
@@ -192,11 +201,14 @@ const ExpenseSummary = () => {
           {/* Export button */}
         </div>
 
-        <div className="table-responsive p-4 px-5 pt-0">
+        <div className="table-responsive p-4 px-5 pt-0 NewTableChange">
           {/* ✅ Search */}
           {/* <PurchaseReturnModal /> */}
 
-          <div className="table-responsive custom-scroll ">
+          <div className="table-responsive custom-scroll "   style={{
+              overflowX: "auto",
+              whiteSpace: "nowrap",
+            }}>
             <table
               {...getTableProps()}
               className="table  table-sm fs--1 mb-0 ConvertUpperCase
@@ -323,8 +335,8 @@ const ExpenseSummary = () => {
 
           {/* ✅ Pagination controls */}
           {/* ✅ Ellipsis-based Pagination (compact version) */}
-          <div className="d-flex justify-content-between align-items-center py-2">
-            <p className="mb-0 text-body fs-9" style={{ fontSize: "14px" }}>
+          <div className="d-flex justify-content-between align-items-center py-2 PAGINATIONS">
+            <p className="mb-0 text-body fs-9 d-md-block d-none" style={{ fontSize: "14px" }}>
               Page {pageIndex + 1} of {pageOptions.length}
               <a
                 href="#!"

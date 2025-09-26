@@ -1,54 +1,67 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { useForm } from "react-hook-form";
 
 const UserInfoFromBrowserModalAddEdit = ({ mode, onSave, initialData }) => {
-  const emptyForm = {
-    id: "",
-    BrowserUniqueID: "",
-    Lat: "",
-    Long: "",
-    TimeZone: "",
-    BrowserMajor: "",
-    BrowserName: "",
-  };
+  const {
+    register,
+    handleSubmit,
+    reset,
+    watch,
+    formState: { errors, touchedFields, isSubmitted },
+  } = useForm({
+    mode: "onChange", // 👈 update validation state on change
+    defaultValues: {
+      BrowserUniqueID: "",
+      Lat: "",
+      Long: "",
+      TimeZone: "",
+      BrowserMajor: "",
+      BrowserName: "",
+    },
+  });
 
-  const [formData, setFormData] = useState(emptyForm);
+  // watch all values for validation state
+  const values = watch();
 
   // Reset form when mode or initialData changes
   useEffect(() => {
     if (mode === "edit" && initialData) {
-      setFormData(initialData);
-    } else if (mode === "new") {
-      setFormData(emptyForm);
+      reset(initialData);
+    } else {
+      reset({
+        BrowserUniqueID: "",
+        Lat: "",
+        Long: "",
+        TimeZone: "",
+        BrowserMajor: "",
+        BrowserName: "",
+      });
     }
-  }, [mode, initialData]);
+  }, [mode, initialData, reset]);
 
-  const [validated, setValidated] = useState(false);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const submitHandler = (e) => {
-    e.preventDefault();
-    const form = e.currentTarget;
-
-    if (form.checkValidity() === false) {
-      e.stopPropagation();
-      setValidated(true);
-      return;
-    }
-
-    onSave(formData);
-
-    // Hide bootstrap modal after save
+  const onSubmit = (data) => {
+    onSave(data);
     const modalEl = document.getElementById("UserInfoFromBrowserModalAddEdit");
     if (modalEl) {
       const modalInstance = window.bootstrap.Modal.getInstance(modalEl);
       modalInstance?.hide();
     }
+  };
 
-    setValidated(false);
+  const getValidationClass = (name) => {
+    // If there's an error, show red
+    if (errors[name]) return "is-invalid";
+
+    // If the field is touched OR value changed from initialData, show green
+    if (mode === "edit" && initialData) {
+      if (values[name] !== initialData[name] && !errors[name])
+        return "is-valid";
+    } else {
+      // Create mode: green only if touched and valid
+      if (touchedFields[name] && !errors[name]) return "is-valid";
+    }
+
+    return "";
   };
 
   return (
@@ -80,76 +93,132 @@ const UserInfoFromBrowserModalAddEdit = ({ mode, onSave, initialData }) => {
           </div>
 
           {/* Body */}
-          <form onSubmit={submitHandler}>
+          <form onSubmit={handleSubmit(onSubmit)} noValidate>
             <div className="modal-body">
+              {/* Browser Unique ID */}
               <div className="mb-3">
                 <label className="form-label">Browser Unique ID *</label>
                 <input
                   type="text"
-                  name="BrowserUniqueID"
-                  className="form-control"
+                  className={`form-control ${getValidationClass(
+                    "BrowserUniqueID"
+                  )}`}
                   placeholder="Enter Browser Unique ID"
-                  value={formData.BrowserUniqueID}
-                  onChange={handleChange}
-                  required
+                  {...register("BrowserUniqueID", {
+                    required: "Browser Unique ID is required",
+                  })}
                 />
+                {errors.BrowserUniqueID && (
+                  <div className="invalid-feedback">
+                    {errors.BrowserUniqueID.message}
+                  </div>
+                )}
               </div>
+
+              {/* Lat & Long */}
               <div className="row">
                 <div className="col mb-3">
-                  <label className="form-label">Lat</label>
+                  <label className="form-label">Lat *</label>
                   <input
-                    type="text"
-                    name="Lat"
-                    className="form-control"
+                    type="number"
+                    step="any"
+                    className={`form-control ${getValidationClass("Lat")}`}
                     placeholder="Enter Latitude"
-                    value={formData.Lat}
-                    onChange={handleChange}
+                    {...register("Lat", {
+                      required: "Latitude is required",
+                      pattern: {
+                        value: /^-?\d+(\.\d+)?$/,
+                        message: "Enter a valid number",
+                      },
+                    })}
                   />
+                  {errors.Lat && (
+                    <div className="invalid-feedback">{errors.Lat.message}</div>
+                  )}
                 </div>
                 <div className="col mb-3">
-                  <label className="form-label">Long</label>
+                  <label className="form-label">Long *</label>
                   <input
-                    type="text"
-                    name="Long"
-                    className="form-control"
+                    type="number"
+                    step="any"
+                    className={`form-control ${getValidationClass("Long")}`}
                     placeholder="Enter Longitude"
-                    value={formData.Long}
-                    onChange={handleChange}
+                    {...register("Long", {
+                      required: "Longitude is required",
+                      pattern: {
+                        value: /^-?\d+(\.\d+)?$/,
+                        message: "Enter a valid number",
+                      },
+                    })}
                   />
+                  {errors.Long && (
+                    <div className="invalid-feedback">
+                      {errors.Long.message}
+                    </div>
+                  )}
                 </div>
               </div>
+
+              {/* Time Zone */}
               <div className="mb-3">
-                <label className="form-label">Time Zone</label>
+                <label className="form-label">Time Zone *</label>
                 <input
                   type="text"
-                  name="TimeZone"
-                  className="form-control"
-                  placeholder="Enter Time Zone"
-                  value={formData.TimeZone}
-                  onChange={handleChange}
+                  className={`form-control ${getValidationClass("TimeZone")}`}
+                  placeholder="Enter Time Zone (e.g., GMT+5:30)"
+                  {...register("TimeZone", {
+                    required: "Time Zone is required",
+                  })}
                 />
+                {errors.TimeZone && (
+                  <div className="invalid-feedback">
+                    {errors.TimeZone.message}
+                  </div>
+                )}
               </div>
+
+              {/* Browser Major */}
               <div className="mb-3">
-                <label className="form-label">Browser Major</label>
+                <label className="form-label">Browser Major *</label>
                 <input
-                  type="text"
-                  name="BrowserMajor"
-                  className="form-control"
+                  type="number"
+                  className={`form-control ${getValidationClass(
+                    "BrowserMajor"
+                  )}`}
                   placeholder="Enter Browser Major Version"
-                  value={formData.BrowserMajor}
-                  onChange={handleChange}
+                  {...register("BrowserMajor", {
+                    required: "Browser Major is required",
+                    pattern: {
+                      value: /^[0-9]+$/,
+                      message: "Enter a valid number",
+                    },
+                  })}
                 />
+                {errors.BrowserMajor && (
+                  <div className="invalid-feedback">
+                    {errors.BrowserMajor.message}
+                  </div>
+                )}
               </div>
+
+              {/* Browser Name */}
               <div className="mb-3">
-                <label className="form-label">Browser Name</label>
+                <label className="form-label">Browser Name *</label>
                 <input
                   type="text"
-                  name="BrowserName"
-                  className="form-control"
+                  className={`form-control ${getValidationClass(
+                    "BrowserName"
+                  )}`}
                   placeholder="Enter Browser Name"
-                  value={formData.BrowserName}
-                  onChange={handleChange}
+                  {...register("BrowserName", {
+                    required: "Browser Name is required",
+                  })}
                 />
+                {errors.BrowserName && (
+                  <div className="invalid-feedback">
+                    {errors.BrowserName.message}
+                  </div>
+                )}
               </div>
             </div>
 
