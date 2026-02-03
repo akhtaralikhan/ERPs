@@ -22,7 +22,6 @@ function AddPaymentModal({ showModal, setShowModal }) {
   return (
     <div>
       <Modal isOpen={showModal} toggle={toggle}>
-        <ModalHeader toggle={toggle}>Add Payment Status</ModalHeader>
         <div className="modal-header d-flex justify-content-between">
           <h5 className="mb-0">Add Payment Status</h5>
           <i className="fa-solid fa-xmark text-danger pointer" onClick={toggle}></i>

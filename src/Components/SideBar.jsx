@@ -354,7 +354,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                           </div>
                         )}
                         <span className="nav-link-icon">
-                          <span data-feather="shopping-bag"></span>
+                        <i className="fa-solid fa-bag-shopping"></i>
                         </span>
                         {!collapsed && (
                           <span className="nav-link-text">
@@ -437,7 +437,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                           </div>
                         )}
                         <span className="nav-link-icon">
-                          <BiCart />
+                          <i className="fa-solid fa-cart-shopping "></i>
                         </span>
                         {!collapsed && (
                           <span className="nav-link-text-wrapper">
@@ -538,7 +538,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                           </div>
                         )}
                         <span className="nav-link-icon">
-                          <BiSolidPurchaseTag />
+                          <i className="fa-solid fa-bag-shopping"></i>
                         </span>
                         {!collapsed && (
                           <span className="nav-link-text-wrapper">
@@ -671,7 +671,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                           </div>
                         )}
                         <span className="nav-link-icon">
-                          <i class="fas fa-receipt"></i>
+                          <i className="fas fa-receipt"></i>
                         </span>
                         {!collapsed && (
                           <span className="nav-link-text-wrapper">
@@ -741,7 +741,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                           </div>
                         )}
                         <span className="nav-link-icon">
-                          <i class="fas fa-code-branch"></i>
+                          <i className="fa-solid fa-code-branch"></i>
                         </span>
                         {!collapsed && (
                           <span className="nav-link-text-wrapper">
@@ -803,7 +803,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                           </div>
                         )}
                         <span className="nav-link-icon">
-                          <i class="fa-solid fa-basket-shopping"></i>
+                          <i className="fa-solid fa-basket-shopping"></i>
                         </span>
                         {!collapsed && (
                           <span className="nav-link-text-wrapper">
@@ -1032,7 +1032,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                           </div>
                         )}
                         <span className="nav-link-icon">
-                          <GrResources />
+                          <i className="fa-solid fa-layer-group"></i>
                         </span>
                         {!collapsed && (
                           <span className="nav-link-text-wrapper">
@@ -1127,7 +1127,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                           </div>
                         )}
                         <span className="nav-link-icon">
-                          <FaUsersRectangle />
+                          <i className="fa-solid fa-users-gear"></i>
                         </span>
                         {!collapsed && (
                           <span className="nav-link-text-wrapper">
@@ -1199,7 +1199,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                           </div>
                         )}
                         <span className="nav-link-icon">
-                          <FaUserEdit />
+                          <i className="fa-solid fa-user"></i>
                         </span>
                         {!collapsed && (
                           <span className="nav-link-text-wrapper">
@@ -1322,7 +1322,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                           </div>
                         )}
                         <span className="nav-link-icon">
-                          <TbReportAnalytics />
+                          <i className="fa-solid fa-clipboard-check"></i>
                         </span>
                         {!collapsed && (
                           <span className="nav-link-text-wrapper">
@@ -1408,7 +1408,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                           </div>
                         )}
                         <span className="nav-link-icon">
-                          <MdPointOfSale />
+                          <i className="fa-solid fa-file-invoice-dollar"></i>
                         </span>
                         {!collapsed && (
                           <span className="nav-link-text-wrapper">
@@ -1510,7 +1510,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                           </div>
                         )}
                         <span className="nav-link-icon">
-                          <TbActivityHeartbeat />
+                          <i className="fa-regular fa-credit-card"></i>
                         </span>
                         {!collapsed && (
                           <span className="nav-link-text-wrapper">
@@ -1604,7 +1604,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                           </div>
                         )}
                         <span className="nav-link-icon">
-                          <GiExpense />
+                        <i className="fa-solid fa-comment-dollar"></i>
                         </span>
                         {!collapsed && (
                           <span className="nav-link-text-wrapper">
@@ -1698,7 +1698,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                           </div>
                         )}
                         <span className="nav-link-icon">
-                          <MdOtherHouses />
+                        <i className="fa-solid fa-clipboard-list"></i>
                         </span>
                         {!collapsed && (
                           <span className="nav-link-text-wrapper">

@@ -3,8 +3,14 @@
 }
 
 .sidebar .nav-item-wrapper .nav-link-icon svg {
-    width: 13px;
+    width: 18px;
 }
+
+.sidebar .nav-item-wrapper .nav-link-icon i {
+    width: 18px;
+    font-size: 18px;
+}
+
 
 .Huzaifa_Date .react-datepicker-wrapper {
     width: 100%;
