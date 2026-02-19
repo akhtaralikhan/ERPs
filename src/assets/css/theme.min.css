@@ -26109,7 +26109,7 @@ html {
 
 @media(min-width: 576px) {
     .footer {
-        height: 4rem
+        height: 3rem
     }
 }
 
@@ -30003,7 +30003,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical.navbar-expand-xs .navbar-v
 .navbar-vertical .navbar-vertical-footer {
     position: fixed;
     width: 15.875rem;
-    height: 4rem;
+    height: 3rem;
     display: none;
     -webkit-box-align: center;
     -ms-flex-align: center;

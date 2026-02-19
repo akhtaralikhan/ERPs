@@ -35,7 +35,7 @@ export default function ItemCart() {
         <div className='d-flex'>
           <div className="card-info position-relative me-3" onClick={() => setShowModal(true)}>
             {showModal && <Example showModal={showModal} setShowModal={setShowModal} />}
-            <i className="fa-solid fa-basket-shopping fs-2 text-secondary"></i>
+            <i className="fa-solid fa-basket-shopping fs-2"></i>
             <div className={`${getTotalAmount() === 0 ? "" : "dot"}`}></div>
           </div>
           <form className="position-relative me-7 w-100">

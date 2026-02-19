@@ -366,7 +366,7 @@ const Navbar = () => {
                 </label>
               </div>
             </li>
-            <li className="nav-item dropdown">
+            <li className="nav-item dropdown changecolorNavlink">
               <Link
                 className="nav-link"
                 to="#"
@@ -701,7 +701,7 @@ const Navbar = () => {
                 </div>
               </div>
             </li>
-            <li className="nav-item dropdown">
+            <li className="nav-item dropdown changecolorNavlink">
               <Link
                 className="nav-link"
                 id="navbarDropdownNindeDots"
@@ -990,23 +990,17 @@ const Navbar = () => {
                       </div>
                       <h6 className="mt-2 text-black">Akhtar Ali</h6>
                     </div>
-                    <div className="mb-3 mx-3">
-                      <input
-                        className="form-control form-control-sm"
-                        id="statusUpdateInput"
-                        type="text"
-                        placeholder="Update your status"
-                      />
-                    </div>
                   </div>
                   <div
-                    className="overflow-auto scrollbar"
+                    className="overflow-auto scrollbar HuzNavbarfontsize"
                     style={{ height: "10rem" }}
                   >
                     <ul className="nav d-flex flex-column mb-2 pb-1">
                       <li className="nav-item">
                         <Link className="nav-link px-3" to="#!">
                           <span
+                            width="15"
+                            height="15"
                             className="me-2 text-900"
                             data-feather="user"
                           ></span>
@@ -1016,6 +1010,8 @@ const Navbar = () => {
                       <li className="nav-item">
                         <Link className="nav-link px-3" to="#!">
                           <span
+                            width="15"
+                            height="15"
                             className="me-2 text-900"
                             data-feather="pie-chart"
                           ></span>
@@ -1025,15 +1021,19 @@ const Navbar = () => {
                       <li className="nav-item">
                         <Link className="nav-link px-3" to="#!">
                           <span
+                            width="15"
+                            height="15"
                             className="me-2 text-900"
                             data-feather="lock"
                           ></span>
-                          Posts &amp; Activity
+                          Activity log
                         </Link>
                       </li>
                       <li className="nav-item">
                         <Link className="nav-link px-3" to="#!">
                           <span
+                            width="15"
+                            height="15"
                             className="me-2 text-900"
                             data-feather="settings"
                           ></span>
@@ -1043,6 +1043,8 @@ const Navbar = () => {
                       <li className="nav-item">
                         <Link className="nav-link px-3" to="#!">
                           <span
+                            width="15"
+                            height="15"
                             className="me-2 text-900"
                             data-feather="help-circle"
                           ></span>
@@ -1052,6 +1054,8 @@ const Navbar = () => {
                       <li className="nav-item">
                         <Link className="nav-link px-3" to="#!">
                           <span
+                            width="15"
+                            height="15"
                             className="me-2 text-900"
                             data-feather="globe"
                           ></span>
@@ -1065,6 +1069,8 @@ const Navbar = () => {
                       <li className="nav-item">
                         <Link className="nav-link px-3" to="#!">
                           <span
+                            width="15"
+                            height="15"
                             className="me-2 text-900"
                             data-feather="user-plus"
                           ></span>
@@ -1079,7 +1085,8 @@ const Navbar = () => {
                         className="btn btn-phoenix-secondary d-flex flex-center w-100"
                         to="Signin"
                       >
-                        <span className="me-2" data-feather="log-out"></span>
+                        <span className="me-2" data-feather="log-out" width="15" height="15"
+                        ></span>
                         Sign out
                       </button>
                     </div>

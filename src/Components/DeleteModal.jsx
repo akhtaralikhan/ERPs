@@ -1,10 +1,13 @@
 import React from "react";
 
-export default function DeleteModal({ modalId, resource, selectedId }) {
-
+export default function DeleteModal({ modalId, resource, onConfirm }) {
   const handleDelete = () => {
-    if (!selectedId) return;
+    if (onConfirm) onConfirm();
 
+     // Remove focus from button
+  document.activeElement.blur();
+
+    // Hide Bootstrap modal
     const modalEl = document.getElementById(modalId);
     const modalInstance = bootstrap.Modal.getInstance(modalEl);
     modalInstance?.hide();
@@ -13,7 +16,7 @@ export default function DeleteModal({ modalId, resource, selectedId }) {
   return (
     <div className="modal fade" id={modalId} tabIndex={-1}>
       <div className="modal-dialog modal-dialog-centered">
-        <div className="modal-content "style={{backgroundColor:"#ffff"}}>
+        <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title">Confirm Delete</h5>
             <button className="btn p-1" type="button" data-bs-dismiss="modal">
@@ -21,14 +24,13 @@ export default function DeleteModal({ modalId, resource, selectedId }) {
             </button>
           </div>
           <div className="modal-body">
-            <p>Are you sure you want to delete this item?</p>
+            <p>Are you sure you want to delete this.</p>
           </div>
           <div className="modal-footer">
             <button
               className="btn btn-danger"
               type="button"
               onClick={handleDelete}
-              data-bs-dismiss="modal"
             >
               <small>Delete</small>
             </button>

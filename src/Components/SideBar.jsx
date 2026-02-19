@@ -148,7 +148,7 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
 .navbar-vertical .navbar-vertical-footer {
   position: fixed;
   width: 15.875rem; /* match expanded width */
-  height: 4rem;
+  height: 3rem;
   display: flex;
   align-items: center;
   bottom: 0;
@@ -269,9 +269,9 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                   >
                     <NavLink className="nav-link label-1" to="/" role="button">
                       <div className="d-flex align-items-center">
-                        <span className="nav-link-icon">
-                          <span data-feather="pie-chart"></span>
-                        </span>
+                      <span className="nav-link-icon">
+                            <span data-feather="pie-chart"></span>
+                          </span>
 
                         {/* normal inline text if not collapsed */}
                         {!collapsed && (
@@ -343,18 +343,18 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                       className="nav-link dropdown-indicator label-1"
                       role="button"
                       data-bs-toggle={collapsed ? "" : "collapse"}
-                      aria-expanded="true"
+                      aria-expanded="false"
                       aria-controls="POS"
                       data-bs-target="#POS"
                     >
                       <div className="d-flex align-items-center">
                         {!collapsed && (
-                          <div className="dropdown-indicator-icon">
+                           <div className="dropdown-indicator-icon">
                             <span className="fas fa-caret-right"></span>
                           </div>
                         )}
                         <span className="nav-link-icon">
-                        <i className="fa-solid fa-bag-shopping"></i>
+                          <span data-feather="shopping-bag"></span>
                         </span>
                         {!collapsed && (
                           <span className="nav-link-text">
@@ -426,7 +426,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                       to=""
                       role="button"
                       data-bs-toggle={collapsed ? "" : "collapse"}
-                      aria-expanded="true"
+                      aria-expanded="false"
                       aria-controls="sale"
                       data-bs-target="#sale"
                     >
@@ -437,7 +437,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                           </div>
                         )}
                         <span className="nav-link-icon">
-                          <i className="fa-solid fa-cart-shopping "></i>
+                          <span data-feather="shopping-cart"></span>
                         </span>
                         {!collapsed && (
                           <span className="nav-link-text-wrapper">
@@ -527,7 +527,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                       to="#expenses"
                       role="button"
                       data-bs-toggle={collapsed ? "" : "collapse"}
-                      aria-expanded="true"
+                      aria-expanded="false"
                       aria-controls="expenses"
                       data-bs-target="#expenses"
                     >
@@ -538,7 +538,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                           </div>
                         )}
                         <span className="nav-link-icon">
-                          <i className="fa-solid fa-bag-shopping"></i>
+                          <span data-feather="shopping-bag"></span>
                         </span>
                         {!collapsed && (
                           <span className="nav-link-text-wrapper">
@@ -660,18 +660,18 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                       to=""
                       role="button"
                       data-bs-toggle={collapsed ? "" : "collapse"}
-                      aria-expanded="true"
+                      aria-expanded="false"
                       aria-controls="ManageExpense"
                       data-bs-target="#ManageExpense"
                     >
                       <div className="d-flex align-items-center">
                         {!collapsed && (
-                          <div className="dropdown-indicator-icon">
+                           <div className="dropdown-indicator-icon">
                             <span className="fas fa-caret-right"></span>
                           </div>
                         )}
                         <span className="nav-link-icon">
-                          <i className="fas fa-receipt"></i>
+                          <span data-feather="file-text"></span>
                         </span>
                         {!collapsed && (
                           <span className="nav-link-text-wrapper">
@@ -730,7 +730,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                       to=""
                       role="button"
                       data-bs-toggle={collapsed ? "" : "collapse"}
-                      aria-expanded="true"
+                      aria-expanded="false"
                       aria-controls="ManageBranch"
                       data-bs-target="#ManageBranch"
                     >
@@ -741,7 +741,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                           </div>
                         )}
                         <span className="nav-link-icon">
-                          <i className="fa-solid fa-code-branch"></i>
+                          <span data-feather="layers"></span>
                         </span>
                         {!collapsed && (
                           <span className="nav-link-text-wrapper">
@@ -792,18 +792,18 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                       to=""
                       role="button"
                       data-bs-toggle={collapsed ? "" : "collapse"}
-                      aria-expanded="true"
+                      aria-expanded="false"
                       aria-controls="ManageItems"
                       data-bs-target="#ManageItems"
                     >
                       <div className="d-flex align-items-center">
                         {!collapsed && (
-                          <div className="dropdown-indicator-icon">
+                         <div className="dropdown-indicator-icon">
                             <span className="fas fa-caret-right"></span>
                           </div>
                         )}
                         <span className="nav-link-icon">
-                          <i className="fa-solid fa-basket-shopping"></i>
+                          <span data-feather="box"></span>
                         </span>
                         {!collapsed && (
                           <span className="nav-link-text-wrapper">
@@ -894,7 +894,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                       to=""
                       role="button"
                       data-bs-toggle={collapsed ? "" : "collapse"}
-                      aria-expanded="true"
+                      aria-expanded="false"
                       aria-controls="SystemSettings"
                       data-bs-target="#SystemSettings"
                     >
@@ -905,7 +905,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                           </div>
                         )}
                         <span className="nav-link-icon">
-                          <i class="fa-solid fa-gear"></i>
+                          <span data-feather="settings"></span>
                         </span>
                         {!collapsed && (
                           <span className="nav-link-text-wrapper">
@@ -1021,7 +1021,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                       to=""
                       role="button"
                       data-bs-toggle={collapsed ? "" : "collapse"}
-                      aria-expanded="true"
+                      aria-expanded="false"
                       aria-controls="HumanResource"
                       data-bs-target="#HumanResource"
                     >
@@ -1032,8 +1032,8 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                           </div>
                         )}
                         <span className="nav-link-icon">
-                          <i className="fa-solid fa-layer-group"></i>
-                        </span>
+                            <span data-feather="layers"></span>
+                          </span>
                         {!collapsed && (
                           <span className="nav-link-text-wrapper">
                             <span className="nav-link-text">Human Resource</span>
@@ -1116,7 +1116,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                       to=""
                       role="button"
                       data-bs-toggle={collapsed ? "" : "collapse"}
-                      aria-expanded="true"
+                      aria-expanded="false"
                       aria-controls="ManageUserRoles"
                       data-bs-target="#ManageUserRoles"
                     >
@@ -1127,7 +1127,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                           </div>
                         )}
                         <span className="nav-link-icon">
-                          <i className="fa-solid fa-users-gear"></i>
+                          <span data-feather="users"></span>
                         </span>
                         {!collapsed && (
                           <span className="nav-link-text-wrapper">
@@ -1188,7 +1188,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                       to=""
                       role="button"
                       data-bs-toggle={collapsed ? "" : "collapse"}
-                      aria-expanded="true"
+                      aria-expanded="false"
                       aria-controls="ManageUser"
                       data-bs-target="#ManageUser"
                     >
@@ -1199,7 +1199,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                           </div>
                         )}
                         <span className="nav-link-icon">
-                          <i className="fa-solid fa-user"></i>
+                          <span data-feather="user"></span>
                         </span>
                         {!collapsed && (
                           <span className="nav-link-text-wrapper">
@@ -1311,7 +1311,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                       to=""
                       role="button"
                       data-bs-toggle={collapsed ? "" : "collapse"}
-                      aria-expanded="true"
+                      aria-expanded="false"
                       aria-controls="ItemReports"
                       data-bs-target="#ItemReports"
                     >
@@ -1322,7 +1322,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                           </div>
                         )}
                         <span className="nav-link-icon">
-                          <i className="fa-solid fa-clipboard-check"></i>
+                          <span data-feather="clipboard"></span>
                         </span>
                         {!collapsed && (
                           <span className="nav-link-text-wrapper">
@@ -1397,7 +1397,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                       to=""
                       role="button"
                       data-bs-toggle={collapsed ? "" : "collapse"}
-                      aria-expanded="true"
+                      aria-expanded="false"
                       aria-controls="SalesReport"
                       data-bs-target="#SalesReport"
                     >
@@ -1408,7 +1408,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                           </div>
                         )}
                         <span className="nav-link-icon">
-                          <i className="fa-solid fa-file-invoice-dollar"></i>
+                          <span data-feather="file-text"></span>
                         </span>
                         {!collapsed && (
                           <span className="nav-link-text-wrapper">
@@ -1499,7 +1499,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                       to=""
                       role="button"
                       data-bs-toggle={collapsed ? "" : "collapse"}
-                      aria-expanded="true"
+                      aria-expanded="false"
                       aria-controls="PurchaseReports"
                       data-bs-target="#PurchaseReports"
                     >
@@ -1510,7 +1510,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                           </div>
                         )}
                         <span className="nav-link-icon">
-                          <i className="fa-regular fa-credit-card"></i>
+                          <span data-feather="credit-card"></span>
                         </span>
                         {!collapsed && (
                           <span className="nav-link-text-wrapper">
@@ -1593,7 +1593,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                       to=""
                       role="button"
                       data-bs-toggle={collapsed ? "" : "collapse"}
-                      aria-expanded="true"
+                      aria-expanded="false"
                       aria-controls="ExpenseReport"
                       data-bs-target="#ExpenseReport"
                     >
@@ -1604,7 +1604,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                           </div>
                         )}
                         <span className="nav-link-icon">
-                        <i className="fa-solid fa-comment-dollar"></i>
+                          <span data-feather="dollar-sign"></span>
                         </span>
                         {!collapsed && (
                           <span className="nav-link-text-wrapper">
@@ -1687,7 +1687,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                       to=""
                       role="button"
                       data-bs-toggle={collapsed ? "" : "collapse"}
-                      aria-expanded="true"
+                      aria-expanded="false"
                       aria-controls="OtherReport"
                       data-bs-target="#OtherReport"
                     >
@@ -1698,7 +1698,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                           </div>
                         )}
                         <span className="nav-link-icon">
-                        <i className="fa-solid fa-clipboard-list"></i>
+                          <span data-feather="clipboard"></span>
                         </span>
                         {!collapsed && (
                           <span className="nav-link-text-wrapper">
@@ -1776,24 +1776,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .navbar-vertical-content::
                       >
                         <div className="d-flex align-items-center">
                           <span className="nav-link-icon">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="24px"
-                              height="24px" // bigger than 16
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              className="feather feather-codepen"
-                            >
-                              <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"></polygon>
-                              <line x1="12" y1="22" x2="12" y2="15.5"></line>
-                              <polyline points="22 8.5 12 15.5 2 8.5"></polyline>
-                              <polyline points="2 15.5 12 8.5 22 15.5"></polyline>
-                              <line x1="12" y1="2" x2="12" y2="8.5"></line>
-                            </svg>
+                            <span data-feather="codepen"></span>
                           </span>
                           <span className="nav-link-text-wrapper">
                             <span className="nav-link-text">Super Admin</span>
