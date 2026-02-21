@@ -548,3 +548,20 @@ th.sort.desc::after {
 .navbar-nav .nav-item.changecolorNavlink .nav-link.show {
     color: var(--phoenix-nav-link-color-New);
 }
+.ChangePaginationColor {
+        color: var(--phoenix-body-color);
+}
+
+.btn:hover.ChangePaginationColor {
+        color: var(--phoenix-body-color) !important;
+}
+
+.rounded-circle .username {
+    font-size: 15px;
+}
+.modal-footer {
+    border-top: 1px solid var(--phoenix-navbar-footer-border-color);
+}
+.modal-header {
+    border-bottom: 1px solid var(--phoenix-navbar-footer-border-color);
+}

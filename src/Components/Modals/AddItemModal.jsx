@@ -53,7 +53,17 @@ function AddItemModal({ showModal, setShowModal, onAdd, onUpdate, editingItem, c
   };
   
   return (
-    <Modal show={showModal} onHide={handleClose} size="xl" centered>
+    <Modal
+      show={showModal}
+      onHide={handleClose}
+      size="xl"
+      centered
+      backdrop={true}
+      keyboard={true}
+      animation={true}
+      enforceFocus={false}
+      restoreFocus={false}
+    >
       <div className="modal-header">
         <Modal.Title>{editingItem ? "Edit Item" : "Add Item"}</Modal.Title>
         <i className="fa-solid fa-xmark text-danger pointer" onClick={handleClose}></i>
@@ -302,7 +312,7 @@ function AddItemModal({ showModal, setShowModal, onAdd, onUpdate, editingItem, c
         <Button variant="primary" onClick={handleSave}>
           <small>{editingItem ? "Update" : "Save"}</small>
         </Button>
-        <Button variant="secondary" onClick={handleClose}>
+        <Button variant="outline-danger" onClick={handleClose}>
           <small>Close</small>
         </Button>
       </Modal.Footer>

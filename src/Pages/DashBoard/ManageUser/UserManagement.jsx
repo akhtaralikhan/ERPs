@@ -204,10 +204,7 @@ const UserManagement = () => {
               </div>
             </div>
             <div className="">
-              <div className="btn btn-light ps-0 fw-bold">
-                <i className="fa-solid fa-file-export me-2"></i>
-                Export
-              </div>
+               <button className="btn btn-link ChangePaginationColor px-0 me-4"><span className="fa-solid fa-file-export fs-9 me-2"></span> Export</button>
               {/* Add order button */}
               <button
                 className="btn btn-primary"
