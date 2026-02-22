@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
-import { useForm } from "react-hook-form";
+import Flatpickr from "react-flatpickr";
+import { Controller, useForm } from "react-hook-form";
 
 const UserManagementModal = ({ mode, onSave, initialData }) => {
   const {
+    control,
     register,
     handleSubmit,
     reset,
@@ -394,17 +396,26 @@ const UserManagementModal = ({ mode, onSave, initialData }) => {
 
                     <div className="col-md-6">
                       <label className="form-label">Joining Date *</label>
-                      <input
-                        type="date"
-                        className={`form-control ${getValidationClass(
-                          "joiningDate"
-                        )}`}
-                        {...register("joiningDate", {
+                      <Controller
+                        name="joiningDate"
+                        control={control}
+                        rules={{
                           required: "Joining Date is required",
                           validate: (value) =>
                             new Date(value) <= new Date() ||
                             "Joining Date cannot be in the future",
-                        })}
+                        }}
+                        render={({ field }) => (
+                          <Flatpickr
+                            value={field.value || ""}
+                            onChange={(_, dateStr) => field.onChange(dateStr)}
+                            options={{ dateFormat: "Y-m-d" }}
+                            className={`form-control ${getValidationClass(
+                              "joiningDate"
+                            )}`}
+                            placeholder="Select joining date"
+                          />
+                        )}
                       />
                       {errors.joiningDate && (
                         <div className="invalid-feedback">
@@ -414,10 +425,10 @@ const UserManagementModal = ({ mode, onSave, initialData }) => {
                     </div>
                     <div className="col-md-6">
                       <label className="form-label">Date of Birth *</label>
-                      <input
-                        type="date"
-                        className={`form-control ${getValidationClass("dob")}`}
-                        {...register("dob", {
+                      <Controller
+                        name="dob"
+                        control={control}
+                        rules={{
                           required: "Date of Birth is required",
                           validate: (value) => {
                             const dob = new Date(value);
@@ -426,7 +437,16 @@ const UserManagementModal = ({ mode, onSave, initialData }) => {
                               return "Date of Birth cannot be today or in the future";
                             return true;
                           },
-                        })}
+                        }}
+                        render={({ field }) => (
+                          <Flatpickr
+                            value={field.value || ""}
+                            onChange={(_, dateStr) => field.onChange(dateStr)}
+                            options={{ dateFormat: "Y-m-d" }}
+                            className={`form-control ${getValidationClass("dob")}`}
+                            placeholder="Select date of birth"
+                          />
+                        )}
                       />
                       {errors.dob && (
                         <div className="invalid-feedback">
@@ -437,12 +457,10 @@ const UserManagementModal = ({ mode, onSave, initialData }) => {
 
                     <div className="col-md-6">
                       <label className="form-label">Leaving Date</label>
-                      <input
-                        type="date"
-                        className={`form-control ${getValidationClass(
-                          "leavingDate"
-                        )}`}
-                        {...register("leavingDate", {
+                      <Controller
+                        name="leavingDate"
+                        control={control}
+                        rules={{
                           required: "Leaving Date is required",
                           validate: (value) => {
                             if (!values.joiningDate)
@@ -452,7 +470,18 @@ const UserManagementModal = ({ mode, onSave, initialData }) => {
                               ? true
                               : "Leaving date cannot be before joining date";
                           },
-                        })}
+                        }}
+                        render={({ field }) => (
+                          <Flatpickr
+                            value={field.value || ""}
+                            onChange={(_, dateStr) => field.onChange(dateStr)}
+                            options={{ dateFormat: "Y-m-d" }}
+                            className={`form-control ${getValidationClass(
+                              "leavingDate"
+                            )}`}
+                            placeholder="Select leaving date"
+                          />
+                        )}
                       />
 
                       {errors.leavingDate && (

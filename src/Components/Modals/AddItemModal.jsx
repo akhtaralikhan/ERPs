@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Flatpickr from "react-flatpickr";
 import { Button, Modal, Form, Row, Col } from "react-bootstrap";
 
 function AddItemModal({ showModal, setShowModal, onAdd, onUpdate, editingItem, clearEditing }) {
@@ -41,6 +42,10 @@ function AddItemModal({ showModal, setShowModal, onAdd, onUpdate, editingItem, c
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleDateChange = (name, dateStr) => {
+    setFormData((prev) => ({ ...prev, [name]: dateStr }));
   };
 
   const handleSave = () => {
@@ -193,7 +198,7 @@ function AddItemModal({ showModal, setShowModal, onAdd, onUpdate, editingItem, c
                 <Form.Label>Barcode</Form.Label>
                 <div className="border p-2 text-center">
                   <div
-                    style={{ height: 60, background: "#eee", marginBottom: 4 }}
+                    style={{ height: 60, background: "var(--phoenix-body-color)", marginBottom: 4 }}
                   ></div>
                   <div>{formData.Barcode || "441349"}</div>
                 </div>
@@ -256,21 +261,23 @@ function AddItemModal({ showModal, setShowModal, onAdd, onUpdate, editingItem, c
 
               <Form.Group className="mb-3">
                 <Form.Label>Manufacture</Form.Label>
-                <Form.Control
-                  type="date"
-                  name="Manufacture"
-                  value={formData.Manufacture}
-                  onChange={handleChange}
+                <Flatpickr
+                  value={formData.Manufacture || ""}
+                  onChange={(_, dateStr) => handleDateChange("Manufacture", dateStr)}
+                  options={{ dateFormat: "Y-m-d" }}
+                  className="form-control"
+                  placeholder="Select manufacture date"
                 />
               </Form.Group>
 
               <Form.Group className="mb-3">
                 <Form.Label>Expiration</Form.Label>
-                <Form.Control
-                  type="date"
-                  name="Expiration"
-                  value={formData.Expiration}
-                  onChange={handleChange}
+                <Flatpickr
+                  value={formData.Expiration || ""}
+                  onChange={(_, dateStr) => handleDateChange("Expiration", dateStr)}
+                  options={{ dateFormat: "Y-m-d" }}
+                  className="form-control"
+                  placeholder="Select expiration date"
                 />
               </Form.Group>
 

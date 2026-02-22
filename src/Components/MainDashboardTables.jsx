@@ -56,7 +56,7 @@ const ProductTable = () => {
     }, [searchProduct, setGlobalFilter]);
 
     return (
-        <div className="p-5 bg-white border-y border-300">
+        <div className="p-5 bg-white">
             <div>
                 <div className="row align-items-end justify-content-between pb-5 g-3">
                     <div className="col-auto">
@@ -176,7 +176,7 @@ const ProductTable = () => {
                     </div>
                     {/* Pagination controls */}
                     <div className="d-flex justify-content-between mt-3">
-                        <span className="text-600">Page {pageIndex + 1} of {pageOptions.length}</span>
+                        <span className="ChangePaginationColor">Page {pageIndex + 1} of {pageOptions.length}</span>
                         <div>
                             <button className="btn btn-sm btn-primary me-2" onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</button>
                             <button className="btn btn-sm btn-primary" onClick={() => nextPage()} disabled={!canNextPage}>Next</button>
@@ -347,7 +347,7 @@ export const RecentEstimates = () => {
                     </div>
 
                     <div className="d-flex justify-content-between mt-3">
-                        <span>Page {pageIndex + 1} of {pageOptions.length}</span>
+                        <span className="ChangePaginationColor">Page {pageIndex + 1} of {pageOptions.length}</span>
                         <div>
                             <button onClick={() => previousPage()} disabled={!canPreviousPage} className="btn btn-sm btn-primary me-2">Previous</button>
                             <button onClick={() => nextPage()} disabled={!canNextPage} className="btn btn-sm btn-primary">Next</button>
@@ -517,7 +517,7 @@ export const NewTable = () => {
                     </div>
 
                     <div className="d-flex justify-content-between mt-3">
-                        <span>Page {pageIndex + 1} of {pageOptions.length}</span>
+                        <span className="ChangePaginationColor">Page {pageIndex + 1} of {pageOptions.length}</span>
                         <div>
                             <button onClick={() => previousPage()} disabled={!canPreviousPage} className="btn btn-sm btn-primary me-2">Previous</button>
                             <button onClick={() => nextPage()} disabled={!canNextPage} className="btn btn-sm btn-primary">Next</button>

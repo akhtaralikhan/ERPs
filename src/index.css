@@ -524,20 +524,24 @@ th.sort.desc::after {
         height: 148px;
     }
 }
+
 .NewTableChange {
     border-top: 1px solid var(--phoenix-navbar-footer-border-color);
     border-bottom: 1px solid var(--phoenix-navbar-footer-border-color);
 }
+
 .pagination .page-item.disabled .page-link {
     background-color: unset;
     border-color: unset;
     color: var(--phoenix-gray-500);
 }
+
 .pagination .page-item.active .page-link {
     color: var(--phoenix-pagination-active-color);
     background-color: var(--phoenix-pagination-active-bg);
     border-color: var(--phoenix-pagination-active-border-color);
 }
+
 .navbar-nav .nav-item.changecolorNavlink .nav-link.active,
 .navbar-nav .nav-item.changecolorNavlink .nav-link {
     color: var(--phoenix-nav-link-color-New);
@@ -548,20 +552,67 @@ th.sort.desc::after {
 .navbar-nav .nav-item.changecolorNavlink .nav-link.show {
     color: var(--phoenix-nav-link-color-New);
 }
+
 .ChangePaginationColor {
-        color: var(--phoenix-body-color);
+    color: var(--phoenix-body-color);
 }
 
 .btn:hover.ChangePaginationColor {
-        color: var(--phoenix-body-color) !important;
+    color: var(--phoenix-body-color) !important;
 }
 
 .rounded-circle .username {
     font-size: 15px;
 }
+
 .modal-footer {
     border-top: 1px solid var(--phoenix-navbar-footer-border-color);
 }
+
 .modal-header {
     border-bottom: 1px solid var(--phoenix-navbar-footer-border-color);
+}
+
+.border-bottom {
+    border-bottom: 1px solid var(--phoenix-navbar-footer-border-color) !important;
+}
+
+.border-end {
+    border-right: 1px solid var(--phoenix-navbar-footer-border-color) !important;
+}
+
+.border-top {
+    border-top: 1px solid var(--phoenix-navbar-footer-border-color) !important;
+}
+
+.ChangePaginationColor {
+    color: var(--phoenix-body-color);
+}
+
+.flatpickr-months .flatpickr-month .flatpickr-current-month .flatpickr-monthDropdown-months {
+    color:  var(--phoenix-body-color);
+}
+
+.flatpickr-current-month .numInputWrapper span.arrowUp:after {
+    border-bottom-color:  var(--phoenix-body-color);
+}
+
+.flatpickr-current-month .numInputWrapper span.arrowDown:after {
+    border-top-color:  var(--phoenix-body-color);
+}
+
+.flatpickr-current-month .flatpickr-monthDropdown-months {
+    font-size: 16px;
+}
+
+.flatpickr-current-month .numInputWrapper {
+    font-size: 16px;
+}
+
+.flatpickr-current-month .flatpickr-monthDropdown-months .flatpickr-monthDropdown-month {
+    background-color: var(--phoenix-white);
+}
+
+.table-responsive tbody tr td a.d-flex {
+    padding: 0px !important;
 }

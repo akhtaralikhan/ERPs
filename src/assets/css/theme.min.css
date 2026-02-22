@@ -282,7 +282,10 @@ content {
     --phoenix-kanban-column-bg: #f5f7fa;
     --phoenix-ghost-bg: var(--phoenix-gray-100);
     --phoenix-drag-bg: var(--phoenix-white);
-    --phoenix-kanban-column-hover-bg: var(--phoenix-white)
+    --phoenix-kanban-column-hover-bg: var(--phoenix-white);
+      /* NEW */
+    --phoenix-tertiary-color-rgb-New: 82, 91, 117;
+
 }
 
 body.light {
@@ -298,21 +301,38 @@ body.dark {
     background-color: var(--background-color);
     color: var(--text-color);
 
-    .text-body {
+    /* .text-body {
         color: var(--text-color) !important;
-    }
-    span{
+    } */
+    /* span{
         color: var(--text-color);
-    }
-    small {
+    } */
+    /* small {
         color: var(--text-color);
-    }
+    } */
 
     th,
     td {
         --text-color: #fff;
         color: var(--text-color);
     }
+}
+
+body.dark .nav-item-wrapper a div span {
+    color: unset !important;
+}
+
+.dark .nav-link.active {
+    /* color: #3874ff !important; */
+    color: #fff !important;
+}
+
+.dark .avatar .avatar-title span {
+    color: white !important;
+}
+
+.dark .nav-link.show .rounded-circle .username {
+    color: white !important;
 }
 
 .NewColorChange {
@@ -706,7 +726,10 @@ p {
     --phoenix-drag-bg: #1c222c;
     --phoenix-kanban-column-hover-bg: #1c222c;
     --phoenix-leaflet-bar-bg: #373e53;
-    --phoenix-leaflet-popup-content-wrapper-bg: #141824
+    --phoenix-leaflet-popup-content-wrapper-bg: #141824;
+      /* NEW */
+        --phoenix-tertiary-color-rgb-New: 138, 148, 173;
+
 }
 
 .dark .text-success-100,
@@ -40480,3 +40503,9 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical .firefox .chat-sidebar .na
 /* .bg-info {
 
 } */
+
+
+.text-body-tertiary {
+    --phoenix-text-opacity: 1;
+    color: rgba(var(--phoenix-tertiary-color-rgb-New), var(--phoenix-text-opacity)) !important;
+}

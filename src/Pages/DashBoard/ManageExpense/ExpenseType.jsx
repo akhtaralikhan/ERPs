@@ -81,7 +81,7 @@ const ExpensesType = () => {
   );
   return (
     <div className="content AssetsPageChangecss AssetPaddingChange">
-      <div className="marginforsmalldevice RemoveBorder card rounded-0">
+      <div className="marginforsmalldevice RemoveBorder card rounded-0 border-0">
         <div className="NewColorChange phoenix-toolbar d-flex align-items-center flex-wrap py-md-3 px-md-4 mb-md-0  gap-3">
           {/* Title and tabs */}
           <div className="p-3 row MainRemovePaddingwidth" style={{ minWidth: "170px" }}>
@@ -90,7 +90,7 @@ const ExpensesType = () => {
             </h2>
             <div
               className="AllabsAssets"
-              
+
             >
               <span className="filterLinks text-dark">
                 All <span className="NewChangeColor">(68817)</span>
@@ -113,78 +113,78 @@ const ExpensesType = () => {
                 setGlobalFilter={setGlobalFilter}
               />
               {/* Filter dropdowns */}
-                <div className="d-flex flex-md-row mb-md-4 mb-4 mt-4 DropDownForMobileDevice">
-                              <Dropdown>
-                                <Dropdown.Toggle
-                                  variant="light"
-                                  className="btn btn-phoenix-secondary px-7 flex-shrink-0"
-                                  style={{
-                                    borderRadius: "8px 0 0 8px",
-                                    fontWeight: 600,
-                                    fontSize: "14px",
-                                    width: "200px",
-                                  }}
-                                >
-                                  Status
-                                </Dropdown.Toggle>
-                                <Dropdown.Menu
-                                  renderOnMount
-                                  popperConfig={{ strategy: "fixed" }} // important
-                                >
-                                  <Dropdown.Item>Active</Dropdown.Item>
-                                  <Dropdown.Item>InActive</Dropdown.Item>
-                                </Dropdown.Menu>
-                              </Dropdown>
-              
-                              <Dropdown>
-                                <Dropdown.Toggle
-                                  variant="light"
-                                  className="btn btn-phoenix-secondary px-7 flex-shrink-0"
-                                  style={{
-                                    borderRadius: "0",
-                                    fontWeight: 600,
-                                    fontSize: "14px",
-                                    width: "200px",
-                                  }}
-                                >
-                                  ModifiedByUser
-                                </Dropdown.Toggle>
-                                <Dropdown.Menu
-                                  renderOnMount
-                                  popperConfig={{ strategy: "fixed" }} // important
-                                >
-                                  <Dropdown.Item>Super Admin</Dropdown.Item>
-                                  <Dropdown.Item>Admin</Dropdown.Item>
-                                  <Dropdown.Item>Users</Dropdown.Item>
-                                </Dropdown.Menu>
-                              </Dropdown>
-              
-                              <Dropdown>
-                                <Dropdown.Toggle
-                                  variant="light"
-                                  className="btn btn-phoenix-secondary px-7 flex-shrink-0"
-                                  style={{
-                                    borderRadius: "0 8px 8px 0",
-                                    fontWeight: 600,
-                                    fontSize: "14px",
-                                    width: "200px",
-                                  }}
-                                >
-                                  More filters
-                                </Dropdown.Toggle>
-                                <Dropdown.Menu
-                                  renderOnMount
-                                  popperConfig={{ strategy: "fixed" }} // important
-                                >
-                                  <Dropdown.Item>Date</Dropdown.Item>
-                                  <Dropdown.Item>Delivery Type</Dropdown.Item>
-                                  <Dropdown.Item>Exported</Dropdown.Item>
-                                </Dropdown.Menu>
-                              </Dropdown>
-                            </div>
+              <div className="d-flex flex-md-row mb-md-4 mb-4 mt-4 DropDownForMobileDevice">
+                <Dropdown>
+                  <Dropdown.Toggle
+                    variant="light"
+                    className="btn btn-phoenix-secondary px-7 flex-shrink-0"
+                    style={{
+                      borderRadius: "8px 0 0 8px",
+                      fontWeight: 600,
+                      fontSize: "14px",
+                      width: "200px",
+                    }}
+                  >
+                    Status
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu
+                    renderOnMount
+                    popperConfig={{ strategy: "fixed" }} // important
+                  >
+                    <Dropdown.Item>Active</Dropdown.Item>
+                    <Dropdown.Item>InActive</Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+
+                <Dropdown>
+                  <Dropdown.Toggle
+                    variant="light"
+                    className="btn btn-phoenix-secondary px-7 flex-shrink-0"
+                    style={{
+                      borderRadius: "0",
+                      fontWeight: 600,
+                      fontSize: "14px",
+                      width: "200px",
+                    }}
+                  >
+                    ModifiedByUser
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu
+                    renderOnMount
+                    popperConfig={{ strategy: "fixed" }} // important
+                  >
+                    <Dropdown.Item>Super Admin</Dropdown.Item>
+                    <Dropdown.Item>Admin</Dropdown.Item>
+                    <Dropdown.Item>Users</Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+
+                <Dropdown>
+                  <Dropdown.Toggle
+                    variant="light"
+                    className="btn btn-phoenix-secondary px-7 flex-shrink-0"
+                    style={{
+                      borderRadius: "0 8px 8px 0",
+                      fontWeight: 600,
+                      fontSize: "14px",
+                      width: "200px",
+                    }}
+                  >
+                    More filters
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu
+                    renderOnMount
+                    popperConfig={{ strategy: "fixed" }} // important
+                  >
+                    <Dropdown.Item>Date</Dropdown.Item>
+                    <Dropdown.Item>Delivery Type</Dropdown.Item>
+                    <Dropdown.Item>Exported</Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+              </div>
             </div>
             <div className="">
-               <button className="btn btn-link ChangePaginationColor px-0 me-4"><span className="fa-solid fa-file-export fs-9 me-2"></span> Export</button>
+              <button className="btn btn-link ChangePaginationColor px-0 me-4"><span className="fa-solid fa-file-export fs-9 me-2"></span> Export</button>
               {/* Add order button */}
               <button className="btn btn-primary" onClick={() => setShowModal(true)}>
                 <span className="fas fa-plus me-2"></span>
@@ -201,10 +201,10 @@ const ExpensesType = () => {
           {/* ✅ Search */}
           {/* <PurchaseReturnModal /> */}
 
-          <div className="table-responsive custom-scroll "   style={{
-              overflowX: "auto",
-              whiteSpace: "nowrap",
-            }}>
+          <div className="table-responsive custom-scroll " style={{
+            overflowX: "auto",
+            whiteSpace: "nowrap",
+          }}>
             <table
               {...getTableProps()}
               className="table  table-sm fs--1 mb-0 ConvertUpperCase
@@ -332,7 +332,7 @@ const ExpensesType = () => {
           {/* ✅ Pagination controls */}
           {/* ✅ Ellipsis-based Pagination (compact version) */}
           <div className="d-flex justify-content-between align-items-center py-2 PAGINATIONS">
-            <p className="mb-0 text-body fs-9 d-md-block d-none" style={{ fontSize: "14px" }}>
+            <p className="mb-0 fs-9 d-md-block d-none ChangePaginationColor" style={{ fontSize: "14px" }}>
               Page {pageIndex + 1} of {pageOptions.length}
               <a
                 href="#!"

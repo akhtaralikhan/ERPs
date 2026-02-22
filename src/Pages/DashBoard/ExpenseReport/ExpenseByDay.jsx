@@ -55,7 +55,7 @@ const ExpenseByDay = () => {
 
   return (
     <div className="content AssetsPageChangecss AssetPaddingChange">
-      <div className="marginforsmalldevice RemoveBorder card rounded-0">
+      <div className="marginforsmalldevice RemoveBorder card rounded-0 border-0">
         <div className="NewColorChange phoenix-toolbar d-flex align-items-center flex-wrap py-md-3 px-md-4 mb-md-0  gap-3">
           <div
             className="p-3 row MainRemovePaddingwidth PrintSize"
@@ -88,7 +88,7 @@ const ExpenseByDay = () => {
                 globalFilter={globalFilter}
                 setGlobalFilter={setGlobalFilter}
               />
-               <div className="d-flex flex-md-row mb-md-4 mb-4 mt-4 PrintWidthDropdown PrintDnone DropDownForMobileDevice">
+              <div className="d-flex flex-md-row mb-md-4 mb-4 mt-4 PrintWidthDropdown PrintDnone DropDownForMobileDevice">
                 <Dropdown>
                   <Dropdown.Toggle
                     variant="light"
@@ -169,10 +169,10 @@ const ExpenseByDay = () => {
 
         {/* ✅ Table (without pagination) */}
         <div className="table-responsive p-4 px-5 pt-0 NewTableChange">
-          <div className="table-responsive custom-scroll"  style={{
-              overflowX: "auto",
-              whiteSpace: "nowrap",
-            }}>
+          <div className="table-responsive custom-scroll" style={{
+            overflowX: "auto",
+            whiteSpace: "nowrap",
+          }}>
             <table
               {...getTableProps()}
               className="table table-sm fs--1 mb-0 ConvertUpperCase"

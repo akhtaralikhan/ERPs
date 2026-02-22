@@ -55,7 +55,7 @@ const LowInDemand = () => {
 
   return (
     <div className="content AssetsPageChangecss AssetPaddingChange">
-      <div className="marginforsmalldevice RemoveBorder card rounded-0">
+      <div className="marginforsmalldevice RemoveBorder card rounded-0 border-0">
         <div className="NewColorChange phoenix-toolbar d-flex align-items-center flex-wrap py-md-3 px-md-4 mb-md-0  gap-3">
           <div
             className="p-3 row MainRemovePaddingwidth PrintSize"
@@ -170,9 +170,9 @@ const LowInDemand = () => {
         {/* ✅ Table */}
         <div className="table-responsive p-4 px-5 pt-0 NewTableChange">
           <div className="table-responsive custom-scroll" style={{
-              overflowX: "auto",
-              whiteSpace: "nowrap",
-            }}>
+            overflowX: "auto",
+            whiteSpace: "nowrap",
+          }}>
             <table
               {...getTableProps()}
               className="table  table-sm fs--1 mb-0 ConvertUpperCase"
@@ -259,7 +259,7 @@ const LowInDemand = () => {
 
           {/* ✅ Pagination */}
           <div className="d-flex justify-content-between align-items-center py-2 PAGINATIONS">
-            <p className="mb-0 text-body fs-9 d-md-block d-none" style={{ fontSize: "14px" }}>
+            <p className="mb-0 fs-9 d-md-block d-none ChangePaginationColor" style={{ fontSize: "14px" }}>
               Page {pageIndex + 1} of {pageOptions.length}
               <a
                 href="#!"
@@ -296,9 +296,8 @@ const LowInDemand = () => {
                   pageNumbers.push(
                     <li
                       key={1}
-                      className={`page-item ${
-                        currentPage === 1 ? "active" : ""
-                      }`}
+                      className={`page-item ${currentPage === 1 ? "active" : ""
+                        }`}
                     >
                       <button className="page-link" onClick={() => gotoPage(0)}>
                         1
@@ -318,9 +317,8 @@ const LowInDemand = () => {
                   pageNumbers.push(
                     <li
                       key={i}
-                      className={`page-item ${
-                        currentPage === i ? "active" : ""
-                      }`}
+                      className={`page-item ${currentPage === i ? "active" : ""
+                        }`}
                     >
                       <button
                         className="page-link"
@@ -343,9 +341,8 @@ const LowInDemand = () => {
                   pageNumbers.push(
                     <li
                       key={totalPages}
-                      className={`page-item ${
-                        currentPage === totalPages ? "active" : ""
-                      }`}
+                      className={`page-item ${currentPage === totalPages ? "active" : ""
+                        }`}
                     >
                       <button
                         className="page-link"
