@@ -51,7 +51,7 @@ const ExpenseByMonth = () => {
   return (
     <div className="content AssetsPageChangecss AssetPaddingChange">
       <div className="marginforsmalldevice RemoveBorder card rounded-0">
-        <div className="NewColorChange phoenix-toolbar d-flex align-items-center flex-wrap py-md-3 px-md-4 mb-md-0 border-bottom gap-3">
+        <div className="NewColorChange phoenix-toolbar d-flex align-items-center flex-wrap py-md-3 px-md-4 mb-md-0  gap-3">
           <div
             className="p-3 row MainRemovePaddingwidth PrintSize"
             style={{ minWidth: "170px" }}

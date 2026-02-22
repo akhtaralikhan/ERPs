@@ -2,6 +2,8 @@ import React, { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import feather from "feather-icons";
 import { ThemeContext } from "../context/ThemeContext";
+import SimpleBar from "simplebar-react";
+import "simplebar-react/dist/simplebar.min.css";
 
 const Navbar = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
@@ -26,11 +28,6 @@ const Navbar = () => {
 
   return (
     <>
-      <style>
-        {`
-          
-        `}
-      </style>
       <nav
         className="HuzaifaNav navbar navbar-top fixed-top navbar-expand"
         id="navbarDefault"
@@ -57,7 +54,7 @@ const Navbar = () => {
                     src="\src\assets\img\icons\logo.png"
                     style={{ width: "27px" }}
                   />
-                  <p className="logo-text ms-2 d-none d-sm-block">phoenix</p>
+                  <p className="logo-text ms-2 d-none d-sm-block">Ticket</p>
                 </div>
               </div>
             </Link>
@@ -141,7 +138,7 @@ const Navbar = () => {
                       <div className="file-thumbnail me-2">
                         <img
                           className="h-100 w-100 fit-cover rounded-3"
-                          src="src/assets/img/products/60x60/3.png"
+                          src="/src/assets/img/products/60x60/3.png"
                           alt=""
                         />
                       </div>
@@ -163,7 +160,7 @@ const Navbar = () => {
                       <div className="file-thumbnail me-2">
                         <img
                           className="img-fluid"
-                          src="src/assets/img/products/60x60/3.png"
+                          src="/src/assets/img/products/60x60/3.png"
                           alt=""
                         />
                       </div>
@@ -287,7 +284,7 @@ const Navbar = () => {
                       <div className="avatar avatar-l  me-2 text-900">
                         <img
                           className="rounded-circle "
-                          src="src/assets/img/team/40x40/12.webp"
+                          src="/src/assets/img/team/40x40/12.webp"
                           alt=""
                         />
                       </div>
@@ -366,7 +363,7 @@ const Navbar = () => {
                 </label>
               </div>
             </li>
-            <li className="nav-item dropdown">
+            <li className="nav-item dropdown changecolorNavlink">
               <Link
                 className="nav-link"
                 to="#"
@@ -391,7 +388,7 @@ const Navbar = () => {
                 <div className="card position-relative border-0">
                   <div className="card-header p-2">
                     <div className="d-flex justify-content-between">
-                      <h5 className="text-black mb-0">Notificatons</h5>
+                      <h5 className="text-black mb-0">Notifications</h5>
                       <button
                         className="btn btn-link p-0 fs--1 fw-normal"
                         type="button"
@@ -401,18 +398,18 @@ const Navbar = () => {
                     </div>
                   </div>
                   <div className="card-body p-0">
-                    <div
-                      className="scrollbar-overlay"
-                      style={{ maxHeight: "27rem" }}
+                    <SimpleBar
+                      style={{ maxHeight: "25rem" }}
+                      className="notification-scroll"
                     >
                       <div className="border-300">
-                        <div className="px-2 px-sm-3 py-3 border-300 notification-card position-relative read border-bottom">
+                        <div className="px-2 px-sm-3 py-3 notification-card position-relative read border-bottom">
                           <div className="d-flex align-items-center justify-content-between position-relative">
                             <div className="d-flex">
                               <div className="avatar avatar-m status-online me-3">
                                 <img
                                   className="rounded-circle"
-                                  src="src/assets/img/team/40x40/30.webp"
+                                  src="/src/assets/img/team/40x40/30.webp"
                                   alt=""
                                 />
                               </div>
@@ -454,7 +451,7 @@ const Navbar = () => {
                             </div>
                           </div>
                         </div>
-                        <div className="px-2 px-sm-3 py-3 border-300 notification-card position-relative unread border-bottom">
+                        <div className="px-2 px-sm-3 py-3 notification-card position-relative unread border-bottom">
                           <div className="d-flex align-items-center justify-content-between position-relative">
                             <div className="d-flex">
                               <div className="avatar avatar-m status-online me-3">
@@ -500,13 +497,13 @@ const Navbar = () => {
                             </div>
                           </div>
                         </div>
-                        <div className="px-2 px-sm-3 py-3 border-300 notification-card position-relative unread border-bottom">
+                        <div className="px-2 px-sm-3 py-3 notification-card position-relative unread border-bottom">
                           <div className="d-flex align-items-center justify-content-between position-relative">
                             <div className="d-flex">
                               <div className="avatar avatar-m status-online me-3">
                                 <img
                                   className="rounded-circle avatar-placeholder"
-                                  src="src/assets/img/team/40x40/avatar.webp"
+                                  src="/src/assets/img/team/40x40/avatar.webp"
                                   alt=""
                                 />
                               </div>
@@ -556,7 +553,7 @@ const Navbar = () => {
                               <div className="avatar avatar-m status-online me-3">
                                 <img
                                   className="rounded-circle"
-                                  src="src/assets/img/team/40x40/57.webp"
+                                  src="/src/assets/img/team/40x40/57.webp"
                                   alt=""
                                 />
                               </div>
@@ -602,7 +599,7 @@ const Navbar = () => {
                               <div className="avatar avatar-m status-online me-3">
                                 <img
                                   className="rounded-circle"
-                                  src="src/assets/img/team/40x40/59.webp"
+                                  src="/src/assets/img/team/40x40/59.webp"
                                   alt=""
                                 />
                               </div>
@@ -648,7 +645,7 @@ const Navbar = () => {
                               <div className="avatar avatar-m status-online me-3">
                                 <img
                                   className="rounded-circle"
-                                  src="src/assets/img/team/40x40/58.webp"
+                                  src="/src/assets/img/team/40x40/58.webp"
                                   alt=""
                                 />
                               </div>
@@ -689,7 +686,7 @@ const Navbar = () => {
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </SimpleBar>
                   </div>
                   <div className="card-footer p-0 border-top border-0">
                     <div className="my-2 text-center fw-bold fs--2 text-600">
@@ -701,7 +698,7 @@ const Navbar = () => {
                 </div>
               </div>
             </li>
-            <li className="nav-item dropdown">
+            <li className="nav-item dropdown changecolorNavlink">
               <Link
                 className="nav-link"
                 id="navbarDropdownNindeDots"
@@ -747,7 +744,7 @@ const Navbar = () => {
                           to="#!"
                         >
                           <img
-                            src="src/assets/img/nav-icons/behance.webp"
+                            src="/src/assets/img/nav-icons/behance.webp"
                             alt=""
                             width="30"
                           />
@@ -762,7 +759,7 @@ const Navbar = () => {
                           to="#!"
                         >
                           <img
-                            src="src/assets/img/nav-icons/google-cloud.webp"
+                            src="/src/assets/img/nav-icons/google-cloud.webp"
                             alt=""
                             width="30"
                           />
@@ -777,7 +774,7 @@ const Navbar = () => {
                           to="#!"
                         >
                           <img
-                            src="src/assets/img/nav-icons/slack.webp"
+                            src="/src/assets/img/nav-icons/slack.webp"
                             alt=""
                             width="30"
                           />
@@ -792,7 +789,7 @@ const Navbar = () => {
                           to="#!"
                         >
                           <img
-                            src="src/assets/img/nav-icons/gitlab.webp"
+                            src="/src/assets/img/nav-icons/gitlab.webp"
                             alt=""
                             width="30"
                           />
@@ -807,7 +804,7 @@ const Navbar = () => {
                           to="#!"
                         >
                           <img
-                            src="src/assets/img/nav-icons/bitbucket.webp"
+                            src="/src/assets/img/nav-icons/bitbucket.webp"
                             alt=""
                             width="30"
                           />
@@ -822,7 +819,7 @@ const Navbar = () => {
                           to="#!"
                         >
                           <img
-                            src="src/assets/img/nav-icons/google-drive.webp"
+                            src="/src/assets/img/nav-icons/google-drive.webp"
                             alt=""
                             width="30"
                           />
@@ -837,7 +834,7 @@ const Navbar = () => {
                           to="#!"
                         >
                           <img
-                            src="src/assets/img/nav-icons/trello.webp"
+                            src="/src/assets/img/nav-icons/trello.webp"
                             alt=""
                             width="30"
                           />
@@ -852,7 +849,7 @@ const Navbar = () => {
                           to="#!"
                         >
                           <img
-                            src="src/assets/img/nav-icons/figma.webp"
+                            src="/src/assets/img/nav-icons/figma.webp"
                             alt=""
                             width="20"
                           />
@@ -867,7 +864,7 @@ const Navbar = () => {
                           to="#!"
                         >
                           <img
-                            src="src/assets/img/nav-icons/twitter.webp"
+                            src="/src/assets/img/nav-icons/twitter.webp"
                             alt=""
                             width="30"
                           />
@@ -882,7 +879,7 @@ const Navbar = () => {
                           to="#!"
                         >
                           <img
-                            src="src/assets/img/nav-icons/pinterest.webp"
+                            src="/src/assets/img/nav-icons/pinterest.webp"
                             alt=""
                             width="30"
                           />
@@ -897,7 +894,7 @@ const Navbar = () => {
                           to="#!"
                         >
                           <img
-                            src="src/assets/img/nav-icons/ln.webp"
+                            src="/src/assets/img/nav-icons/ln.webp"
                             alt=""
                             width="30"
                           />
@@ -912,7 +909,7 @@ const Navbar = () => {
                           to="#!"
                         >
                           <img
-                            src="src/assets/img/nav-icons/google-maps.webp"
+                            src="/src/assets/img/nav-icons/google-maps.webp"
                             alt=""
                             width="30"
                           />
@@ -927,7 +924,7 @@ const Navbar = () => {
                           to="#!"
                         >
                           <img
-                            src="src/assets/img/nav-icons/google-photos.webp"
+                            src="/src/assets/img/nav-icons/google-photos.webp"
                             alt=""
                             width="30"
                           />
@@ -942,7 +939,7 @@ const Navbar = () => {
                           to="#!"
                         >
                           <img
-                            src="src/assets/img/nav-icons/spotify.webp"
+                            src="/src/assets/img/nav-icons/spotify.webp"
                             alt=""
                             width="30"
                           />
@@ -967,7 +964,7 @@ const Navbar = () => {
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                 <div className="avatar-xs">
+                <div className="avatar-xs">
                   <span className="avatar-title d-flex rounded-circle text-uppercase bold fs-1 border p-1">
                     <span className="username m-1">{profilePic}</span>
                     <span className="user-status"></span>
@@ -990,23 +987,17 @@ const Navbar = () => {
                       </div>
                       <h6 className="mt-2 text-black">Akhtar Ali</h6>
                     </div>
-                    <div className="mb-3 mx-3">
-                      <input
-                        className="form-control form-control-sm"
-                        id="statusUpdateInput"
-                        type="text"
-                        placeholder="Update your status"
-                      />
-                    </div>
                   </div>
                   <div
-                    className="overflow-auto scrollbar"
+                    className="overflow-auto scrollbar HuzNavbarfontsize"
                     style={{ height: "10rem" }}
                   >
                     <ul className="nav d-flex flex-column mb-2 pb-1">
                       <li className="nav-item">
                         <Link className="nav-link px-3" to="#!">
                           <span
+                            width="15"
+                            height="15"
                             className="me-2 text-900"
                             data-feather="user"
                           ></span>
@@ -1016,6 +1007,8 @@ const Navbar = () => {
                       <li className="nav-item">
                         <Link className="nav-link px-3" to="#!">
                           <span
+                            width="15"
+                            height="15"
                             className="me-2 text-900"
                             data-feather="pie-chart"
                           ></span>
@@ -1025,15 +1018,19 @@ const Navbar = () => {
                       <li className="nav-item">
                         <Link className="nav-link px-3" to="#!">
                           <span
+                            width="15"
+                            height="15"
                             className="me-2 text-900"
                             data-feather="lock"
                           ></span>
-                          Posts &amp; Activity
+                          Activity log
                         </Link>
                       </li>
                       <li className="nav-item">
                         <Link className="nav-link px-3" to="#!">
                           <span
+                            width="15"
+                            height="15"
                             className="me-2 text-900"
                             data-feather="settings"
                           ></span>
@@ -1043,6 +1040,8 @@ const Navbar = () => {
                       <li className="nav-item">
                         <Link className="nav-link px-3" to="#!">
                           <span
+                            width="15"
+                            height="15"
                             className="me-2 text-900"
                             data-feather="help-circle"
                           ></span>
@@ -1052,6 +1051,8 @@ const Navbar = () => {
                       <li className="nav-item">
                         <Link className="nav-link px-3" to="#!">
                           <span
+                            width="15"
+                            height="15"
                             className="me-2 text-900"
                             data-feather="globe"
                           ></span>
@@ -1065,6 +1066,8 @@ const Navbar = () => {
                       <li className="nav-item">
                         <Link className="nav-link px-3" to="#!">
                           <span
+                            width="15"
+                            height="15"
                             className="me-2 text-900"
                             data-feather="user-plus"
                           ></span>
@@ -1079,7 +1082,8 @@ const Navbar = () => {
                         className="btn btn-phoenix-secondary d-flex flex-center w-100"
                         to="Signin"
                       >
-                        <span className="me-2" data-feather="log-out"></span>
+                        <span className="me-2" data-feather="log-out" width="15" height="15"
+                        ></span>
                         Sign out
                       </button>
                     </div>

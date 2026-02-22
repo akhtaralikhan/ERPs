@@ -1,94 +1,82 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
 function AddCurrencyModal({ showModal, setShowModal }) {
+  const modalRef = useRef(null);
+  const bsModalRef = useRef(null);
+
   const {
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm();
+  } = useForm({ mode: "onChange" });
 
-  const toggle = () => setShowModal(!showModal);
+  useEffect(() => {
+    bsModalRef.current = new window.bootstrap.Modal(modalRef.current);
+    modalRef.current.addEventListener("hidden.bs.modal", () => {
+      setShowModal(false);
+    });
+  }, [setShowModal]);
+
+  useEffect(() => {
+    showModal ? bsModalRef.current.show() : bsModalRef.current.hide();
+  }, [showModal]);
 
   const onSubmit = (data) => {
     console.log("Currency Data:", data);
-    toggle();
+    bsModalRef.current.hide();
   };
 
   return (
-    <Modal isOpen={showModal} toggle={toggle} size="lg">
-        <div className="modal-header d-flex justify-content-between">
-          <h5 className="mb-0">Add Currency</h5>
-          <i className="fa-solid fa-xmark text-danger pointer" onClick={toggle}></i>
+    <div className="modal fade" ref={modalRef} tabIndex="-1">
+      <div className="modal-dialog modal-dialog-centered modal-lg">
+        <div className="modal-content">
+
+          <div className="modal-header">
+            <h5 className="modal-title">Add Currency</h5>
+            <button type="button" className="btn p-1" data-bs-dismiss="modal">
+              <i className="fa fa-xmark fs--1 text-danger"></i>
+            </button>
+          </div>
+
+          <form onSubmit={handleSubmit(onSubmit)} noValidate>
+            <div className="modal-body">
+
+              {["name","code","symbol","country","description"].map(field => (
+                <div className="mb-3" key={field}>
+                  <label className="form-label text-capitalize">{field}</label>
+                  <input
+                    type="text"
+                    className={`form-control ${errors[field] ? "is-invalid" : ""}`}
+                    placeholder={field}
+                    {...register(field, { required: `${field} is required` })}
+                  />
+                  {errors[field] && (
+                    <div className="invalid-feedback">
+                      {errors[field].message}
+                    </div>
+                  )}
+                </div>
+              ))}
+
+              <div className="mb-3 form-check">
+                <input type="checkbox" className="form-check-input" {...register("isDefault")} />
+                <label className="form-check-label">Is Default</label>
+              </div>
+
+            </div>
+
+            <div className="modal-footer">
+              <button type="submit" className="btn btn-primary"><small>Save</small></button>
+              <button type="button" className="btn btn-outline-danger" data-bs-dismiss="modal">
+                <small>Cancel</small>
+              </button>
+            </div>
+
+          </form>
         </div>
-      <ModalBody>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="mb-3">
-            <label className="form-label">Name</label>
-            <input
-              type="text"
-              className="form-control"
-              {...register("name", { required: "Name is required" })}
-              placeholder="Currency name"
-            />
-            {errors.name && <small className="text-danger">{errors.name.message}</small>}
-          </div>
-          <div className="mb-3">
-            <label className="form-label">Code</label>
-            <input
-              type="text"
-              className="form-control"
-              {...register("code", { required: "Code is required" })}
-              placeholder="Currency code (e.g. USD)"
-            />
-            {errors.code && <small className="text-danger">{errors.code.message}</small>}
-          </div>
-          <div className="mb-3">
-            <label className="form-label">Symbol</label>
-            <input
-              type="text"
-              className="form-control"
-              {...register("symbol", { required: "Symbol is required" })}
-              placeholder="Symbol (e.g. $)"
-            />
-            {errors.symbol && <small className="text-danger">{errors.symbol.message}</small>}
-          </div>
-          <div className="mb-3">
-            <label className="form-label">Country</label>
-            <input
-              type="text"
-              className="form-control"
-              {...register("country", { required: "Country is required" })}
-              placeholder="Country"
-            />
-            {errors.country && <small className="text-danger">{errors.country.message}</small>}
-          </div>
-          <div className="mb-3">
-            <label className="form-label">Description</label>
-            <input
-              type="text"
-              className="form-control"
-              {...register("description", { required: "Description is required" })}
-              placeholder="Short description"
-            />
-            {errors.description && <small className="text-danger">{errors.description.message}</small>}
-          </div>
-          <div className="mb-3 form-check">
-            <input
-              type="checkbox"
-              className="form-check-input"
-              {...register("isDefault")}
-            />
-            <label className="form-check-label ms-2">Is Default</label>
-          </div>
-          <div className="modal-footer p-0 pt-2">
-            <Button color="primary" type="submit"><small>Save</small></Button>
-            <Button color="secondary" onClick={toggle}><small>Cancel</small></Button>
-          </div>
-        </form>
-      </ModalBody>
-    </Modal>
+      </div>
+    </div>
   );
 }
 

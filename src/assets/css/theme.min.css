@@ -387,6 +387,7 @@ p {
     --phoenix-navbar-top-link-hover-color: #cbd0dd;
     --phoenix-navbar-top-link-hover-bg: #222834;
     --phoenix-navbar-top-link-active-color: #cbd0dd
+    
 }
 
 :root.dual-nav:not(.dark) .navbar-darker,
@@ -25093,7 +25094,7 @@ input::-webkit-contacts-auto-fill-button {
 .tox .tox-button:focus,
 [data-list] .page:focus,
 .table-list .page:focus {
-    color: var(--phoenix-btn-hover-color);
+    /* color: var(--phoenix-btn-hover-color); */
     background-color: var(--phoenix-btn-hover-bg);
     border-color: var(--phoenix-btn-hover-border-color);
     outline: 0;
@@ -25198,7 +25199,6 @@ input::-webkit-contacts-auto-fill-button {
     -webkit-box-shadow: var(--phoenix-btn-active-shadow), var(--phoenix-btn-focus-box-shadow);
     box-shadow: var(--phoenix-btn-active-shadow), var(--phoenix-btn-focus-box-shadow)
 }
-
 .btn:disabled,
 .google-map-control-btn .zoomIn:disabled,
 .google-map-control-btn .zoomOut:disabled,
@@ -26109,7 +26109,7 @@ html {
 
 @media(min-width: 576px) {
     .footer {
-        height: 4rem
+        height: 3rem
     }
 }
 
@@ -30003,7 +30003,7 @@ html:not(.navbar-vertical-collapsed) .navbar-vertical.navbar-expand-xs .navbar-v
 .navbar-vertical .navbar-vertical-footer {
     position: fixed;
     width: 15.875rem;
-    height: 4rem;
+    height: 3rem;
     display: none;
     -webkit-box-align: center;
     -ms-flex-align: center;

@@ -68,7 +68,7 @@ const ExpenseDetailsReport = () => {
   return (
     <div className="content AssetsPageChangecss AssetPaddingChange">
       <div className="marginforsmalldevice RemoveBorder card rounded-0">
-        <div className="NewColorChange phoenix-toolbar d-flex align-items-center flex-wrap py-md-3 px-md-4 mb-md-0 border-bottom gap-3">
+        <div className="NewColorChange phoenix-toolbar d-flex align-items-center flex-wrap py-md-3 px-md-4 mb-md-0  gap-3">
           <div
             className=" p-3 row MainRemovePaddingwidth"
             style={{ minWidth: "170px" }}
@@ -169,10 +169,7 @@ const ExpenseDetailsReport = () => {
               </div>
             </div>
             <div className="">
-              <div className="btn btn-light ps-0 fw-bold">
-                <i className="fa-solid fa-file-export me-2"></i>
-                Export
-              </div>
+               <button className="btn btn-link ChangePaginationColor px-0 me-4"><span className="fa-solid fa-file-export fs-9 me-2"></span> Export</button>
             </div>
           </div>
         </div>
