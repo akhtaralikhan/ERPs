@@ -58,7 +58,7 @@ const ManageEmployee = () => {
 
   return (
     <div className="content AssetsPageChangecss AssetPaddingChange">
-      <div className="marginforsmalldevice RemoveBorder card rounded-0">
+      <div className="marginforsmalldevice RemoveBorder card rounded-0 border-0">
         <div className="NewColorChange phoenix-toolbar d-flex align-items-center flex-wrap py-md-3 px-md-4 mb-md-0  gap-3">
           {/* Title and tabs */}
           <div
@@ -161,7 +161,7 @@ const ManageEmployee = () => {
               </div>
             </div>
             <div className="">
-               <button className="btn btn-link ChangePaginationColor px-0 me-4"><span className="fa-solid fa-file-export fs-9 me-2"></span> Export</button>
+              <button className="btn btn-link ChangePaginationColor px-0 me-4"><span className="fa-solid fa-file-export fs-9 me-2"></span> Export</button>
               {/* Add order button */}
               <button
                 className="btn btn-primary"
@@ -320,8 +320,8 @@ const ManageEmployee = () => {
 
           {/* ✅ Pagination controls */}
           {/* ✅ Ellipsis-based Pagination (compact version) */}
-          <div className="d-flex justify-content-end justify-content-md-between align-items-center py-2 PAGINATIONS">
-            <p className="mb-0 text-body fs-9 d-md-block d-none" style={{ fontSize: "14px" }}>
+          <div className="d-flex justify-content-between align-items-center py-2 PAGINATIONS">
+            <p className="mb-0 fs-9 d-md-block d-none ChangePaginationColor" style={{ fontSize: "14px" }}>
               Page {pageIndex + 1} of {pageOptions.length}
               <a
                 href="#!"
@@ -361,9 +361,8 @@ const ManageEmployee = () => {
                   pageNumbers.push(
                     <li
                       key={1}
-                      className={`page-item ${
-                        currentPage === 1 ? "active" : ""
-                      }`}
+                      className={`page-item ${currentPage === 1 ? "active" : ""
+                        }`}
                     >
                       <button className="page-link" onClick={() => gotoPage(0)}>
                         1
@@ -384,9 +383,8 @@ const ManageEmployee = () => {
                   pageNumbers.push(
                     <li
                       key={i}
-                      className={`page-item ${
-                        currentPage === i ? "active" : ""
-                      }`}
+                      className={`page-item ${currentPage === i ? "active" : ""
+                        }`}
                     >
                       <button
                         className="page-link"
@@ -410,9 +408,8 @@ const ManageEmployee = () => {
                   pageNumbers.push(
                     <li
                       key={totalPages}
-                      className={`page-item ${
-                        currentPage === totalPages ? "active" : ""
-                      }`}
+                      className={`page-item ${currentPage === totalPages ? "active" : ""
+                        }`}
                     >
                       <button
                         className="page-link"

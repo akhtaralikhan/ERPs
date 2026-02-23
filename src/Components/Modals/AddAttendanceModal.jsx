@@ -1,15 +1,17 @@
 import React, { useEffect, useRef } from "react";
-import { useForm } from "react-hook-form";
+import Flatpickr from "react-flatpickr";
+import { Controller, useForm } from "react-hook-form";
 
 function AddAttendanceModal({ showModal, setShowModal, employees }) {
   const modalRef = useRef(null);
   const bsModalRef = useRef(null);
 
   const {
+    control,
     register,
     handleSubmit,
     watch,
-    formState: { errors }
+    formState: { errors, isValid }
   } = useForm({ mode: "onChange" });
 
   const checkIn = watch("checkIn");
@@ -94,12 +96,25 @@ function AddAttendanceModal({ showModal, setShowModal, employees }) {
               {/* Check In */}
               <div className="mb-3">
                 <label className="form-label">Check In</label>
-                <input
-                  type="datetime-local"
-                  className={`form-control ${errors.checkIn ? "is-invalid" : ""}`}
-                  {...register("checkIn", {
-                    required: "Check In is required"
-                  })}
+                <Controller
+                  name="checkIn"
+                  control={control}
+                  rules={{ required: "Check In is required" }}
+                  render={({ field }) => (
+                    <Flatpickr
+                      value={field.value || ""}
+                      onChange={(_, dateStr) => field.onChange(dateStr)}
+                      options={{
+                        enableTime: true,
+                        dateFormat: "Y-m-d\\TH:i",
+                        time_24hr: true,
+                        static: true,
+                        disableMobile: true
+                      }}
+                      className={`form-control ${errors.checkIn ? "is-invalid" : ""}`}
+                      placeholder="Select check in date and time"
+                    />
+                  )}
                 />
                 {errors.checkIn && (
                   <div className="invalid-feedback">
@@ -111,16 +126,31 @@ function AddAttendanceModal({ showModal, setShowModal, employees }) {
               {/* Check Out */}
               <div className="mb-3">
                 <label className="form-label">Check Out</label>
-                <input
-                  type="datetime-local"
-                  className={`form-control ${errors.checkOut ? "is-invalid" : ""}`}
-                  {...register("checkOut", {
+                <Controller
+                  name="checkOut"
+                  control={control}
+                  rules={{
                     required: "Check Out is required",
                     validate: (value) =>
                       !checkIn ||
                       new Date(value) > new Date(checkIn) ||
                       "Check Out must be after Check In"
-                  })}
+                  }}
+                  render={({ field }) => (
+                    <Flatpickr
+                      value={field.value || ""}
+                      onChange={(_, dateStr) => field.onChange(dateStr)}
+                      options={{
+                        enableTime: true,
+                        dateFormat: "Y-m-d\\TH:i",
+                        time_24hr: true,
+                        static: true,
+                        disableMobile: true
+                      }}
+                      className={`form-control ${errors.checkOut ? "is-invalid" : ""}`}
+                      placeholder="Select check out date and time"
+                    />
+                  )}
                 />
                 {errors.checkOut && (
                   <div className="invalid-feedback">
@@ -133,7 +163,7 @@ function AddAttendanceModal({ showModal, setShowModal, employees }) {
 
             {/* Footer */}
             <div className="modal-footer">
-              <button type="submit" className="btn btn-primary">
+              <button type="submit" className="btn btn-primary" disabled={!isValid}>
                 <small>Save</small>
               </button>
               <button

@@ -26,13 +26,13 @@ const ManageSales = () => {
             href="/"
             className="d-flex align-items-center text-900 text-center"
           >
-            <div className="avatar avatar-l">
+            <div className="avatar avatar-l me-2">
               {row.original.customerImg ? (
                 <img
                   src={row.original.customerImg}
                   alt={row.original.customer}
                   className="rounded-circle"
-                  // style={{ width: "30px", height: "30px", objectFit: "cover" }}
+                // style={{ width: "30px", height: "30px", objectFit: "cover" }}
                 />
               ) : (
                 <div className="avatar-name rounded-circle avatar-m">
@@ -41,9 +41,7 @@ const ManageSales = () => {
               )}
             </div>
             <div>
-              <h6 className="mb-0 text-center ms-3 text-900">
                 {row.original.customer}
-              </h6>
             </div>
           </a>
         ),
@@ -284,11 +282,11 @@ const ManageSales = () => {
                 <span className="fas fa-file-export fs-9 me-2"></span>
                 Export
               </button>
-              <button className="btn btn-primary" onClick={()=>setShowModal(true)}>
+              <button className="btn btn-primary" onClick={() => setShowModal(true)}>
                 <span className="fas fa-plus me-2"></span>
                 Add Payment
               </button>
-              {showModal && <AddPaymentModal showModal={showModal} setShowModal={setShowModal}/>}
+              {showModal && <AddPaymentModal showModal={showModal} setShowModal={setShowModal} />}
             </div>
           </div>
         </div>
@@ -368,11 +366,10 @@ const ManageSales = () => {
                           <td
                             key={cellKey}
                             {...cellProps}
-                            className={`py-3 align-middle ${
-                              cell.column.id === "id"
+                            className={`py-3 align-middle ${cell.column.id === "id"
                                 ? "text-primary id-hover"
                                 : ""
-                            }`}
+                              }`}
                           >
                             {cell.render("Cell")}
                           </td>

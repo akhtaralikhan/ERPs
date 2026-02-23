@@ -200,7 +200,7 @@ const ManualInvoices = () => {
             href="/"
             className="d-flex align-items-center text-900 text-center"
           >
-            <div className="avatar avatar-l">
+            <div className="avatar avatar-l me-2">
               {row.original.customerImg ? (
                 <img
                   src={row.original.customerImg}
@@ -215,9 +215,7 @@ const ManualInvoices = () => {
               )}
             </div>
             <div>
-              <h6 className="mb-0 text-center ms-3 text-900">
                 {row.original.customer}
-              </h6>
             </div>
           </a>
         ),
@@ -543,8 +541,8 @@ const ManualInvoices = () => {
                             key={cellKey}
                             {...cellProps}
                             className={`py-3 align-middle ${cell.column.id === "id"
-                                ? "text-primary id-hover"
-                                : ""
+                              ? "text-primary id-hover"
+                              : ""
                               }`}
                           >
                             {cell.render("Cell")}

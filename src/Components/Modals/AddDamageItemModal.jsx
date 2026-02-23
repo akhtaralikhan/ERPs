@@ -8,7 +8,7 @@ function AddDamageItemModal({ showModal, setShowModal, items, currentStock }) {
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors, isValid }
   } = useForm({ mode: "onChange" });
 
   // Create modal instance once
@@ -134,7 +134,7 @@ function AddDamageItemModal({ showModal, setShowModal, items, currentStock }) {
             </div>
 
             <div className="modal-footer">
-              <button type="submit" className="btn btn-primary">
+              <button type="submit" className="btn btn-primary" disabled={!isValid}>
                 <small>Save</small>
               </button>
               <button

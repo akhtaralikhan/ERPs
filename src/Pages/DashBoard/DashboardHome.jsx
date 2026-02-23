@@ -345,16 +345,16 @@ const DashboardHome = () => {
   return (
     <>
       <div className="content">
-        <div className="card rounded-0">
-          <div className="NewColorChange phoenix-toolbar d-flex align-items-center flex-wrap py-3 px-3 px-md-4 mb-0 border-bottom gap-3 ">
+        <div className="card rounded-0 border-x-0 border-y-0">
+          <div className="NewColorChange phoenix-toolbar d-flex align-items-center flex-wrap py-3 px-4 mb-0 gap-3 ">
             {/* Title and tabs */}
             <div className="p-2 p-md-3 row w-100">
               <h2 className="fw-bolder mb-1" style={{ fontSize: "clamp(1.5rem, 4vw, 2rem)" }}>
                 Main Dashboard
               </h2>
-              <p className="mb-1 mb-md-2" style={{ fontSize: "clamp(0.95rem, 2.4vw, 1.25rem)" }}>Here’s what’s going on at your business right now</p>
-              <div className="row g-3 g-lg-4">
-                <div className="col-12 col-md-6 col-xl-4 d-flex">
+              <p className="mb-5 fs-1">Here’s what’s going on at your business right now</p>
+              <div className="d-flex gap-4 flex-wrap">
+                <div className="d-flex">
                   <div>
                     <i className="fa-solid fa-circle-plus text-success fs-3 mt-2 me-3"></i>
                   </div>
@@ -384,8 +384,8 @@ const DashboardHome = () => {
               </div>
             </div>
             {/* chart  */}
-            <div className="d-flex flex-column flex-sm-row w-100 border-top pt-4 pt-md-5 justify-content-between mb-4 g-3 gap-3">
-              <div className="col-12 col-sm-auto">
+            <div className="d-flex w-100 border-top  pt-5 justify-content-between mb-4 g-3 flex-wrap">
+              <div className="col-auto">
                 <h3>Profit & Loss</h3>
                 <p className="text-700 lh-sm mb-0">
                   Payment received across all channels
@@ -413,14 +413,14 @@ const DashboardHome = () => {
               {summary?.map((item, index) => (
                 <div className="col-12 col-md-4 text-center" key={index}>
                   <p className=" m-0">{item?.title}</p>
-                  <span className="">${item?.value}</span>
+                  <span className="ChangePaginationColor">${item?.value}</span>
                 </div>
               ))}
             </div>
           </div>
         </div>
-        <div className="card rounded-0">
-          <div className="p-3 p-md-5">
+        <div className="card rounded-0 border-x-0">
+          <div className="p-5">
             <div className="row g-4">
               <div className="col-12 col-xxl-12">
                 <div className="mb-5">
@@ -435,8 +435,8 @@ const DashboardHome = () => {
                         <h3>16,247</h3>
                         <Bar data={barData} options={{ plugins: { legend: { display: false } } }} height={100} />
                         <div className="d-flex justify-content-between mt-2">
-                          <small>Completed 52%</small>
-                          <small>Pending 48%</small>
+                          <small className="ChangePaginationColor">Completed 52%</small>
+                          <small className="ChangePaginationColor">Pending 48%</small>
                         </div>
                       </Card>
                     </Col>
@@ -631,7 +631,7 @@ const DashboardHome = () => {
 
                 {/* ✅ Pagination controls */}
                 <div className="d-flex justify-content-between mt-3">
-                  <span className="text-600">
+                  <span className="ChangePaginationColor">
                     Page {pageIndex + 1} of {pageOptions.length}
                   </span>
                   <div className="d-flex flex-wrap gap-2 justify-content-start justify-content-md-end">

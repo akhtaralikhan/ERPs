@@ -5,6 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import StoreContextProvider from "./context/storeContext";
 import { ThemeProvider } from "./context/ThemeContext";
 import "./index.css";
+// import "flatpickr/dist/flatpickr.min.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 

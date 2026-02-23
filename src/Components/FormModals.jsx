@@ -13,8 +13,8 @@ export const TableModal = ({ addInvoice, setAddInvoice, onSave }) => {
     handleSubmit,
     register,
     reset,
-    formState: { errors },
-  } = useForm();
+    formState: { errors, isValid },
+  } = useForm({ mode: "onChange" });
 
   // ✅ Add new row
   const handleSubmitted = (newRow) => {
@@ -124,7 +124,7 @@ export const TableModal = ({ addInvoice, setAddInvoice, onSave }) => {
                     <small className="invalid-feedback">{errors.total?.message}</small>
                   </td>
                   <td className="text-center">
-                    <button type="submit" className="btn btn-sm btn-primary">
+                    <button type="submit" className="btn btn-sm btn-primary" disabled={!isValid}>
                       <i className="fa-solid fa-plus"></i>
                     </button>
                   </td>
@@ -342,11 +342,12 @@ export const NotMain = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
     reset,
     watch,
     setValue,
   } = useForm({
+    mode: "onChange",
     defaultValues: {
       name: "",
       type: "",
@@ -454,7 +455,7 @@ export const NotMain = () => {
             />
           </div>
           <div className="submit text-center mt-5">
-            <button className="btn btn-soft-primary">
+            <button className="btn btn-soft-primary" disabled={!isValid}>
               <a className="fa fa-solid fa-plus me-2" /> Add Supplier
             </button>
           </div>

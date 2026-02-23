@@ -22,19 +22,18 @@ const RefreshToken = () => {
       { Header: "User Email", accessor: "UserEmail" },
       { Header: "Token", accessor: "Token" },
       { Header: "Jwt Id", accessor: "JwtId" },
-      {
-        Header: "Is Used",
-        accessor: "IsUsed",
-        Cell: ({ value }) => <span>{value ? "Yes" : "No"}</span>,
-      },
+     {
+  Header: "Is Used",
+  accessor: "IsUsed",
+  Cell: ({ value }) => value ? "Yes" : "No",
+},
       {
         Header: "Is Revorked",
         accessor: "IsRevorked",
         Cell: ({ value }) => (
           <span
-            className={`badge ${
-              value ? "bg-warning text-white" : "bg-secondary text-white"
-            }`}
+            className={`badge ${value ? "text-bg-warning" : "text-bg-secondary"
+              }`}
           >
             {value ? "Revoked" : "Active"}
           </span>
@@ -86,7 +85,7 @@ const RefreshToken = () => {
 
   return (
     <div className="content AssetsPageChangecss AssetPaddingChange">
-      <div className="marginforsmalldevice RemoveBorder card rounded-0">
+      <div className="marginforsmalldevice RemoveBorder card rounded-0 border-0">
         <div className="NewColorChange phoenix-toolbar d-flex align-items-center flex-wrap py-md-3 px-md-4 mb-md-0  gap-3">
           <div
             className=" p-3 row MainRemovePaddingwidth"
@@ -187,7 +186,7 @@ const RefreshToken = () => {
               </div>
             </div>
             <div className="">
-               <button className="btn btn-link ChangePaginationColor px-0 me-4"><span className="fa-solid fa-file-export fs-9 me-2"></span> Export</button>
+              <button className="btn btn-link ChangePaginationColor px-0 me-4"><span className="fa-solid fa-file-export fs-9 me-2"></span> Export</button>
             </div>
           </div>
         </div>
@@ -199,10 +198,10 @@ const RefreshToken = () => {
             onClose={() => setSelectedData(null)}
           />
 
-          <div className="table-responsive custom-scroll"   style={{
-              overflowX: "auto",
-              whiteSpace: "nowrap",
-            }}>
+          <div className="table-responsive custom-scroll" style={{
+            overflowX: "auto",
+            whiteSpace: "nowrap",
+          }}>
             <table
               {...getTableProps()}
               className="table  table-sm fs--1 mb-0 ConvertUpperCase"
@@ -316,8 +315,8 @@ const RefreshToken = () => {
           </div>
 
           {/* ✅ Pagination */}
-          <div className="d-flex justify-content-end justify-content-md-between align-items-center py-2 PAGINATIONS">
-            <p className="mb-0 text-body fs-9 d-md-block d-none" style={{ fontSize: "14px" }}>
+          <div className="d-flex justify-content-between align-items-center py-2 PAGINATIONS">
+            <p className="mb-0 fs-9 d-md-block d-none ChangePaginationColor" style={{ fontSize: "14px" }}>
               Page {pageIndex + 1} of {pageOptions.length}
               <a
                 href="#!"
@@ -354,9 +353,8 @@ const RefreshToken = () => {
                   pageNumbers.push(
                     <li
                       key={1}
-                      className={`page-item ${
-                        currentPage === 1 ? "active" : ""
-                      }`}
+                      className={`page-item ${currentPage === 1 ? "active" : ""
+                        }`}
                     >
                       <button className="page-link" onClick={() => gotoPage(0)}>
                         1
@@ -376,9 +374,8 @@ const RefreshToken = () => {
                   pageNumbers.push(
                     <li
                       key={i}
-                      className={`page-item ${
-                        currentPage === i ? "active" : ""
-                      }`}
+                      className={`page-item ${currentPage === i ? "active" : ""
+                        }`}
                     >
                       <button
                         className="page-link"
@@ -401,9 +398,8 @@ const RefreshToken = () => {
                   pageNumbers.push(
                     <li
                       key={totalPages}
-                      className={`page-item ${
-                        currentPage === totalPages ? "active" : ""
-                      }`}
+                      className={`page-item ${currentPage === totalPages ? "active" : ""
+                        }`}
                     >
                       <button
                         className="page-link"

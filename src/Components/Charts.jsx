@@ -78,7 +78,7 @@ const TopCoupons = () => {
                                 ></span>
                                 <span className="text-muted ">{label}</span>
                             </div>
-                            <span className="fw-semibold ">{values[i]}%</span>
+                            <span className="ChangePaginationColor">{values[i]}%</span>
                         </div>
                     ))}
                 </div>
@@ -139,12 +139,12 @@ export const PayingVsNonPaying = () => (
             </div>
             <div className="d-flex flex-column mt-0" style={{ fontSize: 14 }}>
                 <div className="d-flex justify-content-between align-items-center mb-1">
-                    <span>{legendDot("#2979ff")}Paying customer</span>
-                    <span className="fw-semibold">30%</span>
+                    <span className="ChangePaginationColor">{legendDot("#2979ff")}Paying customer</span>
+                    <span className="ChangePaginationColor">30%</span>
                 </div>
                 <div className="d-flex justify-content-between align-items-center" style={{ color: "#7886a0" }}>
-                    <span>{legendDot("#e3ecfd")}Non-paying customer</span>
-                    <span className="fw-semibold">70%</span>
+                    <span className="ChangePaginationColor">{legendDot("#e3ecfd")}Non-paying customer</span>
+                    <span className="ChangePaginationColor">70%</span>
                 </div>
             </div>
         </Card>

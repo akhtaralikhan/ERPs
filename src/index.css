@@ -573,3 +573,68 @@ th.sort.desc::after {
     border-bottom: 1px solid var(--phoenix-navbar-footer-border-color);
 }
 
+.border-bottom {
+    border-bottom: 1px solid var(--phoenix-navbar-footer-border-color) !important;
+}
+
+.border-end {
+    border-right: 1px solid var(--phoenix-navbar-footer-border-color) !important;
+}
+
+.border-top {
+    border-top: 1px solid var(--phoenix-navbar-footer-border-color) !important;
+}
+
+.ChangePaginationColor {
+    color: var(--phoenix-body-color);
+}
+
+.flatpickr-months .flatpickr-month .flatpickr-current-month .flatpickr-monthDropdown-months {
+    color:  var(--phoenix-body-color);
+}
+
+.flatpickr-current-month .numInputWrapper span.arrowUp:after {
+    border-bottom-color:  var(--phoenix-body-color);
+}
+
+.flatpickr-current-month .numInputWrapper span.arrowDown:after {
+    border-top-color:  var(--phoenix-body-color);
+}
+
+.flatpickr-current-month .flatpickr-monthDropdown-months {
+    font-size: 16px;
+}
+
+.flatpickr-current-month .numInputWrapper {
+    font-size: 16px;
+}
+
+.flatpickr-current-month .flatpickr-monthDropdown-months .flatpickr-monthDropdown-month {
+    background-color: var(--phoenix-white);
+}
+
+.table-responsive tbody tr td a.d-flex {
+    padding: 0px !important;
+}
+
+.ManageUserRolesModal__table-container {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.ManageUserRolesModal__table-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.ManageUserRolesModal__table-container::-webkit-scrollbar-track {
+    background: transparent;
+}   
+
+.ManageUserRolesModal__table-container::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 10px;
+}
+.ManageUserRolesModal__table-container::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+

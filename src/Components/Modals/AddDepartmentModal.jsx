@@ -1,8 +1,15 @@
 import React, { useEffect, useRef } from "react";
+import { useForm } from "react-hook-form";
 
-function AddExpenseTypeModal({ showModal, setShowModal }) {
+function AddDepartmentModal({ showModal, setShowModal }) {
   const modalRef = useRef(null);
   const bsModalRef = useRef(null);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid }
+  } = useForm({ mode: "onChange" });
 
   useEffect(() => {
     bsModalRef.current = new window.bootstrap.Modal(modalRef.current);
@@ -14,6 +21,11 @@ function AddExpenseTypeModal({ showModal, setShowModal }) {
   useEffect(() => {
     showModal ? bsModalRef.current.show() : bsModalRef.current.hide();
   }, [showModal]);
+
+  const onSubmit = (data) => {
+    console.log("Department data:", data);
+    bsModalRef.current.hide();
+  };
 
   return (
     <div className="modal fade" ref={modalRef} tabIndex="-1">
@@ -27,23 +39,47 @@ function AddExpenseTypeModal({ showModal, setShowModal }) {
             </button>
           </div>
 
-          <div className="modal-body">
-            <form>
+          <form onSubmit={handleSubmit(onSubmit)} noValidate>
+            <div className="modal-body">
               <div className="mb-3">
                 <label className="form-label">Name</label>
-                <input type="text" className="form-control" placeholder="Reference" />
+                <input
+                  type="text"
+                  className={`form-control ${errors.name ? "is-invalid" : ""}`}
+                  placeholder="Reference"
+                  {...register("name", { required: "Name is required" })}
+                />
+                {errors.name && (
+                  <div className="invalid-feedback">{errors.name.message}</div>
+                )}
               </div>
               <div className="mb-3">
                 <label className="form-label">Description</label>
-                <input type="text" className="form-control" placeholder="Reference" />
+                <input
+                  type="text"
+                  className={`form-control ${errors.description ? "is-invalid" : ""}`}
+                  placeholder="Reference"
+                  {...register("description", { required: "Description is required" })}
+                />
+                {errors.description && (
+                  <div className="invalid-feedback">{errors.description.message}</div>
+                )}
               </div>
-            </form>
-          </div>
+            </div>
 
-          <div className="modal-footer">
-            <button className="btn btn-primary" data-bs-dismiss="modal">Save</button>
-            <button className="btn btn-outline-danger" data-bs-dismiss="modal">Cancel</button>
-          </div>
+            <div className="modal-footer">
+              <button type="submit" className="btn btn-primary" disabled={!isValid}>
+                Save
+              </button>
+              <button
+                type="button"
+                className="btn btn-outline-danger"
+                data-bs-dismiss="modal"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
 
         </div>
       </div>
@@ -51,4 +87,4 @@ function AddExpenseTypeModal({ showModal, setShowModal }) {
   );
 }
 
-export default AddExpenseTypeModal;
+export default AddDepartmentModal;

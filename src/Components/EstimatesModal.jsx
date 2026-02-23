@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import { useForm } from "react-hook-form";
+import Flatpickr from "react-flatpickr";
+import { Controller, useForm } from "react-hook-form";
 import { useRedux } from "../hooks/useRedux";
 import { createSelector } from "reselect";
 import { Link } from "react-router-dom";
@@ -19,7 +20,7 @@ const EstimatesModal = ({ mode = "add", initialData = null, onSave }) => {
 
     const createdById = initialData?.createdById;
 
-    const { register, handleSubmit, reset } = useForm({
+    const { control, register, handleSubmit, reset } = useForm({
         defaultValues: {
             customer: "",
             date: "",
@@ -137,20 +138,37 @@ const EstimatesModal = ({ mode = "add", initialData = null, onSave }) => {
                             {/* Date */}
                             <div className="mb-3">
                                 <label className="form-label">Date *</label>
-                                <input
-                                    className="form-control"
-                                    type="date"
-                                    {...register("date", { required: true })}
+                                <Controller
+                                    name="date"
+                                    control={control}
+                                    rules={{ required: true }}
+                                    render={({ field }) => (
+                                        <Flatpickr
+                                            value={field.value || ""}
+                                            onChange={(_, dateStr) => field.onChange(dateStr)}
+                                            options={{ dateFormat: "Y-m-d" }}
+                                            className="form-control"
+                                            placeholder="Select date"
+                                        />
+                                    )}
                                 />
                             </div>
 
                             {/* Expire At */}
                             <div className="mb-3">
                                 <label className="form-label">Expire at</label>
-                                <input
-                                    className="form-control"
-                                    type="date"
-                                    {...register("expireAt")}
+                                <Controller
+                                    name="expireAt"
+                                    control={control}
+                                    render={({ field }) => (
+                                        <Flatpickr
+                                            value={field.value || ""}
+                                            onChange={(_, dateStr) => field.onChange(dateStr)}
+                                            options={{ dateFormat: "Y-m-d" }}
+                                            className="form-control"
+                                            placeholder="Select expiration date"
+                                        />
+                                    )}
                                 />
                             </div>
 

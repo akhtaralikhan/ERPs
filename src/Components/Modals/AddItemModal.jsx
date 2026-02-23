@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Flatpickr from "react-flatpickr";
 import { Button, Modal, Form, Row, Col } from "react-bootstrap";
 
 function AddItemModal({ showModal, setShowModal, onAdd, onUpdate, editingItem, clearEditing }) {
@@ -25,6 +26,9 @@ function AddItemModal({ showModal, setShowModal, onAdd, onUpdate, editingItem, c
     Note: "",
     Image: "https://businesserp.microhind.com/upload/DefaultItem/s2ultra.jpg",
   });
+  const [errors, setErrors] = useState({});
+
+  const isSaveDisabled = !formData.Name.trim();
 
   // ✅ Load data if editing
   useEffect(() => {
@@ -43,7 +47,20 @@ function AddItemModal({ showModal, setShowModal, onAdd, onUpdate, editingItem, c
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleDateChange = (name, dateStr) => {
+    setFormData((prev) => ({ ...prev, [name]: dateStr }));
+  };
+
   const handleSave = () => {
+    // simple required validation
+    const errs = {};
+    if (!formData.Name || !formData.Name.trim()) {
+      errs.Name = "Name is required";
+    }
+    if (Object.keys(errs).length) {
+      setErrors(errs);
+      return;
+    }
     if (editingItem) {
       onUpdate({ ...formData, Id: editingItem.Id });
     } else {
@@ -51,7 +68,7 @@ function AddItemModal({ showModal, setShowModal, onAdd, onUpdate, editingItem, c
     }
     handleClose();
   };
-  
+
   return (
     <Modal
       show={showModal}
@@ -81,7 +98,9 @@ function AddItemModal({ showModal, setShowModal, onAdd, onUpdate, editingItem, c
                   value={formData.Name}
                   onChange={handleChange}
                   placeholder="Enter item name"
+                  className={errors.Name ? "is-invalid" : ""}
                 />
+                {errors.Name && <div className="invalid-feedback">{errors.Name}</div>}
               </Form.Group>
 
               <Form.Group className="mb-3">
@@ -193,7 +212,7 @@ function AddItemModal({ showModal, setShowModal, onAdd, onUpdate, editingItem, c
                 <Form.Label>Barcode</Form.Label>
                 <div className="border p-2 text-center">
                   <div
-                    style={{ height: 60, background: "#eee", marginBottom: 4 }}
+                    style={{ height: 60, background: "var(--phoenix-body-color)", marginBottom: 4 }}
                   ></div>
                   <div>{formData.Barcode || "441349"}</div>
                 </div>
@@ -256,21 +275,23 @@ function AddItemModal({ showModal, setShowModal, onAdd, onUpdate, editingItem, c
 
               <Form.Group className="mb-3">
                 <Form.Label>Manufacture</Form.Label>
-                <Form.Control
-                  type="date"
-                  name="Manufacture"
-                  value={formData.Manufacture}
-                  onChange={handleChange}
+                <Flatpickr
+                  value={formData.Manufacture || ""}
+                  onChange={(_, dateStr) => handleDateChange("Manufacture", dateStr)}
+                  options={{ dateFormat: "Y-m-d" }}
+                  className="form-control"
+                  placeholder="Select manufacture date"
                 />
               </Form.Group>
 
               <Form.Group className="mb-3">
                 <Form.Label>Expiration</Form.Label>
-                <Form.Control
-                  type="date"
-                  name="Expiration"
-                  value={formData.Expiration}
-                  onChange={handleChange}
+                <Flatpickr
+                  value={formData.Expiration || ""}
+                  onChange={(_, dateStr) => handleDateChange("Expiration", dateStr)}
+                  options={{ dateFormat: "Y-m-d" }}
+                  className="form-control"
+                  placeholder="Select expiration date"
                 />
               </Form.Group>
 
@@ -309,7 +330,7 @@ function AddItemModal({ showModal, setShowModal, onAdd, onUpdate, editingItem, c
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="primary" onClick={handleSave}>
+        <Button variant="primary" onClick={handleSave} disabled={isSaveDisabled}>
           <small>{editingItem ? "Update" : "Save"}</small>
         </Button>
         <Button variant="outline-danger" onClick={handleClose}>

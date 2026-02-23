@@ -8,7 +8,7 @@ function AddCurrencyModal({ showModal, setShowModal }) {
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors, isValid }
   } = useForm({ mode: "onChange" });
 
   useEffect(() => {
@@ -42,7 +42,7 @@ function AddCurrencyModal({ showModal, setShowModal }) {
           <form onSubmit={handleSubmit(onSubmit)} noValidate>
             <div className="modal-body">
 
-              {["name","code","symbol","country","description"].map(field => (
+              {["name", "code", "symbol", "country", "description"].map(field => (
                 <div className="mb-3" key={field}>
                   <label className="form-label text-capitalize">{field}</label>
                   <input
@@ -67,7 +67,7 @@ function AddCurrencyModal({ showModal, setShowModal }) {
             </div>
 
             <div className="modal-footer">
-              <button type="submit" className="btn btn-primary"><small>Save</small></button>
+              <button type="submit" className="btn btn-primary" disabled={!isValid}><small>Save</small></button>
               <button type="button" className="btn btn-outline-danger" data-bs-dismiss="modal">
                 <small>Cancel</small>
               </button>

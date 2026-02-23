@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
-import { useForm } from "react-hook-form";
+import Flatpickr from "react-flatpickr";
+import { Controller, useForm } from "react-hook-form";
 
 function AddEmployeeModal({
   showModal,
@@ -12,10 +13,11 @@ function AddEmployeeModal({
   const bsModalRef = useRef(null);
 
   const {
+    control,
     register,
     handleSubmit,
     watch,
-    formState: { errors }
+    formState: { errors, isValid }
   } = useForm({ mode: "onChange" });
 
   const joiningDate = watch("joiningDate");
@@ -55,7 +57,7 @@ function AddEmployeeModal({
 
                   {/* LEFT SIDE FIELDS (unchanged) */}
                   {/* Just converted error styling */}
-                  
+
                   {/* Employee ID */}
                   <div className="mb-3">
                     <label className="form-label">Employee Id</label>
@@ -91,10 +93,19 @@ function AddEmployeeModal({
                   {/* DOB */}
                   <div className="mb-3">
                     <label className="form-label">Date Of Birth</label>
-                    <input
-                      type="date"
-                      className={`form-control ${errors.dateOfBirth ? "is-invalid" : ""}`}
-                      {...register("dateOfBirth", { required: "DOB is required" })}
+                    <Controller
+                      name="dateOfBirth"
+                      control={control}
+                      rules={{ required: "DOB is required" }}
+                      render={({ field }) => (
+                        <Flatpickr
+                          value={field.value || ""}
+                          onChange={(_, dateStr) => field.onChange(dateStr)}
+                          options={{ dateFormat: "Y-m-d" }}
+                          className={`form-control ${errors.dateOfBirth ? "is-invalid" : ""}`}
+                          placeholder="Select date of birth"
+                        />
+                      )}
                     />
                     {errors.dateOfBirth && <div className="invalid-feedback">{errors.dateOfBirth.message}</div>}
                   </div>
@@ -132,25 +143,43 @@ function AddEmployeeModal({
                   {/* Right Side */}
                   <div className="mb-3">
                     <label className="form-label">Joining Date</label>
-                    <input
-                      type="date"
-                      className={`form-control ${errors.joiningDate ? "is-invalid" : ""}`}
-                      {...register("joiningDate", { required: "Joining date is required" })}
+                    <Controller
+                      name="joiningDate"
+                      control={control}
+                      rules={{ required: "Joining date is required" }}
+                      render={({ field }) => (
+                        <Flatpickr
+                          value={field.value || ""}
+                          onChange={(_, dateStr) => field.onChange(dateStr)}
+                          options={{ dateFormat: "Y-m-d" }}
+                          className={`form-control ${errors.joiningDate ? "is-invalid" : ""}`}
+                          placeholder="Select joining date"
+                        />
+                      )}
                     />
                     {errors.joiningDate && <div className="invalid-feedback">{errors.joiningDate.message}</div>}
                   </div>
 
                   <div className="mb-3">
                     <label className="form-label">Leaving Date</label>
-                    <input
-                      type="date"
-                      className={`form-control ${errors.leavingDate ? "is-invalid" : ""}`}
-                      {...register("leavingDate", {
+                    <Controller
+                      name="leavingDate"
+                      control={control}
+                      rules={{
                         validate: value =>
                           !value ||
                           new Date(value) >= new Date(joiningDate) ||
                           "Leaving date must be after joining date"
-                      })}
+                      }}
+                      render={({ field }) => (
+                        <Flatpickr
+                          value={field.value || ""}
+                          onChange={(_, dateStr) => field.onChange(dateStr)}
+                          options={{ dateFormat: "Y-m-d" }}
+                          className={`form-control ${errors.leavingDate ? "is-invalid" : ""}`}
+                          placeholder="Select leaving date"
+                        />
+                      )}
                     />
                     {errors.leavingDate && <div className="invalid-feedback">{errors.leavingDate.message}</div>}
                   </div>
@@ -181,7 +210,7 @@ function AddEmployeeModal({
             </div>
 
             <div className="modal-footer">
-              <button type="submit" className="btn btn-primary">Save</button>
+              <button type="submit" className="btn btn-primary" disabled={!isValid}>Save</button>
               <button type="button" className="btn btn-outline-danger" data-bs-dismiss="modal">
                 Close
               </button>
