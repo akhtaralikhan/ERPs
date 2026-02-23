@@ -54,7 +54,7 @@ const Navbar = () => {
                     src="\src\assets\img\icons\logo.png"
                     style={{ width: "27px" }}
                   />
-                  <p className="logo-text ms-2 d-none d-sm-block">Buisness ERP</p>
+                  <p className="logo-text ms-2 d-none d-sm-block">Business ERP</p>
                 </div>
               </div>
             </Link>
