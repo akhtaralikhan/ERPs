@@ -96,7 +96,7 @@ function AddPaymentModal({ showModal, setShowModal }) {
             <div className="card">
 
               {/* Tabs */}
-              <div className="upper-label d-flex w-100 text-center border-bottom">
+              <div className="upper-label d-flex w-100 text-center add-payment-blue-border-bottom">
                 <label
                   onClick={() => setModal("Main")}
                   className={`${

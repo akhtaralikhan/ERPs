@@ -346,54 +346,54 @@ const DashboardHome = () => {
     <>
       <div className="content">
         <div className="card rounded-0">
-          <div className="NewColorChange phoenix-toolbar d-flex align-items-center flex-wrap py-3 px-4 mb-0 border-bottom gap-3 ">
+          <div className="NewColorChange phoenix-toolbar d-flex align-items-center flex-wrap py-3 px-3 px-md-4 mb-0 border-bottom gap-3 ">
             {/* Title and tabs */}
-            <div className=" p-3 row" style={{ minWidth: "170px" }}>
-              <h2 className="fw-bolder mb-1" style={{ fontSize: "2rem" }}>
+            <div className="p-2 p-md-3 row w-100">
+              <h2 className="fw-bolder mb-1" style={{ fontSize: "clamp(1.5rem, 4vw, 2rem)" }}>
                 Main Dashboard
               </h2>
-              <p className="mb-5 fs-1">Here’s what’s going on at your business right now</p>
-              <div className="d-flex gap-4">
-                <div className="d-flex">
+              <p className="mb-1 mb-md-2" style={{ fontSize: "clamp(0.95rem, 2.4vw, 1.25rem)" }}>Here’s what’s going on at your business right now</p>
+              <div className="row g-3 g-lg-4">
+                <div className="col-12 col-md-6 col-xl-4 d-flex">
                   <div>
                     <i className="fa-solid fa-circle-plus text-success fs-3 mt-2 me-3"></i>
                   </div>
                   <div>
-                    <p className="fs-1 mb-0 fw-bold">60 New Products</p>
+                    <p className="mb-0 fw-bold" style={{ fontSize: "clamp(0.95rem, 2.3vw, 1.25rem)" }}>60 New Products</p>
                     <label className="form-label ps-0">Added This Month</label>
                   </div>
                 </div>
-                <div className="d-flex">
+                <div className="col-12 col-md-6 col-xl-4 d-flex">
                   <div>
                     <i className="fa-solid fa-user-plus text-info fs-3 mt-2 me-3"></i>
                   </div>
                   <div>
-                    <p className="fs-1 mb-0 fw-bold">1000+ New Customer</p>
+                    <p className="mb-0 fw-bold" style={{ fontSize: "clamp(0.95rem, 2.3vw, 1.25rem)" }}>1000+ New Customer</p>
                     <label className="form-label ps-0">Joined This Month</label>
                   </div>
                 </div>
-                <div className="d-flex">
+                <div className="col-12 col-md-6 col-xl-4 d-flex">
                   <div>
                     <i className="fa-solid fa-globe text-danger fs-3 mt-2 me-3"></i>
                   </div>
                   <div>
-                    <p className="fs-1 mb-0 fw-bold">30+ Countries</p>
+                    <p className="mb-0 fw-bold" style={{ fontSize: "clamp(0.95rem, 2.3vw, 1.25rem)" }}>30+ Countries</p>
                     <label className="form-label ps-0">Use Our Services</label>
                   </div>
                 </div>
               </div>
             </div>
             {/* chart  */}
-            <div className="d-flex w-100 border-top  pt-5 justify-content-between mb-4 g-3">
-              <div className="col-auto">
+            <div className="d-flex flex-column flex-sm-row w-100 border-top pt-4 pt-md-5 justify-content-between mb-4 g-3 gap-3">
+              <div className="col-12 col-sm-auto">
                 <h3>Profit & Loss</h3>
                 <p className="text-700 lh-sm mb-0">
                   Payment received across all channels
                 </p>
               </div>
-              <div className="col-8 col-sm-4">
+              <div className="col-12 col-sm-4 col-lg-3">
                 <select
-                  className="form-select form-select-sm mt-2"
+                  className="form-select form-select-sm mt-2 mt-sm-0"
                   id="select-gross-revenue-month"
                   value={isSelected}
                   onChange={(e) => setIsSelected(e.target.value)}
@@ -404,14 +404,14 @@ const DashboardHome = () => {
                 </select>
               </div>
             </div>
-            <div className="container ">
-              <div className="" style={{ width: "96%" }}>
+            <div className="container px-0">
+              <div className="w-100">
                 <SalesChart chartLabel={monthlyTransactions?.chartLabel || []} linesData={monthlyTransactions?.linesData || []} />
               </div>
             </div>
-            <div className="d-flex ">
+            <div className="row w-100 g-3">
               {summary?.map((item, index) => (
-                <div className="col-lg-12 text-nowrap text-center col-sm-12" key={index}>
+                <div className="col-12 col-md-4 text-center" key={index}>
                   <p className=" m-0">{item?.title}</p>
                   <span className="">${item?.value}</span>
                 </div>
@@ -420,7 +420,7 @@ const DashboardHome = () => {
           </div>
         </div>
         <div className="card rounded-0">
-          <div className="p-5">
+          <div className="p-3 p-md-5">
             <div className="row g-4">
               <div className="col-12 col-xxl-12">
                 <div className="mb-5">
@@ -466,7 +466,7 @@ const DashboardHome = () => {
             </div>
           </div>
           {/* last transaction  */}
-          <div className="p-5 bg-white border-y border-300">
+          <div className="p-3 p-md-5 bg-white border-y border-300">
             <div data-list='{"valueNames":["product","customer","rating","review","time"],"page":6}'>
               <div className="row align-items-end justify-content-between pb-5 g-3">
                 <div className="col-auto">
@@ -634,7 +634,7 @@ const DashboardHome = () => {
                   <span className="text-600">
                     Page {pageIndex + 1} of {pageOptions.length}
                   </span>
-                  <div>
+                  <div className="d-flex flex-wrap gap-2 justify-content-start justify-content-md-end">
                     <button
                       className="btn btn-sm btn-primary me-2"
                       onClick={() => previousPage()}

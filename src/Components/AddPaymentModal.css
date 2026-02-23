@@ -13,3 +13,15 @@
   visibility: visible;
   position: relative;       /* take back normal flow for active */
 }
+
+.add-payment-blue-border-bottom {
+  border-bottom: 1px solid var(--phoenix-navbar-footer-border-color) !important;
+}
+
+.add-payment-blue-border-top {
+  border-top: 1px solid var(--phoenix-navbar-footer-border-color) !important;
+}
+
+.upper-label .border-end {
+  border-right-color: var(--phoenix-navbar-footer-border-color) !important;
+}

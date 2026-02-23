@@ -305,7 +305,7 @@ export const MainModal = ({
           </div>
         </div>
 
-        <div className="d-flex justify-content-end align-items-center pt-3 border-top pb-0 ">
+        <div className="d-flex justify-content-end align-items-center pt-3 add-payment-blue-border-top pb-0 ">
           <button
             type="submit"
             className="btn btn-primary me-3 small"

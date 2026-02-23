@@ -287,7 +287,7 @@ const AttendanceReport = () => {
           </div>
 
           {/* ✅ Pagination */}
-          <div className="d-flex justify-content-between align-items-center py-2 PAGINATIONS">
+          <div className="d-flex justify-content-end justify-content-md-between align-items-center py-2 PAGINATIONS">
             <p
               className="mb-0 text-body fs-9 d-md-block d-none"
               style={{ fontSize: "14px" }}
