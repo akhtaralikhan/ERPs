@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import feather from "feather-icons";
 import { BiCart, BiSolidPurchaseTag } from "react-icons/bi";
 import { FcSalesPerformance } from "react-icons/fc";
@@ -12,6 +12,7 @@ import { GiExpense } from "react-icons/gi";
 import { MdOtherHouses } from "react-icons/md";
 import { TbActivityHeartbeat } from "react-icons/tb";
 const Sidebar = ({ collapsed, setCollapsed }) => {
+  const location = useLocation();
   const [isSuperAdmin, setIsSuperAdmin] = useState(false);
   // const [collapsed, setCollapsed] = useState(false); // collapsed state
   const [flyoutTop, setFlyoutTop] = useState(0);
@@ -32,6 +33,22 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
       document.body.classList.add(`navbar-${navbarStyle}`);
     }
   }, []);
+
+  useEffect(() => {
+    if (window.innerWidth >= 992) return;
+
+    const sidebarCollapseEl = document.getElementById("navbarVerticalCollapse");
+    if (!sidebarCollapseEl?.classList.contains("show")) return;
+
+    if (window.bootstrap?.Collapse) {
+      const collapseInstance =
+        window.bootstrap.Collapse.getOrCreateInstance(sidebarCollapseEl);
+      collapseInstance.hide();
+      return;
+    }
+
+    sidebarCollapseEl.classList.remove("show");
+  }, [location.pathname]);
 
   const Padding_left = collapsed ? "1rem" : "1.75rem";
 
