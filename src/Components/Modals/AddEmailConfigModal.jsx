@@ -8,7 +8,7 @@ function AddEmailConfigModal({ showModal, setShowModal }) {
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors, isValid }
   } = useForm({ mode: "onChange" });
 
   useEffect(() => {
@@ -126,7 +126,7 @@ function AddEmailConfigModal({ showModal, setShowModal }) {
             </div>
 
             <div className="modal-footer">
-              <button type="submit" className="btn btn-primary"><small>Save</small></button>
+              <button type="submit" className="btn btn-primary" disabled={!isValid}><small>Save</small></button>
               <button type="button" className="btn btn-outline-danger" data-bs-dismiss="modal">
                 <small>Cancel</small>
               </button>

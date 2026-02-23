@@ -62,7 +62,7 @@ function BankAccountModal({ selectedBankAccount }) {
         }
     });
 
-    const { handleSubmit, register, control, reset, formState: { errors } } = methods;
+    const { handleSubmit, register, control, reset, formState: { errors, isValid } } = methods;
 
     useEffect(() => {
         if (selectedBankAccount) {
@@ -216,6 +216,7 @@ function BankAccountModal({ selectedBankAccount }) {
                             <button
                                 className="btn btn-primary"
                                 type="submit"
+                                disabled={!isValid}
                             >
                                 Save
                             </button>

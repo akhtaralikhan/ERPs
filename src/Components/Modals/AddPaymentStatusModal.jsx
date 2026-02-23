@@ -9,7 +9,7 @@ function AddPaymentModal({ showModal, setShowModal }) {
     register,
     handleSubmit,
     reset,
-    formState: { errors }
+    formState: { errors, isValid }
   } = useForm({ mode: "onChange" });
 
   // Create Bootstrap modal instance once
@@ -100,7 +100,7 @@ function AddPaymentModal({ showModal, setShowModal }) {
             </div>
 
             <div className="modal-footer">
-              <button type="submit" className="btn btn-primary">
+              <button type="submit" className="btn btn-primary" disabled={!isValid}>
                 <small>Save</small>
               </button>
               <button

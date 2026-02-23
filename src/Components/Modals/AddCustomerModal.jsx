@@ -8,7 +8,7 @@ function AddPaymentModal({ showModal, setShowModal }) {
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors, isValid }
   } = useForm({
     mode: "onChange"
   });

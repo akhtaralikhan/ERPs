@@ -11,7 +11,7 @@ function AddAttendanceModal({ showModal, setShowModal, employees }) {
     register,
     handleSubmit,
     watch,
-    formState: { errors }
+    formState: { errors, isValid }
   } = useForm({ mode: "onChange" });
 
   const checkIn = watch("checkIn");
@@ -163,7 +163,7 @@ function AddAttendanceModal({ showModal, setShowModal, employees }) {
 
             {/* Footer */}
             <div className="modal-footer">
-              <button type="submit" className="btn btn-primary">
+              <button type="submit" className="btn btn-primary" disabled={!isValid}>
                 <small>Save</small>
               </button>
               <button

@@ -8,7 +8,7 @@ function VatPercentageModal({ showModal, setShowModal }) {
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors, isValid }
   } = useForm({ mode: "onChange" });
 
   useEffect(() => {
@@ -96,7 +96,7 @@ function VatPercentageModal({ showModal, setShowModal }) {
             </div>
 
             <div className="modal-footer">
-              <button type="submit" className="btn btn-primary">
+              <button type="submit" className="btn btn-primary" disabled={!isValid}>
                 <small>Save</small>
               </button>
               <button

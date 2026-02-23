@@ -26,6 +26,9 @@ function AddItemModal({ showModal, setShowModal, onAdd, onUpdate, editingItem, c
     Note: "",
     Image: "https://businesserp.microhind.com/upload/DefaultItem/s2ultra.jpg",
   });
+  const [errors, setErrors] = useState({});
+
+  const isSaveDisabled = !formData.Name.trim();
 
   // ✅ Load data if editing
   useEffect(() => {
@@ -49,6 +52,15 @@ function AddItemModal({ showModal, setShowModal, onAdd, onUpdate, editingItem, c
   };
 
   const handleSave = () => {
+    // simple required validation
+    const errs = {};
+    if (!formData.Name || !formData.Name.trim()) {
+      errs.Name = "Name is required";
+    }
+    if (Object.keys(errs).length) {
+      setErrors(errs);
+      return;
+    }
     if (editingItem) {
       onUpdate({ ...formData, Id: editingItem.Id });
     } else {
@@ -56,7 +68,7 @@ function AddItemModal({ showModal, setShowModal, onAdd, onUpdate, editingItem, c
     }
     handleClose();
   };
-  
+
   return (
     <Modal
       show={showModal}
@@ -86,7 +98,9 @@ function AddItemModal({ showModal, setShowModal, onAdd, onUpdate, editingItem, c
                   value={formData.Name}
                   onChange={handleChange}
                   placeholder="Enter item name"
+                  className={errors.Name ? "is-invalid" : ""}
                 />
+                {errors.Name && <div className="invalid-feedback">{errors.Name}</div>}
               </Form.Group>
 
               <Form.Group className="mb-3">
@@ -316,7 +330,7 @@ function AddItemModal({ showModal, setShowModal, onAdd, onUpdate, editingItem, c
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="primary" onClick={handleSave}>
+        <Button variant="primary" onClick={handleSave} disabled={isSaveDisabled}>
           <small>{editingItem ? "Update" : "Save"}</small>
         </Button>
         <Button variant="outline-danger" onClick={handleClose}>

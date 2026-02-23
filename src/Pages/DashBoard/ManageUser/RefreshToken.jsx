@@ -22,17 +22,17 @@ const RefreshToken = () => {
       { Header: "User Email", accessor: "UserEmail" },
       { Header: "Token", accessor: "Token" },
       { Header: "Jwt Id", accessor: "JwtId" },
-      {
-        Header: "Is Used",
-        accessor: "IsUsed",
-        Cell: ({ value }) => <span>{value ? "Yes" : "No"}</span>,
-      },
+     {
+  Header: "Is Used",
+  accessor: "IsUsed",
+  Cell: ({ value }) => value ? "Yes" : "No",
+},
       {
         Header: "Is Revorked",
         accessor: "IsRevorked",
         Cell: ({ value }) => (
           <span
-            className={`badge ${value ? "bg-warning text-white" : "bg-secondary text-white"
+            className={`badge ${value ? "text-bg-warning" : "text-bg-secondary"
               }`}
           >
             {value ? "Revoked" : "Active"}

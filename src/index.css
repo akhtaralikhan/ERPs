@@ -616,3 +616,25 @@ th.sort.desc::after {
 .table-responsive tbody tr td a.d-flex {
     padding: 0px !important;
 }
+
+.ManageUserRolesModal__table-container {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.ManageUserRolesModal__table-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.ManageUserRolesModal__table-container::-webkit-scrollbar-track {
+    background: transparent;
+}   
+
+.ManageUserRolesModal__table-container::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 10px;
+}
+.ManageUserRolesModal__table-container::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+

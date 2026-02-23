@@ -170,9 +170,7 @@ const ManageUserRolesViewModal = ({ data }) => {
                   role="tabpanel"
                 >
                   <div
-                    className="table-responsive"
-                    style={{ maxHeight: "300px", overflowY: "auto" }}
-                  >
+                    className="table-responsive ManageUserRolesModal__table-container">
                     <table className="table table-bordered align-middle mb-0">
                       <thead className="table-primary text-center">
                         <tr>

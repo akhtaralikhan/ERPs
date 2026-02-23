@@ -20,6 +20,10 @@ function AddPaymentModal({ showModal, setShowModal }) {
 
   const [MainData, setMainData] = useState([]);
   const [formData, setFormData] = useState(initialData);
+  const [rowErrors, setRowErrors] = useState({});
+
+  // disallow final save until at least one invoice row has been added
+  const canSubmitInvoice = MainData.length > 0;
 
   // Initialize Bootstrap modal once
   useEffect(() => {
@@ -43,7 +47,21 @@ function AddPaymentModal({ showModal, setShowModal }) {
     bsModalRef.current.hide();
   };
 
+  const validateRow = () => {
+    const errors = {};
+    if (!formData.itemName) errors.itemName = "Item name is required";
+    if (!formData.quantity) errors.quantity = "Quantity is required";
+    if (!formData.unitPrice) errors.unitPrice = "Unit price is required";
+    if (!formData.discount) errors.discount = "Discount is required";
+    if (!formData.vat) errors.vat = "VAT is required";
+    if (!formData.total) errors.total = "Total amount is required";
+    setRowErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
   const handleSubmit = () => {
+    // this is invoked when the user clicks the footer "Save" button (finalise invoice)
+    if (!validateRow()) return;
     console.log("submitted");
     console.log(formData);
 
@@ -54,6 +72,7 @@ function AddPaymentModal({ showModal, setShowModal }) {
 
     setMainData((prev) => [...prev, newData]);
     setFormData(initialData);
+    setRowErrors({});
   };
 
   const handleRemoveData = (id) => {
@@ -99,33 +118,30 @@ function AddPaymentModal({ showModal, setShowModal }) {
               <div className="upper-label d-flex w-100 text-center border-bottom">
                 <label
                   onClick={() => setModal("Main")}
-                  className={`${
-                    modal === "Main"
+                  className={`${modal === "Main"
                       ? "border-bottom-0 text-dark"
                       : "text-primary"
-                  } border-end p-2 fw-semi-bold px-6 cursor-pointer`}
+                    } border-end p-2 fw-semi-bold px-6 cursor-pointer`}
                 >
                   Main
                 </label>
 
                 <label
                   onClick={() => setModal("others")}
-                  className={`${
-                    modal === "others"
+                  className={`${modal === "others"
                       ? "border-bottom-0 text-dark"
                       : "text-primary"
-                  } border-end p-2 fw-semi-bold px-6 cursor-pointer`}
+                    } border-end p-2 fw-semi-bold px-6 cursor-pointer`}
                 >
                   Others
                 </label>
 
                 <label
                   onClick={() => setModal("notMain")}
-                  className={`${
-                    modal === "notMain"
+                  className={`${modal === "notMain"
                       ? "border-bottom-0 text-dark"
                       : "text-primary"
-                  } py-2 fw-semi-bold px-5 white-space-nowrap cursor-pointer`}
+                    } py-2 fw-semi-bold px-5 white-space-nowrap cursor-pointer`}
                 >
                   Add New Customer
                 </label>
@@ -156,7 +172,7 @@ function AddPaymentModal({ showModal, setShowModal }) {
 
           {/* Footer */}
           <div className="modal-footer">
-            <button className="btn btn-primary" onClick={handleSubmit}>
+            <button className="btn btn-primary" onClick={handleSubmit} disabled={!canSubmitInvoice}>
               <small>Save</small>
             </button>
             <button

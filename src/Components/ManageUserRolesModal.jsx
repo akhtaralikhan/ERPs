@@ -77,7 +77,7 @@ const ManageUserRolesModal = ({ mode, onSave, initialData }) => {
     reset,
     watch,
     setValue,
-    formState: { errors, touchedFields, isSubmitted },
+    formState: { errors, touchedFields, isSubmitted, isValid },
   } = useForm({
     mode: "onChange",
     defaultValues: {
@@ -248,9 +248,7 @@ const ManageUserRolesModal = ({ mode, onSave, initialData }) => {
               )}
 
               <div
-                className="table-responsive"
-                style={{ maxHeight: "300px", overflowY: "auto" }}
-              >
+                className="table-responsive ManageUserRolesModal__table-container">
                 <table className="table table-bordered align-middle mb-0">
                   <thead className="table-primary text-center">
                     <tr>
@@ -269,11 +267,10 @@ const ManageUserRolesModal = ({ mode, onSave, initialData }) => {
                             <div className="form-check">
                               <input
                                 type="checkbox"
-                                className={`form-check-input ${
-                                  selectedRoles.includes(pair[0])
+                                className={`form-check-input ${selectedRoles.includes(pair[0])
                                     ? "is-valid"
                                     : ""
-                                }`}
+                                  }`}
                                 id={`chk-${pair[0]}`}
                                 {...register("selectedRoles", {
                                   validate: (value) =>
@@ -300,11 +297,10 @@ const ManageUserRolesModal = ({ mode, onSave, initialData }) => {
                                 <div className="form-check">
                                   <input
                                     type="checkbox"
-                                    className={`form-check-input ${
-                                      selectedRoles.includes(pair[1])
+                                    className={`form-check-input ${selectedRoles.includes(pair[1])
                                         ? "is-valid"
                                         : ""
-                                    }`}
+                                      }`}
                                     id={`chk-${pair[1]}`}
                                     {...register("selectedRoles")}
                                     value={pair[1]}
@@ -334,7 +330,7 @@ const ManageUserRolesModal = ({ mode, onSave, initialData }) => {
             </div>
 
             <div className="modal-footer">
-              <button type="submit" className="btn btn-primary">
+              <button type="submit" className="btn btn-primary" disabled={!isValid}>
                 <small>Save</small>
               </button>
               <button

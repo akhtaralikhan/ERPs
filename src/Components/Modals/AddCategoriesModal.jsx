@@ -9,7 +9,7 @@ function AddCategoriesModal({ showModal, setShowModal }) {
     register,
     handleSubmit,
     reset,
-    formState: { errors }
+    formState: { errors, isValid }
   } = useForm({ mode: "onChange" });
 
   useEffect(() => {
@@ -79,7 +79,7 @@ function AddCategoriesModal({ showModal, setShowModal }) {
             </div>
 
             <div className="modal-footer">
-              <button type="submit" className="btn btn-primary">
+              <button type="submit" className="btn btn-primary" disabled={!isValid}>
                 <small>Save</small>
               </button>
               <button

@@ -17,7 +17,7 @@ function AddEmployeeModal({
     register,
     handleSubmit,
     watch,
-    formState: { errors }
+    formState: { errors, isValid }
   } = useForm({ mode: "onChange" });
 
   const joiningDate = watch("joiningDate");
@@ -57,7 +57,7 @@ function AddEmployeeModal({
 
                   {/* LEFT SIDE FIELDS (unchanged) */}
                   {/* Just converted error styling */}
-                  
+
                   {/* Employee ID */}
                   <div className="mb-3">
                     <label className="form-label">Employee Id</label>
@@ -210,7 +210,7 @@ function AddEmployeeModal({
             </div>
 
             <div className="modal-footer">
-              <button type="submit" className="btn btn-primary">Save</button>
+              <button type="submit" className="btn btn-primary" disabled={!isValid}>Save</button>
               <button type="button" className="btn btn-outline-danger" data-bs-dismiss="modal">
                 Close
               </button>
