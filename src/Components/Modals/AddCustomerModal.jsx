@@ -10,7 +10,17 @@ function AddPaymentModal({ showModal, setShowModal }) {
     handleSubmit,
     formState: { errors, isValid }
   } = useForm({
-    mode: "onChange"
+    mode: "onChange",
+    defaultValues: {
+      customerName: "",
+      companyName: "",
+      type: "",
+      phone: "",
+      email: "",
+      address: "",
+      postcode: "",
+      notes: ""
+    }
   });
 
   // Create bootstrap modal once
@@ -105,8 +115,9 @@ function AddPaymentModal({ showModal, setShowModal }) {
                 <select
                   className={`form-control ${errors.type ? "is-invalid" : ""}`}
                   {...register("type", { required: "Type is required" })}
-                  defaultValue="Other"
+                  defaultValue=""
                 >
+                  <option value="">Select Type</option>
                   <option value="Other">Other</option>
                   <option value="Trader">Trader</option>
                   <option value="Premium">Premium</option>
@@ -214,7 +225,11 @@ function AddPaymentModal({ showModal, setShowModal }) {
 
             {/* Footer */}
             <div className="modal-footer">
-              <button type="submit" className="btn btn-primary">
+              <button
+                type="submit"
+                className="btn btn-primary"
+                disabled={!isValid}
+              >
                 <small>Save</small>
               </button>
               <button

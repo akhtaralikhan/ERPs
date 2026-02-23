@@ -6,7 +6,7 @@ const SystemRoleModal = ({ mode, onSave, initialData }) => {
     register,
     handleSubmit,
     reset,
-    formState: { errors, touchedFields },
+    formState: { errors, touchedFields, isValid },
   } = useForm({
     mode: "onChange",
     defaultValues: {
@@ -100,7 +100,11 @@ const SystemRoleModal = ({ mode, onSave, initialData }) => {
 
             {/* Footer */}
             <div className="modal-footer">
-              <button type="submit" className="btn btn-primary">
+              <button
+                type="submit"
+                className="btn btn-primary"
+                disabled={!isValid}
+              >
                 <small>Save</small>
               </button>
               <button

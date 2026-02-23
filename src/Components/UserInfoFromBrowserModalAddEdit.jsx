@@ -7,9 +7,9 @@ const UserInfoFromBrowserModalAddEdit = ({ mode, onSave, initialData }) => {
     handleSubmit,
     reset,
     watch,
-    formState: { errors, touchedFields, isSubmitted },
+    formState: { errors, touchedFields, isValid },
   } = useForm({
-    mode: "onChange", // 👈 update validation state on change
+    mode: "onChange",
     defaultValues: {
       BrowserUniqueID: "",
       Lat: "",
@@ -20,10 +20,8 @@ const UserInfoFromBrowserModalAddEdit = ({ mode, onSave, initialData }) => {
     },
   });
 
-  // watch all values for validation state
   const values = watch();
 
-  // Reset form when mode or initialData changes
   useEffect(() => {
     if (mode === "edit" && initialData) {
       reset(initialData);
@@ -41,7 +39,10 @@ const UserInfoFromBrowserModalAddEdit = ({ mode, onSave, initialData }) => {
 
   const onSubmit = (data) => {
     onSave(data);
-    const modalEl = document.getElementById("UserInfoFromBrowserModalAddEdit");
+
+    const modalEl = document.getElementById(
+      "UserInfoFromBrowserModalAddEdit"
+    );
     if (modalEl) {
       const modalInstance = window.bootstrap.Modal.getInstance(modalEl);
       modalInstance?.hide();
@@ -49,15 +50,12 @@ const UserInfoFromBrowserModalAddEdit = ({ mode, onSave, initialData }) => {
   };
 
   const getValidationClass = (name) => {
-    // If there's an error, show red
     if (errors[name]) return "is-invalid";
 
-    // If the field is touched OR value changed from initialData, show green
     if (mode === "edit" && initialData) {
       if (values[name] !== initialData[name] && !errors[name])
         return "is-valid";
     } else {
-      // Create mode: green only if touched and valid
       if (touchedFields[name] && !errors[name]) return "is-valid";
     }
 
@@ -136,6 +134,7 @@ const UserInfoFromBrowserModalAddEdit = ({ mode, onSave, initialData }) => {
                     <div className="invalid-feedback">{errors.Lat.message}</div>
                   )}
                 </div>
+
                 <div className="col mb-3">
                   <label className="form-label">Long *</label>
                   <input
@@ -224,7 +223,11 @@ const UserInfoFromBrowserModalAddEdit = ({ mode, onSave, initialData }) => {
 
             {/* Footer */}
             <div className="modal-footer">
-              <button type="submit" className="btn btn-primary">
+              <button
+                type="submit"
+                className="btn btn-primary"
+                disabled={!isValid}
+              >
                 <small>Save</small>
               </button>
               <button
