@@ -101,17 +101,17 @@ const CustomerInfo = () => {
 
   return (
     <div className="content AssetsPageChangecss AssetPaddingChange">
-      <div className="marginforsmalldevice RemoveBorder card rounded-0 border-0">
+      <div className="marginforsmalldevice RemoveBorder card rounded-0 border-0 mb-5">
         <div className="NewColorChange phoenix-toolbar d-flex align-items-center flex-wrap py-md-3 px-md-4 mb-md-0  gap-3">
           {/* Title and tabs */}
           <div
-            className="p-3 row MainRemovePaddingwidth"
+            className="p-3 row MainRemovePaddingwidth pb-2"
             style={{ minWidth: "170px" }}
           >
             <h2 className="fw-bolder mb-5" style={{ fontSize: "2rem" }}>
               Customer Info List
             </h2>
-            <div className="AllabsAssets">
+            <div className="AllabsAssets pt-1">
               <span className="filterLinks text-dark">
                 All <span className="NewChangeColor">(68817)</span>
               </span>
@@ -203,11 +203,11 @@ const CustomerInfo = () => {
                 </Dropdown>
               </div>
             </div>
-            <div className="">
+            <div className="d-flex align-items-center">
               <button className="btn btn-link ChangePaginationColor px-0 me-4"><span className="fa-solid fa-file-export fs-9 me-2"></span> Export</button>
               {/* Add order button */}
               <button
-                className="btn btn-primary"
+                className="btn btn-primary me-2"
                 onClick={() => setShowModal(true)}
               >
                 <span className="fas fa-plus me-2"></span>
@@ -225,7 +225,7 @@ const CustomerInfo = () => {
           {/* Export button */}
         </div>
 
-        <div className="table-responsive p-4 px-5 pt-0 NewTableChange">
+        <div className="table-responsive p-4 px-5 pt-0 pb-0 NewTableChange">
           {/* ✅ Search */}
           {/* <PurchaseReturnModal /> */}
 
@@ -255,9 +255,9 @@ const CustomerInfo = () => {
                             {...colRest}
                             style={{
                               cursor: "pointer",
-                              fontSize: "14.5px",
-                              paddingTop: "16px",
-                              paddingBottom: "16px",
+                              fontSize: "12.5px",
+                              paddingTop: "10px",
+                              paddingBottom: "10px",
                             }}
                             className="border-top-0 pe-3 ps-1"
                           >
@@ -293,7 +293,7 @@ const CustomerInfo = () => {
 
               <tbody
                 {...getTableBodyProps()}
-                className="table align-middle text-nowrap fs-9 mb-0"
+                className="table align-middle"
               >
                 {page.map((row, idx) => {
                   prepareRow(row);
@@ -308,7 +308,7 @@ const CustomerInfo = () => {
                           <td
                             key={cellKey || cidx}
                             {...cellRest}
-                            className="py-2 pe-3"
+                            className="py-2 pe-3 DescriptionPara ps-1"
                           >
                             {cell.render("Cell")}
                           </td>
@@ -360,7 +360,7 @@ const CustomerInfo = () => {
 
           {/* ✅ Pagination controls */}
           {/* ✅ Ellipsis-based Pagination (compact version) */}
-          <div className="d-flex justify-content-between align-items-center py-2 PAGINATIONS">
+          <div className="d-flex justify-content-end justify-content-md-between align-items-center py-2 PAGINATIONS">
             <p className="mb-0 fs-9 d-md-block d-none ChangePaginationColor" style={{ fontSize: "14px" }}>
               Page {pageIndex + 1} of {pageOptions.length}
               <a

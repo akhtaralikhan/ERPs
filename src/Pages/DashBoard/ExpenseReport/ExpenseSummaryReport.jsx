@@ -67,7 +67,7 @@ const ExpenseSummaryReport = () => {
 
   return (
     <div className="content AssetsPageChangecss AssetPaddingChange">
-      <div className="marginforsmalldevice RemoveBorder card rounded-0 border-0">
+      <div className="marginforsmalldevice RemoveBorder card rounded-0 border-0 mb-5">
         <div className="NewColorChange phoenix-toolbar d-flex align-items-center flex-wrap py-md-3 px-md-4 mb-md-0  gap-3">
           <div
             className="p-3 row MainRemovePaddingwidth"
@@ -177,7 +177,7 @@ const ExpenseSummaryReport = () => {
         </div>
 
         {/* ✅ Table */}
-        <div className="table-responsive p-4 px-5 pt-0 NewTableChange">
+        <div className="table-responsive p-4 px-5 pt-0 pb-0 NewTableChange">
           <div className="table-responsive custom-scroll" style={{
             overflowX: "auto",
             whiteSpace: "nowrap",
@@ -202,9 +202,9 @@ const ExpenseSummaryReport = () => {
                             {...colRest}
                             style={{
                               cursor: "pointer",
-                              fontSize: "14.5px",
-                              paddingTop: "16px",
-                              paddingBottom: "16px",
+                              fontSize: "12.5px",
+                              paddingTop: "10px",
+                              paddingBottom: "10px",
                             }}
                             className="border-top-0 pe-3 ps-1"
                           >
@@ -239,7 +239,7 @@ const ExpenseSummaryReport = () => {
 
               <tbody
                 {...getTableBodyProps()}
-                className="table align-middle text-nowrap fs-9 mb-0"
+                className="table align-middle"
               >
                 {page.map((row, idx) => {
                   prepareRow(row);
@@ -253,7 +253,7 @@ const ExpenseSummaryReport = () => {
                           <td
                             key={cellKey || cidx}
                             {...cellRest}
-                            className="py-2 pe-3"
+                            className="py-2 pe-3 DescriptionPara ps-1"
                           >
                             {cell.render("Cell")}
                           </td>

@@ -344,72 +344,81 @@ const DashboardHome = () => {
 
   return (
     <>
-      <div className="content">
-        <div className="card rounded-0 border-x-0 border-y-0">
-          <div className="NewColorChange phoenix-toolbar d-flex align-items-center flex-wrap py-3 px-4 mb-0 gap-3 ">
+      <div className="content NewColorChange">
+        <div className="">
+          <div className="NewColorChange phoenix-toolbar py-md-6 px-md-6 px-3 py-3 mb-0 PaddDecreaseTop">
             {/* Title and tabs */}
-            <div className="p-2 p-md-3 row w-100">
-              <h2 className="fw-bolder mb-1" style={{ fontSize: "clamp(1.5rem, 4vw, 2rem)" }}>
-                Main Dashboard
-              </h2>
-              <p className="mb-5 fs-1">Here’s what’s going on at your business right now</p>
-              <div className="d-flex gap-4 flex-wrap">
-                <div className="d-flex">
+            <div className="row" style={{ minWidth: "170px" }}>
+              <div className="col-lg-12">
+                <div className="d-flex justify-content-between mb-2 flex-wrap row-gap-2">
                   <div>
-                    <i className="fa-solid fa-circle-plus text-success fs-3 mt-2 me-3"></i>
-                  </div>
-                  <div>
-                    <p className="mb-0 fw-bold" style={{ fontSize: "clamp(0.95rem, 2.3vw, 1.25rem)" }}>60 New Products</p>
-                    <label className="form-label ps-0">Added This Month</label>
+                    <h2 className="fw-bolder mb-2" style={{ fontSize: "clamp(1.5rem, 4vw, 2rem)" }}>
+                      Main Dashboard
+                    </h2>
+                    <h5 className="mb-5 d-none d-lg-block text-body-tertiary fw-semibold">
+                      Here’s what’s going on at your business right now
+                    </h5>
                   </div>
                 </div>
-                <div className="col-12 col-md-6 col-xl-4 d-flex">
-                  <div>
-                    <i className="fa-solid fa-user-plus text-info fs-3 mt-2 me-3"></i>
+                <div className="row g-3">
+                  <div className="col-12 col-md-auto d-flex align-items-center">
+                    <div>
+                      <i className="fa-solid fa-circle-plus text-success fs-3 me-3"></i>
+                    </div>
+                    <div>
+                      <p className="mb-0 fw-bold" style={{ fontSize: "clamp(0.95rem, 2.3vw, 1.25rem)" }}>60 New Products</p>
+                      <label className="form-label ps-0">Added This Month</label>
+                    </div>
                   </div>
-                  <div>
-                    <p className="mb-0 fw-bold" style={{ fontSize: "clamp(0.95rem, 2.3vw, 1.25rem)" }}>1000+ New Customer</p>
-                    <label className="form-label ps-0">Joined This Month</label>
+                  <div className="col-12 col-md-auto d-flex align-items-center">
+                    <div>
+                      <i className="fa-solid fa-user-plus text-info fs-3 me-3"></i>
+                    </div>
+                    <div>
+                      <p className="mb-0 fw-bold" style={{ fontSize: "clamp(0.95rem, 2.3vw, 1.25rem)" }}>1000+ New Customer</p>
+                      <label className="form-label ps-0">Joined This Month</label>
+                    </div>
+                  </div>
+                  <div className="col-12 col-md-auto d-flex align-items-center">
+                    <div>
+                      <i className="fa-solid fa-globe text-danger fs-3 me-3"></i>
+                    </div>
+                    <div>
+                      <p className="mb-0 fw-bold" style={{ fontSize: "clamp(0.95rem, 2.3vw, 1.25rem)" }}>30+ Countries</p>
+                      <label className="form-label ps-0">Use Our Services</label>
+                    </div>
                   </div>
                 </div>
-                <div className="col-12 col-md-6 col-xl-4 d-flex">
-                  <div>
-                    <i className="fa-solid fa-globe text-danger fs-3 mt-2 me-3"></i>
-                  </div>
-                  <div>
-                    <p className="mb-0 fw-bold" style={{ fontSize: "clamp(0.95rem, 2.3vw, 1.25rem)" }}>30+ Countries</p>
-                    <label className="form-label ps-0">Use Our Services</label>
-                  </div>
-                </div>
+                <hr className="bg-body-secondary mb-6 mt-4" />
               </div>
             </div>
             {/* chart  */}
-            <div className="d-flex w-100 border-top  pt-5 justify-content-between mb-4 g-3 flex-wrap">
-              <div className="col-auto">
-                <h3>Profit & Loss</h3>
-                <p className="text-700 lh-sm mb-0">
-                  Payment received across all channels
-                </p>
+            <div className="p-0">
+              <div className="d-flex w-100 justify-content-between mb-4 g-3 flex-wrap">
+                <div className="col-auto">
+                  <h3>Profit & Loss</h3>
+                  <p className="text-700 lh-sm mb-0">
+                    Payment received across all channels
+                  </p>
+                </div>
+                <div className="col-12 col-sm-4 col-lg-3">
+                  <select
+                    className="form-select form-select-sm mt-2 mt-sm-0"
+                    id="select-gross-revenue-month"
+                    value={isSelected}
+                    onChange={(e) => setIsSelected(e.target.value)}
+                  >
+                    <option value="week">Week</option>
+                    <option value="month">Month</option>
+                    <option value="year">Year</option>
+                  </select>
+                </div>
               </div>
-              <div className="col-12 col-sm-4 col-lg-3">
-                <select
-                  className="form-select form-select-sm mt-2 mt-sm-0"
-                  id="select-gross-revenue-month"
-                  value={isSelected}
-                  onChange={(e) => setIsSelected(e.target.value)}
-                >
-                  <option value="week">Week</option>
-                  <option value="month">Month</option>
-                  <option value="year">Year</option>
-                </select>
-              </div>
-            </div>
-            <div className="container px-0">
-              <div className="w-100">
+              <div className="rounded-xl">
                 <SalesChart chartLabel={monthlyTransactions?.chartLabel || []} linesData={monthlyTransactions?.linesData || []} />
               </div>
             </div>
-            <div className="row w-100 g-3">
+            <div className="row g-3 mt-3">
               {summary?.map((item, index) => (
                 <div className="col-12 col-md-4 text-center" key={index}>
                   <p className=" m-0">{item?.title}</p>
@@ -419,18 +428,16 @@ const DashboardHome = () => {
             </div>
           </div>
         </div>
-        <div className="card rounded-0 border-x-0">
-          <div className="p-5">
+        <div className="card rounded-0 NewColorChange" style={{ border: "none" }}>
+          <div className="NewColorChange container-fluid px-lg-6 px-3">
             <div className="row g-4">
-              <div className="col-12 col-xxl-12">
-                <div className="mb-5">
-                </div>
-                <Container fluid>
-                  {/* Navbar */}
-                  <Row className="mt-2 g-3">
-                    {/* Total Orders */}
-                    <Col md={12} lg={6}>
-                      <Card className="p-3 border-0">
+              <div className="col-12 col-xxl-12 px-1">
+                <div className="conatiner-fluid">
+                  <Container fluid className="p-0">
+                    <Row className="mt-2 g-3">
+                      {/* Total Orders */}
+                      <Col md={12} lg={6} className="p-3">
+                        <Card className="bg-white border rounded-3 p-3 h-100 shadow-none">
                         <h6>Total Orders <span className="text-warning">-6.8%</span></h6>
                         <h3>16,247</h3>
                         <Bar data={barData} options={{ plugins: { legend: { display: false } } }} height={100} />
@@ -438,36 +445,41 @@ const DashboardHome = () => {
                           <small className="ChangePaginationColor">Completed 52%</small>
                           <small className="ChangePaginationColor">Pending 48%</small>
                         </div>
-                      </Card>
-                    </Col>
+                        </Card>
+                      </Col>
 
-                    {/* New Customers */}
-                    <Col md={12} lg={6} >
-                      <Card className="p-3 border-0">
+                      {/* New Customers */}
+                      <Col md={12} lg={6} className="p-3">
+                        <Card className="bg-white border rounded-3 p-3 h-100 shadow-none">
                         <h6>New Customers <span className="text-success">+26.5%</span></h6>
                         <h3>356</h3>
                         <Line data={lineData} options={{ plugins: { legend: { display: false } } }} height={100} />
-                      </Card>
-                    </Col>
+                        </Card>
+                      </Col>
 
-                    {/* Top Coupons */}
-                    <Col md={12} lg={6}>
-                      <TopCoupons />
-                    </Col>
+                      {/* Top Coupons */}
+                      <Col md={12} lg={6} className="p-3">
+                        <div className="bg-white border rounded-3 p-3 h-100">
+                          <TopCoupons />
+                        </div>
+                      </Col>
 
-                    {/* Paying vs Non Paying */}
-                    <Col md={12} lg={6} className="d-flex justify-content-center align-items-center" >
-                      <PayingVsNonPaying />
-                    </Col>
-                  </Row>
-                </Container>
-
+                      {/* Paying vs Non Paying */}
+                      <Col md={12} lg={6} className="p-3 d-flex justify-content-center align-items-stretch">
+                        <div className="bg-white border rounded-3 p-3 h-100 w-100 d-flex justify-content-center align-items-center">
+                          <PayingVsNonPaying />
+                        </div>
+                      </Col>
+                    </Row>
+                  </Container>
+                </div>
               </div>
             </div>
           </div>
           {/* last transaction  */}
-          <div className="p-3 p-md-5 bg-white border-y border-300">
-            <div data-list='{"valueNames":["product","customer","rating","review","time"],"page":6}'>
+          <div style={{ padding: "20px" }} className="px-lg-6 px-md-3 border-y">
+            <div className="bg-white border rounded-3 p-3 p-md-5">
+              <div data-list='{"valueNames":["product","customer","rating","review","time"],"page":6}'>
               <div className="row align-items-end justify-content-between pb-5 g-3">
                 <div className="col-auto">
                   <h3>Transactions</h3>
@@ -653,8 +665,8 @@ const DashboardHome = () => {
                 </div>
                 <DeleteModal modalId="verticallyCentered" resource="invoices" />
               </div>
-
             </div>
+          </div>
           </div>
 
           {/* last estimate */}

@@ -55,10 +55,10 @@ const LowestEarning = () => {
 
   return (
     <div className="content AssetsPageChangecss AssetPaddingChange">
-      <div className="marginforsmalldevice RemoveBorder card rounded-0 border-0">
+      <div className="marginforsmalldevice RemoveBorder card rounded-0 border-0 mb-5">
         <div className="NewColorChange phoenix-toolbar d-flex align-items-center flex-wrap py-md-3 px-md-4 mb-md-0  gap-3">
           <div
-            className="p-3 row MainRemovePaddingwidth PrintSize"
+            className="p-3 row MainRemovePaddingwidth pb-2 PrintSize"
             style={{ minWidth: "170px" }}
           >
             <h2
@@ -67,7 +67,7 @@ const LowestEarning = () => {
             >
               Item: Lowest Earning
             </h2>
-            <div className="AllabsAssets PrintDnone">
+            <div className="AllabsAssets pt-1 PrintDnone">
               <span className="filterLinks text-dark">
                 All <span className="NewChangeColor">(68817)</span>
               </span>
@@ -158,9 +158,9 @@ const LowestEarning = () => {
                 </Dropdown>
               </div>
             </div>
-            <div className="PrintIconDisplay">
+            <div className="d-flex align-items-center PrintIconDisplay">
               <div className="btn btn-light ps-0 fw-bold" onClick={handlePrint}>
-                <i class="fa-solid fa-print me-2"></i>
+                <i className="fa-solid fa-print me-2"></i>
                 Print
               </div>
             </div>
@@ -193,9 +193,9 @@ const LowestEarning = () => {
                             {...colRest}
                             style={{
                               cursor: "pointer",
-                              fontSize: "14.5px",
-                              paddingTop: "16px",
-                              paddingBottom: "16px",
+                              fontSize: "12.5px",
+                              paddingTop: "10px",
+                              paddingBottom: "10px",
                             }}
                             className="border-top-0 pe-3 ps-1"
                           >
@@ -230,7 +230,7 @@ const LowestEarning = () => {
 
               <tbody
                 {...getTableBodyProps()}
-                className="table align-middle text-nowrap fs-9 mb-0"
+                className="table align-middle"
               >
                 {page.map((row, idx) => {
                   prepareRow(row);
@@ -244,7 +244,7 @@ const LowestEarning = () => {
                           <td
                             key={cellKey || cidx}
                             {...cellRest}
-                            className="py-2 pe-3"
+                            className="py-2 pe-3 DescriptionPara ps-1"
                           >
                             {cell.render("Cell")}
                           </td>
